@@ -1,0 +1,20 @@
+PODS:
+  - OAuthSwift (1.1.0)
+  - Realm (2.1.2):
+    - Realm/Headers (= 2.1.2)
+  - Realm/Headers (2.1.2)
+  - RealmSwift (2.1.2):
+    - Realm (= 2.1.2)
+
+DEPENDENCIES:
+  - OAuthSwift (~> 1.1.0)
+  - RealmSwift
+
+SPEC CHECKSUMS:
+  OAuthSwift: 7ec2c62274f6bdc30b1ba3b799c39a6fdcaea0e5
+  Realm: efe855f4d977c8ce5a82d3116d9f1ff155a6550c
+  RealmSwift: 17d6ee30b6f9df86364408c2197492e33bfea567
+
+PODFILE CHECKSUM: dc84f7982c6ae6c57ac4dd84a08ed86ca874aff3
+
+COCOAPODS: 1.1.1

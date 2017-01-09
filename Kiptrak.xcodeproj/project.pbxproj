@@ -1,0 +1,415 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		373D32901E22BE9100980925 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373D328F1E22BE9100980925 /* LoginViewController.swift */; };
+		373D32931E22BF5700980925 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373D32921E22BF5700980925 /* APIClient.swift */; };
+		373D32961E22C05C00980925 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373D32951E22C05C00980925 /* Constants.swift */; };
+		37870B201E22BA6A00A2EC00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37870B1F1E22BA6A00A2EC00 /* AppDelegate.swift */; };
+		37870B221E22BA6A00A2EC00 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37870B211E22BA6A00A2EC00 /* SplashViewController.swift */; };
+		37870B251E22BA6A00A2EC00 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37870B231E22BA6A00A2EC00 /* Main.storyboard */; };
+		37870B271E22BA6A00A2EC00 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37870B261E22BA6A00A2EC00 /* Assets.xcassets */; };
+		37870B2A1E22BA6A00A2EC00 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37870B281E22BA6A00A2EC00 /* LaunchScreen.storyboard */; };
+		CCECAB0157942143A8E08CB2 /* Pods_Kiptrak.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37B22421F8414CC64C2C4B78 /* Pods_Kiptrak.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		373D328F1E22BE9100980925 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = Classes/ViewControllers/LoginViewController.swift; sourceTree = "<group>"; };
+		373D32921E22BF5700980925 /* APIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIClient.swift; path = Classes/Managers/APIClient.swift; sourceTree = "<group>"; };
+		373D32951E22C05C00980925 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Kiptrak/Classes/Constants.swift; sourceTree = "<group>"; };
+		37870B1C1E22BA6A00A2EC00 /* Kiptrak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kiptrak.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		37870B1F1E22BA6A00A2EC00 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		37870B211E22BA6A00A2EC00 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		37870B241E22BA6A00A2EC00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		37870B261E22BA6A00A2EC00 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		37870B291E22BA6A00A2EC00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		37870B2B1E22BA6A00A2EC00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		37B22421F8414CC64C2C4B78 /* Pods_Kiptrak.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kiptrak.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		57BCB84000D2751D40C37EC7 /* Pods-Kiptrak.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kiptrak.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kiptrak/Pods-Kiptrak.debug.xcconfig"; sourceTree = "<group>"; };
+		FC6C3DDC87919D26314AE58D /* Pods-Kiptrak.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kiptrak.release.xcconfig"; path = "Pods/Target Support Files/Pods-Kiptrak/Pods-Kiptrak.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		37870B191E22BA6A00A2EC00 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CCECAB0157942143A8E08CB2 /* Pods_Kiptrak.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		12EE2D71C67781060DB8F8AE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				57BCB84000D2751D40C37EC7 /* Pods-Kiptrak.debug.xcconfig */,
+				FC6C3DDC87919D26314AE58D /* Pods-Kiptrak.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		373D32911E22BE9700980925 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				37870B211E22BA6A00A2EC00 /* SplashViewController.swift */,
+				373D328F1E22BE9100980925 /* LoginViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		373D32941E22BF5C00980925 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				373D32921E22BF5700980925 /* APIClient.swift */,
+			);
+			name = Managers;
+			sourceTree = "<group>";
+		};
+		37870B131E22BA6A00A2EC00 = {
+			isa = PBXGroup;
+			children = (
+				373D32951E22C05C00980925 /* Constants.swift */,
+				37870B1E1E22BA6A00A2EC00 /* Kiptrak */,
+				37870B1D1E22BA6A00A2EC00 /* Products */,
+				12EE2D71C67781060DB8F8AE /* Pods */,
+				4679527081A47D22E35BDC47 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		37870B1D1E22BA6A00A2EC00 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				37870B1C1E22BA6A00A2EC00 /* Kiptrak.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		37870B1E1E22BA6A00A2EC00 /* Kiptrak */ = {
+			isa = PBXGroup;
+			children = (
+				37870B1F1E22BA6A00A2EC00 /* AppDelegate.swift */,
+				37870B231E22BA6A00A2EC00 /* Main.storyboard */,
+				373D32941E22BF5C00980925 /* Managers */,
+				37870B261E22BA6A00A2EC00 /* Assets.xcassets */,
+				37870B281E22BA6A00A2EC00 /* LaunchScreen.storyboard */,
+				37870B2B1E22BA6A00A2EC00 /* Info.plist */,
+				373D32911E22BE9700980925 /* ViewControllers */,
+			);
+			path = Kiptrak;
+			sourceTree = "<group>";
+		};
+		4679527081A47D22E35BDC47 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				37B22421F8414CC64C2C4B78 /* Pods_Kiptrak.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		37870B1B1E22BA6A00A2EC00 /* Kiptrak */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 37870B2E1E22BA6A00A2EC00 /* Build configuration list for PBXNativeTarget "Kiptrak" */;
+			buildPhases = (
+				607631F0D1C3329CEEED915C /* [CP] Check Pods Manifest.lock */,
+				37870B181E22BA6A00A2EC00 /* Sources */,
+				37870B191E22BA6A00A2EC00 /* Frameworks */,
+				37870B1A1E22BA6A00A2EC00 /* Resources */,
+				EA82FF84A79BA0B7A01D74D1 /* [CP] Embed Pods Frameworks */,
+				7C50886ACF88F300C3229EE4 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Kiptrak;
+			productName = Kiptrak;
+			productReference = 37870B1C1E22BA6A00A2EC00 /* Kiptrak.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		37870B141E22BA6A00A2EC00 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0800;
+				LastUpgradeCheck = 0800;
+				ORGANIZATIONNAME = "Supernovacaine Inc.";
+				TargetAttributes = {
+					37870B1B1E22BA6A00A2EC00 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = K34TMM225J;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 37870B171E22BA6A00A2EC00 /* Build configuration list for PBXProject "Kiptrak" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 37870B131E22BA6A00A2EC00;
+			productRefGroup = 37870B1D1E22BA6A00A2EC00 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				37870B1B1E22BA6A00A2EC00 /* Kiptrak */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		37870B1A1E22BA6A00A2EC00 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37870B2A1E22BA6A00A2EC00 /* LaunchScreen.storyboard in Resources */,
+				37870B271E22BA6A00A2EC00 /* Assets.xcassets in Resources */,
+				37870B251E22BA6A00A2EC00 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		607631F0D1C3329CEEED915C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		7C50886ACF88F300C3229EE4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Kiptrak/Pods-Kiptrak-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EA82FF84A79BA0B7A01D74D1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Kiptrak/Pods-Kiptrak-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		37870B181E22BA6A00A2EC00 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				373D32961E22C05C00980925 /* Constants.swift in Sources */,
+				373D32901E22BE9100980925 /* LoginViewController.swift in Sources */,
+				37870B221E22BA6A00A2EC00 /* SplashViewController.swift in Sources */,
+				37870B201E22BA6A00A2EC00 /* AppDelegate.swift in Sources */,
+				373D32931E22BF5700980925 /* APIClient.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		37870B231E22BA6A00A2EC00 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				37870B241E22BA6A00A2EC00 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		37870B281E22BA6A00A2EC00 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				37870B291E22BA6A00A2EC00 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		37870B2C1E22BA6A00A2EC00 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		37870B2D1E22BA6A00A2EC00 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		37870B2F1E22BA6A00A2EC00 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 57BCB84000D2751D40C37EC7 /* Pods-Kiptrak.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = K34TMM225J;
+				INFOPLIST_FILE = Kiptrak/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.supernovacaine.Kiptrak;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		37870B301E22BA6A00A2EC00 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FC6C3DDC87919D26314AE58D /* Pods-Kiptrak.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = K34TMM225J;
+				INFOPLIST_FILE = Kiptrak/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.supernovacaine.Kiptrak;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		37870B171E22BA6A00A2EC00 /* Build configuration list for PBXProject "Kiptrak" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				37870B2C1E22BA6A00A2EC00 /* Debug */,
+				37870B2D1E22BA6A00A2EC00 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		37870B2E1E22BA6A00A2EC00 /* Build configuration list for PBXNativeTarget "Kiptrak" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				37870B2F1E22BA6A00A2EC00 /* Debug */,
+				37870B301E22BA6A00A2EC00 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 37870B141E22BA6A00A2EC00 /* Project object */;
+}
