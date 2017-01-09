@@ -5,6 +5,7 @@ def shared_pods
 	use_frameworks!
 	pod 'OAuthSwift', '~> 1.1.0'
 	pod 'RealmSwift'
+	pod 'SwiftyJSON'
 end
 
 target 'Kiptrak' do

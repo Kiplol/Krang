@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		373D32901E22BE9100980925 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373D328F1E22BE9100980925 /* LoginViewController.swift */; };
-		373D32931E22BF5700980925 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373D32921E22BF5700980925 /* APIClient.swift */; };
 		373D32961E22C05C00980925 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373D32951E22C05C00980925 /* Constants.swift */; };
+		374C2AA01E242BCD0094D7A4 /* TraktHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374C2A9F1E242BCD0094D7A4 /* TraktHelper.swift */; };
 		37870B201E22BA6A00A2EC00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37870B1F1E22BA6A00A2EC00 /* AppDelegate.swift */; };
 		37870B221E22BA6A00A2EC00 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37870B211E22BA6A00A2EC00 /* SplashViewController.swift */; };
 		37870B251E22BA6A00A2EC00 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37870B231E22BA6A00A2EC00 /* Main.storyboard */; };
@@ -20,8 +20,9 @@
 
 /* Begin PBXFileReference section */
 		373D328F1E22BE9100980925 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = Classes/ViewControllers/LoginViewController.swift; sourceTree = "<group>"; };
-		373D32921E22BF5700980925 /* APIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIClient.swift; path = Classes/Managers/APIClient.swift; sourceTree = "<group>"; };
 		373D32951E22C05C00980925 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Kiptrak/Classes/Constants.swift; sourceTree = "<group>"; };
+		374C2A9F1E242BCD0094D7A4 /* TraktHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraktHelper.swift; sourceTree = "<group>"; };
+		374C2AA11E243C080094D7A4 /* Kiptrak.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Kiptrak.entitlements; sourceTree = "<group>"; };
 		37870B1C1E22BA6A00A2EC00 /* Kiptrak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kiptrak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37870B1F1E22BA6A00A2EC00 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37870B211E22BA6A00A2EC00 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
@@ -67,7 +68,7 @@
 		373D32941E22BF5C00980925 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				373D32921E22BF5700980925 /* APIClient.swift */,
+				374C2A9F1E242BCD0094D7A4 /* TraktHelper.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -94,6 +95,7 @@
 		37870B1E1E22BA6A00A2EC00 /* Kiptrak */ = {
 			isa = PBXGroup;
 			children = (
+				374C2AA11E243C080094D7A4 /* Kiptrak.entitlements */,
 				37870B1F1E22BA6A00A2EC00 /* AppDelegate.swift */,
 				37870B231E22BA6A00A2EC00 /* Main.storyboard */,
 				373D32941E22BF5C00980925 /* Managers */,
@@ -148,8 +150,13 @@
 				TargetAttributes = {
 					37870B1B1E22BA6A00A2EC00 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = K34TMM225J;
+						DevelopmentTeam = LSB86U552U;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -241,7 +248,7 @@
 				373D32901E22BE9100980925 /* LoginViewController.swift in Sources */,
 				37870B221E22BA6A00A2EC00 /* SplashViewController.swift in Sources */,
 				37870B201E22BA6A00A2EC00 /* AppDelegate.swift in Sources */,
-				373D32931E22BF5700980925 /* APIClient.swift in Sources */,
+				374C2AA01E242BCD0094D7A4 /* TraktHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,10 +372,12 @@
 			baseConfigurationReference = 57BCB84000D2751D40C37EC7 /* Pods-Kiptrak.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = K34TMM225J;
+				CODE_SIGN_ENTITLEMENTS = Kiptrak/Kiptrak.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = LSB86U552U;
 				INFOPLIST_FILE = Kiptrak/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.supernovacaine.Kiptrak;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kip.krang;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -379,10 +388,12 @@
 			baseConfigurationReference = FC6C3DDC87919D26314AE58D /* Pods-Kiptrak.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = K34TMM225J;
+				CODE_SIGN_ENTITLEMENTS = Kiptrak/Kiptrak.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = LSB86U552U;
 				INFOPLIST_FILE = Kiptrak/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.supernovacaine.Kiptrak;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kip.krang;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

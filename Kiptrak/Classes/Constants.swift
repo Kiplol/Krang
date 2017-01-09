@@ -16,5 +16,6 @@ class Constants: NSObject {
     open class var traktRedirectURL: String { get { return "http://elliottkipper.com/apps/kiptrak/auth.php" } }
     open class var traktAuthorizeURL: String { get { return "https://api.trakt.tv/oauth/authorize" } }
     open class var traktAccessTokenURL: String { get { return "https://api.trakt.tv/oauth/token" } }
+    open class var traktBaseURL: String { get { return "https://api.trakt.tv" } }
     
 }

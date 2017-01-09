@@ -23,11 +23,11 @@ class SplashViewController: UIViewController {
 
 
     @IBAction func loginTapped(_ sender: AnyObject) {
-        let oauth = OAuth2Swift(consumerKey: Constants.traktClientID, consumerSecret: Constants.traktClientSecret, authorizeUrl: Constants.traktAuthorizeURL, accessTokenUrl: Constants.traktAccessTokenURL, responseType: "code")
-        oauth.authorizeURLHandler = SafariURLHandler(viewController: self, oauthSwift: oauth)
-        let _ = oauth.authorize(withCallbackURL: Constants.traktRedirectURL, scope: "public", state: "ABCDE12345ABCDE12345ABCDE12345", success: { (credential, response, parameters) in
-            //Yay
-            print(credential)
+        
+        TraktHelper.shared.login(from: self, success: { 
+            TraktHelper.shared.getMyProfile(completion: { 
+                //Yay
+            })
             }) { (error) in
                 //Boo
                 print(error)
