@@ -21,21 +21,30 @@ class SplashViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if TraktHelper.shared.credentialsAreValid() {
-            TraktHelper.shared.getMyProfile(completion: { 
+            TraktHelper.shared.getMyProfile(completion: { error, user in
                 //Peeee
             })
+            self.goToHome()
         } else {
             
         }
     }
     
-
-
-    @IBAction func loginTapped(_ sender: AnyObject) {
+    //MARK:-
+    private func goToHome() {
         
+    }
+    
+    private func goToOnboarding() {
+        
+    }
+    
+    //MARK:- Test
+    @IBAction func loginTapped(_ sender: AnyObject) {
         TraktHelper.shared.login(from: self, success: { 
-            TraktHelper.shared.getMyProfile(completion: { 
+            TraktHelper.shared.getMyProfile(completion: { error, user in
                 //Yay
+                self.goToHome()
             })
             }) { (error) in
                 //Boo

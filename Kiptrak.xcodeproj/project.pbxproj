@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		373D32901E22BE9100980925 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373D328F1E22BE9100980925 /* LoginViewController.swift */; };
+		3724CBAA1E2474AF005387D1 /* KrangViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724CBA91E2474AF005387D1 /* KrangViewController.swift */; };
+		3724CBAC1E247557005387D1 /* PlaybackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724CBAB1E247557005387D1 /* PlaybackViewController.swift */; };
 		373D32961E22C05C00980925 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373D32951E22C05C00980925 /* Constants.swift */; };
 		374C2AA01E242BCD0094D7A4 /* TraktHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374C2A9F1E242BCD0094D7A4 /* TraktHelper.swift */; };
 		37870B201E22BA6A00A2EC00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37870B1F1E22BA6A00A2EC00 /* AppDelegate.swift */; };
@@ -15,12 +16,16 @@
 		37870B251E22BA6A00A2EC00 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37870B231E22BA6A00A2EC00 /* Main.storyboard */; };
 		37870B271E22BA6A00A2EC00 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37870B261E22BA6A00A2EC00 /* Assets.xcassets */; };
 		37870B2A1E22BA6A00A2EC00 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37870B281E22BA6A00A2EC00 /* LaunchScreen.storyboard */; };
+		379C55441E247F9C00D51019 /* KrangUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C55431E247F9C00D51019 /* KrangUser.swift */; };
+		379C55471E248B4F00D51019 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C55461E248B4F00D51019 /* RealmManager.swift */; };
+		379C554A1E24992300D51019 /* KrangRealmUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C55491E24992300D51019 /* KrangRealmUtils.swift */; };
 		CCECAB0157942143A8E08CB2 /* Pods_Kiptrak.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37B22421F8414CC64C2C4B78 /* Pods_Kiptrak.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		373D328F1E22BE9100980925 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = Classes/ViewControllers/LoginViewController.swift; sourceTree = "<group>"; };
-		373D32951E22C05C00980925 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Kiptrak/Classes/Constants.swift; sourceTree = "<group>"; };
+		3724CBA91E2474AF005387D1 /* KrangViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KrangViewController.swift; path = Classes/ViewControllers/KrangViewController.swift; sourceTree = "<group>"; };
+		3724CBAB1E247557005387D1 /* PlaybackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlaybackViewController.swift; path = Classes/ViewControllers/PlaybackViewController.swift; sourceTree = "<group>"; };
+		373D32951E22C05C00980925 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Classes/Constants.swift; sourceTree = "<group>"; };
 		374C2A9F1E242BCD0094D7A4 /* TraktHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraktHelper.swift; sourceTree = "<group>"; };
 		374C2AA11E243C080094D7A4 /* Kiptrak.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Kiptrak.entitlements; sourceTree = "<group>"; };
 		37870B1C1E22BA6A00A2EC00 /* Kiptrak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kiptrak.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -30,6 +35,9 @@
 		37870B261E22BA6A00A2EC00 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		37870B291E22BA6A00A2EC00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		37870B2B1E22BA6A00A2EC00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		379C55431E247F9C00D51019 /* KrangUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KrangUser.swift; sourceTree = "<group>"; };
+		379C55461E248B4F00D51019 /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RealmManager.swift; path = Classes/Managers/RealmManager.swift; sourceTree = "<group>"; };
+		379C55491E24992300D51019 /* KrangRealmUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KrangRealmUtils.swift; path = Classes/Utils/KrangRealmUtils.swift; sourceTree = "<group>"; };
 		37B22421F8414CC64C2C4B78 /* Pods_Kiptrak.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kiptrak.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		57BCB84000D2751D40C37EC7 /* Pods-Kiptrak.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kiptrak.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kiptrak/Pods-Kiptrak.debug.xcconfig"; sourceTree = "<group>"; };
 		FC6C3DDC87919D26314AE58D /* Pods-Kiptrak.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kiptrak.release.xcconfig"; path = "Pods/Target Support Files/Pods-Kiptrak/Pods-Kiptrak.release.xcconfig"; sourceTree = "<group>"; };
@@ -59,16 +67,19 @@
 		373D32911E22BE9700980925 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				3724CBAB1E247557005387D1 /* PlaybackViewController.swift */,
+				3724CBA91E2474AF005387D1 /* KrangViewController.swift */,
 				37870B211E22BA6A00A2EC00 /* SplashViewController.swift */,
-				373D328F1E22BE9100980925 /* LoginViewController.swift */,
 			);
 			name = ViewControllers;
+			path = Kiptrak;
 			sourceTree = "<group>";
 		};
 		373D32941E22BF5C00980925 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
 				374C2A9F1E242BCD0094D7A4 /* TraktHelper.swift */,
+				379C55461E248B4F00D51019 /* RealmManager.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -76,8 +87,9 @@
 		37870B131E22BA6A00A2EC00 = {
 			isa = PBXGroup;
 			children = (
-				373D32951E22C05C00980925 /* Constants.swift */,
 				37870B1E1E22BA6A00A2EC00 /* Kiptrak */,
+				373D32911E22BE9700980925 /* ViewControllers */,
+				379C554B1E24992900D51019 /* Utils */,
 				37870B1D1E22BA6A00A2EC00 /* Products */,
 				12EE2D71C67781060DB8F8AE /* Pods */,
 				4679527081A47D22E35BDC47 /* Frameworks */,
@@ -95,15 +107,33 @@
 		37870B1E1E22BA6A00A2EC00 /* Kiptrak */ = {
 			isa = PBXGroup;
 			children = (
+				373D32951E22C05C00980925 /* Constants.swift */,
 				374C2AA11E243C080094D7A4 /* Kiptrak.entitlements */,
 				37870B1F1E22BA6A00A2EC00 /* AppDelegate.swift */,
 				37870B231E22BA6A00A2EC00 /* Main.storyboard */,
-				373D32941E22BF5C00980925 /* Managers */,
 				37870B261E22BA6A00A2EC00 /* Assets.xcassets */,
 				37870B281E22BA6A00A2EC00 /* LaunchScreen.storyboard */,
 				37870B2B1E22BA6A00A2EC00 /* Info.plist */,
-				373D32911E22BE9700980925 /* ViewControllers */,
+				373D32941E22BF5C00980925 /* Managers */,
+				379C55451E247F9F00D51019 /* Models */,
 			);
+			path = Kiptrak;
+			sourceTree = "<group>";
+		};
+		379C55451E247F9F00D51019 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				379C55431E247F9C00D51019 /* KrangUser.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		379C554B1E24992900D51019 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				379C55491E24992300D51019 /* KrangRealmUtils.swift */,
+			);
+			name = Utils;
 			path = Kiptrak;
 			sourceTree = "<group>";
 		};
@@ -244,9 +274,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3724CBAA1E2474AF005387D1 /* KrangViewController.swift in Sources */,
+				379C55471E248B4F00D51019 /* RealmManager.swift in Sources */,
 				373D32961E22C05C00980925 /* Constants.swift in Sources */,
-				373D32901E22BE9100980925 /* LoginViewController.swift in Sources */,
 				37870B221E22BA6A00A2EC00 /* SplashViewController.swift in Sources */,
+				3724CBAC1E247557005387D1 /* PlaybackViewController.swift in Sources */,
+				379C554A1E24992300D51019 /* KrangRealmUtils.swift in Sources */,
+				379C55441E247F9C00D51019 /* KrangUser.swift in Sources */,
 				37870B201E22BA6A00A2EC00 /* AppDelegate.swift in Sources */,
 				374C2AA01E242BCD0094D7A4 /* TraktHelper.swift in Sources */,
 			);

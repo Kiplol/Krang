@@ -17,5 +17,7 @@ class Constants: NSObject {
     open class var traktAuthorizeURL: String { get { return "https://api.trakt.tv/oauth/authorize" } }
     open class var traktAccessTokenURL: String { get { return "https://api.trakt.tv/oauth/token" } }
     open class var traktBaseURL: String { get { return "https://api.trakt.tv" } }
+    open class var traktPlaybackMovieURL: String { get { return Constants.traktBaseURL + "/sync/playback/movies" } }
+    open class var traktPlaybackEpisodeURL: String { get { return Constants.traktBaseURL + "/sync/playback/episodes" } }
     
 }

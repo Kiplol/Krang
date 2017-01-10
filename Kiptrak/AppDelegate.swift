@@ -16,7 +16,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        self.setupAppearance()
+        
+        //Init the RealmManager
+        let _ = RealmManager.shared
+        
         return true
     }
 
@@ -42,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    //MARK:-
+    //MARK:- Deeplinks
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         if (url.host == "oauth-callback") {
             OAuthSwift.handle(url: url)
@@ -50,6 +54,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
+    func setupAppearance() {
+        UIWindow.appearance().tintColor = UIColor.orange
+    }
 
 }
 

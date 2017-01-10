@@ -74,15 +74,22 @@ class TraktHelper: NSObject {
         }
     }
     
-    func getMyProfile(completion: (() -> ())? ) {
+    func getMyProfile(completion: ((_:Error?,  _:KrangUser?) -> ())? ) {
         let _ = self.oauth.client.get(Constants.traktBaseURL + "/users/settings", parameters: [:], headers: TraktHelper.defaultHeaders(), success: { (response) in
             //Yay
             let json = JSON(data: response.data)
-            completion?()
+            var user:KrangUser? = nil
+            
+            KrangRealmUtils.makeChanges {
+                user = KrangUser.from(json: json)
+                KrangUser.setCurrentUser(user)
+            }
+            
+            completion?(nil, user)
             }) { (error) in
                 //Boo
                 print(error)
-                completion?()
+                completion?(error, nil)
         }
     }
     
