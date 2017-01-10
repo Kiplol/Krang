@@ -16,16 +16,20 @@ class TraktHelper: NSObject {
     static let shared = TraktHelper()
     
     let oauth = OAuth2Swift(consumerKey: Constants.traktClientID, consumerSecret: Constants.traktClientSecret, authorizeUrl: Constants.traktAuthorizeURL, accessTokenUrl: Constants.traktAccessTokenURL, responseType: "code")
+    private var didGetCredentials = false
     
     override init () {
         super.init()
         self.attemptToLoadCachedCredentials()
     }
     
+    //MARK:- Credentials
     fileprivate func attemptToLoadCachedCredentials() {
         let sharedDefaults = UserDefaults(suiteName: "group.com.kip.krang")
         if let cachedCredentialData = sharedDefaults?.object(forKey: "traktCredentials") as? Data {
             if let cachedCredential = NSKeyedUnarchiver.unarchiveObject(with: cachedCredentialData) as? OAuthSwiftCredential {
+                self.didGetCredentials = true
+                cachedCredential.version = .oauth2
                 self.oauth.client = OAuthSwiftClient(credential: cachedCredential)
             } else {
                 //Error unarchiving
@@ -39,12 +43,28 @@ class TraktHelper: NSObject {
         sharedDefaults?.set(data, forKey: "traktCredentials")
     }
     
+    func credentialsNeedRefresh() -> Bool {
+        return self.didGetCredentials && self.oauth.client.credential.isTokenExpired()
+    }
     
+    func credentialsAreValid() -> Bool {
+        if !self.didGetCredentials {
+            return false
+        }
+        
+        if self.oauth.client.credential.isTokenExpired() {
+            return false
+        }
+        
+        return true
+    }
+    
+    //MARK:- Real Shit
     func login(from presentingViewController: UIViewController, success: (() -> ())?, failure: ((_ error:Error?) -> ())?) {
         self.oauth.authorizeURLHandler = SafariURLHandler(viewController: presentingViewController, oauthSwift: oauth)
         let _ = oauth.authorize(withCallbackURL: Constants.traktRedirectURL, scope: "public", state: "ABCDE12345ABCDE12345ABCDE12345", success: { (credential, response, parameters) in
             //Yay
-            print(credential)
+            self.didGetCredentials = true
             self.cache(credentials: credential)
             success?()
         }) { (error) in
