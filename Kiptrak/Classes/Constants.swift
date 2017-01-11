@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Hue
 
 class Constants: NSObject {
     
@@ -17,7 +18,14 @@ class Constants: NSObject {
     open class var traktAuthorizeURL: String { get { return "https://api.trakt.tv/oauth/authorize" } }
     open class var traktAccessTokenURL: String { get { return "https://api.trakt.tv/oauth/token" } }
     open class var traktBaseURL: String { get { return "https://api.trakt.tv" } }
-    open class var traktPlaybackMovieURL: String { get { return Constants.traktBaseURL + "/sync/playback/movies" } }
-    open class var traktPlaybackEpisodeURL: String { get { return Constants.traktBaseURL + "/sync/playback/episodes" } }
+    open class var traktWatchingURLFormat: String { get { return Constants.traktBaseURL + "/users/%@/watching" } }
     
+    //MARK:- TMDB
+    open class var tmdbAPIKey: String { get { return "42261ec0aa6d07687f189a56f7b2363d" } }
+    open class var tmdbAPIReadAccessToken: String { get { return "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0MjI2MWVjMGFhNmQwNzY4N2YxODlhNTZmN2IyMzYzZCIsInN1YiI6IjU4NzY3MTg2OTI1MTQxMDg3MjAwMDBiNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.p_kIHeKSPM99z5aTJX_lHWaQenBLBH8_iJQB4oRpL8I" } }
+    
+}
+
+extension UIColor {
+    class var darkBackground: UIColor { get { return UIColor(hex: "1E1E1E") } }
 }

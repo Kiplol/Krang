@@ -21,6 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Init the RealmManager
         let _ = RealmManager.shared
         
+        //Init the logger
+        KrangLogger.setup()
+        
         return true
     }
 
@@ -49,6 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //MARK:- Deeplinks
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         if (url.host == "oauth-callback") {
+            KrangLogger.log.debug("Got OAuth callback from URL: \(url)")
             OAuthSwift.handle(url: url)
         }
         return true
@@ -56,6 +60,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func setupAppearance() {
         UIWindow.appearance().tintColor = UIColor.orange
+        UIView.appearance().tintColor = UIColor.orange
+        
+        //Navigation Bar
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        UINavigationBar.appearance().barTintColor = UIColor.darkBackground
+        UINavigationBar.appearance().isTranslucent = false
     }
 
 }

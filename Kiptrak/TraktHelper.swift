@@ -66,10 +66,11 @@ class TraktHelper: NSObject {
             //Yay
             self.didGetCredentials = true
             self.cache(credentials: credential)
+            KrangLogger.log.debug("Successfully logged in")
             success?()
         }) { (error) in
             //Boo
-            print(error)
+            KrangLogger.log.error("Error loggin in: \(error)")
             failure?(error)
         }
     }
@@ -85,17 +86,50 @@ class TraktHelper: NSObject {
                 KrangUser.setCurrentUser(user)
             }
             
+            KrangLogger.log.debug("Got profile for user \(user!.username)")
+            
             completion?(nil, user)
             }) { (error) in
                 //Boo
-                print(error)
+                KrangLogger.log.error("Error getting profile: \(error)")
                 completion?(error, nil)
+        }
+    }
+    
+    func getCheckedInMovie(completion: ((_:Error?, _:KrangMovie?) -> ())?) {
+        let url = String.init(format: Constants.traktWatchingURLFormat, KrangUser.getCurrentUser().slug)
+        let _ = self.oauth.client.get(url, parameters: [:], headers: TraktHelper.defaultHeaders(), success: { (response) in
+            //Yay
+            let json = JSON(data: response.data)
+            var movie:KrangMovie? = nil
+            let maybeMovieOrEpisode = TraktHelper.movieOrEpisodeFrom(json: json)
+            if let actualMovie = maybeMovieOrEpisode as? KrangMovie {
+                movie = actualMovie
+            }
+            
+            completion?(nil, movie)
+        }) { (error) in
+            //Boo
+            KrangLogger.log.error("Error getting currently watching movie or episode: \(error)")
+            completion?(error, nil)
         }
     }
     
     //Helpers
     private static func defaultHeaders() -> [String: String] {
         return ["Content-type": "application/json", "trakt-api-key": Constants.traktClientID, "trakt-api-version": "2"]
+    }
+    
+    private static func movieOrEpisodeFrom(json:JSON) -> AnyObject? {
+        guard json.type != SwiftyJSON.Type.null else {
+            return nil
+        }
+        
+        if let movie = KrangMovie.from(json: json) {
+            return movie
+        }
+        
+        return nil
     }
 
 }

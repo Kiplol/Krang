@@ -9,7 +9,7 @@
 import UIKit
 import OAuthSwift
 
-class SplashViewController: UIViewController {
+class SplashViewController: KrangViewController {
 
     
     //MARK:- View Lifecycle
@@ -23,16 +23,22 @@ class SplashViewController: UIViewController {
         if TraktHelper.shared.credentialsAreValid() {
             TraktHelper.shared.getMyProfile(completion: { error, user in
                 //Peeee
+                if user != nil && user!.username.characters.count > 0 {
+                    KrangLogger.log.debug("User \(user!.username) is already logged in, so proceed to playback")
+                    self.goToPlayback()
+                } else {
+                    self.goToOnboarding()
+                }
             })
-            self.goToHome()
         } else {
             
         }
     }
     
     //MARK:-
-    private func goToHome() {
-        
+    private func goToPlayback() {
+        let playbackVC = PlaybackViewController.instantiatedFromStoryboard()
+        self.navigationController?.setViewControllers([playbackVC], animated: false)
     }
     
     private func goToOnboarding() {
@@ -44,7 +50,7 @@ class SplashViewController: UIViewController {
         TraktHelper.shared.login(from: self, success: { 
             TraktHelper.shared.getMyProfile(completion: { error, user in
                 //Yay
-                self.goToHome()
+                self.goToPlayback()
             })
             }) { (error) in
                 //Boo

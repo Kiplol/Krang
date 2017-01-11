@@ -4,6 +4,21 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Hero.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Hue.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Kingfisher.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>OAuthSwift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -24,6 +39,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SwiftyBeaver.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>SwiftyJSON.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -32,17 +52,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>24871D9CBCBC313F08CBD87EBDC53F20</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>2C6B033EF849C28F2A1D974546BD7D1F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>3BBDFE14180571414BD870ADD763BA8C</key>
+		<key>469334DBF04663F029334B1A9CD6E757</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -52,7 +62,37 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5F186E83BF5B97B8DF12F9409E80CBCC</key>
+		<key>50F1793B430A190840CB81E07D3DB433</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>744AC3853F21DAD8070102E47A451AC9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B2542602E50EDF091ADB18B4688DF34F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B3F9658D55E0398ABA3499E0A0526B98</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B5E62AD060E41C562C378D77249443C6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C312A7A3357421DEA7946D74E0974EDC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C4944FEC314D1A66588651D006273ADE</key>
 		<dict>
 			<key>primary</key>
 			<true/>

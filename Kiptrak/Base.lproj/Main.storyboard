@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="id2-XQ-XDI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="id2-XQ-XDI">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -36,6 +41,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TgE-em-xKW">
+                                <rect key="frame" x="132.5" y="617" width="110" height="30"/>
                                 <state key="normal" title="Login with Trakt"/>
                                 <connections>
                                     <action selector="loginTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="a0g-PM-VJp"/>
@@ -52,6 +58,151 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="108" y="139"/>
+        </scene>
+        <!--Playback View Controller-->
+        <scene sceneID="Dg7-tf-ZyS">
+            <objects>
+                <viewController storyboardIdentifier="playback" id="4EL-Ga-1bM" customClass="PlaybackViewController" customModule="Kiptrak" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Yzu-M5-eX9"/>
+                        <viewControllerLayoutGuide type="bottom" id="5VY-kU-Lwu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7TZ-ZG-VI5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="08k-fo-OJA">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4y2-C5-0ib" customClass="KrangAvatarView" customModule="Kiptrak" customModuleProvider="target">
+                                <rect key="frame" x="326" y="28" width="33" height="33"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="4y2-C5-0ib" secondAttribute="height" id="KEK-5a-qAM"/>
+                                    <constraint firstAttribute="width" constant="33" id="XPR-Fq-PMk"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="userAvatar"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Tks-PU-6aF" appends="YES" id="3oj-hu-Rgk"/>
+                                </connections>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="08k-fo-OJA" firstAttribute="top" secondItem="7TZ-ZG-VI5" secondAttribute="topMargin" id="LKB-cR-YpQ"/>
+                            <constraint firstItem="5VY-kU-Lwu" firstAttribute="top" secondItem="08k-fo-OJA" secondAttribute="bottom" id="RqD-UT-Nqa"/>
+                            <constraint firstAttribute="trailing" secondItem="08k-fo-OJA" secondAttribute="trailing" id="YKu-h5-suA"/>
+                            <constraint firstAttribute="trailing" secondItem="4y2-C5-0ib" secondAttribute="trailing" constant="16" id="kix-IV-N0H"/>
+                            <constraint firstItem="4y2-C5-0ib" firstAttribute="top" secondItem="Yzu-M5-eX9" secondAttribute="bottom" constant="8" id="wNr-ma-Ai3"/>
+                            <constraint firstItem="08k-fo-OJA" firstAttribute="leading" secondItem="7TZ-ZG-VI5" secondAttribute="leading" id="yHw-Iz-JhY"/>
+                        </constraints>
+                    </view>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabled" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <outlet property="imagePosterBackground" destination="08k-fo-OJA" id="20M-fp-Eye"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KSG-JT-GKi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Tks-PU-6aF">
+                    <connections>
+                        <segue destination="xJp-HJ-PiM" kind="showDetail" id="nap-3H-zpg"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="1028" y="138.98050974512745"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="qf6-Wl-jpd">
+            <objects>
+                <navigationController navigationBarHidden="YES" id="xJp-HJ-PiM" sceneMemberID="viewController">
+                    <nil key="simulatedTopBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="KPY-Pv-Af8">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabled" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <segue destination="heS-o5-q6v" kind="relationship" relationship="rootViewController" id="3CA-bR-uFD"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fU0-K7-Rmj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1804" y="-373"/>
+        </scene>
+        <!--Settings View Controller-->
+        <scene sceneID="HWQ-Z6-OYE">
+            <objects>
+                <viewController id="heS-o5-q6v" customClass="SettingsViewController" customModule="Kiptrak" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="17w-AS-tP6"/>
+                        <viewControllerLayoutGuide type="bottom" id="Lhj-8y-Hvv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="n2z-LW-m4z">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4bK-BR-dg5">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="Onz-pe-hXC"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rZs-lu-zxD" customClass="KrangAvatarView" customModule="Kiptrak" customModuleProvider="target">
+                                <rect key="frame" x="127.5" y="150" width="120" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="rZs-lu-zxD" secondAttribute="height" id="M3n-wE-Rsf"/>
+                                    <constraint firstAttribute="height" constant="120" id="znR-Eu-JFd"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="userAvatar"/>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CBW-WP-5pr">
+                                <rect key="frame" x="322" y="28" width="37" height="30"/>
+                                <state key="normal" title="Done"/>
+                                <connections>
+                                    <segue destination="ACx-tu-NIY" kind="unwind" unwindAction="unwindToPlayback:" id="LLf-Lx-kxf"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="CBW-WP-5pr" secondAttribute="trailing" constant="16" id="Djn-6d-Pkn"/>
+                            <constraint firstItem="4bK-BR-dg5" firstAttribute="top" secondItem="n2z-LW-m4z" secondAttribute="top" id="Fqx-bw-BjM"/>
+                            <constraint firstItem="CBW-WP-5pr" firstAttribute="top" secondItem="17w-AS-tP6" secondAttribute="bottom" constant="8" id="b5y-b0-VLB"/>
+                            <constraint firstAttribute="trailing" secondItem="4bK-BR-dg5" secondAttribute="trailing" id="bD0-Sh-zuh"/>
+                            <constraint firstItem="rZs-lu-zxD" firstAttribute="centerX" secondItem="n2z-LW-m4z" secondAttribute="centerX" id="oiy-Oq-iZ2"/>
+                            <constraint firstItem="rZs-lu-zxD" firstAttribute="top" secondItem="17w-AS-tP6" secondAttribute="bottom" constant="130" id="rYr-hy-Qlq"/>
+                            <constraint firstItem="4bK-BR-dg5" firstAttribute="leading" secondItem="n2z-LW-m4z" secondAttribute="leading" id="t7Q-7V-mDg"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="gpl-QY-oPR">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="9IQ-OD-3hc">
+                            <connections>
+                                <segue destination="ACx-tu-NIY" kind="unwind" unwindAction="unwindToPlayback:" id="e4z-Dj-BQ7"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabled" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <outlet property="buttonClose" destination="CBW-WP-5pr" id="GZc-EN-cqk"/>
+                        <outlet property="imageAvatar" destination="rZs-lu-zxD" id="iPQ-8i-EIk"/>
+                        <outlet property="imageCover" destination="4bK-BR-dg5" id="1QH-gX-0b5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="U4F-zt-S7p" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="ACx-tu-NIY" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2594" y="-367"/>
         </scene>
     </scenes>
 </document>

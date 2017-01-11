@@ -7,13 +7,13 @@
 //
 
 import UIKit
+import Hero
 
 class KrangViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        self.view.backgroundColor = UIColor.darkBackground
     }
 
     override func didReceiveMemoryWarning() {

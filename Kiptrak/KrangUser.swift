@@ -13,6 +13,7 @@ import SwiftyJSON
 class KrangUser: Object {
     
     dynamic var username:String = ""
+    dynamic var slug:String = ""
     dynamic var name:String? = nil
     dynamic var vip:Bool = false
     dynamic var about:String? = nil
@@ -76,6 +77,14 @@ class KrangUser: Object {
     
     func update(withJSON json:JSON) {
         self.name = json["user"]["name"].string
-        //TODO
+        self.slug = json["user"]["ids"]["slug"].string ?? ""
+        self.vip = json["user"]["vip"].bool ?? false
+        self.about = json["user"]["about"].string
+        self.location = json["user"]["location"].string
+        self.gender = json["user"]["gender"].string ?? "male"
+        self.avatarImageURL = json["user"]["images"]["avatar"]["full"].string
+        self.coverImageURL = json["account"]["cover_image"].string
+        self.sharingTextWatching = json["sharing_text"]["watching"].string ?? "I'm watching [item]"
+        self.sharingTextWatched = json["sharing_text"]["watching"].string ?? "I just watched [item]"        
     }
 }

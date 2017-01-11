@@ -9,11 +9,23 @@
 import UIKit
 
 class PlaybackViewController: KrangViewController {
+    
+    @IBOutlet weak var imagePosterBackground: UIImageView!
+    class func instantiatedFromStoryboard() -> PlaybackViewController {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        return storyboard.instantiateViewController(withIdentifier: "playback") as! PlaybackViewController
+    }
 
+    //MARK:- View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        TraktHelper.shared.getCheckedInMovie { (error, movie) in
+            //
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -22,14 +34,9 @@ class PlaybackViewController: KrangViewController {
     }
     
 
-    /*
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func unwindToPlayback(_ sender:UIStoryboardSegue) {
+        
     }
-    */
 
 }
