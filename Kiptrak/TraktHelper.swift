@@ -126,11 +126,17 @@ class TraktHelper: NSObject {
             return nil
         }
         
-        if let movie = KrangMovie.from(json: json) {
-            return movie
+        var result:KrangMovie? = nil
+        KrangRealmUtils.makeChanges {
+            if let movie = KrangMovie.from(json: json) {
+                if KrangMovie.with(traktID: movie.traktID) == nil {
+                    movie.saveToDatabaseOutsideWriteTransaction()
+                }
+                result = movie
+            }
         }
         
-        return nil
+        return result
     }
 
 }

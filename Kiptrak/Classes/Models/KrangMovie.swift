@@ -39,7 +39,12 @@ class KrangMovie: Object {
         self.tmdbID = json["movie"]["ids"]["tmdb"].int ?? -1
     }
     
-    class func with(slug:String) -> KrangMovie? {
+    class func with(traktID:Int) -> KrangMovie? {
+        let realm = try! Realm()
+        let matchingMovies = realm.objects(KrangMovie.self).filter("traktID = %d", traktID)
+        if matchingMovies.count > 0 {
+            return matchingMovies.first
+        }
         return nil
     }
     
@@ -52,12 +57,12 @@ class KrangMovie: Object {
             return nil
         }
         
-        guard let slug = json["movie"]["ids"]["slug"].string else {
+        guard let traktID = json["movie"]["ids"]["trakt"].int else {
             return nil
         }
         
         let movie:KrangMovie = {
-            if let existingMovie = KrangMovie.with(slug: slug) {
+            if let existingMovie = KrangMovie.with(traktID: traktID) {
                 return existingMovie
             } else {
                 return KrangMovie()

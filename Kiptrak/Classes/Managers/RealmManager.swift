@@ -20,7 +20,7 @@ class RealmManager: NSObject {
         
         //Set default Realm path
         let directory: URL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.kip.krang")!
-        let realmPath = directory.path + "db.realm"
+        let realmPath = directory.path + "/db.realm"
         config.fileURL = URL(string: realmPath)!
         
         //Migrate if needed
