@@ -43,6 +43,25 @@ extension UIImage
         
         return newImage!
     }
+    
+    convenience init?(gradientColors:[UIColor], size:CGSize = CGSize(width: 10, height: 10), locations: [Float] = [] )
+    {
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        let context = UIGraphicsGetCurrentContext()
+        
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        let colors = gradientColors.map {(color: UIColor) -> AnyObject! in return color.cgColor as AnyObject! } as NSArray
+        let gradient: CGGradient
+        if locations.count > 0 {
+            let cgLocations = locations.map { CGFloat($0) }
+            gradient = CGGradient(colorsSpace: colorSpace, colors: colors, locations: cgLocations)!
+        } else {
+            gradient = CGGradient(colorsSpace: colorSpace, colors: colors, locations: nil)!
+        }
+        context!.drawLinearGradient(gradient, start: CGPoint(x: 0, y: 0), end: CGPoint(x: 0, y: size.height), options: CGGradientDrawingOptions(rawValue: 0))
+        self.init(cgImage:(UIGraphicsGetImageFromCurrentImageContext()?.cgImage!)!)
+        UIGraphicsEndImageContext()
+    }
 }
 
 extension UIImageView {
@@ -73,6 +92,25 @@ extension UIImageView {
         }
         
         self.kf.setImage(with: urlURL)
+    }
+    
+    func setPoster(fromMovie movie:KrangMovie?) {
+        guard let movie = movie else {
+            //TODO
+            return
+        }
+        
+        guard let posterURL = movie.posterImageURL else {
+            //TODO
+            return
+        }
+        
+        guard let url = URL(string: posterURL) else {
+            //TODO
+            return
+        }
+        
+        self.kf.setImage(with: url)
     }
     
 }

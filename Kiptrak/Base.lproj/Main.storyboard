@@ -72,31 +72,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="08k-fo-OJA">
+                            <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="08k-fo-OJA">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4y2-C5-0ib" customClass="KrangAvatarView" customModule="Kiptrak" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RbW-AH-BXY" customClass="KrangAvatarView" customModule="Kiptrak" customModuleProvider="target">
                                 <rect key="frame" x="326" y="28" width="33" height="33"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="4y2-C5-0ib" secondAttribute="height" id="KEK-5a-qAM"/>
-                                    <constraint firstAttribute="width" constant="33" id="XPR-Fq-PMk"/>
+                                    <constraint firstAttribute="width" secondItem="RbW-AH-BXY" secondAttribute="height" multiplier="1:1" id="feq-7I-ijY"/>
+                                    <constraint firstAttribute="width" constant="33" id="oYi-vk-NRI"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="userAvatar"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <outletCollection property="gestureRecognizers" destination="Tks-PU-6aF" appends="YES" id="3oj-hu-Rgk"/>
+                                    <outletCollection property="gestureRecognizers" destination="A1d-aX-B8b" appends="YES" id="JR5-uL-nkB"/>
                                 </connections>
-                            </imageView>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="08k-fo-OJA" firstAttribute="top" secondItem="7TZ-ZG-VI5" secondAttribute="topMargin" id="LKB-cR-YpQ"/>
+                            <constraint firstItem="RbW-AH-BXY" firstAttribute="top" secondItem="Yzu-M5-eX9" secondAttribute="bottom" constant="8" id="LgP-sE-en4"/>
                             <constraint firstItem="5VY-kU-Lwu" firstAttribute="top" secondItem="08k-fo-OJA" secondAttribute="bottom" id="RqD-UT-Nqa"/>
+                            <constraint firstAttribute="trailing" secondItem="RbW-AH-BXY" secondAttribute="trailing" constant="16" id="WXz-7v-bPs"/>
                             <constraint firstAttribute="trailing" secondItem="08k-fo-OJA" secondAttribute="trailing" id="YKu-h5-suA"/>
-                            <constraint firstAttribute="trailing" secondItem="4y2-C5-0ib" secondAttribute="trailing" constant="16" id="kix-IV-N0H"/>
-                            <constraint firstItem="4y2-C5-0ib" firstAttribute="top" secondItem="Yzu-M5-eX9" secondAttribute="bottom" constant="8" id="wNr-ma-Ai3"/>
                             <constraint firstItem="08k-fo-OJA" firstAttribute="leading" secondItem="7TZ-ZG-VI5" secondAttribute="leading" id="yHw-Iz-JhY"/>
                         </constraints>
                     </view>
@@ -108,9 +109,9 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KSG-JT-GKi" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="Tks-PU-6aF">
+                <tapGestureRecognizer id="A1d-aX-B8b">
                     <connections>
-                        <segue destination="xJp-HJ-PiM" kind="showDetail" id="nap-3H-zpg"/>
+                        <segue destination="xJp-HJ-PiM" kind="showDetail" id="2Mo-kA-rgG"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -154,16 +155,17 @@
                                     <constraint firstAttribute="height" constant="200" id="Onz-pe-hXC"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rZs-lu-zxD" customClass="KrangAvatarView" customModule="Kiptrak" customModuleProvider="target">
-                                <rect key="frame" x="127.5" y="150" width="120" height="120"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hMa-Px-WAx" customClass="KrangAvatarView" customModule="Kiptrak" customModuleProvider="target">
+                                <rect key="frame" x="127" y="140" width="120" height="120"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="rZs-lu-zxD" secondAttribute="height" id="M3n-wE-Rsf"/>
-                                    <constraint firstAttribute="height" constant="120" id="znR-Eu-JFd"/>
+                                    <constraint firstAttribute="width" secondItem="hMa-Px-WAx" secondAttribute="height" id="Bqv-2H-3Ga"/>
+                                    <constraint firstAttribute="height" constant="120" id="nLV-Pj-Asr"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="userAvatar"/>
                                 </userDefinedRuntimeAttributes>
-                            </imageView>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CBW-WP-5pr">
                                 <rect key="frame" x="322" y="28" width="37" height="30"/>
                                 <state key="normal" title="Done"/>
@@ -171,15 +173,32 @@
                                     <segue destination="ACx-tu-NIY" kind="unwind" unwindAction="unwindToPlayback:" id="LLf-Lx-kxf"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pjF-lU-tfj">
+                                <rect key="frame" x="187" y="280" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8fW-hp-xAB">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="KKu-dJ-Flw"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="CBW-WP-5pr" secondAttribute="trailing" constant="16" id="Djn-6d-Pkn"/>
+                            <constraint firstAttribute="trailing" secondItem="8fW-hp-xAB" secondAttribute="trailing" id="Fdc-Ad-3HA"/>
                             <constraint firstItem="4bK-BR-dg5" firstAttribute="top" secondItem="n2z-LW-m4z" secondAttribute="top" id="Fqx-bw-BjM"/>
+                            <constraint firstItem="8fW-hp-xAB" firstAttribute="top" secondItem="n2z-LW-m4z" secondAttribute="top" id="Fti-sB-LgJ"/>
+                            <constraint firstItem="hMa-Px-WAx" firstAttribute="centerX" secondItem="n2z-LW-m4z" secondAttribute="centerX" id="LMe-gK-7wm"/>
+                            <constraint firstItem="pjF-lU-tfj" firstAttribute="centerX" secondItem="n2z-LW-m4z" secondAttribute="centerX" id="MtI-H7-ltz"/>
+                            <constraint firstItem="pjF-lU-tfj" firstAttribute="top" secondItem="hMa-Px-WAx" secondAttribute="bottom" constant="20" id="Ve3-Kh-Ple"/>
+                            <constraint firstItem="hMa-Px-WAx" firstAttribute="top" secondItem="17w-AS-tP6" secondAttribute="bottom" constant="120" id="XmY-R3-7aS"/>
                             <constraint firstItem="CBW-WP-5pr" firstAttribute="top" secondItem="17w-AS-tP6" secondAttribute="bottom" constant="8" id="b5y-b0-VLB"/>
                             <constraint firstAttribute="trailing" secondItem="4bK-BR-dg5" secondAttribute="trailing" id="bD0-Sh-zuh"/>
-                            <constraint firstItem="rZs-lu-zxD" firstAttribute="centerX" secondItem="n2z-LW-m4z" secondAttribute="centerX" id="oiy-Oq-iZ2"/>
-                            <constraint firstItem="rZs-lu-zxD" firstAttribute="top" secondItem="17w-AS-tP6" secondAttribute="bottom" constant="130" id="rYr-hy-Qlq"/>
+                            <constraint firstItem="8fW-hp-xAB" firstAttribute="leading" secondItem="n2z-LW-m4z" secondAttribute="leading" id="qgp-JR-3EX"/>
                             <constraint firstItem="4bK-BR-dg5" firstAttribute="leading" secondItem="n2z-LW-m4z" secondAttribute="leading" id="t7Q-7V-mDg"/>
                         </constraints>
                     </view>
@@ -194,9 +213,11 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabled" value="YES"/>
                     </userDefinedRuntimeAttributes>
                     <connections>
+                        <outlet property="avatar" destination="hMa-Px-WAx" id="JF4-cJ-K1W"/>
                         <outlet property="buttonClose" destination="CBW-WP-5pr" id="GZc-EN-cqk"/>
-                        <outlet property="imageAvatar" destination="rZs-lu-zxD" id="iPQ-8i-EIk"/>
                         <outlet property="imageCover" destination="4bK-BR-dg5" id="1QH-gX-0b5"/>
+                        <outlet property="labelName" destination="pjF-lU-tfj" id="zwk-OO-KBe"/>
+                        <outlet property="shadowTop" destination="8fW-hp-xAB" id="grc-DF-4g3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U4F-zt-S7p" userLabel="First Responder" sceneMemberID="firstResponder"/>

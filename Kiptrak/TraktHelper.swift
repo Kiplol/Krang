@@ -105,9 +105,10 @@ class TraktHelper: NSObject {
             let maybeMovieOrEpisode = TraktHelper.movieOrEpisodeFrom(json: json)
             if let actualMovie = maybeMovieOrEpisode as? KrangMovie {
                 movie = actualMovie
+                TMDBHelper.shared.update(movie: actualMovie, completion: completion)
+            } else {
+                completion?(nil, movie)
             }
-            
-            completion?(nil, movie)
         }) { (error) in
             //Boo
             KrangLogger.log.error("Error getting currently watching movie or episode: \(error)")

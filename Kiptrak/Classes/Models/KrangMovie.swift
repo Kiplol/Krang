@@ -20,6 +20,7 @@ class KrangMovie: Object {
     dynamic var slug: String = ""
     dynamic var imdbID: String? = nil
     dynamic var tmdbID: Int = -1
+    dynamic var posterImageURL: String? = nil
     
     func update(withJSON json:JSON) {
         guard let type = json["type"].string else {
