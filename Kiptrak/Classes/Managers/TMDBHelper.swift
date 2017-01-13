@@ -54,7 +54,26 @@ class TMDBHelper: NSObject {
             return
         }
         
+        guard let show = episode.show else {
+            completion?(nil, episode)
+            return
+        }
         
+        guard show.tmdbID != -1 else {
+            completion?(nil, episode)
+            return
+        }
+        
+        KrangLogger.log.debug("Updating episode")
+        let url = String(format: Constants.tmdbEpisodeGetURLFormat, show.tmdbID, show.slug, episode.season, episode.episode)
+        let _ = self.oauth.client.get(url, success: { (response) in
+            let json = JSON(data: response.data)
+            self.update(episode: episode, withJSON: json)
+            completion?(nil, episode)
+        }) { (error) in
+            KrangLogger.log.error("Error updating episode.  Error: \(error)\nEpisode: \(episode)")
+            completion?(error, episode)
+        }
     }
     
     class Configuration {
@@ -68,6 +87,8 @@ class TMDBHelper: NSObject {
         func update(with json:JSON) {
             self.imageBaseURL = json["images"]["secure_base_url"].string ?? ""
             self.posterSizes = json["images"]["poster_sizes"].arrayObject as? [String] ?? [""]
+            self.stillSizes = json["images"]["still_sizes"].arrayObject as? [String] ?? [""]
+            self.backdropSizes = json["images"]["backdrop_sizes"].arrayObject as? [String] ?? [""]
         }
     }
     
@@ -76,6 +97,15 @@ class TMDBHelper: NSObject {
             if let posterPath = json["poster_path"].string {
                 let posterURL = self.configuration.imageBaseURL + self.configuration.posterSizes[Int(3 * self.configuration.posterSizes.count / 4)] + posterPath
                 movie.posterImageURL = posterURL
+            }
+        }
+    }
+    
+    private func update(episode:KrangEpisode, withJSON json:JSON) {
+        episode.makeChanges {
+            if let stillPath = json["still_path"].string {
+                let stillURL = self.configuration.imageBaseURL + self.configuration.stillSizes[Int(3 * self.configuration.stillSizes.count / 4)] + stillPath
+                episode.stillImageURL = stillURL
             }
         }
     }

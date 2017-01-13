@@ -25,7 +25,7 @@ class Constants: NSObject {
     open class var tmdbAPIReadAccessToken: String { get { return "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0MjI2MWVjMGFhNmQwNzY4N2YxODlhNTZmN2IyMzYzZCIsInN1YiI6IjU4NzY3MTg2OTI1MTQxMDg3MjAwMDBiNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.p_kIHeKSPM99z5aTJX_lHWaQenBLBH8_iJQB4oRpL8I" } }
     open class var tmdbMovieGetURLFormat: String { get { return "https://api.themoviedb.org/3/movie/%d?api_key=\(Constants.tmdbAPIKey)&language=en-US" } }
     open class var tmdbConfigurationURL: String { get { return "https://api.themoviedb.org/3/configuration?api_key=\(Constants.tmdbAPIKey)" } }
-    open class var tmdbEpisodeGetURLFormat: String { get { return "https://api.themoviedb.org/3/tv/32726-bob-s-burgers/season/1/episode/1?api_key=\(Constants.tmdbAPIKey)&language=en-US" } }
+    open class var tmdbEpisodeGetURLFormat: String { get { return "https://api.themoviedb.org/3/tv/%d%@/season/%d/episode/%d?api_key=\(Constants.tmdbAPIKey)&language=en-US" } }
     
     //MARK: IMDB
     open class var imdbURLFormat: String { get { return "http://www.imdb.com/title/%@/?ref_=Krang" } }

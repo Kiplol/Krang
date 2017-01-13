@@ -101,18 +101,17 @@ class TraktHelper: NSObject {
         let _ = self.oauth.client.get(url, parameters: [:], headers: TraktHelper.defaultHeaders(), success: { (response) in
             //Yay
             let json = JSON(data: response.data)
-            var movie:KrangMovie? = nil
-            var episode:KrangEpisode? = nil
             let maybeMovieOrEpisode = TraktHelper.movieOrEpisodeFrom(json: json)
             if let actualMovie = maybeMovieOrEpisode as? KrangMovie {
-                movie = actualMovie
                 TMDBHelper.shared.update(movie: actualMovie, completion: { (error, updatedMovie) in
-                    completion?(error, updatedMovie, episode)
+                    completion?(error, updatedMovie, nil)
                 })
             } else if let actualEpisode = maybeMovieOrEpisode as? KrangEpisode {
-                episode = actualEpisode
+                TMDBHelper.shared.update(episode: actualEpisode, completion: { (error, updatedEpisode) in
+                    completion?(error, nil, updatedEpisode)
+                })
             } else {
-                completion?(nil, movie, episode)
+                completion?(nil, nil, nil)
             }
         }) { (error) in
             //Boo

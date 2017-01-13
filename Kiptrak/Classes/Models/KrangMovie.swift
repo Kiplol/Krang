@@ -73,4 +73,13 @@ class KrangMovie: Object {
         movie.update(withJSON: json)
         return movie
     }
+    
+    func urlForIMDB() -> URL? {
+        guard let imdbID = self.imdbID else {
+            return nil
+        }
+        
+        let szURL = String(format: Constants.imdbURLFormat, imdbID)
+        return URL(string: szURL)
+    }
 }

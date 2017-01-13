@@ -21,7 +21,8 @@ class PlaybackViewController: KrangViewController {
         return storyboard.instantiateViewController(withIdentifier: "playback") as! PlaybackViewController
     }
     
-    var traktID:Int? = nil
+    var traktMovieID:Int? = nil
+    var traktEpisodeID:Int? = nil
 
     //MARK:- View Lifecycle
     override func viewDidLoad() {
@@ -31,15 +32,21 @@ class PlaybackViewController: KrangViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         TraktHelper.shared.getCheckedInMovieOrEpisode { [unowned self] (error, movie, episode) in
-            self.traktID = movie?.traktID
-            self.updateViews(withMovie: movie)
+            if let movie = movie {
+                self.traktMovieID = movie.traktID
+                self.traktEpisodeID = nil
+            } else if let episode = episode {
+                self.traktEpisodeID = episode.traktID
+                self.traktMovieID = nil
+            }
+            
+            self.updateViews(withMovie: movie, orEpisode: episode)
         }
     }
     
     //MARK:- User Interaction
-    
     @IBAction func imdbTapped(_ sender: Any) {
-        guard let traktID = self.traktID else {
+        guard let traktID = self.traktMovieID else {
             return
         }
         
@@ -47,25 +54,37 @@ class PlaybackViewController: KrangViewController {
             return
         }
         
-        guard let imdbID = movie.imdbID else {
-            return
-        }
-        
-        let szURL = String(format: Constants.imdbURLFormat, imdbID)
-        guard let url = URL(string: szURL) else {
+        guard let url = movie.urlForIMDB() else {
             return
         }
         
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
-    //MARK:-
-    func updateViews(withMovie movie:KrangMovie?) {
-        self.imagePosterBackground.setPoster(fromMovie: movie)
-        if let movie = movie {
-        
+    @IBAction func tmdbTapped(_ sender: Any) {
+        if let episodeID = self.traktEpisodeID {
+            guard let episode = KrangEpisode.with(traktID: episodeID) else {
+                return
+            }
+            
+            guard let url = episode.urlForTMDB() else {
+                return
+            }
+            
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
         } else {
             
+        }
+    }
+    
+    //MARK:-
+    func updateViews(withMovie movie:KrangMovie?, orEpisode episode:KrangEpisode?) {
+        if let movie = movie {
+            self.imagePosterBackground.setPoster(fromMovie: movie)
+        } else if let episode = episode {
+            self.imagePosterBackground.setStill(fromEpisode: episode)
+        } else {
+            self.imagePosterBackground.setPoster(fromMovie: nil)
         }
     }
 

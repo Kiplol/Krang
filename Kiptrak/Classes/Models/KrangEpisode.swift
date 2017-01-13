@@ -22,6 +22,7 @@ class KrangEpisode: Object {
     dynamic var tmdbID: Int = -1
     dynamic var tvRageID: Int = -1
     dynamic var posterImageURL: String? = nil
+    dynamic var stillImageURL: String? = nil
     let shows = LinkingObjects(fromType: KrangShow.self, property: "episodes")
     var show: KrangShow? {
         get {
@@ -82,6 +83,23 @@ class KrangEpisode: Object {
         
         episode.update(withJSON: json)
         return episode
+    }
+    
+    func urlForIMDB() -> URL? {
+        return nil
+    }
+    
+    func urlForTMDB() -> URL? {
+        guard let show = self.show else {
+            return nil
+        }
+        
+        guard show.tmdbID != -1 else {
+            return nil
+        }
+        
+        let szURL = "https://www.themoviedb.org/tv/\(show.tmdbID)-\(show.slug)/season/\(self.season)/episode/\(self.episode)"
+        return URL(string: szURL)
     }
     
 }

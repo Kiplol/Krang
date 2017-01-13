@@ -118,4 +118,26 @@ extension UIImageView {
         self.kf.setImage(with: url)
     }
     
+    func setStill(fromEpisode episode:KrangEpisode?) {
+        guard let episode = episode else {
+            //TODO
+            self.image = nil
+            return
+        }
+        
+        guard let stillURL = episode.stillImageURL else {
+            //TODO
+            self.image = nil
+            return
+        }
+        
+        guard let url = URL(string: stillURL) else {
+            //TODO
+            self.image = nil
+            return
+        }
+        
+        self.kf.setImage(with: url)
+    }
+    
 }
