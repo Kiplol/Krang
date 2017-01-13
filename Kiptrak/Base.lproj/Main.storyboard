@@ -16,7 +16,7 @@
             <objects>
                 <navigationController navigationBarHidden="YES" id="id2-XQ-XDI" sceneMemberID="viewController">
                     <nil key="simulatedTopBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="5RF-Bj-fFW">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="5RF-Bj-fFW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -90,30 +90,50 @@
                                     <outletCollection property="gestureRecognizers" destination="A1d-aX-B8b" appends="YES" id="JR5-uL-nkB"/>
                                 </connections>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UPE-r7-PhN">
-                                <rect key="frame" x="313" y="617" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UPE-r7-PhN">
+                                <rect key="frame" x="322" y="617" width="37" height="30"/>
                                 <state key="normal" title="IMDB"/>
                                 <connections>
                                     <action selector="imdbTapped:" destination="4EL-Ga-1bM" eventType="touchUpInside" id="dYm-tC-Plu"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Coe-6v-C0y">
-                                <rect key="frame" x="259" y="617" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Coe-6v-C0y">
+                                <rect key="frame" x="271" y="617" width="43" height="30"/>
                                 <state key="normal" title="TMDB"/>
                                 <connections>
                                     <action selector="tmdbTapped:" destination="4EL-Ga-1bM" eventType="touchUpInside" id="jDu-ml-bQ9"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RFR-Kq-JBt">
+                                <rect key="frame" x="36" y="568" width="303" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You are watching" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="frG-Xv-C7V">
+                                <rect key="frame" x="36" y="539" width="303" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="RFR-Kq-JBt" secondAttribute="trailing" constant="20" id="9Y5-sQ-aLz"/>
+                            <constraint firstItem="RFR-Kq-JBt" firstAttribute="top" secondItem="frG-Xv-C7V" secondAttribute="bottom" constant="8" id="KNL-5G-9FC"/>
                             <constraint firstItem="08k-fo-OJA" firstAttribute="top" secondItem="7TZ-ZG-VI5" secondAttribute="topMargin" id="LKB-cR-YpQ"/>
                             <constraint firstItem="RbW-AH-BXY" firstAttribute="top" secondItem="Yzu-M5-eX9" secondAttribute="bottom" constant="8" id="LgP-sE-en4"/>
+                            <constraint firstAttribute="trailing" secondItem="UPE-r7-PhN" secondAttribute="trailing" constant="16" id="N9e-j3-86f"/>
+                            <constraint firstItem="RFR-Kq-JBt" firstAttribute="leading" secondItem="7TZ-ZG-VI5" secondAttribute="leadingMargin" constant="20" id="OHN-nd-tTR"/>
+                            <constraint firstItem="5VY-kU-Lwu" firstAttribute="top" secondItem="UPE-r7-PhN" secondAttribute="bottom" constant="20" id="OiI-PQ-AXI"/>
                             <constraint firstItem="5VY-kU-Lwu" firstAttribute="top" secondItem="08k-fo-OJA" secondAttribute="bottom" id="RqD-UT-Nqa"/>
                             <constraint firstAttribute="trailing" secondItem="RbW-AH-BXY" secondAttribute="trailing" constant="16" id="WXz-7v-bPs"/>
                             <constraint firstAttribute="trailing" secondItem="08k-fo-OJA" secondAttribute="trailing" id="YKu-h5-suA"/>
+                            <constraint firstItem="UPE-r7-PhN" firstAttribute="leading" secondItem="Coe-6v-C0y" secondAttribute="trailing" constant="8" id="b99-Yy-CaS"/>
+                            <constraint firstItem="Coe-6v-C0y" firstAttribute="top" secondItem="RFR-Kq-JBt" secondAttribute="bottom" constant="8" id="dIO-az-MVP"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="frG-Xv-C7V" secondAttribute="trailing" constant="20" id="i4I-Iq-53U"/>
+                            <constraint firstItem="frG-Xv-C7V" firstAttribute="leading" secondItem="7TZ-ZG-VI5" secondAttribute="leadingMargin" constant="20" id="tRx-A6-hQc"/>
+                            <constraint firstItem="Coe-6v-C0y" firstAttribute="baseline" secondItem="UPE-r7-PhN" secondAttribute="baseline" id="tYB-qn-2L2"/>
                             <constraint firstItem="08k-fo-OJA" firstAttribute="leading" secondItem="7TZ-ZG-VI5" secondAttribute="leading" id="yHw-Iz-JhY"/>
                         </constraints>
                     </view>
@@ -122,6 +142,8 @@
                     </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="imagePosterBackground" destination="08k-fo-OJA" id="20M-fp-Eye"/>
+                        <outlet property="labelDisplayName" destination="RFR-Kq-JBt" id="OoV-MR-L2B"/>
+                        <outlet property="labelYouAreWatching" destination="frG-Xv-C7V" id="Krr-ro-fe7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KSG-JT-GKi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -138,7 +160,7 @@
             <objects>
                 <navigationController navigationBarHidden="YES" id="xJp-HJ-PiM" sceneMemberID="viewController">
                     <nil key="simulatedTopBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="KPY-Pv-Af8">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="KPY-Pv-Af8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

@@ -69,6 +69,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //Labels
         UILabel.appearance().textColor = UIColor.white
+        UILabel.appearance().font = UIFont(name: "Exo-Black", size: 15.0)
+//        for family: String in UIFont.familyNames
+//        {
+//            print("\(family)")
+//            for names: String in UIFont.fontNames(forFamilyName: family)
+//            {
+//                print("== \(names)")
+//            }
+//        }
     }
 
 }

@@ -21,6 +21,10 @@ class PlaybackViewController: KrangViewController {
         return storyboard.instantiateViewController(withIdentifier: "playback") as! PlaybackViewController
     }
     
+    @IBOutlet weak var labelYouAreWatching: UILabel!
+    @IBOutlet weak var labelDisplayName: UILabel!
+    
+    
     var traktMovieID:Int? = nil
     var traktEpisodeID:Int? = nil
 
@@ -83,8 +87,10 @@ class PlaybackViewController: KrangViewController {
             self.imagePosterBackground.setPoster(fromMovie: movie)
         } else if let episode = episode {
             self.imagePosterBackground.setStill(fromEpisode: episode)
+            self.labelDisplayName.text = episode.title
         } else {
             self.imagePosterBackground.setPoster(fromMovie: nil)
+            self.labelDisplayName.text = nil
         }
     }
 
