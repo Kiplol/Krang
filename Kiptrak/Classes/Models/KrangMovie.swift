@@ -21,6 +21,7 @@ class KrangMovie: Object {
     dynamic var imdbID: String? = nil
     dynamic var tmdbID: Int = -1
     dynamic var posterImageURL: String? = nil
+    dynamic var backdropImageURL:String? = nil
     
     func update(withJSON json:JSON) {
         guard let type = json["type"].string else {

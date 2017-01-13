@@ -48,6 +48,15 @@ class TMDBHelper: NSObject {
         }
     }
     
+    func update(episode:KrangEpisode, completion:((_:Error?, _:KrangEpisode?) -> ())?) {
+        guard episode.tmdbID != -1 else {
+            completion?(nil, episode)
+            return
+        }
+        
+        
+    }
+    
     class Configuration {
         var imageBaseURL = ""
         var posterSizes: [String] = [""]

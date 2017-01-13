@@ -96,23 +96,28 @@ class TraktHelper: NSObject {
         }
     }
     
-    func getCheckedInMovie(completion: ((_:Error?, _:KrangMovie?) -> ())?) {
+    func getCheckedInMovieOrEpisode(completion: ((_:Error?, _:KrangMovie?, _:KrangEpisode?) -> ())?) {
         let url = String.init(format: Constants.traktWatchingURLFormat, KrangUser.getCurrentUser().slug)
         let _ = self.oauth.client.get(url, parameters: [:], headers: TraktHelper.defaultHeaders(), success: { (response) in
             //Yay
             let json = JSON(data: response.data)
             var movie:KrangMovie? = nil
+            var episode:KrangEpisode? = nil
             let maybeMovieOrEpisode = TraktHelper.movieOrEpisodeFrom(json: json)
             if let actualMovie = maybeMovieOrEpisode as? KrangMovie {
                 movie = actualMovie
-                TMDBHelper.shared.update(movie: actualMovie, completion: completion)
+                TMDBHelper.shared.update(movie: actualMovie, completion: { (error, updatedMovie) in
+                    completion?(error, updatedMovie, episode)
+                })
+            } else if let actualEpisode = maybeMovieOrEpisode as? KrangEpisode {
+                episode = actualEpisode
             } else {
-                completion?(nil, movie)
+                completion?(nil, movie, episode)
             }
         }) { (error) in
             //Boo
             KrangLogger.log.error("Error getting currently watching movie or episode: \(error)")
-            completion?(error, nil)
+            completion?(error, nil, nil)
         }
     }
     
@@ -126,17 +131,50 @@ class TraktHelper: NSObject {
             return nil
         }
         
-        var result:KrangMovie? = nil
+        var resultMovie:KrangMovie? = nil
+        var resultEpisode:KrangEpisode? = nil
         KrangRealmUtils.makeChanges {
             if let movie = KrangMovie.from(json: json) {
+                //If it's new, save it to our database.
                 if KrangMovie.with(traktID: movie.traktID) == nil {
                     movie.saveToDatabaseOutsideWriteTransaction()
                 }
-                result = movie
+                resultMovie = movie
+            } else if let episode = KrangEpisode.from(json: json) {
+                //If it's new, save it to our database.
+                if KrangEpisode.with(traktID: episode.traktID) == nil {
+                    episode.saveToDatabaseOutsideWriteTransaction()
+                }
+                
+                if let showID = json["show"]["ids"]["trakt"].int {
+                    let show:KrangShow = {
+                        if let existingShow = KrangShow.with(traktID: showID) {
+                            existingShow.update(withJSON: json["show"])
+                            return existingShow
+                        } else {
+                            let newShow = KrangShow()
+                            newShow.update(withJSON: json["show"])
+                            newShow.saveToDatabaseOutsideWriteTransaction()
+                            return newShow
+                        }
+                    }()
+                    
+                    
+                    if !episode.shows.contains(show) {
+                        show.episodes.append(episode)
+                    }
+                }
+                
+                resultEpisode = episode
             }
         }
         
-        return result
+        if let movie = resultMovie {
+            return movie
+        } else if let episode = resultEpisode {
+            return episode
+        }
+        return nil
     }
 
 }

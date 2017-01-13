@@ -30,7 +30,7 @@ class PlaybackViewController: KrangViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        TraktHelper.shared.getCheckedInMovie { [unowned self] (error, movie) in
+        TraktHelper.shared.getCheckedInMovieOrEpisode { [unowned self] (error, movie, episode) in
             self.traktID = movie?.traktID
             self.updateViews(withMovie: movie)
         }

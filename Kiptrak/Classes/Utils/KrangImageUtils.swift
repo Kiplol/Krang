@@ -69,11 +69,13 @@ extension UIImageView {
     func setAvatar(fromURL url:String?) {
         guard let url = url else {
             //TODO: Set default avatar
+            self.image = nil
             return
         }
         
         guard let urlURL = URL(string: url) else {
             //TODO: Set default avatar
+            self.image = nil
             return
         }
         
@@ -97,16 +99,19 @@ extension UIImageView {
     func setPoster(fromMovie movie:KrangMovie?) {
         guard let movie = movie else {
             //TODO
+            self.image = nil
             return
         }
         
         guard let posterURL = movie.posterImageURL else {
             //TODO
+            self.image = nil
             return
         }
         
         guard let url = URL(string: posterURL) else {
             //TODO
+            self.image = nil
             return
         }
         
