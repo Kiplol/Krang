@@ -14,12 +14,12 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>KeychainAccess.xcscheme</key>
+		<key>Kingfisher.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Kingfisher.xcscheme</key>
+		<key>MarqueeLabel.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -62,12 +62,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>262D4D3576FD9DC3886C412E141903D5</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>293488881FB833CFB7C6166E58D1531E</key>
+		<key>320AD47B0C6BA014D301395D3BFC8FB6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -82,12 +77,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5B25944162CD84772F278BD6EF40F235</key>
+		<key>62187D55222419E4F1610596C1CAB331</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8905DB6521F8FDC34752B69DEE3FDEB7</key>
+		<key>820CC5D936EC8638F4ACED08D7ABBEF7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>ACE110E902AA03BCB8C29FC306748ED6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -97,22 +97,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B95520F47C9A5C2EB0A99E3E5D3CB4D9</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>C4944FEC314D1A66588651D006273ADE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D3A559217677639EF86C73D73D7F44FB</key>
+		<key>CC2BED865DC5BB201B9270B6ED4574A6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E4CC4DF7834A197C34F8BAD23D4ACDC0</key>
+		<key>F6DFC84571F14B8D37840757C6A0E3C7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F752593F8CEE5620F13A3E490234E080</key>
 		<dict>
 			<key>primary</key>
 			<true/>

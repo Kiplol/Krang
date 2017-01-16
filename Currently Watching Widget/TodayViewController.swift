@@ -8,11 +8,12 @@
 
 import UIKit
 import NotificationCenter
+import MarqueeLabel
 
 class TodayViewController: UIViewController, NCWidgetProviding {
     
     //MARK:- ivars
-    @IBOutlet weak var labelTitle: UILabel!
+    @IBOutlet weak var labelTitle: MarqueeLabel!
     @IBOutlet weak var imageBackground: UIImageView!
     @IBOutlet weak var imagePoster: UIImageView!
     

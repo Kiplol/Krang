@@ -115,14 +115,14 @@ class TMDBHelper: NSObject {
     
     private func update(movie:KrangMovie, withJSON json:JSON) {
         movie.makeChanges {
-            if let posterPath = json["poster_path"].string {
+            if let posterPath = json["poster_path"].string, self.configuration.posterSizes.count > 0 {
                 let posterURL = self.configuration.imageBaseURL + self.configuration.posterSizes[Int(3 * self.configuration.posterSizes.count / 4)] + posterPath
-                let smallestPosterURL = self.configuration.imageBaseURL + self.configuration.posterSizes[0] + posterPath
                 movie.posterImageURL = posterURL
+                let smallestPosterURL = self.configuration.imageBaseURL + self.configuration.posterSizes[0] + posterPath
                 movie.posterThumbnailImageURL = smallestPosterURL
             }
             
-            if let stillPath = json["backdrop_path"].string {
+            if let stillPath = json["backdrop_path"].string, self.configuration.backdropSizes.count > 0 {
                 let backdropURL = self.configuration.imageBaseURL + self.configuration.backdropSizes[Int(3 * self.configuration.posterSizes.count / 4)] + stillPath
                 let smallestBackdropURL = self.configuration.imageBaseURL + self.configuration.backdropSizes[0] + stillPath
                 movie.backdropImageURL = backdropURL
@@ -133,9 +133,9 @@ class TMDBHelper: NSObject {
     
     private func update(episode:KrangEpisode, withJSON json:JSON) {
         episode.makeChanges {
-            if let stillPath = json["still_path"].string {
+            if let stillPath = json["still_path"].string, self.configuration.stillSizes.count > 0 {
                 let stillURL = self.configuration.imageBaseURL + self.configuration.stillSizes[Int(3 * self.configuration.stillSizes.count / 4)] + stillPath
-                let smallestStillURL = self.configuration.imageBaseURL + self.configuration.stillSizes[Int(3 * self.configuration.stillSizes.count / 4)] + stillPath
+                let smallestStillURL = self.configuration.imageBaseURL + self.configuration.stillSizes[0] + stillPath
                 episode.stillImageURL = stillURL
                 episode.stillThumbnailImageURL = smallestStillURL
             }
@@ -144,7 +144,7 @@ class TMDBHelper: NSObject {
     
     private func update(episode:KrangEpisode, withSeasonJSON json:JSON) {
         episode.makeChanges {
-            if let posterPath = json["poster_path"].string {
+            if let posterPath = json["poster_path"].string, self.configuration.posterSizes.count > 0 {
                 let posterURL = self.configuration.imageBaseURL + self.configuration.posterSizes[Int(3 * self.configuration.posterSizes.count / 4)] + posterPath
                 let smallestPosterURL = self.configuration.imageBaseURL + self.configuration.posterSizes[0] + posterPath
                 episode.posterImageURL = posterURL
