@@ -75,15 +75,6 @@ class KrangMovie: Object {
         movie.update(withJSON: json)
         return movie
     }
-    
-    func urlForIMDB() -> URL? {
-        guard let imdbID = self.imdbID else {
-            return nil
-        }
-        
-        let szURL = String(format: Constants.imdbURLFormat, imdbID)
-        return URL(string: szURL)
-    }
 }
 
 extension KrangMovie: KrangWatchable {
@@ -99,6 +90,30 @@ extension KrangMovie: KrangWatchable {
                 return nil
             }
             return URL(string: posterThumbnailURL)
+        }
+    }
+    
+    var urlForIMDB: URL? {
+        get {
+            guard let imdbID = self.imdbID else {
+                return nil
+            }
+            
+            let szURL = String(format: Constants.imdbURLFormat, imdbID)
+            return URL(string: szURL)
+        }
+    }
+    
+    var urlForTMDB: URL? {
+        get {
+            guard self.tmdbID != -1 else {
+                return nil
+            }
+            
+//            https://www.themoviedb.org/movie/174772-europa-report
+            
+            let szURL = "https://www.themoviedb.org/movie/\(self.tmdbID)-\(self.slug)"
+            return URL(string: szURL)
         }
     }
 }

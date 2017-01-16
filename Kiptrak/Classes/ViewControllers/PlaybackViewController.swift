@@ -58,7 +58,7 @@ class PlaybackViewController: KrangViewController {
             return
         }
         
-        guard let url = movie.urlForIMDB() else {
+        guard let url = movie.urlForIMDB else {
             return
         }
         
@@ -71,7 +71,7 @@ class PlaybackViewController: KrangViewController {
                 return
             }
             
-            guard let url = episode.urlForTMDB() else {
+            guard let url = episode.urlForTMDB else {
                 return
             }
             

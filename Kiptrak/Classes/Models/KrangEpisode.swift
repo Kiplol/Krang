@@ -86,30 +86,13 @@ class KrangEpisode: Object {
         episode.update(withJSON: json)
         return episode
     }
-    
-    func urlForIMDB() -> URL? {
-        return nil
-    }
-    
-    func urlForTMDB() -> URL? {
-        guard let show = self.show else {
-            return nil
-        }
-        
-        guard show.tmdbID != -1 else {
-            return nil
-        }
-        
-        let szURL = "https://www.themoviedb.org/tv/\(show.tmdbID)-\(show.slug)/season/\(self.season)/episode/\(self.episode)/cast"
-        return URL(string: szURL)
-    }
 }
 
 extension KrangEpisode: KrangWatchable {
     var titleDisplayString: String {
         get {
             if let show = self.show {
-                return "\(show.titleDisplayString) - \(self.title)"
+                return "\(show.title) - \(self.title)"
             } else {
                 return self.title
             }
@@ -122,6 +105,27 @@ extension KrangEpisode: KrangWatchable {
                 return nil
             }
             return URL(string: posterThumbnailURL)
+        }
+    }
+    
+    var urlForIMDB: URL? {
+        get {
+            return nil
+        }
+    }
+    
+    var urlForTMDB: URL? {
+        get {
+            guard let show = self.show else {
+                return nil
+            }
+            
+            guard show.tmdbID != -1 else {
+                return nil
+            }
+            
+            let szURL = "https://www.themoviedb.org/tv/\(show.tmdbID)-\(show.slug)/season/\(self.season)/episode/\(self.episode)/cast"
+            return URL(string: szURL)
         }
     }
 }

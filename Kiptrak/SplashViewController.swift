@@ -61,7 +61,7 @@ class SplashViewController: KrangViewController {
             })
             }) { (error) in
                 //Boo
-                print(error)
+                KrangLogger.log.error("Error logging into Trakt: \(error)")
         }
     }
 }

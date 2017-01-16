@@ -11,4 +11,6 @@ import UIKit
 protocol KrangWatchable {
     var titleDisplayString: String { get }
     var posterThumbnailURL: URL? { get }
+    var urlForIMDB: URL? { get }
+    var urlForTMDB: URL? { get }
 }
