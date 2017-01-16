@@ -60,8 +60,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func setupAppearance() {
-        UIWindow.appearance().tintColor = UIColor.orange
-        UIView.appearance().tintColor = UIColor.orange
+        UIWindow.appearance().tintColor = UIColor.white
+        UIView.appearance().tintColor = UIColor.white
         
         //Navigation Bar
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
