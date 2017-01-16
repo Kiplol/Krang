@@ -123,7 +123,7 @@ class TMDBHelper: NSObject {
             }
             
             if let stillPath = json["backdrop_path"].string, self.configuration.backdropSizes.count > 0 {
-                let backdropURL = self.configuration.imageBaseURL + self.configuration.backdropSizes[Int(3 * self.configuration.posterSizes.count / 4)] + stillPath
+                let backdropURL = self.configuration.imageBaseURL + self.configuration.backdropSizes[Int(3 * self.configuration.backdropSizes.count / 4)] + stillPath
                 let smallestBackdropURL = self.configuration.imageBaseURL + self.configuration.backdropSizes[0] + stillPath
                 movie.backdropImageURL = backdropURL
                 movie.backdropThumbnailImageURL = smallestBackdropURL
