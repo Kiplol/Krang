@@ -82,6 +82,8 @@
 		37A19E981E2C5B14007877B4 /* Exo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 37A19E4A1E288FFD007877B4 /* Exo-Regular.otf */; };
 		37A19E991E2C5B14007877B4 /* Exo-Thin-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 37A19E4B1E288FFD007877B4 /* Exo-Thin-Italic.otf */; };
 		37A19E9A1E2C5B14007877B4 /* Exo-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 37A19E4C1E288FFD007877B4 /* Exo-Thin.otf */; };
+		37A19E9C1E2D512E007877B4 /* KrangViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A19E9B1E2D512E007877B4 /* KrangViewUtils.swift */; };
+		37A19E9D1E2D512E007877B4 /* KrangViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A19E9B1E2D512E007877B4 /* KrangViewUtils.swift */; };
 		CCECAB0157942143A8E08CB2 /* Pods_Kiptrak.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37B22421F8414CC64C2C4B78 /* Pods_Kiptrak.framework */; };
 		FB3E162D1E45A3E736A6C43D /* Pods_Currently_Watching_Widget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98F45B548DC94C8289E45742 /* Pods_Currently_Watching_Widget.framework */; };
 /* End PBXBuildFile section */
@@ -163,6 +165,7 @@
 		37A19E801E2BFFE6007877B4 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = "../../Library/Developer/Xcode/DerivedData/Kiptrak-gjgpfebnhtdsvcfwevvrqpbgglic/Build/Products/Debug-iphonesimulator/RealmSwift/RealmSwift.framework"; sourceTree = "<group>"; };
 		37A19E821E2BFFF3007877B4 /* Pods_Kiptrak.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_Kiptrak.framework; path = "../../Library/Developer/Xcode/DerivedData/Kiptrak-gjgpfebnhtdsvcfwevvrqpbgglic/Build/Products/Debug-iphonesimulator/Pods_Kiptrak.framework"; sourceTree = "<group>"; };
 		37A19E871E2C01C9007877B4 /* Currently Watching Widget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Currently Watching Widget.entitlements"; sourceTree = "<group>"; };
+		37A19E9B1E2D512E007877B4 /* KrangViewUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KrangViewUtils.swift; path = Classes/Utils/KrangViewUtils.swift; sourceTree = "<group>"; };
 		37B22421F8414CC64C2C4B78 /* Pods_Kiptrak.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kiptrak.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		57BCB84000D2751D40C37EC7 /* Pods-Kiptrak.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kiptrak.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kiptrak/Pods-Kiptrak.debug.xcconfig"; sourceTree = "<group>"; };
 		98F45B548DC94C8289E45742 /* Pods_Currently_Watching_Widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Currently_Watching_Widget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -281,6 +284,7 @@
 			isa = PBXGroup;
 			children = (
 				379C554C1E25529600D51019 /* KrangImageUtils.swift */,
+				37A19E9B1E2D512E007877B4 /* KrangViewUtils.swift */,
 				379C55491E24992300D51019 /* KrangRealmUtils.swift */,
 			);
 			name = Utils;
@@ -610,6 +614,7 @@
 				373D32961E22C05C00980925 /* Constants.swift in Sources */,
 				37870B221E22BA6A00A2EC00 /* SplashViewController.swift in Sources */,
 				3724CBAC1E247557005387D1 /* PlaybackViewController.swift in Sources */,
+				37A19E9C1E2D512E007877B4 /* KrangViewUtils.swift in Sources */,
 				379C554A1E24992300D51019 /* KrangRealmUtils.swift in Sources */,
 				37A19E361E27F0B3007877B4 /* KrangEpisode.swift in Sources */,
 				379C55441E247F9C00D51019 /* KrangUser.swift in Sources */,
@@ -635,6 +640,7 @@
 				37A19E841E2C013E007877B4 /* KrangRealmUtils.swift in Sources */,
 				37A19E7A1E2BFF4A007877B4 /* KrangMovie.swift in Sources */,
 				37A19E861E2C015B007877B4 /* Constants.swift in Sources */,
+				37A19E9D1E2D512E007877B4 /* KrangViewUtils.swift in Sources */,
 				37A19E851E2C0143007877B4 /* KrangImageUtils.swift in Sources */,
 				37A19E7C1E2BFF50007877B4 /* TMDBHelper.swift in Sources */,
 				37A19E7F1E2BFF50007877B4 /* RealmManager.swift in Sources */,

@@ -5,6 +5,7 @@ def shared_pods
 	use_frameworks!
 	pod 'Hue'
 	pod 'Kingfisher', '~> 3.0'
+	pod 'MarqueeLabel/Swift'
 	pod 'OAuthSwift', '~> 1.1.0'
 	pod 'RealmSwift'
 	pod 'SwiftyBeaver'

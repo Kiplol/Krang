@@ -22,7 +22,9 @@ class KrangEpisode: Object {
     dynamic var tmdbID: Int = -1
     dynamic var tvRageID: Int = -1
     dynamic var posterImageURL: String? = nil
+    dynamic var posterThumbnailImageURL: String? = nil
     dynamic var stillImageURL: String? = nil
+    dynamic var stillThumbnailImageURL: String? = nil
     let shows = LinkingObjects(fromType: KrangShow.self, property: "episodes")
     var show: KrangShow? {
         get {
@@ -114,12 +116,12 @@ extension KrangEpisode: KrangWatchable {
         }
     }
     
-    var mainImageURL: URL? {
+    var posterThumbnailURL: URL? {
         get {
-            guard let szStillImageIRL = self.stillImageURL else {
+            guard let posterThumbnailURL = self.posterThumbnailImageURL else {
                 return nil
             }
-            return URL(string: szStillImageIRL)
+            return URL(string: posterThumbnailURL)
         }
     }
 }

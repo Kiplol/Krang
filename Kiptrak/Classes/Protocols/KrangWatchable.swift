@@ -10,5 +10,5 @@ import UIKit
 
 protocol KrangWatchable {
     var titleDisplayString: String { get }
-    var mainImageURL: URL? { get }
+    var posterThumbnailURL: URL? { get }
 }

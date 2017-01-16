@@ -21,7 +21,9 @@ class KrangMovie: Object {
     dynamic var imdbID: String? = nil
     dynamic var tmdbID: Int = -1
     dynamic var posterImageURL: String? = nil
+    dynamic var posterThumbnailImageURL: String? = nil
     dynamic var backdropImageURL:String? = nil
+    dynamic var backdropThumbnailImageURL: String? = nil
     
     func update(withJSON json:JSON) {
         guard let type = json["type"].string else {
@@ -91,12 +93,12 @@ extension KrangMovie: KrangWatchable {
         }
     }
     
-    var mainImageURL: URL? {
+    var posterThumbnailURL: URL? {
         get {
-            guard let szPosterImageURL = self.posterImageURL else {
+            guard let posterThumbnailURL = self.posterThumbnailImageURL else {
                 return nil
             }
-            return URL(string: szPosterImageURL)
+            return URL(string: posterThumbnailURL)
         }
     }
 }

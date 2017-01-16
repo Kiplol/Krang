@@ -47,15 +47,15 @@ class KrangShow: Object {
 }
 
 extension KrangShow: KrangWatchable {
+    var posterThumbnailURL: URL? {
+        get {
+            return nil
+        }
+    }
+
     var titleDisplayString: String {
         get {
             return self.title
-        }
-    }
-    
-    var mainImageURL: URL? {
-        get {
-            return nil
         }
     }
 }
