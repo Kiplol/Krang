@@ -51,10 +51,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     //MARK:- Deeplinks
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        if (url.host == "oauth-callback") {
+        if url.host == "oauth-callback" {
             KrangLogger.log.debug("Got OAuth callback from URL: \(url)")
             OAuthSwift.handle(url: url)
         }
+        DeeplinkHandler.shared.handle(url: url)
         return true
     }
 

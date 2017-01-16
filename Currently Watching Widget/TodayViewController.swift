@@ -39,7 +39,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     //MARK:- User Interaction
     
     @IBAction func tmdbTapped(_ sender: Any) {
-        //TODO:
         guard let watchable = self.getCurrentWatchable() else {
             return
         }
@@ -49,12 +48,20 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         }
         
         let szURL = "krang://externalurl/\(tmdbURL.absoluteString)"
-        self.extensionContext?.open(URL(string: "krang://\(szURL)")!, completionHandler: nil)
+        self.extensionContext?.open(URL(string: szURL)!, completionHandler: nil)
     }
     
     @IBAction func imdbTapped(_ sender: Any) {
-        //TODO:
-        self.extensionContext?.open(URL(string: "krang://")!, completionHandler: nil)
+        guard let watchable = self.getCurrentWatchable() else {
+            return
+        }
+        
+        guard let imdbURL = watchable.urlForIMDB else {
+            return
+        }
+        
+        let szURL = "krang://externalurl/\(imdbURL.absoluteString)"
+        self.extensionContext?.open(URL(string: szURL)!, completionHandler: nil)
     }
     
     //MARK:-
