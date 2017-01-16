@@ -21,18 +21,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         let _ = RealmManager.shared
         KrangLogger.setup()
         
-        //TODO: Centralize this with app
-        UIWindow.appearance().tintColor = UIColor.orange
-        UIView.appearance().tintColor = UIColor.orange
-        
-        //Navigation Bar
-        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
-        UINavigationBar.appearance().barTintColor = UIColor.darkBackground
-        UINavigationBar.appearance().isTranslucent = false
-        
-        //Labels
-        UILabel.appearance().textColor = UIColor.white
-        UILabel.appearance().font = UIFont(name: "Exo-Black", size: 15.0)
+        //TODO: Appearance
     }
     
     override func didReceiveMemoryWarning() {
@@ -63,8 +52,9 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                     return
                 }
                 
-//                self.imageBackground.kf.setImage(with: imageURL)
-                completionHandler(.newData)
+                self.imageBackground.kf.setImage(with: imageURL, placeholder: nil, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, url) in
+                    completionHandler(.newData)
+                })
             }
         }
         
