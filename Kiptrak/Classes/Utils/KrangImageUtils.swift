@@ -97,13 +97,7 @@ extension UIImageView {
     }
     
     func setPoster(fromMovie movie:KrangMovie?) {
-        guard let movie = movie else {
-            //TODO
-            self.image = nil
-            return
-        }
-        
-        guard let posterURL = movie.posterImageURL else {
+        guard let posterURL = movie?.posterImageURL else {
             //TODO
             self.image = nil
             return
@@ -118,14 +112,24 @@ extension UIImageView {
         self.kf.setImage(with: url)
     }
     
-    func setStill(fromEpisode episode:KrangEpisode?) {
-        guard let episode = episode else {
+    func setPoster(fromEpisode episode:KrangEpisode?) {
+        guard let szURL = episode?.posterImageURL else {
             //TODO
             self.image = nil
             return
         }
         
-        guard let stillURL = episode.stillImageURL else {
+        guard let url = URL(string: szURL) else {
+            //TODO
+            self.image = nil
+            return
+        }
+        
+        self.kf.setImage(with: url)
+    }
+    
+    func setStill(fromEpisode episode:KrangEpisode?) {
+        guard let stillURL = episode?.stillImageURL else {
             //TODO
             self.image = nil
             return

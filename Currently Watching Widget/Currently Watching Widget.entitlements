@@ -8,6 +8,7 @@
 	</array>
 	<key>keychain-access-groups</key>
 	<array>
+		<string>$(AppIdentifierPrefix)com.kip.krang.Currently-Watching-Widget</string>
 		<string>$(AppIdentifierPrefix)com.kip.krang</string>
 	</array>
 </dict>

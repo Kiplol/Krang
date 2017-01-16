@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Currently Watching Widget.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>10</integer>
+		</dict>
 		<key>Kiptrak.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -13,6 +18,11 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>37870B1B1E22BA6A00A2EC00</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>37A19E621E2BFDD9007877B4</key>
 		<dict>
 			<key>primary</key>
 			<true/>

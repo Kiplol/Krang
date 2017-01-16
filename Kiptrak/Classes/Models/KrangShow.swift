@@ -45,3 +45,17 @@ class KrangShow: Object {
         self.tvRageID = json["ids"]["tvrage"].int ?? -1
     }
 }
+
+extension KrangShow: KrangWatchable {
+    var titleDisplayString: String {
+        get {
+            return self.title
+        }
+    }
+    
+    var mainImageURL: URL? {
+        get {
+            return nil
+        }
+    }
+}

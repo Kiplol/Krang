@@ -83,3 +83,20 @@ class KrangMovie: Object {
         return URL(string: szURL)
     }
 }
+
+extension KrangMovie: KrangWatchable {
+    var titleDisplayString: String {
+        get {
+            return self.title
+        }
+    }
+    
+    var mainImageURL: URL? {
+        get {
+            guard let szPosterImageURL = self.posterImageURL else {
+                return nil
+            }
+            return URL(string: szPosterImageURL)
+        }
+    }
+}

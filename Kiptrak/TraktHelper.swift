@@ -27,20 +27,32 @@ class TraktHelper: NSObject {
     fileprivate func attemptToLoadCachedCredentials() {
         let sharedDefaults = UserDefaults(suiteName: "group.com.kip.krang")
         if let cachedCredentialData = sharedDefaults?.object(forKey: "traktCredentials") as? Data {
-            if let cachedCredential = NSKeyedUnarchiver.unarchiveObject(with: cachedCredentialData) as? OAuthSwiftCredential {
-                self.didGetCredentials = true
+            if let cachedCredential = NSKeyedUnarchiver.unarchiveObject(with: cachedCredentialData) as? OAuthSwiftCredential, cachedCredential.oauthToken.characters.count > 0 {
                 cachedCredential.version = .oauth2
                 self.oauth.client = OAuthSwiftClient(credential: cachedCredential)
-            } else {
-                //Error unarchiving
+                self.cache(credentials: self.oauth.client.credential)
+                self.didGetCredentials = true
+                KrangLogger.log.debug("Got cached Trakt credential object")
             }
+        } else if let cachedOAuthToken = sharedDefaults?.string(forKey: "oauthToken"), let cachedOAuthTokenSecret = sharedDefaults?.string(forKey: "oauthTokenSecret") {
+            self.oauth.client.credential.oauthToken = cachedOAuthToken
+            self.oauth.client.credential.oauthTokenSecret = cachedOAuthTokenSecret
+            self.oauth.client.credential.version = .oauth2
+            self.didGetCredentials = true
+            KrangLogger.log.debug("Got cached Trakt credentials")
+        } else {
+            //Error unarchiving
+            KrangLogger.log.error("Could not get cached Trakt credentials")
         }
     }
     
     fileprivate func cache(credentials credential:OAuthSwiftCredential) {
-        let data = NSKeyedArchiver.archivedData(withRootObject: credential)
+//        let data = NSKeyedArchiver.archivedData(withRootObject: credential)
         let sharedDefaults = UserDefaults(suiteName: "group.com.kip.krang")
-        sharedDefaults?.set(data, forKey: "traktCredentials")
+//        sharedDefaults?.set(data, forKey: "traktCredentials")
+        sharedDefaults?.setValue(credential.oauthToken, forKey: "oauthToken")
+        sharedDefaults?.setValue(credential.oauthTokenSecret, forKey: "oauthTokenSecret")
+        sharedDefaults?.synchronize()
     }
     
     func credentialsNeedRefresh() -> Bool {

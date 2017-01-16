@@ -46,10 +46,72 @@
 		37A19E5C1E288FFD007877B4 /* Exo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 37A19E4A1E288FFD007877B4 /* Exo-Regular.otf */; };
 		37A19E5D1E288FFD007877B4 /* Exo-Thin-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 37A19E4B1E288FFD007877B4 /* Exo-Thin-Italic.otf */; };
 		37A19E5E1E288FFD007877B4 /* Exo-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 37A19E4C1E288FFD007877B4 /* Exo-Thin.otf */; };
+		37A19E651E2BFDD9007877B4 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37A19E641E2BFDD9007877B4 /* NotificationCenter.framework */; };
+		37A19E681E2BFDD9007877B4 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A19E671E2BFDD9007877B4 /* TodayViewController.swift */; };
+		37A19E6B1E2BFDD9007877B4 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37A19E691E2BFDD9007877B4 /* MainInterface.storyboard */; };
+		37A19E6F1E2BFDD9007877B4 /* Currently Watching Widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 37A19E631E2BFDD9007877B4 /* Currently Watching Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		37A19E751E2BFE34007877B4 /* KrangWatchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A19E741E2BFE34007877B4 /* KrangWatchable.swift */; };
+		37A19E761E2BFE34007877B4 /* KrangWatchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A19E741E2BFE34007877B4 /* KrangWatchable.swift */; };
+		37A19E781E2BFF4A007877B4 /* KrangEpisode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A19E351E27F0B3007877B4 /* KrangEpisode.swift */; };
+		37A19E791E2BFF4A007877B4 /* KrangShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A19E371E27F290007877B4 /* KrangShow.swift */; };
+		37A19E7A1E2BFF4A007877B4 /* KrangMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A19E311E269C96007877B4 /* KrangMovie.swift */; };
+		37A19E7B1E2BFF4A007877B4 /* KrangUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C55431E247F9C00D51019 /* KrangUser.swift */; };
+		37A19E7C1E2BFF50007877B4 /* TMDBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A19E331E26E914007877B4 /* TMDBHelper.swift */; };
+		37A19E7D1E2BFF50007877B4 /* KrangLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C55501E2564D100D51019 /* KrangLogger.swift */; };
+		37A19E7E1E2BFF50007877B4 /* TraktHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374C2A9F1E242BCD0094D7A4 /* TraktHelper.swift */; };
+		37A19E7F1E2BFF50007877B4 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C55461E248B4F00D51019 /* RealmManager.swift */; };
+		37A19E841E2C013E007877B4 /* KrangRealmUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C55491E24992300D51019 /* KrangRealmUtils.swift */; };
+		37A19E851E2C0143007877B4 /* KrangImageUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C554C1E25529600D51019 /* KrangImageUtils.swift */; };
+		37A19E861E2C015B007877B4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373D32951E22C05C00980925 /* Constants.swift */; };
+		37A19E881E2C5AFF007877B4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37A19E2E1E25BAEF007877B4 /* Images.xcassets */; };
+		37A19E891E2C5B14007877B4 /* Exo-Black-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 37A19E3B1E288FFD007877B4 /* Exo-Black-Italic.otf */; };
+		37A19E8A1E2C5B14007877B4 /* Exo-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 37A19E3C1E288FFD007877B4 /* Exo-Black.otf */; };
+		37A19E8B1E2C5B14007877B4 /* Exo-Bold-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 37A19E3D1E288FFD007877B4 /* Exo-Bold-Italic.otf */; };
+		37A19E8C1E2C5B14007877B4 /* Exo-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 37A19E3E1E288FFD007877B4 /* Exo-Bold.otf */; };
+		37A19E8D1E2C5B14007877B4 /* Exo-DemiBold-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 37A19E3F1E288FFD007877B4 /* Exo-DemiBold-Italic.otf */; };
+		37A19E8E1E2C5B14007877B4 /* Exo-DemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 37A19E401E288FFD007877B4 /* Exo-DemiBold.otf */; };
+		37A19E8F1E2C5B14007877B4 /* Exo-ExtraBold-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 37A19E411E288FFD007877B4 /* Exo-ExtraBold-Italic.otf */; };
+		37A19E901E2C5B14007877B4 /* Exo-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 37A19E421E288FFD007877B4 /* Exo-ExtraBold.otf */; };
+		37A19E911E2C5B14007877B4 /* Exo-ExtraLight-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 37A19E431E288FFD007877B4 /* Exo-ExtraLight-Italic.otf */; };
+		37A19E921E2C5B14007877B4 /* Exo-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 37A19E441E288FFD007877B4 /* Exo-ExtraLight.otf */; };
+		37A19E931E2C5B14007877B4 /* Exo-Light-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 37A19E451E288FFD007877B4 /* Exo-Light-Italic.otf */; };
+		37A19E941E2C5B14007877B4 /* Exo-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 37A19E461E288FFD007877B4 /* Exo-Light.otf */; };
+		37A19E951E2C5B14007877B4 /* Exo-Medium-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 37A19E471E288FFD007877B4 /* Exo-Medium-Italic.otf */; };
+		37A19E961E2C5B14007877B4 /* Exo-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 37A19E481E288FFD007877B4 /* Exo-Medium.otf */; };
+		37A19E971E2C5B14007877B4 /* Exo-Regular-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 37A19E491E288FFD007877B4 /* Exo-Regular-Italic.otf */; };
+		37A19E981E2C5B14007877B4 /* Exo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 37A19E4A1E288FFD007877B4 /* Exo-Regular.otf */; };
+		37A19E991E2C5B14007877B4 /* Exo-Thin-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 37A19E4B1E288FFD007877B4 /* Exo-Thin-Italic.otf */; };
+		37A19E9A1E2C5B14007877B4 /* Exo-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 37A19E4C1E288FFD007877B4 /* Exo-Thin.otf */; };
 		CCECAB0157942143A8E08CB2 /* Pods_Kiptrak.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37B22421F8414CC64C2C4B78 /* Pods_Kiptrak.framework */; };
+		FB3E162D1E45A3E736A6C43D /* Pods_Currently_Watching_Widget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98F45B548DC94C8289E45742 /* Pods_Currently_Watching_Widget.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		37A19E6D1E2BFDD9007877B4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 37870B141E22BA6A00A2EC00 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 37A19E621E2BFDD9007877B4;
+			remoteInfo = "Currently Watching Widget";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		37A19E731E2BFDD9007877B4 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				37A19E6F1E2BFDD9007877B4 /* Currently Watching Widget.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		30BCC36AEA18296CBF311C9C /* Pods-Currently Watching Widget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Currently Watching Widget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Currently Watching Widget/Pods-Currently Watching Widget.debug.xcconfig"; sourceTree = "<group>"; };
 		3724CBA91E2474AF005387D1 /* KrangViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KrangViewController.swift; path = Classes/ViewControllers/KrangViewController.swift; sourceTree = "<group>"; };
 		3724CBAB1E247557005387D1 /* PlaybackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlaybackViewController.swift; path = Classes/ViewControllers/PlaybackViewController.swift; sourceTree = "<group>"; };
 		373D32951E22C05C00980925 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Classes/Constants.swift; sourceTree = "<group>"; };
@@ -92,8 +154,19 @@
 		37A19E4A1E288FFD007877B4 /* Exo-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Exo-Regular.otf"; path = "Resources/Fonts/Exo-Regular.otf"; sourceTree = "<group>"; };
 		37A19E4B1E288FFD007877B4 /* Exo-Thin-Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Exo-Thin-Italic.otf"; path = "Resources/Fonts/Exo-Thin-Italic.otf"; sourceTree = "<group>"; };
 		37A19E4C1E288FFD007877B4 /* Exo-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Exo-Thin.otf"; path = "Resources/Fonts/Exo-Thin.otf"; sourceTree = "<group>"; };
+		37A19E631E2BFDD9007877B4 /* Currently Watching Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Currently Watching Widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		37A19E641E2BFDD9007877B4 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		37A19E671E2BFDD9007877B4 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		37A19E6A1E2BFDD9007877B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		37A19E6C1E2BFDD9007877B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		37A19E741E2BFE34007877B4 /* KrangWatchable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KrangWatchable.swift; path = Classes/Protocols/KrangWatchable.swift; sourceTree = "<group>"; };
+		37A19E801E2BFFE6007877B4 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = "../../Library/Developer/Xcode/DerivedData/Kiptrak-gjgpfebnhtdsvcfwevvrqpbgglic/Build/Products/Debug-iphonesimulator/RealmSwift/RealmSwift.framework"; sourceTree = "<group>"; };
+		37A19E821E2BFFF3007877B4 /* Pods_Kiptrak.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_Kiptrak.framework; path = "../../Library/Developer/Xcode/DerivedData/Kiptrak-gjgpfebnhtdsvcfwevvrqpbgglic/Build/Products/Debug-iphonesimulator/Pods_Kiptrak.framework"; sourceTree = "<group>"; };
+		37A19E871E2C01C9007877B4 /* Currently Watching Widget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Currently Watching Widget.entitlements"; sourceTree = "<group>"; };
 		37B22421F8414CC64C2C4B78 /* Pods_Kiptrak.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kiptrak.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		57BCB84000D2751D40C37EC7 /* Pods-Kiptrak.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kiptrak.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kiptrak/Pods-Kiptrak.debug.xcconfig"; sourceTree = "<group>"; };
+		98F45B548DC94C8289E45742 /* Pods_Currently_Watching_Widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Currently_Watching_Widget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A0DBC2C2D99275125265CBBB /* Pods-Currently Watching Widget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Currently Watching Widget.release.xcconfig"; path = "Pods/Target Support Files/Pods-Currently Watching Widget/Pods-Currently Watching Widget.release.xcconfig"; sourceTree = "<group>"; };
 		FC6C3DDC87919D26314AE58D /* Pods-Kiptrak.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kiptrak.release.xcconfig"; path = "Pods/Target Support Files/Pods-Kiptrak/Pods-Kiptrak.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -106,6 +179,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		37A19E601E2BFDD9007877B4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37A19E651E2BFDD9007877B4 /* NotificationCenter.framework in Frameworks */,
+				FB3E162D1E45A3E736A6C43D /* Pods_Currently_Watching_Widget.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -114,6 +196,8 @@
 			children = (
 				57BCB84000D2751D40C37EC7 /* Pods-Kiptrak.debug.xcconfig */,
 				FC6C3DDC87919D26314AE58D /* Pods-Kiptrak.release.xcconfig */,
+				30BCC36AEA18296CBF311C9C /* Pods-Currently Watching Widget.debug.xcconfig */,
+				A0DBC2C2D99275125265CBBB /* Pods-Currently Watching Widget.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -144,6 +228,7 @@
 			isa = PBXGroup;
 			children = (
 				37870B1E1E22BA6A00A2EC00 /* Kiptrak */,
+				37A19E661E2BFDD9007877B4 /* Currently Watching Widget */,
 				37870B1D1E22BA6A00A2EC00 /* Products */,
 				12EE2D71C67781060DB8F8AE /* Pods */,
 				4679527081A47D22E35BDC47 /* Frameworks */,
@@ -154,6 +239,7 @@
 			isa = PBXGroup;
 			children = (
 				37870B1C1E22BA6A00A2EC00 /* Kiptrak.app */,
+				37A19E631E2BFDD9007877B4 /* Currently Watching Widget.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -161,6 +247,7 @@
 		37870B1E1E22BA6A00A2EC00 /* Kiptrak */ = {
 			isa = PBXGroup;
 			children = (
+				37A19E771E2BFE39007877B4 /* Protocols */,
 				37A19E2E1E25BAEF007877B4 /* Images.xcassets */,
 				373D32951E22C05C00980925 /* Constants.swift */,
 				374C2AA11E243C080094D7A4 /* Kiptrak.entitlements */,
@@ -241,10 +328,33 @@
 			name = Fonts;
 			sourceTree = "<group>";
 		};
+		37A19E661E2BFDD9007877B4 /* Currently Watching Widget */ = {
+			isa = PBXGroup;
+			children = (
+				37A19E871E2C01C9007877B4 /* Currently Watching Widget.entitlements */,
+				37A19E671E2BFDD9007877B4 /* TodayViewController.swift */,
+				37A19E691E2BFDD9007877B4 /* MainInterface.storyboard */,
+				37A19E6C1E2BFDD9007877B4 /* Info.plist */,
+			);
+			path = "Currently Watching Widget";
+			sourceTree = "<group>";
+		};
+		37A19E771E2BFE39007877B4 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				37A19E741E2BFE34007877B4 /* KrangWatchable.swift */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
 		4679527081A47D22E35BDC47 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				37A19E821E2BFFF3007877B4 /* Pods_Kiptrak.framework */,
+				37A19E801E2BFFE6007877B4 /* RealmSwift.framework */,
 				37B22421F8414CC64C2C4B78 /* Pods_Kiptrak.framework */,
+				37A19E641E2BFDD9007877B4 /* NotificationCenter.framework */,
+				98F45B548DC94C8289E45742 /* Pods_Currently_Watching_Widget.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -262,15 +372,36 @@
 				37870B1A1E22BA6A00A2EC00 /* Resources */,
 				EA82FF84A79BA0B7A01D74D1 /* [CP] Embed Pods Frameworks */,
 				7C50886ACF88F300C3229EE4 /* [CP] Copy Pods Resources */,
+				37A19E731E2BFDD9007877B4 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				37A19E6E1E2BFDD9007877B4 /* PBXTargetDependency */,
 			);
 			name = Kiptrak;
 			productName = Kiptrak;
 			productReference = 37870B1C1E22BA6A00A2EC00 /* Kiptrak.app */;
 			productType = "com.apple.product-type.application";
+		};
+		37A19E621E2BFDD9007877B4 /* Currently Watching Widget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 37A19E701E2BFDD9007877B4 /* Build configuration list for PBXNativeTarget "Currently Watching Widget" */;
+			buildPhases = (
+				73D49ED513927513BFAC8F7D /* [CP] Check Pods Manifest.lock */,
+				37A19E5F1E2BFDD9007877B4 /* Sources */,
+				37A19E601E2BFDD9007877B4 /* Frameworks */,
+				37A19E611E2BFDD9007877B4 /* Resources */,
+				83CA47E5F19AB1878A523774 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Currently Watching Widget";
+			productName = "Currently Watching Widget";
+			productReference = 37A19E631E2BFDD9007877B4 /* Currently Watching Widget.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -278,7 +409,7 @@
 		37870B141E22BA6A00A2EC00 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0800;
+				LastSwiftUpdateCheck = 0820;
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Supernovacaine Inc.";
 				TargetAttributes = {
@@ -288,6 +419,22 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
+					};
+					37A19E621E2BFDD9007877B4 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = LSB86U552U;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.Keychain = {
 								enabled = 1;
 							};
 						};
@@ -308,6 +455,7 @@
 			projectRoot = "";
 			targets = (
 				37870B1B1E22BA6A00A2EC00 /* Kiptrak */,
+				37A19E621E2BFDD9007877B4 /* Currently Watching Widget */,
 			);
 		};
 /* End PBXProject section */
@@ -342,10 +490,52 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		37A19E611E2BFDD9007877B4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37A19E971E2C5B14007877B4 /* Exo-Regular-Italic.otf in Resources */,
+				37A19E991E2C5B14007877B4 /* Exo-Thin-Italic.otf in Resources */,
+				37A19E901E2C5B14007877B4 /* Exo-ExtraBold.otf in Resources */,
+				37A19E8E1E2C5B14007877B4 /* Exo-DemiBold.otf in Resources */,
+				37A19E981E2C5B14007877B4 /* Exo-Regular.otf in Resources */,
+				37A19E951E2C5B14007877B4 /* Exo-Medium-Italic.otf in Resources */,
+				37A19E6B1E2BFDD9007877B4 /* MainInterface.storyboard in Resources */,
+				37A19E9A1E2C5B14007877B4 /* Exo-Thin.otf in Resources */,
+				37A19E881E2C5AFF007877B4 /* Images.xcassets in Resources */,
+				37A19E8A1E2C5B14007877B4 /* Exo-Black.otf in Resources */,
+				37A19E8F1E2C5B14007877B4 /* Exo-ExtraBold-Italic.otf in Resources */,
+				37A19E8B1E2C5B14007877B4 /* Exo-Bold-Italic.otf in Resources */,
+				37A19E891E2C5B14007877B4 /* Exo-Black-Italic.otf in Resources */,
+				37A19E8C1E2C5B14007877B4 /* Exo-Bold.otf in Resources */,
+				37A19E941E2C5B14007877B4 /* Exo-Light.otf in Resources */,
+				37A19E931E2C5B14007877B4 /* Exo-Light-Italic.otf in Resources */,
+				37A19E8D1E2C5B14007877B4 /* Exo-DemiBold-Italic.otf in Resources */,
+				37A19E921E2C5B14007877B4 /* Exo-ExtraLight.otf in Resources */,
+				37A19E911E2C5B14007877B4 /* Exo-ExtraLight-Italic.otf in Resources */,
+				37A19E961E2C5B14007877B4 /* Exo-Medium.otf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		607631F0D1C3329CEEED915C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		73D49ED513927513BFAC8F7D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -373,6 +563,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Kiptrak/Pods-Kiptrak-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		83CA47E5F19AB1878A523774 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Currently Watching Widget/Pods-Currently Watching Widget-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		EA82FF84A79BA0B7A01D74D1 /* [CP] Embed Pods Frameworks */ = {
@@ -414,10 +619,39 @@
 				379C554D1E25529600D51019 /* KrangImageUtils.swift in Sources */,
 				37A19E381E27F290007877B4 /* KrangShow.swift in Sources */,
 				379C55511E2564D100D51019 /* KrangLogger.swift in Sources */,
+				37A19E751E2BFE34007877B4 /* KrangWatchable.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		37A19E5F1E2BFDD9007877B4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37A19E7B1E2BFF4A007877B4 /* KrangUser.swift in Sources */,
+				37A19E781E2BFF4A007877B4 /* KrangEpisode.swift in Sources */,
+				37A19E681E2BFDD9007877B4 /* TodayViewController.swift in Sources */,
+				37A19E791E2BFF4A007877B4 /* KrangShow.swift in Sources */,
+				37A19E761E2BFE34007877B4 /* KrangWatchable.swift in Sources */,
+				37A19E841E2C013E007877B4 /* KrangRealmUtils.swift in Sources */,
+				37A19E7A1E2BFF4A007877B4 /* KrangMovie.swift in Sources */,
+				37A19E861E2C015B007877B4 /* Constants.swift in Sources */,
+				37A19E851E2C0143007877B4 /* KrangImageUtils.swift in Sources */,
+				37A19E7C1E2BFF50007877B4 /* TMDBHelper.swift in Sources */,
+				37A19E7F1E2BFF50007877B4 /* RealmManager.swift in Sources */,
+				37A19E7E1E2BFF50007877B4 /* TraktHelper.swift in Sources */,
+				37A19E7D1E2BFF50007877B4 /* KrangLogger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		37A19E6E1E2BFDD9007877B4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 37A19E621E2BFDD9007877B4 /* Currently Watching Widget */;
+			targetProxy = 37A19E6D1E2BFDD9007877B4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		37870B231E22BA6A00A2EC00 /* Main.storyboard */ = {
@@ -434,6 +668,14 @@
 				37870B291E22BA6A00A2EC00 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		37A19E691E2BFDD9007877B4 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				37A19E6A1E2BFDD9007877B4 /* Base */,
+			);
+			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -536,6 +778,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 57BCB84000D2751D40C37EC7 /* Pods-Kiptrak.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Kiptrak/Kiptrak.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -552,6 +795,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FC6C3DDC87919D26314AE58D /* Pods-Kiptrak.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Kiptrak/Kiptrak.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -560,6 +804,40 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kip.krang;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		37A19E711E2BFDD9007877B4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 30BCC36AEA18296CBF311C9C /* Pods-Currently Watching Widget.debug.xcconfig */;
+			buildSettings = {
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CODE_SIGN_ENTITLEMENTS = "Currently Watching Widget/Currently Watching Widget.entitlements";
+				DEVELOPMENT_TEAM = LSB86U552U;
+				INFOPLIST_FILE = "Currently Watching Widget/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kip.krang.Currently-Watching-Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		37A19E721E2BFDD9007877B4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A0DBC2C2D99275125265CBBB /* Pods-Currently Watching Widget.release.xcconfig */;
+			buildSettings = {
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CODE_SIGN_ENTITLEMENTS = "Currently Watching Widget/Currently Watching Widget.entitlements";
+				DEVELOPMENT_TEAM = LSB86U552U;
+				INFOPLIST_FILE = "Currently Watching Widget/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kip.krang.Currently-Watching-Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -581,6 +859,15 @@
 			buildConfigurations = (
 				37870B2F1E22BA6A00A2EC00 /* Debug */,
 				37870B301E22BA6A00A2EC00 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		37A19E701E2BFDD9007877B4 /* Build configuration list for PBXNativeTarget "Currently Watching Widget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				37A19E711E2BFDD9007877B4 /* Debug */,
+				37A19E721E2BFDD9007877B4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -86,7 +86,7 @@ class PlaybackViewController: KrangViewController {
         if let movie = movie {
             self.imagePosterBackground.setPoster(fromMovie: movie)
         } else if let episode = episode {
-            self.imagePosterBackground.setStill(fromEpisode: episode)
+            self.imagePosterBackground.setPoster(fromEpisode: episode)
             self.labelDisplayName.text = episode.title
         } else {
             self.imagePosterBackground.setPoster(fromMovie: nil)

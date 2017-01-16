@@ -69,11 +69,32 @@ class TMDBHelper: NSObject {
         let _ = self.oauth.client.get(url, success: { (response) in
             let json = JSON(data: response.data)
             self.update(episode: episode, withJSON: json)
-            completion?(nil, episode)
+            
+            KrangLogger.log.debug("Updated episode with episode details.  Now updating with season details.")
+            let seasonURL = String(format: Constants.tmdbSeasonGetURLFormat, show.tmdbID, show.slug, episode.season)
+            let _ = self.oauth.client.get(seasonURL, success: { (seasonResponse) in
+                let seasonJSON = JSON(data: seasonResponse.data)
+                self.update(episode: episode, withSeasonJSON: seasonJSON)
+                completion?(nil, episode)
+            }, failure: { (seasonError) in
+                KrangLogger.log.error("Error updating episode with season data.  Error: \(seasonError)\nEpisode: \(episode)")
+                completion?(seasonError, episode)
+            })
+            
         }) { (error) in
             KrangLogger.log.error("Error updating episode.  Error: \(error)\nEpisode: \(episode)")
             completion?(error, episode)
         }
+    }
+    
+    func update(show:KrangShow, completion:((_:Error?, _:KrangShow?) -> ())?) {
+        guard show.tmdbID != -1 else {
+            completion?(NSError(domain: "Krang", code: -1, userInfo: ["debugMessage": "tmdbID = -1"]), show)
+            return
+        }
+        
+        //TODO
+        completion?(nil, show)
     }
     
     class Configuration {
@@ -106,6 +127,15 @@ class TMDBHelper: NSObject {
             if let stillPath = json["still_path"].string {
                 let stillURL = self.configuration.imageBaseURL + self.configuration.stillSizes[Int(3 * self.configuration.stillSizes.count / 4)] + stillPath
                 episode.stillImageURL = stillURL
+            }
+        }
+    }
+    
+    private func update(episode:KrangEpisode, withSeasonJSON json:JSON) {
+        episode.makeChanges {
+            if let posterPath = json["poster_path"].string {
+                let posterURL = self.configuration.imageBaseURL + self.configuration.posterSizes[Int(3 * self.configuration.posterSizes.count / 4)] + posterPath
+                episode.posterImageURL = posterURL
             }
         }
     }

@@ -26,6 +26,7 @@ class Constants: NSObject {
     open class var tmdbMovieGetURLFormat: String { get { return "https://api.themoviedb.org/3/movie/%d?api_key=\(Constants.tmdbAPIKey)&language=en-US" } }
     open class var tmdbConfigurationURL: String { get { return "https://api.themoviedb.org/3/configuration?api_key=\(Constants.tmdbAPIKey)" } }
     open class var tmdbEpisodeGetURLFormat: String { get { return "https://api.themoviedb.org/3/tv/%d%@/season/%d/episode/%d?api_key=\(Constants.tmdbAPIKey)&language=en-US" } }
+    open class var tmdbSeasonGetURLFormat: String { get { return "https://api.themoviedb.org/3/tv/%d%@/season/%d?api_key=\(Constants.tmdbAPIKey)&language=en-US" } }
     
     //MARK: IMDB
     open class var imdbURLFormat: String { get { return "http://www.imdb.com/title/%@/?ref_=Krang" } }

@@ -1,6 +1,7 @@
 PODS:
   - Hero (0.1.0)
   - Hue (2.0.1)
+  - KeychainAccess (3.0.1)
   - Kingfisher (3.2.4)
   - OAuthSwift (1.1.0)
   - Realm (2.1.2):
@@ -14,6 +15,7 @@ PODS:
 DEPENDENCIES:
   - Hero
   - Hue
+  - KeychainAccess
   - Kingfisher (~> 3.0)
   - OAuthSwift (~> 1.1.0)
   - RealmSwift
@@ -23,6 +25,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Hero: 14038043c41ea53ba1aa43b4d3655f377d78bea6
   Hue: 354caec055fdc9d38b5ef33ca2e7224721843baf
+  KeychainAccess: 017ea25e313a49eda10bb19b0bb0760fb1edfe1a
   Kingfisher: 8d80f39da403cd9c9ee11984e1655f4d6a566cdb
   OAuthSwift: 7ec2c62274f6bdc30b1ba3b799c39a6fdcaea0e5
   Realm: efe855f4d977c8ce5a82d3116d9f1ff155a6550c
@@ -30,6 +33,6 @@ SPEC CHECKSUMS:
   SwiftyBeaver: 2b68694df862381235e32bcfc4ec991e26bf131d
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: eae67171a04d03134e56b0cd3bb8704f4cc3a790
+PODFILE CHECKSUM: 2bfe7139487cd8b85441bb09d4e0e41ad0acab52
 
 COCOAPODS: 1.1.1

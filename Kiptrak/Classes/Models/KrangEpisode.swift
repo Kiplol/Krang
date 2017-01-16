@@ -98,8 +98,28 @@ class KrangEpisode: Object {
             return nil
         }
         
-        let szURL = "https://www.themoviedb.org/tv/\(show.tmdbID)-\(show.slug)/season/\(self.season)/episode/\(self.episode)"
+        let szURL = "https://www.themoviedb.org/tv/\(show.tmdbID)-\(show.slug)/season/\(self.season)/episode/\(self.episode)/cast"
         return URL(string: szURL)
     }
+}
+
+extension KrangEpisode: KrangWatchable {
+    var titleDisplayString: String {
+        get {
+            if let show = self.show {
+                return "\(show.titleDisplayString) - \(self.title)"
+            } else {
+                return self.title
+            }
+        }
+    }
     
+    var mainImageURL: URL? {
+        get {
+            guard let szStillImageIRL = self.stillImageURL else {
+                return nil
+            }
+            return URL(string: szStillImageIRL)
+        }
+    }
 }
