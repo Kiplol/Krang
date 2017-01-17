@@ -36,3 +36,8 @@ class Constants: NSObject {
 extension UIColor {
     class var darkBackground: UIColor { get { return UIColor(hex: "1E1E1E") } }
 }
+
+extension Notification.Name {
+//    public static var willEnterForeground: Notification.Name { get { return Notification.Name("willEnterForeground") } }
+//    public static var didEnterBackground: Notification.Name { get { return Notification.Name("didEnterBackground") } }
+}

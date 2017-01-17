@@ -10,6 +10,11 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Exo-Black.otf">
+            <string>Exo-Black</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Navigation Controller-->
         <scene sceneID="557-PH-wf0">
@@ -73,7 +78,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="08k-fo-OJA">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="531"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="557"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RbW-AH-BXY" customClass="KrangAvatarView" customModule="Kiptrak" customModuleProvider="target">
                                 <rect key="frame" x="326" y="28" width="33" height="33"/>
@@ -99,30 +104,58 @@
                                     <outletCollection property="gestureRecognizers" destination="A1d-aX-B8b" appends="YES" id="JR5-uL-nkB"/>
                                 </connections>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UPE-r7-PhN">
-                                <rect key="frame" x="322" y="617" width="37" height="30"/>
-                                <state key="normal" title="IMDB"/>
-                                <connections>
-                                    <action selector="imdbTapped:" destination="4EL-Ga-1bM" eventType="touchUpInside" id="dYm-tC-Plu"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Coe-6v-C0y">
-                                <rect key="frame" x="271" y="617" width="43" height="30"/>
-                                <state key="normal" title="TMDB"/>
-                                <connections>
-                                    <action selector="tmdbTapped:" destination="4EL-Ga-1bM" eventType="touchUpInside" id="jDu-ml-bQ9"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RFR-Kq-JBt">
-                                <rect key="frame" x="36" y="609" width="303" height="0.0"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wlr-5B-5Di">
-                                <rect key="frame" x="0.0" y="539" width="375" height="128"/>
+                                <rect key="frame" x="0.0" y="547" width="375" height="120"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="WBv-kv-rbR">
+                                        <rect key="frame" x="183" y="68" width="184" height="44"/>
+                                        <subviews>
+                                            <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UPE-r7-PhN">
+                                                <rect key="frame" x="0.0" y="0.0" width="88" height="44"/>
+                                                <state key="normal" image="button_imdb_small"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                        <real key="value" value="0.69999999999999996"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                        <real key="value" value="6"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                        <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="imdbTapped:" destination="4EL-Ga-1bM" eventType="touchUpInside" id="dYm-tC-Plu"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Coe-6v-C0y">
+                                                <rect key="frame" x="96" y="0.0" width="88" height="44"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="Coe-6v-C0y" secondAttribute="height" multiplier="2:1" id="rUR-xc-KxK"/>
+                                                </constraints>
+                                                <state key="normal" image="button_tmdb_ small"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                        <real key="value" value="0.69999999999999996"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                        <real key="value" value="6"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                        <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="tmdbTapped:" destination="4EL-Ga-1bM" eventType="touchUpInside" id="jDu-ml-bQ9"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
                                 <color key="backgroundColor" red="0.11764705882352941" green="0.11764705882352941" blue="0.11764705882352941" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="WBv-kv-rbR" secondAttribute="trailing" constant="8" id="3me-2h-InA"/>
+                                    <constraint firstAttribute="bottom" secondItem="WBv-kv-rbR" secondAttribute="bottom" constant="8" id="dNu-jl-gNS"/>
                                     <constraint firstAttribute="height" constant="120" id="hmA-ba-c4M"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
@@ -140,24 +173,56 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NOW WATCHING" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jvF-h6-fN5">
+                                <rect key="frame" x="8" y="560.5" width="126.5" height="22.5"/>
+                                <fontDescription key="fontDescription" name="Exo-Black" family="Exo" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                        <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                        <real key="value" value="0.69999999999999996"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                        <real key="value" value="6"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RFR-Kq-JBt">
+                                <rect key="frame" x="8" y="567" width="359" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                        <real key="value" value="0.69999999999999996"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                        <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                        <real key="value" value="6"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="5VY-kU-Lwu" firstAttribute="top" secondItem="Wlr-5B-5Di" secondAttribute="bottom" id="3O8-HA-E9V"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="RFR-Kq-JBt" secondAttribute="trailing" constant="20" id="9Y5-sQ-aLz"/>
+                            <constraint firstItem="Wlr-5B-5Di" firstAttribute="top" secondItem="RFR-Kq-JBt" secondAttribute="bottom" constant="-20" id="IO9-a5-mkf"/>
                             <constraint firstItem="Wlr-5B-5Di" firstAttribute="top" secondItem="08k-fo-OJA" secondAttribute="bottom" constant="-10" id="JU5-tU-mXX"/>
                             <constraint firstItem="08k-fo-OJA" firstAttribute="top" secondItem="7TZ-ZG-VI5" secondAttribute="topMargin" id="LKB-cR-YpQ"/>
                             <constraint firstItem="RbW-AH-BXY" firstAttribute="top" secondItem="Yzu-M5-eX9" secondAttribute="bottom" constant="8" id="LgP-sE-en4"/>
-                            <constraint firstAttribute="trailing" secondItem="UPE-r7-PhN" secondAttribute="trailing" constant="16" id="N9e-j3-86f"/>
-                            <constraint firstItem="RFR-Kq-JBt" firstAttribute="leading" secondItem="7TZ-ZG-VI5" secondAttribute="leadingMargin" constant="20" id="OHN-nd-tTR"/>
-                            <constraint firstItem="5VY-kU-Lwu" firstAttribute="top" secondItem="UPE-r7-PhN" secondAttribute="bottom" constant="20" id="OiI-PQ-AXI"/>
                             <constraint firstAttribute="trailing" secondItem="RbW-AH-BXY" secondAttribute="trailing" constant="16" id="WXz-7v-bPs"/>
+                            <constraint firstItem="RFR-Kq-JBt" firstAttribute="leading" secondItem="7TZ-ZG-VI5" secondAttribute="leading" constant="8" id="We2-3z-lYv"/>
                             <constraint firstAttribute="trailing" secondItem="08k-fo-OJA" secondAttribute="trailing" id="YKu-h5-suA"/>
-                            <constraint firstItem="UPE-r7-PhN" firstAttribute="leading" secondItem="Coe-6v-C0y" secondAttribute="trailing" constant="8" id="b99-Yy-CaS"/>
-                            <constraint firstItem="Coe-6v-C0y" firstAttribute="top" secondItem="RFR-Kq-JBt" secondAttribute="bottom" constant="8" id="dIO-az-MVP"/>
+                            <constraint firstItem="jvF-h6-fN5" firstAttribute="leading" secondItem="RFR-Kq-JBt" secondAttribute="leading" id="gR3-UI-GJS"/>
                             <constraint firstItem="Wlr-5B-5Di" firstAttribute="leading" secondItem="7TZ-ZG-VI5" secondAttribute="leading" id="jss-td-T4r"/>
                             <constraint firstAttribute="trailing" secondItem="Wlr-5B-5Di" secondAttribute="trailing" id="lrJ-5m-0on"/>
-                            <constraint firstItem="Coe-6v-C0y" firstAttribute="baseline" secondItem="UPE-r7-PhN" secondAttribute="baseline" id="tYB-qn-2L2"/>
+                            <constraint firstAttribute="trailing" secondItem="RFR-Kq-JBt" secondAttribute="trailing" constant="8" id="nca-un-cV5"/>
+                            <constraint firstItem="RFR-Kq-JBt" firstAttribute="top" secondItem="jvF-h6-fN5" secondAttribute="bottom" constant="-16" id="xrq-fc-Pww"/>
                             <constraint firstItem="08k-fo-OJA" firstAttribute="leading" secondItem="7TZ-ZG-VI5" secondAttribute="leading" id="yHw-Iz-JhY"/>
                         </constraints>
                     </view>
@@ -166,7 +231,9 @@
                     </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="imagePosterBackground" destination="08k-fo-OJA" id="20M-fp-Eye"/>
+                        <outlet property="infoContainer" destination="Wlr-5B-5Di" id="D9z-jC-SWM"/>
                         <outlet property="labelDisplayName" destination="RFR-Kq-JBt" id="OoV-MR-L2B"/>
+                        <outlet property="labelNowWatching" destination="jvF-h6-fN5" id="HLd-Ic-Uq8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KSG-JT-GKi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -287,4 +354,8 @@
             <point key="canvasLocation" x="2594" y="-367"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="button_imdb_small" width="88" height="44"/>
+        <image name="button_tmdb_ small" width="88" height="44"/>
+    </resources>
 </document>

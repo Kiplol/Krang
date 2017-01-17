@@ -70,7 +70,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //Labels
         UILabel.appearance().textColor = UIColor.white
-        UILabel.appearance().font = UIFont(name: "Exo-Black", size: 15.0)
+//        UILabel.appearance().font = UIFont(name: "Exo-Light-Italic", size: 20.0)
+        UILabel.appearance().fontName = "Exo-Light-Italic" //This seems to make it so that I can't ever set the font to something else...
+//        UILabel.appearance().font = UIFont(name: "Exo-Black", size: 15.0)
 //        for family: String in UIFont.familyNames
 //        {
 //            print("\(family)")

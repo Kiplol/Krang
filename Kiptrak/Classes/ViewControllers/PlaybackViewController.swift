@@ -21,7 +21,9 @@ class PlaybackViewController: KrangViewController {
         return storyboard.instantiateViewController(withIdentifier: "playback") as! PlaybackViewController
     }
     
+    @IBOutlet weak var labelNowWatching: UILabel!
     @IBOutlet weak var labelDisplayName: UILabel!
+    @IBOutlet weak var infoContainer: UIView!
     
     
     var traktMovieID:Int? = nil
@@ -34,9 +36,16 @@ class PlaybackViewController: KrangViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.labelNowWatching.font = UIFont(name: "Exo-Black", size: self.labelNowWatching.font.pointSize)
         self.refreshCheckin { 
             //Completion
         }
+    }
+    
+    //MARK:- App Lifecycle
+    override func willEnterForeground(_ notif: Notification) {
+        super.willEnterForeground(notif)
+        self.refreshCheckin(nil)
     }
     
     //MARK:- User Interaction
@@ -76,12 +85,16 @@ class PlaybackViewController: KrangViewController {
     func updateViews(withMovie movie:KrangMovie?, orEpisode episode:KrangEpisode?) {
         if let movie = movie {
             self.imagePosterBackground.setPoster(fromMovie: movie)
+            self.labelDisplayName.text = movie.titleDisplayString
+            self.labelNowWatching.isHidden = false
         } else if let episode = episode {
             self.imagePosterBackground.setPoster(fromEpisode: episode)
-            self.labelDisplayName.text = episode.title
+            self.labelDisplayName.text = episode.titleDisplayString
+            self.labelNowWatching.isHidden = false
         } else {
             self.imagePosterBackground.setPoster(fromMovie: nil)
             self.labelDisplayName.text = nil
+            self.labelNowWatching.isHidden = true
         }
     }
     

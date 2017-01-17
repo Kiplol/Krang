@@ -14,6 +14,9 @@ class KrangViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.darkBackground
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(KrangViewController.willEnterForeground(_:)), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(KrangViewController.didEnterBackground(_:)), name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,6 +24,14 @@ class KrangViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    //MARK:- App Licecyle
+    func willEnterForeground(_ notif:Notification) {
+        //Override
+    }
+    
+    func didEnterBackground(_ notif:Notification) {
+        //Override
+    }
 
     /*
     // MARK: - Navigation

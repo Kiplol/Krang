@@ -8,7 +8,7 @@
 
 import UIKit
 
-@IBDesignable
+//@IBDesignable
 extension UIView {
     
     @IBInspectable var cornerRadius: CGFloat {
@@ -17,9 +17,6 @@ extension UIView {
         }
         set {
             self.layer.cornerRadius = newValue
-//            if newValue != 0 {
-//                self.layer.masksToBounds = true
-//            }
         }
     }
     
@@ -63,6 +60,21 @@ extension UIView {
         }
         set {
             self.layer.shadowOffset = newValue
+        }
+    }
+    
+}
+
+extension UILabel {
+    
+    dynamic var fontName:String? {
+        set {
+            if let name = newValue {
+                self.font = UIFont(name: name, size: self.font.pointSize)
+            }
+        }
+        get {
+            return self.font.fontName
         }
     }
     
