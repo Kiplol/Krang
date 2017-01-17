@@ -25,6 +25,7 @@ class KrangEpisode: Object {
     dynamic var posterThumbnailImageURL: String? = nil
     dynamic var stillImageURL: String? = nil
     dynamic var stillThumbnailImageURL: String? = nil
+    dynamic var checkin:KrangCheckin? = nil
     let shows = LinkingObjects(fromType: KrangShow.self, property: "episodes")
     var show: KrangShow? {
         get {
@@ -48,6 +49,26 @@ class KrangEpisode: Object {
         self.imdbID = json["episode"]["ids"]["imdb"].string
         self.tmdbID = json["episode"]["ids"]["tmdb"].int ?? -1
         self.tvRageID = json["episode"]["ids"]["tvrage"].int ?? -1
+        
+        if let szStartedAt = json["started_at"].string,
+            let szExpiresAt = json["expires_at"].string,
+            let startedAt = Date.from(utcTimestamp: szStartedAt),
+            let expiresAt = Date.from(utcTimestamp: szExpiresAt) {
+            if let checkin = self.checkin {
+                checkin.dateStarted = startedAt
+                checkin.dateExpires = expiresAt
+            } else {
+                self.checkin = KrangCheckin()
+                self.checkin?.dateStarted = startedAt
+                self.checkin?.dateExpires = expiresAt
+                self.checkin?.saveToDatabaseOutsideWriteTransaction()
+            }
+        } else {
+            if let checkin = self.checkin {
+                checkin.dateStarted = nil
+                checkin.dateStarted = nil
+            }
+        }
     }
     
     class func with(traktID:Int) -> KrangEpisode? {

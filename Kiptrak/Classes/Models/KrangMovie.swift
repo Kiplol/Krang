@@ -24,6 +24,7 @@ class KrangMovie: Object {
     dynamic var posterThumbnailImageURL: String? = nil
     dynamic var backdropImageURL:String? = nil
     dynamic var backdropThumbnailImageURL: String? = nil
+    dynamic var checkin:KrangCheckin? = nil
     
     func update(withJSON json:JSON) {
         guard let type = json["type"].string else {
@@ -40,6 +41,26 @@ class KrangMovie: Object {
         self.slug = json["movie"]["ids"]["slug"].string ?? ""
         self.imdbID = json["movie"]["ids"]["imdb"].string
         self.tmdbID = json["movie"]["ids"]["tmdb"].int ?? -1
+        
+        if let szStartedAt = json["started_at"].string,
+            let szExpiresAt = json["expires_at"].string,
+            let startedAt = Date.from(utcTimestamp: szStartedAt),
+            let expiresAt = Date.from(utcTimestamp: szExpiresAt) {
+            if let checkin = self.checkin {
+                checkin.dateStarted = startedAt
+                checkin.dateExpires = expiresAt
+            } else {
+                self.checkin = KrangCheckin()
+                self.checkin?.dateStarted = startedAt
+                self.checkin?.dateExpires = expiresAt
+                self.checkin?.saveToDatabaseOutsideWriteTransaction()
+            }
+        } else {
+            if let checkin = self.checkin {
+                checkin.dateStarted = nil
+                checkin.dateStarted = nil
+            }
+        }
     }
     
     class func with(traktID:Int) -> KrangMovie? {

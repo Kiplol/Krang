@@ -57,4 +57,13 @@ extension UIView {
         }
     }
     
+    @IBInspectable var shadowOffser: CGSize {
+        get {
+            return self.layer.shadowOffset
+        }
+        set {
+            self.layer.shadowOffset = newValue
+        }
+    }
+    
 }

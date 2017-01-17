@@ -13,4 +13,5 @@ protocol KrangWatchable {
     var posterThumbnailURL: URL? { get }
     var urlForIMDB: URL? { get }
     var urlForTMDB: URL? { get }
+    var checkin:KrangCheckin? { get }
 }

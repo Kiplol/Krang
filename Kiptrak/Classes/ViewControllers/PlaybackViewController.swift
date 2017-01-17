@@ -21,7 +21,6 @@ class PlaybackViewController: KrangViewController {
         return storyboard.instantiateViewController(withIdentifier: "playback") as! PlaybackViewController
     }
     
-    @IBOutlet weak var labelYouAreWatching: UILabel!
     @IBOutlet weak var labelDisplayName: UILabel!
     
     
@@ -35,16 +34,8 @@ class PlaybackViewController: KrangViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        TraktHelper.shared.getCheckedInMovieOrEpisode { [unowned self] (error, movie, episode) in
-            if let movie = movie {
-                self.traktMovieID = movie.traktID
-                self.traktEpisodeID = nil
-            } else if let episode = episode {
-                self.traktEpisodeID = episode.traktID
-                self.traktMovieID = nil
-            }
-            
-            self.updateViews(withMovie: movie, orEpisode: episode)
+        self.refreshCheckin { 
+            //Completion
         }
     }
     
@@ -91,6 +82,21 @@ class PlaybackViewController: KrangViewController {
         } else {
             self.imagePosterBackground.setPoster(fromMovie: nil)
             self.labelDisplayName.text = nil
+        }
+    }
+    
+    func refreshCheckin(_ completion:(() -> ())?) {
+        TraktHelper.shared.getCheckedInMovieOrEpisode { [unowned self] (error, movie, episode) in
+            if let movie = movie {
+                self.traktMovieID = movie.traktID
+                self.traktEpisodeID = nil
+            } else if let episode = episode {
+                self.traktEpisodeID = episode.traktID
+                self.traktMovieID = nil
+            }
+            
+            self.updateViews(withMovie: movie, orEpisode: episode)
+            completion?()
         }
     }
 

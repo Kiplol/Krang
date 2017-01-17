@@ -37,6 +37,8 @@ class TraktHelper: NSObject {
         } else if let cachedOAuthToken = sharedDefaults?.string(forKey: "oauthToken"), let cachedOAuthTokenSecret = sharedDefaults?.string(forKey: "oauthTokenSecret") {
             self.oauth.client.credential.oauthToken = cachedOAuthToken
             self.oauth.client.credential.oauthTokenSecret = cachedOAuthTokenSecret
+            self.oauth.client.credential.oauthTokenExpiresAt = sharedDefaults?.object(forKey: "oathTokenExpiresAt") as? Date
+            self.oauth.client.credential.oauthRefreshToken = sharedDefaults?.string(forKey: "oauthRefreshToken") ?? ""
             self.oauth.client.credential.version = .oauth2
             self.didGetCredentials = true
             KrangLogger.log.debug("Got cached Trakt credentials")
@@ -47,11 +49,16 @@ class TraktHelper: NSObject {
     }
     
     fileprivate func cache(credentials credential:OAuthSwiftCredential) {
-//        let data = NSKeyedArchiver.archivedData(withRootObject: credential)
         let sharedDefaults = UserDefaults(suiteName: "group.com.kip.krang")
-//        sharedDefaults?.set(data, forKey: "traktCredentials")
+        //First cache the actual object for the app...
+        let data = NSKeyedArchiver.archivedData(withRootObject: credential)
+        sharedDefaults?.set(data, forKey: "traktCredentials")
+        
+        //Then cache the strings for the app extensions since they can't seem to fucking unarchive this object
         sharedDefaults?.setValue(credential.oauthToken, forKey: "oauthToken")
         sharedDefaults?.setValue(credential.oauthTokenSecret, forKey: "oauthTokenSecret")
+        sharedDefaults?.set(credential.oauthTokenExpiresAt, forKey: "oathTokenExpiresAt")
+        sharedDefaults?.set(credential.oauthRefreshToken, forKey: "oauthRefreshToken")
         sharedDefaults?.synchronize()
     }
     
