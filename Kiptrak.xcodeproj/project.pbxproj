@@ -89,6 +89,8 @@
 		37E7B7591E2DA17B001D4799 /* KrangDateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E7B7581E2DA17B001D4799 /* KrangDateUtils.swift */; };
 		37E7B75A1E2DA17B001D4799 /* KrangDateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E7B7581E2DA17B001D4799 /* KrangDateUtils.swift */; };
 		37ED660A1E2D7E5400AEE3F4 /* DeeplinkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37ED66091E2D7E5400AEE3F4 /* DeeplinkHandler.swift */; };
+		37F0DB671E31705300FAC6DB /* KrangProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F0DB661E31705300FAC6DB /* KrangProgressView.swift */; };
+		37F0DB681E31705300FAC6DB /* KrangProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F0DB661E31705300FAC6DB /* KrangProgressView.swift */; };
 		CCECAB0157942143A8E08CB2 /* Pods_Kiptrak.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37B22421F8414CC64C2C4B78 /* Pods_Kiptrak.framework */; };
 		FB3E162D1E45A3E736A6C43D /* Pods_Currently_Watching_Widget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98F45B548DC94C8289E45742 /* Pods_Currently_Watching_Widget.framework */; };
 /* End PBXBuildFile section */
@@ -175,6 +177,7 @@
 		37E7B7551E2DA023001D4799 /* KrangCheckin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KrangCheckin.swift; path = Classes/Models/KrangCheckin.swift; sourceTree = "<group>"; };
 		37E7B7581E2DA17B001D4799 /* KrangDateUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KrangDateUtils.swift; path = Classes/Utils/KrangDateUtils.swift; sourceTree = "<group>"; };
 		37ED66091E2D7E5400AEE3F4 /* DeeplinkHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeeplinkHandler.swift; path = Classes/Managers/DeeplinkHandler.swift; sourceTree = "<group>"; };
+		37F0DB661E31705300FAC6DB /* KrangProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KrangProgressView.swift; path = Kiptrak/Classes/Views/KrangProgressView.swift; sourceTree = "<group>"; };
 		57BCB84000D2751D40C37EC7 /* Pods-Kiptrak.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kiptrak.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kiptrak/Pods-Kiptrak.debug.xcconfig"; sourceTree = "<group>"; };
 		98F45B548DC94C8289E45742 /* Pods_Currently_Watching_Widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Currently_Watching_Widget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0DBC2C2D99275125265CBBB /* Pods-Currently Watching Widget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Currently Watching Widget.release.xcconfig"; path = "Pods/Target Support Files/Pods-Currently Watching Widget/Pods-Currently Watching Widget.release.xcconfig"; sourceTree = "<group>"; };
@@ -304,6 +307,7 @@
 		379C55531E259BAE00D51019 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				37F0DB661E31705300FAC6DB /* KrangProgressView.swift */,
 				379C55551E259BD000D51019 /* KrangAvatarView.swift */,
 			);
 			name = Views;
@@ -632,6 +636,7 @@
 				37A19E361E27F0B3007877B4 /* KrangEpisode.swift in Sources */,
 				379C55441E247F9C00D51019 /* KrangUser.swift in Sources */,
 				379C55561E259BD000D51019 /* KrangAvatarView.swift in Sources */,
+				37F0DB671E31705300FAC6DB /* KrangProgressView.swift in Sources */,
 				37E7B7591E2DA17B001D4799 /* KrangDateUtils.swift in Sources */,
 				37870B201E22BA6A00A2EC00 /* AppDelegate.swift in Sources */,
 				374C2AA01E242BCD0094D7A4 /* TraktHelper.swift in Sources */,
@@ -662,6 +667,7 @@
 				37A19E7F1E2BFF50007877B4 /* RealmManager.swift in Sources */,
 				37A19E7E1E2BFF50007877B4 /* TraktHelper.swift in Sources */,
 				37A19E7D1E2BFF50007877B4 /* KrangLogger.swift in Sources */,
+				37F0DB681E31705300FAC6DB /* KrangProgressView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
