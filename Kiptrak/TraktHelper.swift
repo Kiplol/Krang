@@ -122,9 +122,13 @@ class TraktHelper: NSObject {
             let json = JSON(data: response.data)
             let maybeMovieOrEpisode = TraktHelper.movieOrEpisodeFrom(json: json)
             if let actualMovie = maybeMovieOrEpisode as? KrangMovie {
-                TMDBHelper.shared.update(movie: actualMovie, completion: { (error, updatedMovie) in
-                    completion?(error, updatedMovie, nil)
-                })
+                if let _ = actualMovie.posterImageURL {
+                    completion?(nil, actualMovie, nil)
+                } else {
+                    TMDBHelper.shared.update(movie: actualMovie, completion: { (error, updatedMovie) in
+                        completion?(error, updatedMovie, nil)
+                    })
+                }
             } else if let actualEpisode = maybeMovieOrEpisode as? KrangEpisode {
                 TMDBHelper.shared.update(episode: actualEpisode, completion: { (error, updatedEpisode) in
                     completion?(error, nil, updatedEpisode)

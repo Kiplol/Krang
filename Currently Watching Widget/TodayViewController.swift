@@ -157,6 +157,9 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 group.enter()
                 group.enter()
                 self.imageBackground.kf.setImage(with: backgroundImageURL, placeholder: nil, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, url) in
+//                    if let image = image {
+//                        self.imageBackground.image = image.kf.blurred(withRadius: 1.0).kf.tinted(with: UIColor.darkBackground.alpha(0.9))
+//                    }
                     group.leave()
                 })
                 self.imagePoster.kf.setImage(with: posterImageURL, placeholder: nil, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, url) in
