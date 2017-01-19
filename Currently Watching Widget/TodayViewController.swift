@@ -19,6 +19,26 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     @IBOutlet weak var buttonIMDB: UIButton!
     @IBOutlet weak var buttonTMDB: UIButton!
     @IBOutlet weak var stackViewForButtons: UIStackView!
+    
+    @IBOutlet weak var contentViewNotWatching: UIView!
+    @IBOutlet weak var contentViewWatching: UIView!
+    @IBOutlet weak var contentViewLoading: UIView!
+    @IBOutlet weak var contentViewLogin: UIView!
+    @IBOutlet weak var spinnerInWatching: UIActivityIndicatorView!
+    
+    var visibleContentView: UIView? {
+        didSet {
+            self.visibleContentView?.isHidden = false
+            for contentView: UIView in [self.contentViewNotWatching, self.contentViewWatching, self.contentViewLoading, self.contentViewLogin] {
+                guard let visibleOne = self.visibleContentView else {
+                    contentView.isHidden = true
+                    continue
+                }
+                contentView.isHidden = (contentView != visibleOne)
+            }
+        }
+    }
+    
     var episodeID:Int? = nil
     var movieID:Int? = nil
     
@@ -80,8 +100,11 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             self.buttonIMDB.isHidden = true
             self.stackViewForButtons.removeArrangedSubview(self.buttonIMDB)
             self.stackViewForButtons.removeArrangedSubview(self.buttonTMDB)
+            self.stackViewForButtons.isHidden = true
             return
         }
+        
+        self.stackViewForButtons.isHidden = false
         
         //IMDB
         if let _ = watchable.urlForIMDB {
@@ -109,11 +132,25 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     //MARK:- NCWidgetProviding
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
         
+        if KrangUser.getCurrentUser().username.characters.count < 1 {
+            //Not logged in.
+            self.visibleContentView = self.contentViewLogin
+            completionHandler(.newData)
+            return
+        }
+        
+        if self.contentViewWatching.isHidden == false {
+            //Show spinner
+            self.spinnerInWatching.startAnimating()
+        }
+        
         let afterGettingTMDBConfiguartion = {
             TraktHelper.shared.getCheckedInMovieOrEpisode { (error, movie, episode) in
                 self.movieID = nil
                 self.episodeID = nil
-                guard error == nil else {
+                
+                guard error == nil, TMDBHelper.shared.gotConfiguration else {
+                    self.spinnerInWatching.stopAnimating()
                     completionHandler(NCUpdateResult.failed)
                     return
                 }
@@ -157,16 +194,17 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 group.enter()
                 group.enter()
                 self.imageBackground.kf.setImage(with: backgroundImageURL, placeholder: nil, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, url) in
-//                    if let image = image {
-//                        self.imageBackground.image = image.kf.blurred(withRadius: 1.0).kf.tinted(with: UIColor.darkBackground.alpha(0.9))
-//                    }
+                    if let image = image {
+                        self.imageBackground.image = image.kf.blurred(withRadius: 1.0).kf.tinted(with: UIColor.darkBackground.alpha(0.9))
+                    }
                     group.leave()
                 })
                 self.imagePoster.kf.setImage(with: posterImageURL, placeholder: nil, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, url) in
                     group.leave()
                 })
                 
-                group.notify(queue: DispatchQueue.main, execute: { 
+                group.notify(queue: DispatchQueue.main, execute: {
+                    self.spinnerInWatching.stopAnimating()
                     completionHandler(.newData)
                 })
             }
