@@ -25,8 +25,11 @@ class TraktHelper: NSObject {
     
     //MARK:- Credentials
     fileprivate func attemptToLoadCachedCredentials() {
-        let sharedDefaults = UserDefaults(suiteName: "group.com.kip.krang")
-        if let cachedCredentialData = sharedDefaults?.object(forKey: "traktCredentials") as? Data {
+        guard let sharedDefaults = UserDefaults(suiteName: "group.com.kip.krang") else {
+            KrangLogger.log.error("Could not get UserDefaults for app group!  This is very bad!")
+            return
+        }
+        if let cachedCredentialData = sharedDefaults.object(forKey: "traktCredentials") as? Data {
             if let cachedCredential = NSKeyedUnarchiver.unarchiveObject(with: cachedCredentialData) as? OAuthSwiftCredential, cachedCredential.oauthToken.characters.count > 0 {
                 cachedCredential.version = .oauth2
                 self.oauth.client = OAuthSwiftClient(credential: cachedCredential)
@@ -34,12 +37,16 @@ class TraktHelper: NSObject {
                 self.didGetCredentials = true
                 KrangLogger.log.debug("Got cached Trakt credential object")
             }
-        } else if let cachedOAuthToken = sharedDefaults?.string(forKey: "oauthToken"), let cachedOAuthTokenSecret = sharedDefaults?.string(forKey: "oauthTokenSecret") {
+        } else if let cachedOAuthToken = sharedDefaults.string(forKey: "oauthToken") {
+            
+            let cachedOAuthTokenSecret = sharedDefaults.string(forKey: "oauthTokenSecret") ?? ""
+            
             self.oauth.client.credential.oauthToken = cachedOAuthToken
             self.oauth.client.credential.oauthTokenSecret = cachedOAuthTokenSecret
-            self.oauth.client.credential.oauthTokenExpiresAt = sharedDefaults?.object(forKey: "oathTokenExpiresAt") as? Date
-            self.oauth.client.credential.oauthRefreshToken = sharedDefaults?.string(forKey: "oauthRefreshToken") ?? ""
+            self.oauth.client.credential.oauthTokenExpiresAt = sharedDefaults.object(forKey: "oathTokenExpiresAt") as? Date
+            self.oauth.client.credential.oauthRefreshToken = sharedDefaults.string(forKey: "oauthRefreshToken") ?? ""
             self.oauth.client.credential.version = .oauth2
+            self.cache(credentials: self.oauth.client.credential)
             self.didGetCredentials = true
             KrangLogger.log.debug("Got cached Trakt credentials")
         } else {
@@ -49,17 +56,20 @@ class TraktHelper: NSObject {
     }
     
     fileprivate func cache(credentials credential:OAuthSwiftCredential) {
-        let sharedDefaults = UserDefaults(suiteName: "group.com.kip.krang")
+        guard let sharedDefaults = UserDefaults(suiteName: "group.com.kip.krang") else {
+            KrangLogger.log.error("Could not get UserDefaults for app group!  This is very bad!")
+            return
+        }
         //First cache the actual object for the app...
         let data = NSKeyedArchiver.archivedData(withRootObject: credential)
-        sharedDefaults?.set(data, forKey: "traktCredentials")
+        sharedDefaults.set(data, forKey: "traktCredentials")
         
         //Then cache the strings for the app extensions since they can't seem to fucking unarchive this object
-        sharedDefaults?.setValue(credential.oauthToken, forKey: "oauthToken")
-        sharedDefaults?.setValue(credential.oauthTokenSecret, forKey: "oauthTokenSecret")
-        sharedDefaults?.set(credential.oauthTokenExpiresAt, forKey: "oathTokenExpiresAt")
-        sharedDefaults?.set(credential.oauthRefreshToken, forKey: "oauthRefreshToken")
-        sharedDefaults?.synchronize()
+        sharedDefaults.setValue(credential.oauthToken, forKey: "oauthToken")
+        sharedDefaults.setValue(credential.oauthTokenSecret, forKey: "oauthTokenSecret")
+        sharedDefaults.set(credential.oauthTokenExpiresAt, forKey: "oathTokenExpiresAt")
+        sharedDefaults.set(credential.oauthRefreshToken, forKey: "oauthRefreshToken")
+        sharedDefaults.synchronize()
     }
     
     func credentialsNeedRefresh() -> Bool {
@@ -130,9 +140,13 @@ class TraktHelper: NSObject {
                     })
                 }
             } else if let actualEpisode = maybeMovieOrEpisode as? KrangEpisode {
-                TMDBHelper.shared.update(episode: actualEpisode, completion: { (error, updatedEpisode) in
-                    completion?(error, nil, updatedEpisode)
-                })
+                if let _ = actualEpisode.posterImageURL {
+                    completion?(nil, nil, actualEpisode)
+                } else {
+                    TMDBHelper.shared.update(episode: actualEpisode, completion: { (error, updatedEpisode) in
+                        completion?(error, nil, updatedEpisode)
+                    })
+                }
             } else {
                 completion?(nil, nil, nil)
             }

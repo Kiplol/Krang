@@ -25,6 +25,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     @IBOutlet weak var contentViewLoading: UIView!
     @IBOutlet weak var contentViewLogin: UIView!
     @IBOutlet weak var spinnerInWatching: UIActivityIndicatorView!
+    @IBOutlet weak var spinnerInLoading: UIActivityIndicatorView!
     
     var visibleContentView: UIView? {
         didSet {
@@ -132,16 +133,23 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     //MARK:- NCWidgetProviding
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
         
-        if KrangUser.getCurrentUser().username.characters.count < 1 {
+        //First things first: make sure we're logged in to Trakt.
+        guard KrangUser.getCurrentUser().username.characters.count > 0,
+            TraktHelper.shared.credentialsAreValid() else {
             //Not logged in.
             self.visibleContentView = self.contentViewLogin
             completionHandler(.newData)
             return
         }
         
+        //OK cool; we are.  Now let's see if the widget would already be showing something by the time this opens.
         if self.contentViewWatching.isHidden == false {
-            //Show spinner
+            //Yeah, it's already visible, so we'll just show a small spinner in here.
             self.spinnerInWatching.startAnimating()
+        } else {
+            //There isn't already a watchable displaying, so we'll show the full loading content view.
+            self.visibleContentView = self.contentViewLoading
+            self.spinnerInLoading.startAnimating()
         }
         
         let afterGettingTMDBConfiguartion = {
@@ -159,6 +167,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 var posterImageURL:URL? = nil
                 var watchable:KrangWatchable? = nil
                 if let movie = movie {
+                    self.visibleContentView = self.contentViewWatching
+                    self.spinnerInWatching.startAnimating()
                     self.movieID = movie.traktID
                     watchable = movie
                     self.labelTitle.text = movie.titleDisplayString
@@ -169,6 +179,9 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                         posterImageURL = URL(string: posterThumbnailURL)
                     }
                 } else if let episode = episode {
+                    self.visibleContentView = self.contentViewWatching
+                    self.spinnerInWatching.startAnimating()
+                    
                     self.episodeID = episode.traktID
                     watchable = episode
                     self.labelTitle.text = episode.titleDisplayString
@@ -205,6 +218,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 
                 group.notify(queue: DispatchQueue.main, execute: {
                     self.spinnerInWatching.stopAnimating()
+                    self.spinnerInLoading.stopAnimating()
                     completionHandler(.newData)
                 })
             }

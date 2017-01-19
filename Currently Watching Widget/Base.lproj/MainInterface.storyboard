@@ -184,7 +184,16 @@
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zAA-es-TRi" userLabel="Loading Content View">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
+                                <subviews>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="ub6-EG-h3D">
+                                        <rect key="frame" x="150" y="25" width="20" height="20"/>
+                                    </activityIndicatorView>
+                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="ub6-EG-h3D" firstAttribute="centerX" secondItem="zAA-es-TRi" secondAttribute="centerX" id="7nd-9w-UKO"/>
+                                    <constraint firstItem="ub6-EG-h3D" firstAttribute="centerY" secondItem="zAA-es-TRi" secondAttribute="centerY" id="T5f-Qv-qpF"/>
+                                </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Th7-qJ-p0w" userLabel="Login Content View">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
@@ -239,6 +248,7 @@
                         <outlet property="imageBackground" destination="MUr-nh-ypc" id="bnE-9U-Pbw"/>
                         <outlet property="imagePoster" destination="6u8-Kf-b3F" id="PEn-Ic-S6A"/>
                         <outlet property="labelTitle" destination="GcN-lo-r42" id="W4d-lJ-eQf"/>
+                        <outlet property="spinnerInLoading" destination="ub6-EG-h3D" id="TV0-25-JaD"/>
                         <outlet property="spinnerInWatching" destination="ocQ-EZ-R6C" id="DlV-Rf-q9O"/>
                         <outlet property="stackViewForButtons" destination="eMj-l6-Q8Z" id="7QD-My-rzj"/>
                     </connections>
