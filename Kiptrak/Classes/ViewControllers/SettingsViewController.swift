@@ -28,8 +28,8 @@ class SettingsViewController: KrangViewController {
     }
     @IBOutlet weak var shadowTop: UIImageView! {
         didSet {
-            self.shadowTop.heroModifiers = [.zPosition(11.0), .translate(x: 0.0, y: -80.0, z: 0.0)]
             self.shadowTop.image = UIImage(gradientColors: [UIColor(white: 0.0, alpha: 0.7) , UIColor.clear])
+            self.shadowTop.heroModifiers = [.fade]
         }
     }
     @IBOutlet weak var labelName: UILabel! {

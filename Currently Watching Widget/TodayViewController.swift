@@ -192,7 +192,9 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                        posterImageURL = URL(string: posterThumbnailURL)
                     }
                 } else {
-                    self.labelTitle.text = "Not Currently Watching Anything"
+                    self.visibleContentView = self.contentViewNotWatching
+                    
+                    self.labelTitle.text = nil
                     self.imageBackground.image = nil
                     self.updateButtonsFor(watchable: nil)
                     completionHandler(.noData)
