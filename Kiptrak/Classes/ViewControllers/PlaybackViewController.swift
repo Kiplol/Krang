@@ -39,7 +39,7 @@ class PlaybackViewController: KrangViewController {
     @IBOutlet weak var shadowTop: UIImageView! {
         didSet {
             self.shadowTop.image = UIImage(gradientColors: [UIColor(white: 0.0, alpha: 0.7) , UIColor.clear])
-            self.shadowTop.heroModifiers = [.zPosition(19.0), .fade]
+            self.shadowTop.heroModifiers = [.zPosition(19.0), .fade, .translate(x: 0.0, y: -80.0, z: 0.0)]
         }
     }
     
