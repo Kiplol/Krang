@@ -16,6 +16,7 @@ class PlaybackViewController: KrangViewController {
             self.imagePosterBackground.heroModifiers = [.zPosition(1.0), .translate(x: 0.0, y: 200.0, z: 0.0), .fade]
         }
     }
+    @IBOutlet weak var imageInfoBackground: UIImageView!
     @IBOutlet weak var avatar: KrangAvatarView! {
         didSet {
             self.avatar.heroModifiers = [.zPosition(20.0)]

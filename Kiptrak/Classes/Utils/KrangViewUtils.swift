@@ -63,6 +63,31 @@ extension UIView {
         }
     }
     
+    @IBInspectable var borderColor: UIColor? {
+        get {
+            if let color = self.layer.borderColor {
+                return UIColor(cgColor: color)
+            }
+            return nil
+        }
+        set {
+            guard let color = newValue else {
+                self.layer.borderColor = nil
+                return
+            }
+            self.layer.borderColor = color.cgColor
+        }
+    }
+    
+    @IBInspectable var borderWidth: CGFloat {
+        get {
+            return self.layer.borderWidth
+        }
+        set {
+            self.layer.borderWidth = newValue
+        }
+    }
+    
 }
 
 extension UILabel {
