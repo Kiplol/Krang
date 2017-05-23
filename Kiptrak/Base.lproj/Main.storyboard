@@ -52,14 +52,30 @@
                                     <action selector="loginTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="a0g-PM-VJp"/>
                                 </connections>
                             </button>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="Gpc-RB-YBd">
+                                <rect key="frame" x="106" y="238" width="162" height="191"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Gpc-RB-YBd" secondAttribute="height" multiplier="162:191" id="P2B-0E-QUq"/>
+                                    <constraint firstAttribute="width" constant="162" id="v1F-sn-VqN"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="blankSlate"/>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="TgE-em-xKW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Jfp-ox-vqp"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="TgE-em-xKW" secondAttribute="bottom" constant="20" id="PEa-PD-t4V"/>
+                            <constraint firstItem="Gpc-RB-YBd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="kv0-nr-8hg"/>
+                            <constraint firstItem="Gpc-RB-YBd" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="ukF-HU-Fxr"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="dg2-Ya-oXy"/>
+                    <connections>
+                        <outlet property="buttonLoginTrakt" destination="TgE-em-xKW" id="OM9-mf-bDl"/>
+                        <segue destination="4EL-Ga-1bM" kind="showDetail" identifier="toPlayback" id="mKM-6M-5rM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -77,6 +93,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.050000000000000003" contentMode="scaleAspectFit" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="g58-TI-8pq">
+                                <rect key="frame" x="106" y="183" width="162" height="191"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="162" id="5Z9-xc-2AS"/>
+                                    <constraint firstAttribute="width" secondItem="g58-TI-8pq" secondAttribute="height" multiplier="162:191" id="E3h-OS-33h"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                        <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffser">
+                                        <size key="value" width="0.0" height="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="blankSlate"/>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="08k-fo-OJA">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="557"/>
                             </imageView>
@@ -239,10 +277,12 @@
                             <constraint firstAttribute="trailing" secondItem="08k-fo-OJA" secondAttribute="trailing" id="YKu-h5-suA"/>
                             <constraint firstItem="jvF-h6-fN5" firstAttribute="leading" secondItem="RFR-Kq-JBt" secondAttribute="leading" id="gR3-UI-GJS"/>
                             <constraint firstItem="Wlr-5B-5Di" firstAttribute="leading" secondItem="7TZ-ZG-VI5" secondAttribute="leading" id="jss-td-T4r"/>
+                            <constraint firstItem="g58-TI-8pq" firstAttribute="centerY" secondItem="08k-fo-OJA" secondAttribute="centerY" id="k9T-Pl-jUJ"/>
                             <constraint firstAttribute="trailing" secondItem="Wlr-5B-5Di" secondAttribute="trailing" id="lrJ-5m-0on"/>
                             <constraint firstItem="RFR-Kq-JBt" firstAttribute="top" secondItem="Wlr-5B-5Di" secondAttribute="top" id="mfr-bD-9oF"/>
                             <constraint firstAttribute="trailing" secondItem="RFR-Kq-JBt" secondAttribute="trailing" constant="8" id="nca-un-cV5"/>
                             <constraint firstAttribute="trailing" secondItem="Xpz-CY-3FR" secondAttribute="trailing" id="pV1-Bb-A4z"/>
+                            <constraint firstItem="g58-TI-8pq" firstAttribute="centerX" secondItem="08k-fo-OJA" secondAttribute="centerX" id="uRx-O7-jPe"/>
                             <constraint firstItem="08k-fo-OJA" firstAttribute="leading" secondItem="7TZ-ZG-VI5" secondAttribute="leading" id="yHw-Iz-JhY"/>
                         </constraints>
                     </view>
@@ -304,7 +344,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4bK-BR-dg5">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4bK-BR-dg5">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="Onz-pe-hXC"/>
@@ -384,5 +424,6 @@
     <resources>
         <image name="button_imdb_small" width="88" height="44"/>
         <image name="button_tmdb_ small" width="88" height="44"/>
+        <image name="logo" width="162" height="191"/>
     </resources>
 </document>

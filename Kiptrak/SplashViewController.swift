@@ -11,11 +11,12 @@ import OAuthSwift
 
 class SplashViewController: KrangViewController {
 
+    @IBOutlet weak var buttonLoginTrakt: UIButton!
     
     //MARK:- View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        self.buttonLoginTrakt.alpha = 0.0
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -44,12 +45,13 @@ class SplashViewController: KrangViewController {
     
     //MARK:-
     private func goToPlayback() {
-        let playbackVC = PlaybackViewController.instantiatedFromStoryboard()
-        self.navigationController?.setViewControllers([playbackVC], animated: false)
+        self.performSegue(withIdentifier: "toPlayback", sender: nil)
     }
     
     private func goToOnboarding() {
-        
+        UIView.animate(withDuration: 0.3) { 
+            self.buttonLoginTrakt.alpha = 1.0
+        }
     }
     
     //MARK:- Test
@@ -61,7 +63,7 @@ class SplashViewController: KrangViewController {
             })
             }) { (error) in
                 //Boo
-                KrangLogger.log.error("Error logging into Trakt: \(error)")
+                KrangLogger.log.error("Error logging into Trakt: \(String(describing: error))")
         }
     }
 }
