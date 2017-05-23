@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="M4Y-Lb-cyx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="M4Y-Lb-cyx">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -45,6 +45,10 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </imageView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8mh-Ej-MQ3" customClass="KrangProgressView" customModule="Currently_Watching_Widget" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </view>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="GcN-lo-r42" customClass="MarqueeLabel" customModule="MarqueeLabel">
                                         <rect key="frame" x="52" y="8" width="260" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -143,7 +147,7 @@
                                                 <rect key="frame" x="8" y="17" width="20" height="20"/>
                                             </activityIndicatorView>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="0.70143942636986301" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="0.8706376903553299" green="0.8706376903553299" blue="0.8706376903553299" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstItem="ocQ-EZ-R6C" firstAttribute="centerX" secondItem="4DT-S4-Oj9" secondAttribute="centerX" id="KaM-hV-d5F"/>
                                             <constraint firstItem="6u8-Kf-b3F" firstAttribute="top" secondItem="4DT-S4-Oj9" secondAttribute="top" constant="-1" id="Qzg-gt-dRI"/>
@@ -175,13 +179,17 @@
                                     <constraint firstAttribute="trailing" secondItem="MUr-nh-ypc" secondAttribute="trailing" id="B3c-Vh-xYR"/>
                                     <constraint firstItem="eMj-l6-Q8Z" firstAttribute="trailing" secondItem="GcN-lo-r42" secondAttribute="trailing" id="KXZ-SW-Shv"/>
                                     <constraint firstItem="4DT-S4-Oj9" firstAttribute="top" secondItem="x0l-8T-geC" secondAttribute="top" constant="8" id="Kmb-mZ-NWD"/>
+                                    <constraint firstAttribute="bottom" secondItem="8mh-Ej-MQ3" secondAttribute="bottom" id="Tde-St-kng"/>
                                     <constraint firstAttribute="bottom" secondItem="MUr-nh-ypc" secondAttribute="bottom" id="a2F-ks-25Q"/>
                                     <constraint firstAttribute="bottom" secondItem="4DT-S4-Oj9" secondAttribute="bottom" constant="8" id="aK2-pj-3Rg"/>
                                     <constraint firstAttribute="trailing" secondItem="GcN-lo-r42" secondAttribute="trailing" constant="8" id="daa-EG-Qd4"/>
                                     <constraint firstItem="eMj-l6-Q8Z" firstAttribute="bottom" secondItem="4DT-S4-Oj9" secondAttribute="bottom" id="kGN-qs-3zM"/>
                                     <constraint firstItem="4DT-S4-Oj9" firstAttribute="leading" secondItem="x0l-8T-geC" secondAttribute="leading" constant="8" id="kzy-oF-wNK"/>
                                     <constraint firstItem="4DT-S4-Oj9" firstAttribute="top" secondItem="GcN-lo-r42" secondAttribute="top" id="lHf-UF-W0g"/>
+                                    <constraint firstItem="8mh-Ej-MQ3" firstAttribute="leading" secondItem="x0l-8T-geC" secondAttribute="leading" id="nz4-uD-Rvh"/>
+                                    <constraint firstItem="8mh-Ej-MQ3" firstAttribute="top" secondItem="x0l-8T-geC" secondAttribute="top" id="sMc-Io-DRf"/>
                                     <constraint firstItem="MUr-nh-ypc" firstAttribute="leading" secondItem="x0l-8T-geC" secondAttribute="leading" id="sbY-ih-eHO"/>
+                                    <constraint firstAttribute="trailing" secondItem="8mh-Ej-MQ3" secondAttribute="trailing" id="sxS-xc-8JE"/>
                                     <constraint firstItem="GcN-lo-r42" firstAttribute="leading" secondItem="4DT-S4-Oj9" secondAttribute="trailing" constant="8" id="u9s-JN-3cZ"/>
                                 </constraints>
                             </view>
@@ -251,6 +259,7 @@
                         <outlet property="imageBackground" destination="MUr-nh-ypc" id="bnE-9U-Pbw"/>
                         <outlet property="imagePoster" destination="6u8-Kf-b3F" id="PEn-Ic-S6A"/>
                         <outlet property="labelTitle" destination="GcN-lo-r42" id="W4d-lJ-eQf"/>
+                        <outlet property="progressView" destination="8mh-Ej-MQ3" id="CHn-iT-dEB"/>
                         <outlet property="spinnerInLoading" destination="ub6-EG-h3D" id="TV0-25-JaD"/>
                         <outlet property="spinnerInWatching" destination="ocQ-EZ-R6C" id="DlV-Rf-q9O"/>
                         <outlet property="stackViewForButtons" destination="eMj-l6-Q8Z" id="7QD-My-rzj"/>

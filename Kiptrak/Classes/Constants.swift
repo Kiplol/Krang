@@ -35,7 +35,7 @@ class Constants: NSObject {
 
 extension UIColor {
     class var darkBackground: UIColor { get { return UIColor(hex: "1E1E1E") } }
-    class var accent: UIColor { get { return UIColor.red } }
+    class var accent: UIColor { get { return UIColor(white: 1.0, alpha: 0.1) } }
 }
 
 extension Notification.Name {

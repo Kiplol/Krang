@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="id2-XQ-XDI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="id2-XQ-XDI">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -94,7 +94,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="WBv-kv-rbR">
                                         <rect key="frame" x="183" y="68" width="184" height="44"/>
                                         <subviews>
-                                            <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UPE-r7-PhN">
+                                            <button hidden="YES" opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UPE-r7-PhN">
                                                 <rect key="frame" x="0.0" y="0.0" width="88" height="44"/>
                                                 <state key="normal" image="button_imdb_small"/>
                                                 <userDefinedRuntimeAttributes>
@@ -112,7 +112,7 @@
                                                     <action selector="imdbTapped:" destination="4EL-Ga-1bM" eventType="touchUpInside" id="dYm-tC-Plu"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Coe-6v-C0y">
+                                            <button hidden="YES" opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Coe-6v-C0y">
                                                 <rect key="frame" x="96" y="0.0" width="88" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="Coe-6v-C0y" secondAttribute="height" multiplier="2:1" id="rUR-xc-KxK"/>
@@ -251,12 +251,16 @@
                     </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="avatar" destination="RbW-AH-BXY" id="T75-kj-OD5"/>
+                        <outlet property="buttonIMDB" destination="UPE-r7-PhN" id="OiO-k0-DzO"/>
+                        <outlet property="buttonTMDB" destination="Coe-6v-C0y" id="4dS-Do-IqC"/>
                         <outlet property="imageInfoBackground" destination="Xfi-1B-afS" id="Aip-V9-wCR"/>
                         <outlet property="imagePosterBackground" destination="08k-fo-OJA" id="20M-fp-Eye"/>
                         <outlet property="infoContainer" destination="Wlr-5B-5Di" id="D9z-jC-SWM"/>
                         <outlet property="labelDisplayName" destination="RFR-Kq-JBt" id="OoV-MR-L2B"/>
                         <outlet property="labelNowWatching" destination="jvF-h6-fN5" id="HLd-Ic-Uq8"/>
+                        <outlet property="progressView" destination="37d-7m-bWA" id="5bA-Wt-VPs"/>
                         <outlet property="shadowTop" destination="Xpz-CY-3FR" id="7K2-Vm-HCa"/>
+                        <outlet property="stackViewForButtons" destination="WBv-kv-rbR" id="jiO-eU-2Uf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KSG-JT-GKi" userLabel="First Responder" sceneMemberID="firstResponder"/>

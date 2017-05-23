@@ -37,12 +37,16 @@ class PlaybackViewController: KrangViewController {
             self.infoContainer.heroModifiers = [.zPosition(4.0), .translate(x: 0.0, y: 120.0, z: 0.0)]
         }
     }
+    @IBOutlet weak var progressView: KrangProgressView!
     @IBOutlet weak var shadowTop: UIImageView! {
         didSet {
             self.shadowTop.image = UIImage(gradientColors: [UIColor(white: 0.0, alpha: 0.7) , UIColor.clear])
             self.shadowTop.heroModifiers = [.zPosition(19.0), .fade, .translate(x: 0.0, y: -80.0, z: 0.0)]
         }
     }
+    @IBOutlet weak var stackViewForButtons: UIStackView!
+    @IBOutlet weak var buttonIMDB: UIButton!
+    @IBOutlet weak var buttonTMDB: UIButton!
     
     var traktMovieID:Int? = nil
     var traktEpisodeID:Int? = nil
@@ -56,6 +60,8 @@ class PlaybackViewController: KrangViewController {
     //MARK:- View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.stackViewForButtons.removeArrangedSubview(self.buttonIMDB)
+        self.stackViewForButtons.removeArrangedSubview(self.buttonTMDB)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -104,33 +110,64 @@ class PlaybackViewController: KrangViewController {
     }
     
     //MARK:-
-    func updateViews(withMovie movie:KrangMovie?, orEpisode episode:KrangEpisode?) {
-        if let movie = movie {
-            self.imagePosterBackground.setPoster(fromMovie: movie)
-            self.labelDisplayName.text = movie.titleDisplayString
+    func updateViews(withWatchable watchable:KrangWatchable?) {
+        self.stackViewForButtons.removeArrangedSubview(self.buttonIMDB)
+        self.stackViewForButtons.removeArrangedSubview(self.buttonTMDB)
+        self.buttonIMDB.isHidden = true
+        self.buttonTMDB.isHidden = true
+        if let watchable = watchable {
+            self.imagePosterBackground.setPoster(fromWatchable: watchable)
+            self.labelDisplayName.text = watchable.titleDisplayString
             self.labelNowWatching.isHidden = false
-        } else if let episode = episode {
-            self.imagePosterBackground.setPoster(fromEpisode: episode)
-            self.labelDisplayName.text = episode.titleDisplayString
-            self.labelNowWatching.isHidden = false
+            if watchable.urlForIMDB != nil {
+                self.stackViewForButtons.addArrangedSubview(self.buttonIMDB)
+                self.buttonIMDB.isHidden = false
+            }
+            if watchable.urlForTMDB != nil {
+                self.stackViewForButtons.addArrangedSubview(self.buttonTMDB)
+                self.buttonTMDB.isHidden = false
+            }
         } else {
             self.imagePosterBackground.setPoster(fromMovie: nil)
             self.labelDisplayName.text = nil
             self.labelNowWatching.isHidden = true
+            
         }
+    }
+    
+    func updateProgressView(withCheckin checkin: KrangCheckin?) {
+        guard let checkin = checkin else {
+            self.progressView.isHidden = true
+            return
+        }
+        
+        self.progressView.isHidden = false
+        self.progressView.startDate = checkin.dateStarted
+        self.progressView.endDate = checkin.dateExpires
+        self.progressView.start()
     }
     
     func refreshCheckin(_ completion:(() -> ())?) {
         TraktHelper.shared.getCheckedInMovieOrEpisode { [unowned self] (error, movie, episode) in
+            var watchable:KrangWatchable? = nil
             if let movie = movie {
                 self.traktMovieID = movie.traktID
                 self.traktEpisodeID = nil
+                watchable = movie
             } else if let episode = episode {
                 self.traktEpisodeID = episode.traktID
                 self.traktMovieID = nil
+                watchable = episode
             }
             
-            self.updateViews(withMovie: movie, orEpisode: episode)
+            if let coverImageURL = watchable?.fanartImageURL {
+                KrangUser.getCurrentUser().makeChanges {
+                    KrangUser.getCurrentUser().coverImageURL = coverImageURL.absoluteString
+                }
+            }
+            
+            self.updateViews(withWatchable: watchable)
+            self.updateProgressView(withCheckin: watchable?.checkin)
             completion?()
         }
     }

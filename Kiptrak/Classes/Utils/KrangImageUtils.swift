@@ -128,6 +128,22 @@ extension UIImageView {
         self.kf.setImage(with: url)
     }
     
+    func setPoster(fromWatchable watchable:KrangWatchable?) {
+        guard let szURL = watchable?.posterImageURL else {
+            //TODO
+            self.image = nil
+            return
+        }
+        
+        guard let url = URL(string: szURL) else {
+            //TODO
+            self.image = nil
+            return
+        }
+        
+        self.kf.setImage(with: url)
+    }
+    
     func setStill(fromEpisode episode:KrangEpisode?) {
         guard let stillURL = episode?.stillImageURL else {
             //TODO

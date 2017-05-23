@@ -149,4 +149,14 @@ extension KrangEpisode: KrangWatchable {
             return URL(string: szURL)
         }
     }
+    
+    var fanartImageURL: URL? {
+        get {
+            guard let szURL = self.stillThumbnailImageURL else {
+                return nil
+            }
+            
+            return URL(string: szURL)
+        }
+    }
 }

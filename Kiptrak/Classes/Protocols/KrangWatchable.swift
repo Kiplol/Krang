@@ -9,9 +9,18 @@
 import UIKit
 
 protocol KrangWatchable {
+    
+    var title: String { get }
+    var traktID: Int { get }
+    var imdbID: String? { get }
+    var tmdbID: Int { get }
+    var posterImageURL: String? { get }
+    
     var titleDisplayString: String { get }
     var posterThumbnailURL: URL? { get }
     var urlForIMDB: URL? { get }
     var urlForTMDB: URL? { get }
     var checkin:KrangCheckin? { get }
+    
+    var fanartImageURL: URL? { get }
 }

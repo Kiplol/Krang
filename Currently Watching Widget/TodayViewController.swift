@@ -26,6 +26,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     @IBOutlet weak var contentViewLogin: UIView!
     @IBOutlet weak var spinnerInWatching: UIActivityIndicatorView!
     @IBOutlet weak var spinnerInLoading: UIActivityIndicatorView!
+    @IBOutlet weak var progressView: KrangProgressView!
     
     var visibleContentView: UIView? {
         didSet {
@@ -202,6 +203,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 }
                 
                 self.updateButtonsFor(watchable: watchable)
+                
+                self.progressView.startDate = watchable?.checkin?.dateStarted
+                self.progressView.endDate = watchable?.checkin?.dateExpires
+                self.progressView.start()
                 
                 //Images
                 let group = DispatchGroup()

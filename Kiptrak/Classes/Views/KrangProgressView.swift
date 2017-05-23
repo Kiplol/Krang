@@ -18,6 +18,9 @@ class KrangProgressView: UIView {
         }
     }
     
+    var startDate:Date? = nil
+    var endDate:Date? = nil
+    
     //MARK:- Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -32,9 +35,35 @@ class KrangProgressView: UIView {
         self.backgroundColor = UIColor.clear
         self.fillView.frame = CGRect(x: 0, y: 0, width: 0, height: self.bounds.size.height)
         self.fillView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.fillView.backgroundColor = UIColor.accent
+        self.fillView.backgroundColor = UIColor.accent.alpha(0.2)
         self.addSubview(self.fillView)
         self.progress = 0.0
+    }
+    
+    //MARK:-
+    func start() {
+        guard let _ = self.startDate, let _ = self.endDate else {
+            self.stop()
+            return
+        }
+        
+        self.update()
+    }
+    
+    func stop() {
+        self.progress = 0.0
+    }
+    
+    func update() {
+        guard let startDate = self.startDate, let endDate = self.endDate else {
+            self.stop()
+            return
+        }
+        
+        let totalRunTime = endDate.timeIntervalSince1970 - startDate.timeIntervalSince1970
+        let now = Date().timeIntervalSince1970
+        let watchedSoFar = now - startDate.timeIntervalSince1970
+        self.progress = Float(Double(watchedSoFar) / Double(totalRunTime))
     }
 
 }
