@@ -380,9 +380,21 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="userAvatar"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Coh-BO-7I1">
+                                <rect key="frame" x="16" y="601" width="177" height="50"/>
+                                <subviews>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="logo_tmdb_100" translatesAutoresizingMaskIntoConstraints="NO" id="czA-bY-dNo">
+                                        <rect key="frame" x="0.0" y="0.0" width="46" height="50"/>
+                                    </imageView>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="logo_imdb_100" translatesAutoresizingMaskIntoConstraints="NO" id="Qnz-ys-Ytm">
+                                        <rect key="frame" x="54" y="0.0" width="123" height="50"/>
+                                    </imageView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Lhj-8y-Hvv" firstAttribute="top" secondItem="Coh-BO-7I1" secondAttribute="bottom" constant="16" id="4M3-4Z-PMD"/>
                             <constraint firstAttribute="trailing" secondItem="CBW-WP-5pr" secondAttribute="trailing" constant="16" id="Djn-6d-Pkn"/>
                             <constraint firstAttribute="trailing" secondItem="8fW-hp-xAB" secondAttribute="trailing" id="Fdc-Ad-3HA"/>
                             <constraint firstItem="4bK-BR-dg5" firstAttribute="top" secondItem="n2z-LW-m4z" secondAttribute="top" id="Fqx-bw-BjM"/>
@@ -393,6 +405,7 @@
                             <constraint firstItem="hMa-Px-WAx" firstAttribute="top" secondItem="17w-AS-tP6" secondAttribute="bottom" constant="120" id="XmY-R3-7aS"/>
                             <constraint firstItem="CBW-WP-5pr" firstAttribute="top" secondItem="17w-AS-tP6" secondAttribute="bottom" constant="8" id="b5y-b0-VLB"/>
                             <constraint firstAttribute="trailing" secondItem="4bK-BR-dg5" secondAttribute="trailing" id="bD0-Sh-zuh"/>
+                            <constraint firstItem="Coh-BO-7I1" firstAttribute="leading" secondItem="n2z-LW-m4z" secondAttribute="leading" constant="16" id="gwI-mW-0dX"/>
                             <constraint firstItem="8fW-hp-xAB" firstAttribute="leading" secondItem="n2z-LW-m4z" secondAttribute="leading" id="qgp-JR-3EX"/>
                             <constraint firstItem="4bK-BR-dg5" firstAttribute="leading" secondItem="n2z-LW-m4z" secondAttribute="leading" id="t7Q-7V-mDg"/>
                         </constraints>
@@ -425,5 +438,7 @@
         <image name="button_imdb_small" width="88" height="44"/>
         <image name="button_tmdb_ small" width="88" height="44"/>
         <image name="logo" width="162" height="191"/>
+        <image name="logo_imdb_100" width="123" height="50"/>
+        <image name="logo_tmdb_100" width="46" height="50"/>
     </resources>
 </document>
