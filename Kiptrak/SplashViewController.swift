@@ -51,10 +51,10 @@ class SplashViewController: KrangViewController {
     }
     
     private func goToOnboarding() {
-        UIView.animate(withDuration: 0.3) { 
+        UIView.animate(withDuration: 0.6) {
             self.buttonLoginTrakt.alpha = 1.0
         }
-        UIView.animate(withDuration: 0.6) { 
+        UIView.animate(withDuration: 3.0) {
             self.imageBackground.alpha = 1.0
         }
     }
@@ -76,6 +76,7 @@ class SplashViewController: KrangViewController {
     @IBAction func unwindToSplash(_ sender:UIStoryboardSegue) {
         //Logout
         TraktHelper.shared.logout()
+        self.goToOnboarding()
     
     }
 }
