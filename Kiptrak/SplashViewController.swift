@@ -12,11 +12,13 @@ import OAuthSwift
 class SplashViewController: KrangViewController {
 
     @IBOutlet weak var buttonLoginTrakt: UIButton!
+    @IBOutlet weak var imageBackground: UIImageView!
     
     //MARK:- View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.buttonLoginTrakt.alpha = 0.0
+        self.imageBackground.alpha = 0.0
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -24,7 +26,7 @@ class SplashViewController: KrangViewController {
     
         TMDBHelper.shared.getConfiguration { (error) in
             guard error == nil else {
-                //TODO: Some shit
+                self.goToOnboarding()
                 return
             }
             if TraktHelper.shared.credentialsAreValid() {
@@ -38,7 +40,7 @@ class SplashViewController: KrangViewController {
                     }
                 })
             } else {
-                
+                self.goToOnboarding()
             }
         }
     }
@@ -52,9 +54,12 @@ class SplashViewController: KrangViewController {
         UIView.animate(withDuration: 0.3) { 
             self.buttonLoginTrakt.alpha = 1.0
         }
+        UIView.animate(withDuration: 0.6) { 
+            self.imageBackground.alpha = 1.0
+        }
     }
     
-    //MARK:- Test
+    //MARK:- 
     @IBAction func loginTapped(_ sender: AnyObject) {
         TraktHelper.shared.login(from: self, success: { 
             TraktHelper.shared.getMyProfile(completion: { error, user in
@@ -65,6 +70,13 @@ class SplashViewController: KrangViewController {
                 //Boo
                 KrangLogger.log.error("Error logging into Trakt: \(String(describing: error))")
         }
+    }
+    
+    // MARK: - Navigation
+    @IBAction func unwindToSplash(_ sender:UIStoryboardSegue) {
+        //Logout
+        TraktHelper.shared.logout()
+    
     }
 }
 

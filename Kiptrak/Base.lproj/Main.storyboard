@@ -45,6 +45,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="posters_bg" translatesAutoresizingMaskIntoConstraints="NO" id="2Ua-9U-zz9">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TgE-em-xKW">
                                 <rect key="frame" x="133" y="617" width="110" height="30"/>
                                 <state key="normal" title="Login with Trakt"/>
@@ -65,21 +68,27 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="2Ua-9U-zz9" secondAttribute="trailing" id="BFH-5L-gvP"/>
+                            <constraint firstItem="2Ua-9U-zz9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Hkt-lL-V22"/>
                             <constraint firstItem="TgE-em-xKW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Jfp-ox-vqp"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="TgE-em-xKW" secondAttribute="bottom" constant="20" id="PEa-PD-t4V"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="2Ua-9U-zz9" secondAttribute="bottom" id="TPJ-Nh-z3h"/>
                             <constraint firstItem="Gpc-RB-YBd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="kv0-nr-8hg"/>
+                            <constraint firstItem="2Ua-9U-zz9" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="qVL-0J-kxg"/>
                             <constraint firstItem="Gpc-RB-YBd" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="ukF-HU-Fxr"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="dg2-Ya-oXy"/>
                     <connections>
                         <outlet property="buttonLoginTrakt" destination="TgE-em-xKW" id="OM9-mf-bDl"/>
+                        <outlet property="imageBackground" destination="2Ua-9U-zz9" id="fcj-3D-o4N"/>
                         <segue destination="4EL-Ga-1bM" kind="showDetail" identifier="toPlayback" id="mKM-6M-5rM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <exit id="071-Lr-vD4" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="108" y="139"/>
+            <point key="canvasLocation" x="108" y="138.98050974512745"/>
         </scene>
         <!--Playback View Controller-->
         <scene sceneID="Dg7-tf-ZyS">
@@ -380,17 +389,27 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="userAvatar"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Coh-BO-7I1">
-                                <rect key="frame" x="16" y="601" width="177" height="50"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Coh-BO-7I1">
+                                <rect key="frame" x="16" y="621" width="177" height="30"/>
                                 <subviews>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="logo_tmdb_100" translatesAutoresizingMaskIntoConstraints="NO" id="czA-bY-dNo">
-                                        <rect key="frame" x="0.0" y="0.0" width="46" height="50"/>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="logo_tmdb_100" translatesAutoresizingMaskIntoConstraints="NO" id="czA-bY-dNo">
+                                        <rect key="frame" x="0.0" y="0.0" width="46" height="30"/>
                                     </imageView>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="logo_imdb_100" translatesAutoresizingMaskIntoConstraints="NO" id="Qnz-ys-Ytm">
-                                        <rect key="frame" x="54" y="0.0" width="123" height="50"/>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="logo_imdb_100" translatesAutoresizingMaskIntoConstraints="NO" id="Qnz-ys-Ytm">
+                                        <rect key="frame" x="54" y="0.0" width="123" height="30"/>
                                     </imageView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="YXd-qV-jzP"/>
+                                </constraints>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5P4-RY-8P5">
+                                <rect key="frame" x="163" y="320" width="48" height="30"/>
+                                <state key="normal" title="Logout"/>
+                                <connections>
+                                    <segue destination="071-Lr-vD4" kind="unwind" unwindAction="unwindToSplash:" id="ayo-ih-3Pw"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -401,10 +420,12 @@
                             <constraint firstItem="8fW-hp-xAB" firstAttribute="top" secondItem="n2z-LW-m4z" secondAttribute="top" id="Fti-sB-LgJ"/>
                             <constraint firstItem="hMa-Px-WAx" firstAttribute="centerX" secondItem="n2z-LW-m4z" secondAttribute="centerX" id="LMe-gK-7wm"/>
                             <constraint firstItem="pjF-lU-tfj" firstAttribute="centerX" secondItem="n2z-LW-m4z" secondAttribute="centerX" id="MtI-H7-ltz"/>
+                            <constraint firstItem="5P4-RY-8P5" firstAttribute="top" secondItem="pjF-lU-tfj" secondAttribute="bottom" constant="40" id="NwJ-9v-L9M"/>
                             <constraint firstItem="pjF-lU-tfj" firstAttribute="top" secondItem="hMa-Px-WAx" secondAttribute="bottom" constant="20" id="Ve3-Kh-Ple"/>
                             <constraint firstItem="hMa-Px-WAx" firstAttribute="top" secondItem="17w-AS-tP6" secondAttribute="bottom" constant="120" id="XmY-R3-7aS"/>
                             <constraint firstItem="CBW-WP-5pr" firstAttribute="top" secondItem="17w-AS-tP6" secondAttribute="bottom" constant="8" id="b5y-b0-VLB"/>
                             <constraint firstAttribute="trailing" secondItem="4bK-BR-dg5" secondAttribute="trailing" id="bD0-Sh-zuh"/>
+                            <constraint firstItem="5P4-RY-8P5" firstAttribute="centerX" secondItem="n2z-LW-m4z" secondAttribute="centerX" id="e6c-9X-xOB"/>
                             <constraint firstItem="Coh-BO-7I1" firstAttribute="leading" secondItem="n2z-LW-m4z" secondAttribute="leading" constant="16" id="gwI-mW-0dX"/>
                             <constraint firstItem="8fW-hp-xAB" firstAttribute="leading" secondItem="n2z-LW-m4z" secondAttribute="leading" id="qgp-JR-3EX"/>
                             <constraint firstItem="4bK-BR-dg5" firstAttribute="leading" secondItem="n2z-LW-m4z" secondAttribute="leading" id="t7Q-7V-mDg"/>
@@ -440,5 +461,6 @@
         <image name="logo" width="162" height="191"/>
         <image name="logo_imdb_100" width="123" height="50"/>
         <image name="logo_tmdb_100" width="46" height="50"/>
+        <image name="posters_bg" width="16" height="16"/>
     </resources>
 </document>

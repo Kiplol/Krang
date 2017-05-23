@@ -48,4 +48,6 @@ class SettingsViewController: KrangViewController {
     private func populateViews() {
         self.labelName.text = KrangUser.getCurrentUser().name
     }
+    
+    
 }

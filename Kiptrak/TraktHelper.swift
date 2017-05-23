@@ -70,6 +70,19 @@ class TraktHelper: NSObject {
         sharedDefaults.synchronize()
     }
     
+    func logout() {
+        guard let sharedDefaults = UserDefaults(suiteName: "group.com.kip.krang") else {
+            KrangLogger.log.error("Could not get UserDefaults for app group!  This is very bad!")
+            return
+        }
+        
+        sharedDefaults.removeObject(forKey: "traktCredentials")
+        sharedDefaults.removeObject(forKey: "oauthToken")
+        sharedDefaults.removeObject(forKey: "oathTokenExpiresAt")
+        sharedDefaults.removeObject(forKey: "oauthRefreshToken")
+        sharedDefaults.synchronize()
+    }
+    
     func credentialsNeedRefresh() -> Bool {
         return self.didGetCredentials && self.oauth.client.credential.isTokenExpired()
     }
