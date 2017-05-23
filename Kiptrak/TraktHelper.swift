@@ -81,6 +81,7 @@ class TraktHelper: NSObject {
         sharedDefaults.removeObject(forKey: "oathTokenExpiresAt")
         sharedDefaults.removeObject(forKey: "oauthRefreshToken")
         sharedDefaults.synchronize()
+        self.didGetCredentials = false
     }
     
     func credentialsNeedRefresh() -> Bool {

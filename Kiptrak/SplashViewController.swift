@@ -21,9 +21,10 @@ class SplashViewController: KrangViewController {
         self.imageBackground.alpha = 0.0
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
         TMDBHelper.shared.getConfiguration { (error) in
             guard error == nil else {
                 self.goToOnboarding()

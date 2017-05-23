@@ -148,7 +148,7 @@ class PlaybackViewController: KrangViewController {
     }
     
     func refreshCheckin(_ completion:(() -> ())?) {
-        TraktHelper.shared.getCheckedInMovieOrEpisode { [unowned self] (error, movie, episode) in
+        TraktHelper.shared.getCheckedInMovieOrEpisode { (error, movie, episode) in
             var watchable:KrangWatchable? = nil
             if let movie = movie {
                 self.traktMovieID = movie.traktID
