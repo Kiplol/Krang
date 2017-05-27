@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="id2-XQ-XDI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="id2-XQ-XDI">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -21,7 +21,7 @@
             <objects>
                 <navigationController navigationBarHidden="YES" id="id2-XQ-XDI" sceneMemberID="viewController">
                     <nil key="simulatedTopBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="5RF-Bj-fFW">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="5RF-Bj-fFW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -138,8 +138,8 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="WBv-kv-rbR">
-                                        <rect key="frame" x="183" y="68" width="184" height="44"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="WBv-kv-rbR">
+                                        <rect key="frame" x="174.5" y="68" width="184.5" height="44"/>
                                         <subviews>
                                             <button hidden="YES" opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UPE-r7-PhN">
                                                 <rect key="frame" x="0.0" y="0.0" width="88" height="44"/>
@@ -160,7 +160,7 @@
                                                 </connections>
                                             </button>
                                             <button hidden="YES" opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Coe-6v-C0y">
-                                                <rect key="frame" x="96" y="0.0" width="88" height="44"/>
+                                                <rect key="frame" x="96" y="0.0" width="88.5" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="Coe-6v-C0y" secondAttribute="height" multiplier="2:1" id="rUR-xc-KxK"/>
                                                 </constraints>
@@ -185,7 +185,7 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.11764705882352941" green="0.11764705882352941" blue="0.11764705882352941" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="WBv-kv-rbR" secondAttribute="trailing" constant="8" id="3me-2h-InA"/>
+                                    <constraint firstAttribute="trailing" secondItem="WBv-kv-rbR" secondAttribute="trailing" constant="16" id="3me-2h-InA"/>
                                     <constraint firstAttribute="trailing" secondItem="Xfi-1B-afS" secondAttribute="trailing" id="3tq-J8-7kQ"/>
                                     <constraint firstItem="37d-7m-bWA" firstAttribute="top" secondItem="Wlr-5B-5Di" secondAttribute="top" id="9zN-Ia-0ND"/>
                                     <constraint firstAttribute="bottom" secondItem="37d-7m-bWA" secondAttribute="bottom" id="Foz-dx-gtH"/>
@@ -326,7 +326,7 @@
             <objects>
                 <navigationController navigationBarHidden="YES" id="xJp-HJ-PiM" sceneMemberID="viewController">
                     <nil key="simulatedTopBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="KPY-Pv-Af8">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="KPY-Pv-Af8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -389,14 +389,17 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="userAvatar"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Coh-BO-7I1">
-                                <rect key="frame" x="16" y="621" width="177" height="30"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Coh-BO-7I1">
+                                <rect key="frame" x="98" y="621" width="261" height="30"/>
                                 <subviews>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="logo_trakt" translatesAutoresizingMaskIntoConstraints="NO" id="9Kb-Pf-Be2">
+                                        <rect key="frame" x="0.0" y="0.0" width="81.5" height="30"/>
+                                    </imageView>
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="logo_tmdb_100" translatesAutoresizingMaskIntoConstraints="NO" id="czA-bY-dNo">
-                                        <rect key="frame" x="0.0" y="0.0" width="46" height="30"/>
+                                        <rect key="frame" x="89.5" y="0.0" width="82" height="30"/>
                                     </imageView>
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="logo_imdb_100" translatesAutoresizingMaskIntoConstraints="NO" id="Qnz-ys-Ytm">
-                                        <rect key="frame" x="54" y="0.0" width="123" height="30"/>
+                                        <rect key="frame" x="179.5" y="0.0" width="81.5" height="30"/>
                                     </imageView>
                                 </subviews>
                                 <constraints>
@@ -410,23 +413,31 @@
                                     <segue destination="071-Lr-vD4" kind="unwind" unwindAction="unwindToSplash:" id="ayo-ih-3Pw"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Powered by" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C31-of-DRF">
+                                <rect key="frame" x="16" y="629" width="66" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="C31-of-DRF" firstAttribute="centerY" secondItem="Coh-BO-7I1" secondAttribute="centerY" id="1Ps-AE-GOw"/>
                             <constraint firstItem="Lhj-8y-Hvv" firstAttribute="top" secondItem="Coh-BO-7I1" secondAttribute="bottom" constant="16" id="4M3-4Z-PMD"/>
                             <constraint firstAttribute="trailing" secondItem="CBW-WP-5pr" secondAttribute="trailing" constant="16" id="Djn-6d-Pkn"/>
                             <constraint firstAttribute="trailing" secondItem="8fW-hp-xAB" secondAttribute="trailing" id="Fdc-Ad-3HA"/>
                             <constraint firstItem="4bK-BR-dg5" firstAttribute="top" secondItem="n2z-LW-m4z" secondAttribute="top" id="Fqx-bw-BjM"/>
                             <constraint firstItem="8fW-hp-xAB" firstAttribute="top" secondItem="n2z-LW-m4z" secondAttribute="top" id="Fti-sB-LgJ"/>
+                            <constraint firstItem="C31-of-DRF" firstAttribute="leading" secondItem="n2z-LW-m4z" secondAttribute="leading" constant="16" id="GeI-S8-mCv"/>
                             <constraint firstItem="hMa-Px-WAx" firstAttribute="centerX" secondItem="n2z-LW-m4z" secondAttribute="centerX" id="LMe-gK-7wm"/>
                             <constraint firstItem="pjF-lU-tfj" firstAttribute="centerX" secondItem="n2z-LW-m4z" secondAttribute="centerX" id="MtI-H7-ltz"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Coh-BO-7I1" secondAttribute="trailing" constant="16" id="NFK-0N-KeH"/>
                             <constraint firstItem="5P4-RY-8P5" firstAttribute="top" secondItem="pjF-lU-tfj" secondAttribute="bottom" constant="40" id="NwJ-9v-L9M"/>
                             <constraint firstItem="pjF-lU-tfj" firstAttribute="top" secondItem="hMa-Px-WAx" secondAttribute="bottom" constant="20" id="Ve3-Kh-Ple"/>
                             <constraint firstItem="hMa-Px-WAx" firstAttribute="top" secondItem="17w-AS-tP6" secondAttribute="bottom" constant="120" id="XmY-R3-7aS"/>
                             <constraint firstItem="CBW-WP-5pr" firstAttribute="top" secondItem="17w-AS-tP6" secondAttribute="bottom" constant="8" id="b5y-b0-VLB"/>
                             <constraint firstAttribute="trailing" secondItem="4bK-BR-dg5" secondAttribute="trailing" id="bD0-Sh-zuh"/>
                             <constraint firstItem="5P4-RY-8P5" firstAttribute="centerX" secondItem="n2z-LW-m4z" secondAttribute="centerX" id="e6c-9X-xOB"/>
-                            <constraint firstItem="Coh-BO-7I1" firstAttribute="leading" secondItem="n2z-LW-m4z" secondAttribute="leading" constant="16" id="gwI-mW-0dX"/>
+                            <constraint firstItem="Coh-BO-7I1" firstAttribute="leading" secondItem="C31-of-DRF" secondAttribute="trailing" constant="16" id="lSo-Zd-Qsh"/>
                             <constraint firstItem="8fW-hp-xAB" firstAttribute="leading" secondItem="n2z-LW-m4z" secondAttribute="leading" id="qgp-JR-3EX"/>
                             <constraint firstItem="4bK-BR-dg5" firstAttribute="leading" secondItem="n2z-LW-m4z" secondAttribute="leading" id="t7Q-7V-mDg"/>
                         </constraints>
@@ -461,6 +472,7 @@
         <image name="logo" width="162" height="191"/>
         <image name="logo_imdb_100" width="123" height="50"/>
         <image name="logo_tmdb_100" width="46" height="50"/>
+        <image name="logo_trakt" width="100" height="99"/>
         <image name="posters_bg" width="16" height="16"/>
     </resources>
 </document>
