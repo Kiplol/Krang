@@ -81,6 +81,9 @@ class TraktHelper: NSObject {
         sharedDefaults.removeObject(forKey: "oathTokenExpiresAt")
         sharedDefaults.removeObject(forKey: "oauthRefreshToken")
         sharedDefaults.synchronize()
+        KrangUser.getCurrentUser().makeChanges {
+            KrangUser.setCurrentUser(nil)
+        }
         self.didGetCredentials = false
     }
     
