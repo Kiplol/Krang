@@ -12,6 +12,8 @@ class KrangProgressView: UIView {
     
     //MARK:- ivars
     private let fillView = UIView()
+    private var displayLink: CADisplayLink? = nil
+    
     var progress: Float = 0.0 {
         didSet {
             self.fillView.frame.size.width = self.bounds.size.width * CGFloat(self.progress)
@@ -44,19 +46,30 @@ class KrangProgressView: UIView {
     func start() {
         guard let _ = self.startDate, let _ = self.endDate else {
             self.stop()
+            self.reset()
             return
         }
         
-        self.update()
+        if self.displayLink == nil {
+            self.displayLink = CADisplayLink(target: self, selector: #selector(KrangProgressView.update))
+            self.displayLink?.add(to: RunLoop.main, forMode: .defaultRunLoopMode)
+        }
     }
     
     func stop() {
+        self.displayLink?.remove(from: RunLoop.main, forMode: .defaultRunLoopMode)
+        self.displayLink?.invalidate()
+        self.displayLink = nil
+    }
+    
+    func reset() {
         self.progress = 0.0
     }
     
     func update() {
         guard let startDate = self.startDate, let endDate = self.endDate else {
             self.stop()
+            self.reset()
             return
         }
         

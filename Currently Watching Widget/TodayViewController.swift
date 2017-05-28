@@ -153,6 +153,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             self.spinnerInLoading.startAnimating()
         }
         
+        self.progressView.stop()
         let afterGettingTMDBConfiguartion = {
             TraktHelper.shared.getCheckedInMovieOrEpisode { (error, movie, episode) in
                 self.movieID = nil
@@ -195,6 +196,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 } else {
                     self.visibleContentView = self.contentViewNotWatching
                     
+                    self.progressView.reset()
                     self.labelTitle.text = nil
                     self.imageBackground.image = nil
                     self.updateButtonsFor(watchable: nil)

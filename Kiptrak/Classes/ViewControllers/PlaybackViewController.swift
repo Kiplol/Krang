@@ -72,10 +72,20 @@ class PlaybackViewController: KrangViewController {
         }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.progressView.stop()
+    }
+    
     //MARK:- App Lifecycle
     override func willEnterForeground(_ notif: Notification) {
         super.willEnterForeground(notif)
         self.refreshCheckin(nil)
+    }
+    
+    override func didEnterBackground(_ notif: Notification) {
+        super.didEnterBackground(notif)
+        self.progressView.stop()
     }
     
     //MARK:- User Interaction
@@ -137,6 +147,8 @@ class PlaybackViewController: KrangViewController {
     
     func updateProgressView(withCheckin checkin: KrangCheckin?) {
         guard let checkin = checkin else {
+            self.progressView.stop()
+            self.progressView.reset()
             self.progressView.isHidden = true
             return
         }
