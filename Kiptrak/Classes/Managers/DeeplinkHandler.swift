@@ -13,8 +13,15 @@ class DeeplinkHandler: NSObject {
     static let shared = DeeplinkHandler()
     
     func handle(url:URL) {
-        if url.host == "externalurl" {
-            self.handleExternalURL(url: url)
+        if let host = url.host {
+            switch host {
+            case "externalurl":
+                self.handleExternalURL(url: url)
+            case "traktlogin":
+                self.handleTraktLogin(url: url)
+            default:
+                break
+            }
         }
     }
     
@@ -29,5 +36,24 @@ class DeeplinkHandler: NSObject {
             UIApplication.shared.open(finalURL, options: [:], completionHandler: nil)
         }
     }
-
+    
+    func handleTraktLogin(url: URL) {
+        guard url.host == "traktlogin" else {
+            return
+        }
+        
+        guard !TraktHelper.shared.credentialsAreValid() else {
+            return
+        }
+        
+        var splashVC: SplashViewController? = AppDelegate.shared.topViewController() as? SplashViewController
+        
+        if splashVC == nil {
+            let splashNav = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateInitialViewController() as? UINavigationController
+            splashVC = splashNav?.topViewController as? SplashViewController
+            UIApplication.shared.keyWindow?.rootViewController = splashNav
+        }
+        
+        splashVC?.loginAfterAppear()
+    }
 }

@@ -13,8 +13,14 @@ import OAuthSwift
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
+    
+    static var shared: AppDelegate {
+        get {
+            return UIApplication.shared.delegate as! AppDelegate
+        }
+    }
+    
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         self.setupAppearance()
         
@@ -81,6 +87,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //                print("== \(names)")
 //            }
 //        }
+    }
+    
+    func topViewController() -> UIViewController {
+        return self.topViewController(in: self.window!.rootViewController!)
+    }
+    
+    private func topViewController(in viewController: UIViewController) -> UIViewController {
+        if let presentedViewController = viewController.presentedViewController {
+            return self.topViewController(in: presentedViewController)
+        } else if let navController = viewController as? UINavigationController, let topVC = navController.topViewController {
+            return self.topViewController(in: topVC)
+        } else {
+            return viewController
+        }
     }
 
 }

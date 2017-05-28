@@ -19,7 +19,7 @@
         <!--Navigation Controller-->
         <scene sceneID="557-PH-wf0">
             <objects>
-                <navigationController navigationBarHidden="YES" id="id2-XQ-XDI" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="initial" navigationBarHidden="YES" id="id2-XQ-XDI" sceneMemberID="viewController">
                     <nil key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="5RF-Bj-fFW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -326,7 +326,7 @@
             <objects>
                 <navigationController navigationBarHidden="YES" id="xJp-HJ-PiM" sceneMemberID="viewController">
                     <nil key="simulatedTopBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="KPY-Pv-Af8">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="KPY-Pv-Af8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

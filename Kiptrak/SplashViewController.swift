@@ -13,6 +13,22 @@ class SplashViewController: KrangViewController {
 
     @IBOutlet weak var buttonLoginTrakt: UIButton!
     @IBOutlet weak var imageBackground: UIImageView!
+    private var shouldLoginAfterAppear = false {
+        didSet {
+            if self.canLogin && shouldLoginAfterAppear {
+                self.loginTapped(self)
+                self.shouldLoginAfterAppear = false
+            }
+        }
+    }
+    private var canLogin = false {
+        didSet {
+            if self.canLogin && shouldLoginAfterAppear {
+                self.loginTapped(self)
+                self.shouldLoginAfterAppear = false
+            }
+        }
+    }
     
     //MARK:- View Lifecycle
     override func viewDidLoad() {
@@ -26,6 +42,7 @@ class SplashViewController: KrangViewController {
         super.viewDidAppear(animated)
         
         TMDBHelper.shared.getConfiguration { (error) in
+            self.canLogin = true
             guard error == nil else {
                 self.goToOnboarding()
                 return
@@ -58,6 +75,10 @@ class SplashViewController: KrangViewController {
         UIView.animate(withDuration: 3.0) {
             self.imageBackground.alpha = 1.0
         }
+    }
+    
+    func loginAfterAppear() {
+        self.shouldLoginAfterAppear = true
     }
     
     //MARK:- 

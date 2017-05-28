@@ -131,6 +131,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         }
     }
     
+    //MARK:- User Interaction
+    @IBAction func loginTapped(_ sender: Any) {
+        let szURL = "krang://traktlogin"
+        self.extensionContext?.open(URL(string: szURL)!, completionHandler: nil)
+    }
+    
     //MARK:- NCWidgetProviding
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
         
