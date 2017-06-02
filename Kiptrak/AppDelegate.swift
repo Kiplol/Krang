@@ -90,18 +90,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func topViewController() -> UIViewController {
-        return self.topViewController(in: self.window!.rootViewController!)
+        return self.window!.rootViewController!.topViewController()
     }
     
-    private func topViewController(in viewController: UIViewController) -> UIViewController {
-        if let presentedViewController = viewController.presentedViewController {
-            return self.topViewController(in: presentedViewController)
-        } else if let navController = viewController as? UINavigationController, let topVC = navController.topViewController {
-            return self.topViewController(in: topVC)
-        } else {
-            return viewController
-        }
-    }
-
 }
 

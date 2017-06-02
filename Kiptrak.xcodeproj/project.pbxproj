@@ -11,6 +11,7 @@
 		3724CBAC1E247557005387D1 /* PlaybackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724CBAB1E247557005387D1 /* PlaybackViewController.swift */; };
 		373D32961E22C05C00980925 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373D32951E22C05C00980925 /* Constants.swift */; };
 		374C2AA01E242BCD0094D7A4 /* TraktHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374C2A9F1E242BCD0094D7A4 /* TraktHelper.swift */; };
+		375FD4E91EDB56710022C4C9 /* UIViewController+Krang.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375FD4E81EDB56710022C4C9 /* UIViewController+Krang.swift */; };
 		37870B201E22BA6A00A2EC00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37870B1F1E22BA6A00A2EC00 /* AppDelegate.swift */; };
 		37870B221E22BA6A00A2EC00 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37870B211E22BA6A00A2EC00 /* SplashViewController.swift */; };
 		37870B251E22BA6A00A2EC00 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37870B231E22BA6A00A2EC00 /* Main.storyboard */; };
@@ -126,6 +127,7 @@
 		373D32951E22C05C00980925 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Classes/Constants.swift; sourceTree = "<group>"; };
 		374C2A9F1E242BCD0094D7A4 /* TraktHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraktHelper.swift; sourceTree = "<group>"; };
 		374C2AA11E243C080094D7A4 /* Kiptrak.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Kiptrak.entitlements; sourceTree = "<group>"; };
+		375FD4E81EDB56710022C4C9 /* UIViewController+Krang.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIViewController+Krang.swift"; path = "Classes/ViewControllers/UIViewController+Krang.swift"; sourceTree = "<group>"; };
 		37870B1C1E22BA6A00A2EC00 /* Kiptrak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kiptrak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37870B1F1E22BA6A00A2EC00 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37870B211E22BA6A00A2EC00 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 				379C554E1E25586900D51019 /* SettingsViewController.swift */,
 				3724CBAB1E247557005387D1 /* PlaybackViewController.swift */,
 				37870B211E22BA6A00A2EC00 /* SplashViewController.swift */,
+				375FD4E81EDB56710022C4C9 /* UIViewController+Krang.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -639,6 +642,7 @@
 				37F0DB671E31705300FAC6DB /* KrangProgressView.swift in Sources */,
 				37E7B7591E2DA17B001D4799 /* KrangDateUtils.swift in Sources */,
 				37870B201E22BA6A00A2EC00 /* AppDelegate.swift in Sources */,
+				375FD4E91EDB56710022C4C9 /* UIViewController+Krang.swift in Sources */,
 				374C2AA01E242BCD0094D7A4 /* TraktHelper.swift in Sources */,
 				379C554D1E25529600D51019 /* KrangImageUtils.swift in Sources */,
 				37A19E381E27F290007877B4 /* KrangShow.swift in Sources */,
