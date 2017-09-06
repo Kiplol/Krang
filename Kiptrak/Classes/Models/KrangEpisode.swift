@@ -23,6 +23,7 @@ class KrangEpisode: Object {
     dynamic var tvRageID: Int = -1
     dynamic var posterImageURL: String? = nil
     dynamic var posterThumbnailImageURL: String? = nil
+    var posterImageURLs: List<RealmString> = List<RealmString>()
     dynamic var stillImageURL: String? = nil
     dynamic var stillThumbnailImageURL: String? = nil
     dynamic var checkin:KrangCheckin? = nil
@@ -110,6 +111,7 @@ class KrangEpisode: Object {
 }
 
 extension KrangEpisode: KrangWatchable {
+
     var titleDisplayString: String {
         get {
             if let show = self.show {
@@ -145,12 +147,33 @@ extension KrangEpisode: KrangWatchable {
                 return nil
             }
             
-            let szURL = "https://www.themoviedb.org/tv/\(show.tmdbID)-\(show.slug)/season/\(self.season)/episode/\(self.episode)/cast"
+            let szURL = "https://www.themoviedb.org/tv/\(show.tmdbID)-\(show.slug)/season/\(self.season)/episode/\(self.episode)"
+            return URL(string: szURL)
+        }
+    }
+    
+    var urlForTrakt: URL? {
+        get {
+            guard let show = self.show else {
+                return nil
+            }
+            
+            let szURL = "https://www.trakt.tv/shows/\(show.slug)/seasons/\(self.season)/episodes/\(self.episode)"
             return URL(string: szURL)
         }
     }
     
     var fanartImageURL: URL? {
+        get {
+            guard let szURL = self.stillImageURL else {
+                return nil
+            }
+            
+            return URL(string: szURL)
+        }
+    }
+
+    var fanartBlurrableImageURL: URL? {
         get {
             guard let szURL = self.stillThumbnailImageURL else {
                 return nil

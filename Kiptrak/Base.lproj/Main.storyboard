@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="id2-XQ-XDI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="id2-XQ-XDI">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -138,11 +138,29 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
-                                    <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="WBv-kv-rbR">
-                                        <rect key="frame" x="174.5" y="68" width="184.5" height="44"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="WBv-kv-rbR">
+                                        <rect key="frame" x="79" y="68" width="280" height="44"/>
                                         <subviews>
-                                            <button hidden="YES" opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UPE-r7-PhN">
+                                            <button hidden="YES" opaque="NO" alpha="0.80000001192092896" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SY8-SC-PkJ">
                                                 <rect key="frame" x="0.0" y="0.0" width="88" height="44"/>
+                                                <state key="normal" image="button_trakt_small"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                        <real key="value" value="0.69999999999999996"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                        <real key="value" value="6"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                        <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="traktTapped:" destination="4EL-Ga-1bM" eventType="touchUpInside" id="vOr-P3-h9B"/>
+                                                </connections>
+                                            </button>
+                                            <button hidden="YES" opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UPE-r7-PhN">
+                                                <rect key="frame" x="96" y="0.0" width="88" height="44"/>
                                                 <state key="normal" image="button_imdb_small"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
@@ -160,7 +178,7 @@
                                                 </connections>
                                             </button>
                                             <button hidden="YES" opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Coe-6v-C0y">
-                                                <rect key="frame" x="96" y="0.0" width="88.5" height="44"/>
+                                                <rect key="frame" x="192" y="0.0" width="88" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="Coe-6v-C0y" secondAttribute="height" multiplier="2:1" id="rUR-xc-KxK"/>
                                                 </constraints>
@@ -302,6 +320,7 @@
                         <outlet property="avatar" destination="RbW-AH-BXY" id="T75-kj-OD5"/>
                         <outlet property="buttonIMDB" destination="UPE-r7-PhN" id="OiO-k0-DzO"/>
                         <outlet property="buttonTMDB" destination="Coe-6v-C0y" id="4dS-Do-IqC"/>
+                        <outlet property="buttonTrakt" destination="SY8-SC-PkJ" id="07n-G6-wv7"/>
                         <outlet property="imageInfoBackground" destination="Xfi-1B-afS" id="Aip-V9-wCR"/>
                         <outlet property="imagePosterBackground" destination="08k-fo-OJA" id="20M-fp-Eye"/>
                         <outlet property="infoContainer" destination="Wlr-5B-5Di" id="D9z-jC-SWM"/>
@@ -326,7 +345,7 @@
             <objects>
                 <navigationController navigationBarHidden="YES" id="xJp-HJ-PiM" sceneMemberID="viewController">
                     <nil key="simulatedTopBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="KPY-Pv-Af8">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="KPY-Pv-Af8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -469,6 +488,7 @@
     <resources>
         <image name="button_imdb_small" width="88" height="44"/>
         <image name="button_tmdb_ small" width="88" height="44"/>
+        <image name="button_trakt_small" width="88" height="44"/>
         <image name="logo" width="162" height="191"/>
         <image name="logo_imdb_100" width="123" height="50"/>
         <image name="logo_tmdb_100" width="46" height="50"/>

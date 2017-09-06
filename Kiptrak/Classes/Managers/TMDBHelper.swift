@@ -9,6 +9,7 @@
 import UIKit
 import OAuthSwift
 import SwiftyJSON
+import RealmSwift
 
 class TMDBHelper: NSObject {
 
@@ -147,8 +148,16 @@ class TMDBHelper: NSObject {
             if let posterPath = json["poster_path"].string, self.configuration.posterSizes.count > 0 {
                 let posterURL = self.configuration.imageBaseURL + self.configuration.posterSizes[Int(3 * self.configuration.posterSizes.count / 4)] + posterPath
                 let smallestPosterURL = self.configuration.imageBaseURL + self.configuration.posterSizes[0] + posterPath
+                
+                let realmStringURLs = self.configuration.posterSizes.map({ sizeString in
+                    self.configuration.imageBaseURL + sizeString + posterPath
+                }).map({ fullURL in
+                    RealmString.with(value: fullURL)
+                })
+                
                 episode.posterImageURL = posterURL
                 episode.posterThumbnailImageURL = smallestPosterURL
+                episode.posterImageURLs = List<RealmString>(realmStringURLs)
             }
         }
     }

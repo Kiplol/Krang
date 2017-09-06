@@ -20,7 +20,9 @@ protocol KrangWatchable {
     var posterThumbnailURL: URL? { get }
     var urlForIMDB: URL? { get }
     var urlForTMDB: URL? { get }
+    var urlForTrakt: URL? { get }
     var checkin:KrangCheckin? { get }
     
     var fanartImageURL: URL? { get }
+    var fanartBlurrableImageURL : URL? { get }
 }

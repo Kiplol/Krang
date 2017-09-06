@@ -20,6 +20,28 @@ class KrangRealmUtils : NSObject {
     
 }
 
+class RealmString : Object {
+    
+    dynamic var value: String = ""
+    
+    override static func primaryKey() -> String? {
+        return "value"
+    }
+    
+    class func with(value: String) -> RealmString {
+        let realm = try! Realm()
+        let existingStrings = realm.objects(RealmString.self).filter("value = %@", value)
+        if existingStrings.count > 0 {
+            return existingStrings.first!
+        }
+        
+        let newString = RealmString()
+        newString.value = value
+        return newString
+    }
+    
+}
+
 extension Object {
     
     func makeChanges(changes:@escaping () -> Void) {

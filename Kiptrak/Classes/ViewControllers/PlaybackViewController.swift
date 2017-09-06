@@ -47,9 +47,11 @@ class PlaybackViewController: KrangViewController {
     @IBOutlet weak var stackViewForButtons: UIStackView!
     @IBOutlet weak var buttonIMDB: UIButton!
     @IBOutlet weak var buttonTMDB: UIButton!
+    @IBOutlet weak var buttonTrakt: UIButton!
     
     var traktMovieID:Int? = nil
     var traktEpisodeID:Int? = nil
+    var watchable: KrangWatchable? = nil
 
     //MARK:- Initializers
     class func instantiatedFromStoryboard() -> PlaybackViewController {
@@ -119,16 +121,29 @@ class PlaybackViewController: KrangViewController {
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
+    @IBAction func traktTapped(_ sender: Any) {
+        guard let url = self.watchable?.urlForTrakt else {
+            return
+        }
+        
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
     //MARK:-
     func updateViews(withWatchable watchable:KrangWatchable?) {
         self.stackViewForButtons.removeArrangedSubview(self.buttonIMDB)
         self.stackViewForButtons.removeArrangedSubview(self.buttonTMDB)
+        self.stackViewForButtons.removeArrangedSubview(self.buttonTrakt)
         self.buttonIMDB.isHidden = true
         self.buttonTMDB.isHidden = true
+        self.buttonTrakt.isHidden = true
         if let watchable = watchable {
             self.imagePosterBackground.setPoster(fromWatchable: watchable)
             self.labelDisplayName.text = watchable.titleDisplayString
             self.labelNowWatching.isHidden = false
+            if watchable.urlForTrakt != nil {
+                self.stackViewForButtons.addArrangedSubview(self.buttonTrakt)
+                self.buttonTrakt.isHidden = false
+            }
             if watchable.urlForIMDB != nil {
                 self.stackViewForButtons.addArrangedSubview(self.buttonIMDB)
                 self.buttonIMDB.isHidden = false
@@ -171,6 +186,7 @@ class PlaybackViewController: KrangViewController {
                 self.traktMovieID = nil
                 watchable = episode
             }
+            self.watchable = watchable
             
             if let coverImageURL = watchable?.fanartImageURL {
                 KrangUser.getCurrentUser().makeChanges {

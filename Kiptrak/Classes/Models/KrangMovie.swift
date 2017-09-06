@@ -138,7 +138,24 @@ extension KrangMovie: KrangWatchable {
         }
     }
     
+    var urlForTrakt: URL? {
+        get {
+            let szURL = "https://trakt.tv/movies/\(self.slug)"
+            return URL(string: szURL)
+        }
+    }
+    
     var fanartImageURL: URL? {
+        get {
+            guard let szURL = self.backdropImageURL else {
+                return nil
+            }
+            
+            return URL(string: szURL)
+        }
+    }
+    
+    var fanartBlurrableImageURL: URL? {
         get {
             guard let szURL = self.backdropImageURL else {
                 return nil
