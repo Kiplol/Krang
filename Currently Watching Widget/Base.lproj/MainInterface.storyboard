@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="M4Y-Lb-cyx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="M4Y-Lb-cyx">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -78,15 +78,15 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="eMj-l6-Q8Z">
-                                        <rect key="frame" x="174" y="29" width="138" height="33"/>
+                                        <rect key="frame" x="102" y="29" width="210" height="33"/>
                                         <subviews>
-                                            <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bzX-5v-vJ3" userLabel="TMDB">
+                                            <button opaque="NO" alpha="0.69999998807907104" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="njy-jh-vRy" userLabel="Trakt">
                                                 <rect key="frame" x="0.0" y="0.0" width="66" height="33"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" secondItem="bzX-5v-vJ3" secondAttribute="height" multiplier="2:1" id="Mfz-lx-zUP"/>
-                                                    <constraint firstAttribute="width" constant="66" id="NSN-S6-a9w"/>
+                                                    <constraint firstAttribute="width" secondItem="njy-jh-vRy" secondAttribute="height" multiplier="2:1" id="79A-ic-ve0"/>
+                                                    <constraint firstAttribute="width" constant="66" id="lq6-Xt-BvB"/>
                                                 </constraints>
-                                                <state key="normal" image="button_tmdb_ small"/>
+                                                <state key="normal" image="button_trakt_small"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
                                                         <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -99,7 +99,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="tmdbTapped:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="3dk-4c-3g3"/>
+                                                    <action selector="traktTapped:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="abm-tj-fM2"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oIQ-1y-Yj2" userLabel="IMDB">
@@ -124,7 +124,32 @@
                                                     <action selector="imdbTapped:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="ono-y2-Vf0"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bzX-5v-vJ3" userLabel="TMDB">
+                                                <rect key="frame" x="144" y="0.0" width="66" height="33"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="bzX-5v-vJ3" secondAttribute="height" multiplier="2:1" id="Mfz-lx-zUP"/>
+                                                    <constraint firstAttribute="width" constant="66" id="NSN-S6-a9w"/>
+                                                </constraints>
+                                                <state key="normal" image="button_tmdb_ small"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                        <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                        <real key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                        <real key="value" value="6"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="tmdbTapped:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="3dk-4c-3g3"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstItem="njy-jh-vRy" firstAttribute="width" secondItem="njy-jh-vRy" secondAttribute="height" multiplier="2:1" id="iCA-zN-CCJ"/>
+                                        </constraints>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4DT-S4-Oj9" userLabel="Poster Container">
                                         <rect key="frame" x="8" y="8" width="36" height="54"/>
@@ -256,6 +281,7 @@
                     <connections>
                         <outlet property="buttonIMDB" destination="oIQ-1y-Yj2" id="ptF-zq-GDH"/>
                         <outlet property="buttonTMDB" destination="bzX-5v-vJ3" id="k28-F4-dxy"/>
+                        <outlet property="buttonTrakt" destination="njy-jh-vRy" id="xKa-hN-axr"/>
                         <outlet property="contentViewLoading" destination="zAA-es-TRi" id="khx-Pd-0g9"/>
                         <outlet property="contentViewLogin" destination="Th7-qJ-p0w" id="G3F-i3-IBh"/>
                         <outlet property="contentViewNotWatching" destination="d31-7E-rNv" id="pPP-eg-pUd"/>
@@ -282,6 +308,7 @@
     <resources>
         <image name="button_imdb_small" width="88" height="44"/>
         <image name="button_tmdb_ small" width="88" height="44"/>
+        <image name="button_trakt_small" width="88" height="44"/>
     </resources>
     <color key="tintColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
 </document>

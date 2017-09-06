@@ -18,6 +18,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     @IBOutlet weak var imagePoster: UIImageView!
     @IBOutlet weak var buttonIMDB: UIButton!
     @IBOutlet weak var buttonTMDB: UIButton!
+    @IBOutlet weak var buttonTrakt: UIButton!
     @IBOutlet weak var stackViewForButtons: UIStackView!
     
     @IBOutlet weak var contentViewNotWatching: UIView!
@@ -86,6 +87,19 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         self.extensionContext?.open(URL(string: szURL)!, completionHandler: nil)
     }
     
+    @IBAction func traktTapped(_ sender: Any) {
+        guard let watchable = self.getCurrentWatchable() else {
+            return
+        }
+        
+        guard let imdbURL = watchable.urlForTrakt else {
+            return
+        }
+        
+        let szURL = "krang://externalurl/\(imdbURL.absoluteString)"
+        self.extensionContext?.open(URL(string: szURL)!, completionHandler: nil)
+    }
+    
     //MARK:-
     func getCurrentWatchable() -> KrangWatchable? {
         if let episodeID = self.episodeID {
@@ -100,13 +114,26 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         guard let watchable = watchable else {
             self.buttonTMDB.isHidden = true
             self.buttonIMDB.isHidden = true
+            self.buttonTrakt.isHidden = true
             self.stackViewForButtons.removeArrangedSubview(self.buttonIMDB)
             self.stackViewForButtons.removeArrangedSubview(self.buttonTMDB)
+            self.stackViewForButtons.removeArrangedSubview(self.buttonTrakt)
             self.stackViewForButtons.isHidden = true
             return
         }
         
         self.stackViewForButtons.isHidden = false
+        
+        //Trakt
+        if let _ = watchable.urlForTrakt {
+            if self.buttonTrakt.isHidden {
+                self.buttonTrakt.isHidden = false
+                self.stackViewForButtons.addArrangedSubview(self.buttonTrakt)
+            }
+        } else {
+            self.buttonTrakt.isHidden = true
+            self.stackViewForButtons.removeArrangedSubview(self.buttonTrakt)
+        }
         
         //IMDB
         if let _ = watchable.urlForIMDB {
@@ -193,11 +220,9 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                     self.episodeID = episode.traktID
                     watchable = episode
                     self.labelTitle.text = episode.titleDisplayString
-                    if let stillThumbnailURL = episode.stillThumbnailImageURL {
-                        backgroundImageURL = URL(string: stillThumbnailURL)
-                    }
+                    backgroundImageURL = watchable?.fanartBlurrableImageURL
                     if let posterThumbnailURL = episode.posterThumbnailImageURL {
-                       posterImageURL = URL(string: posterThumbnailURL)
+                        posterImageURL = URL(string: posterThumbnailURL)
                     }
                 } else {
                     self.visibleContentView = self.contentViewNotWatching
