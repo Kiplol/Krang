@@ -133,7 +133,12 @@ extension KrangEpisode: KrangWatchable {
     
     var urlForIMDB: URL? {
         get {
-            return nil
+            guard let imdbID = self.imdbID else {
+                return nil
+            }
+            
+            let szURL = String(format: Constants.imdbURLFormat, imdbID)
+            return URL(string: szURL)
         }
     }
     

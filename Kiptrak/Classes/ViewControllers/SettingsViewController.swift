@@ -37,7 +37,11 @@ class SettingsViewController: KrangViewController {
             self.labelName.heroModifiers = [.fade, .translate(x: 0.0, y: -50.0, z: 0.0)]
         }
     }
-    
+    @IBOutlet weak var labelVersion: UILabel! {
+        didSet {
+            self.labelVersion.heroModifiers = [.fade, .translate(x: 0.0, y: -50.0, z: 0.0)]
+        }
+    }
     //MARK:- View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +51,7 @@ class SettingsViewController: KrangViewController {
     //MARK:-
     private func populateViews() {
         self.labelName.text = KrangUser.getCurrentUser().name
+        self.labelVersion.text = "Krang \(KrangUtils.versionAndBuildNumberString)"
     }
     
     

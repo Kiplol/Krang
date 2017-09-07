@@ -438,10 +438,17 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y8S-WW-M9P">
+                                <rect key="frame" x="16" y="621" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <constraints>
                             <constraint firstItem="C31-of-DRF" firstAttribute="centerY" secondItem="Coh-BO-7I1" secondAttribute="centerY" id="1Ps-AE-GOw"/>
                             <constraint firstItem="Lhj-8y-Hvv" firstAttribute="top" secondItem="Coh-BO-7I1" secondAttribute="bottom" constant="16" id="4M3-4Z-PMD"/>
+                            <constraint firstItem="Y8S-WW-M9P" firstAttribute="leading" secondItem="n2z-LW-m4z" secondAttribute="leadingMargin" id="9b2-fQ-5Si"/>
                             <constraint firstAttribute="trailing" secondItem="CBW-WP-5pr" secondAttribute="trailing" constant="16" id="Djn-6d-Pkn"/>
                             <constraint firstAttribute="trailing" secondItem="8fW-hp-xAB" secondAttribute="trailing" id="Fdc-Ad-3HA"/>
                             <constraint firstItem="4bK-BR-dg5" firstAttribute="top" secondItem="n2z-LW-m4z" secondAttribute="top" id="Fqx-bw-BjM"/>
@@ -455,6 +462,7 @@
                             <constraint firstItem="hMa-Px-WAx" firstAttribute="top" secondItem="17w-AS-tP6" secondAttribute="bottom" constant="120" id="XmY-R3-7aS"/>
                             <constraint firstItem="CBW-WP-5pr" firstAttribute="top" secondItem="17w-AS-tP6" secondAttribute="bottom" constant="8" id="b5y-b0-VLB"/>
                             <constraint firstAttribute="trailing" secondItem="4bK-BR-dg5" secondAttribute="trailing" id="bD0-Sh-zuh"/>
+                            <constraint firstItem="C31-of-DRF" firstAttribute="top" secondItem="Y8S-WW-M9P" secondAttribute="bottom" constant="8" id="ddW-oq-LLo"/>
                             <constraint firstItem="5P4-RY-8P5" firstAttribute="centerX" secondItem="n2z-LW-m4z" secondAttribute="centerX" id="e6c-9X-xOB"/>
                             <constraint firstItem="Coh-BO-7I1" firstAttribute="leading" secondItem="C31-of-DRF" secondAttribute="trailing" constant="16" id="lSo-Zd-Qsh"/>
                             <constraint firstItem="8fW-hp-xAB" firstAttribute="leading" secondItem="n2z-LW-m4z" secondAttribute="leading" id="qgp-JR-3EX"/>
@@ -476,6 +484,7 @@
                         <outlet property="buttonClose" destination="CBW-WP-5pr" id="GZc-EN-cqk"/>
                         <outlet property="imageCover" destination="4bK-BR-dg5" id="1QH-gX-0b5"/>
                         <outlet property="labelName" destination="pjF-lU-tfj" id="zwk-OO-KBe"/>
+                        <outlet property="labelVersion" destination="Y8S-WW-M9P" id="W7p-k2-jI9"/>
                         <outlet property="shadowTop" destination="8fW-hp-xAB" id="grc-DF-4g3"/>
                     </connections>
                 </viewController>
