@@ -23,9 +23,6 @@ class KrangUtils: NSObject {
     }
     
     class var versionAndBuildNumberString: String {
-        return "\(versionNumberString)(\(buildNumberString))"
+        return "\(versionNumberString) (\(buildNumberString))"
     }
-
-//    NSDictionary * info = [[NSBundle mainBundle] infoDictionary];
-//    self.labelVersion.text = [NSString stringWithFormat:@"v %@.%@", info[@"CFBundleShortVersionString"], info[@"CFBundleVersion"]];
 }
