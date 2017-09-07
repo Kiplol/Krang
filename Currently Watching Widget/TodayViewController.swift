@@ -164,6 +164,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         self.extensionContext?.open(URL(string: szURL)!, completionHandler: nil)
     }
     
+    @IBAction func posterTapped(_ sender: Any) {
+        self.extensionContext?.open(URL(string: "krang://")!, completionHandler: nil)
+    }
+    
     //MARK:- NCWidgetProviding
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
         
