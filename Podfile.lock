@@ -4,6 +4,7 @@ PODS:
   - Kingfisher (3.2.4)
   - MarqueeLabel/Swift (3.0.1)
   - OAuthSwift (1.1.0)
+  - Pulley (1.5.2)
   - Realm (2.1.2):
     - Realm/Headers (= 2.1.2)
   - Realm/Headers (2.1.2)
@@ -18,6 +19,7 @@ DEPENDENCIES:
   - Kingfisher (~> 3.0)
   - MarqueeLabel/Swift
   - OAuthSwift (~> 1.1.0)
+  - Pulley
   - RealmSwift
   - SwiftyBeaver
   - SwiftyJSON
@@ -28,11 +30,12 @@ SPEC CHECKSUMS:
   Kingfisher: 8d80f39da403cd9c9ee11984e1655f4d6a566cdb
   MarqueeLabel: 80ba85d2b76a9f5fa6c13de337db80bcd94feb1d
   OAuthSwift: 7ec2c62274f6bdc30b1ba3b799c39a6fdcaea0e5
+  Pulley: f5213e59f3bc8f0d74e933d98b9b2000a0fd4d18
   Realm: efe855f4d977c8ce5a82d3116d9f1ff155a6550c
   RealmSwift: 17d6ee30b6f9df86364408c2197492e33bfea567
   SwiftyBeaver: 2b68694df862381235e32bcfc4ec991e26bf131d
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 57f8d4b11554d4d4ccfece13ab7e3e6254ff1403
+PODFILE CHECKSUM: 3d9b335e0285aa5c8c78d7489f6ba4159a40ee08
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.3.1

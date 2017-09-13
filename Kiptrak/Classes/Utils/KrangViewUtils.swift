@@ -102,5 +102,16 @@ extension UILabel {
             return self.font.fontName
         }
     }
+}
+
+extension UISearchBar {
     
+    func applyKrangStyle() {
+//        self.searchBarStyle = .prominent
+        self.backgroundColor = UIColor.clear
+        self.backgroundImage = UIImage()
+        self.isTranslucent = true
+        self.barTintColor = UIColor.accent
+        self.tintColor = UIColor.darkBackground
+    }
 }

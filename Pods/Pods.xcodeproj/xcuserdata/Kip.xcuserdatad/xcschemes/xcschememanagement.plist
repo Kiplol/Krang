@@ -39,6 +39,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pulley.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Realm.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -62,7 +67,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>1D23B4D0F4BA07DEA40931786FCA30A6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>320AD47B0C6BA014D301395D3BFC8FB6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>39177DA6192D2C81681075F87AECAA70</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -78,11 +93,6 @@
 			<true/>
 		</dict>
 		<key>62187D55222419E4F1610596C1CAB331</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>820CC5D936EC8638F4ACED08D7ABBEF7</key>
 		<dict>
 			<key>primary</key>
 			<true/>

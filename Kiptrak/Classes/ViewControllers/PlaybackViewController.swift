@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Pulley
 
 class PlaybackViewController: KrangViewController {
     
@@ -48,6 +49,8 @@ class PlaybackViewController: KrangViewController {
     @IBOutlet weak var buttonIMDB: UIButton!
     @IBOutlet weak var buttonTMDB: UIButton!
     @IBOutlet weak var buttonTrakt: UIButton!
+    @IBOutlet weak var constraintBelowInfoContainer: NSLayoutConstraint!
+    @IBOutlet weak var constraintBelowStackViewForButtons: NSLayoutConstraint!
     
     var traktMovieID:Int? = nil
     var traktEpisodeID:Int? = nil
@@ -64,6 +67,7 @@ class PlaybackViewController: KrangViewController {
         super.viewDidLoad()
         self.stackViewForButtons.removeArrangedSubview(self.buttonIMDB)
         self.stackViewForButtons.removeArrangedSubview(self.buttonTMDB)
+        self.stackViewForButtons.removeArrangedSubview(self.buttonTrakt)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -205,4 +209,26 @@ class PlaybackViewController: KrangViewController {
         
     }
 
+}
+
+extension PlaybackViewController: PulleyPrimaryContentControllerDelegate {
+    
+    func makeUIAdjustmentsForFullscreen(progress: CGFloat)
+    {
+//        controlsContainer.alpha = 1.0 - progress
+    }
+    
+    func drawerPositionDidChange(drawer: PulleyViewController)
+    {
+        
+    }
+    
+    func drawerChangedDistanceFromBottom(drawer: PulleyViewController, distance: CGFloat)
+    {
+        let overlap = drawer.drawerCornerRadius
+        let maxContentShrinkage: CGFloat = drawer.partialRevealDrawerHeight() - self.stackViewForButtons.bounds.size.height - overlap - 8.0
+        self.constraintBelowStackViewForButtons.constant = 8.0 + overlap
+        self.constraintBelowInfoContainer.constant = min(maxContentShrinkage, distance) - overlap
+        self.view.layoutIfNeeded()
+    }
 }

@@ -87,6 +87,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //                print("== \(names)")
 //            }
 //        }
+        
+        //Search Bars
+        let searchBarTextFieldAppearance = UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self])
+        searchBarTextFieldAppearance.backgroundColor = UIColor(white: 0.4, alpha: 1.0)
+        searchBarTextFieldAppearance.textColor = UILabel.appearance().textColor
+        searchBarTextFieldAppearance.font = UIFont(name: "Exo-Light-Italic", size: 16.0)
     }
     
     func topViewController() -> UIViewController {

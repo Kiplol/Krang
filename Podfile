@@ -14,6 +14,7 @@ end
 target 'Kiptrak' do
 	shared_pods
 	pod 'Hero'
+	pod 'Pulley'
 end
 
 target 'Currently Watching Widget' do
