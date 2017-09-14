@@ -15,6 +15,7 @@ import RealmSwift
 class TraktHelper: NSObject {
     
     static let shared = TraktHelper()
+    static let asyncImageLoadingOnSearch = false
     
     let oauth = OAuth2Swift(consumerKey: Constants.traktClientID, consumerSecret: Constants.traktClientSecret, authorizeUrl: Constants.traktAuthorizeURL, accessTokenUrl: Constants.traktAccessTokenURL, responseType: "code")
     private var didGetCredentials = false
@@ -173,17 +174,17 @@ class TraktHelper: NSObject {
         }
     }
     
-    func search(withQuery query: String, completion: ((Error?, [KrangSearchable]) -> ())?) {
+    func search(withQuery query: String, completion: ((Error?, [KrangSearchable]) -> ())?) -> OAuthSwiftRequestHandle? {
         guard !query.isEmpty else {
             completion?(nil, [])
-            return
+            return nil
         }
         guard let escapedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
             completion?(nil, [])
-            return
+            return nil
         }
         let url = String(format: Constants.traktSearchURLFormat, escapedQuery)
-        let _ = self.oauth.client.get(url, parameters: [:], headers: TraktHelper.defaultHeaders(), success: { (response) in
+        let request = self.oauth.client.get(url, parameters: [:], headers: TraktHelper.defaultHeaders(), success: { (response) in
             //Success
             let json = JSON(data: response.data)
             var result: [KrangSearchable] = []
@@ -223,9 +224,13 @@ class TraktHelper: NSObject {
             
             result.filter { $0.urlForSearchResultThumbnailImage == nil }.forEach {
                 if let movie = $0 as? KrangMovie {
-//                    imageUpdateGroup.enter()
-                    TMDBHelper.shared.update(movie: movie, completion: { (_, _) in
-//                        imageUpdateGroup.leave()
+                    if !TraktHelper.asyncImageLoadingOnSearch {
+                        imageUpdateGroup.enter()
+                    }
+                    TMDBHelper.shared.update(movie: movie, completion: { (_, updatedMovie) in
+                        if !TraktHelper.asyncImageLoadingOnSearch {
+                            imageUpdateGroup.leave()
+                        }
                     })
                 }
             }
@@ -236,6 +241,8 @@ class TraktHelper: NSObject {
             //Failure
             completion?(error, [])
         }
+        
+        return request
     }
     
     //Helpers

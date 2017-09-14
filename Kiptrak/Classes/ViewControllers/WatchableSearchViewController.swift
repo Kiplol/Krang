@@ -9,6 +9,7 @@
 import UIKit
 import Pulley
 import RealmSwift
+import OAuthSwift
 
 class WatchableSearchViewController: KrangViewController, UISearchResultsUpdating, UITableViewDataSource, UITableViewDelegate {
     
@@ -28,6 +29,7 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
     //MARK:- ivars
     fileprivate let searchController = UISearchController(searchResultsController: nil)
     fileprivate var searchResults = [KrangSearchable]()
+    fileprivate var searchRequest: OAuthSwiftRequestHandle? = nil
     
     //MARK:- View Lifecycle
     override func viewDidLoad() {
@@ -43,8 +45,8 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
     
     //MARK:- UISearchResultsUpdating
     func updateSearchResults(for searchController: UISearchController) {
-        // TODO
-        TraktHelper.shared.search(withQuery: searchController.searchBar.text ?? "") { (error, results) in
+        self.searchRequest?.cancel()
+        self.searchRequest = TraktHelper.shared.search(withQuery: searchController.searchBar.text ?? "") { (error, results) in
             self.searchResults.removeAll()
             self.searchResults.append(contentsOf: results)
             self.tableView.reloadData()
@@ -75,7 +77,13 @@ extension WatchableSearchViewController: PulleyDrawerViewControllerDelegate, UIS
     
     func partialRevealDrawerHeight() -> CGFloat
     {
-        return 264.0
+        let rowHeight = self.tableView.rowHeight
+        let maxHeight = 2.5 * rowHeight
+        let minHeight = rowHeight * 1.5
+        let searchResultsHeight = (max(1.0, CGFloat(self.searchResults.count)) - 0.5) * rowHeight
+        let tableViewHeight = max(minHeight, min(maxHeight, searchResultsHeight))
+        let searchBarHeight = self.searchBarContainerView.frame.maxY
+        return tableViewHeight + searchBarHeight
     }
     
     func supportedDrawerPositions() -> [PulleyPosition] {

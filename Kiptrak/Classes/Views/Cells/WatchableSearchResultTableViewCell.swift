@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import Kingfisher
 
 class WatchableSearchResultTableViewCell: UITableViewCell {
 
@@ -17,6 +18,7 @@ class WatchableSearchResultTableViewCell: UITableViewCell {
     
     //MARK:- ivars
     var realmChangeToken: NotificationToken? = nil
+    var retrieveImageTask: RetrieveImageTask? = nil
     
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -28,20 +30,26 @@ class WatchableSearchResultTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         self.realmChangeToken?.stop()
+        self.imageViewThumbnail.image = nil
+        self.retrieveImageTask?.cancel()
+        self.retrieveImageTask = nil
     }
     
     func update(withSearchable searchable: KrangSearchable) {
+        self.realmChangeToken?.stop()
+        self.imageViewThumbnail.image = nil
+        self.retrieveImageTask?.cancel()
+        self.retrieveImageTask = nil
         if let thumbnailURL = searchable.urlForSearchResultThumbnailImage {
-            self.imageViewThumbnail.kf.setImage(with: thumbnailURL)
-        } else {
+            self.retrieveImageTask = self.imageViewThumbnail.kf.setImage(with: thumbnailURL)
+        } else if TraktHelper.asyncImageLoadingOnSearch {
             if let movie = searchable as? KrangMovie {
                 let movieID = movie.traktID
                 let query = try! Realm().objects(KrangMovie.self).filter("traktID == %d", movieID)
-                self.realmChangeToken?.stop()
                 self.realmChangeToken = query.addNotificationBlock() { change in
                     if query.count > 0 {
                         if let updatedThumbnailURL = query[0].urlForSearchResultThumbnailImage {
-                            self.imageViewThumbnail.kf.setImage(with: updatedThumbnailURL)
+                            self.retrieveImageTask = self.imageViewThumbnail.kf.setImage(with: updatedThumbnailURL)
                         }
                     }
                 }

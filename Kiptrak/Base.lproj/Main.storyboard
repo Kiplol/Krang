@@ -451,9 +451,9 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NJG-If-Ilk">
-                                <rect key="frame" x="0.0" y="70" width="375" height="253.5"/>
+                                <rect key="frame" x="0.0" y="70" width="375" height="233.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <color key="separatorColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="separatorColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="1k8-dh-FtJ" id="kKr-w8-ox9"/>
                                     <outlet property="delegate" destination="1k8-dh-FtJ" id="IA3-4g-9Ky"/>
@@ -465,7 +465,7 @@
                             <constraint firstItem="NJG-If-Ilk" firstAttribute="leading" secondItem="9Vk-ZM-QaF" secondAttribute="leading" id="5Pr-01-DLl"/>
                             <constraint firstItem="Q9g-cZ-fCV" firstAttribute="top" secondItem="qDe-dT-kMI" secondAttribute="bottom" constant="8" id="6Qj-52-RU5"/>
                             <constraint firstItem="qDe-dT-kMI" firstAttribute="top" secondItem="r4R-pC-DwE" secondAttribute="bottom" constant="12" id="HIl-RO-bXG"/>
-                            <constraint firstItem="w0H-uQ-9EG" firstAttribute="top" secondItem="NJG-If-Ilk" secondAttribute="bottom" id="Z7j-J1-y7s"/>
+                            <constraint firstItem="w0H-uQ-9EG" firstAttribute="top" secondItem="NJG-If-Ilk" secondAttribute="bottom" constant="20" id="Z7j-J1-y7s"/>
                             <constraint firstItem="Q9g-cZ-fCV" firstAttribute="leading" secondItem="9Vk-ZM-QaF" secondAttribute="leading" id="aM3-QB-JE4"/>
                             <constraint firstItem="qDe-dT-kMI" firstAttribute="centerX" secondItem="9Vk-ZM-QaF" secondAttribute="centerX" id="dfp-7P-q8M"/>
                             <constraint firstItem="NJG-If-Ilk" firstAttribute="top" secondItem="Q9g-cZ-fCV" secondAttribute="bottom" id="pcg-BT-Fbt"/>

@@ -85,6 +85,9 @@ class PlaybackViewController: KrangViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.progressView.stop()
+        if let drawer = self.parent as? PulleyViewController {
+            drawer.setDrawerPosition(position: .collapsed, animated: animated)
+        }
     }
     
     //MARK:- App Lifecycle
