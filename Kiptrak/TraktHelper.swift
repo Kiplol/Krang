@@ -219,7 +219,19 @@ class TraktHelper: NSObject {
                     }
                 }
             }
-            completion?(nil, result)
+            let imageUpdateGroup = DispatchGroup()
+            
+            result.filter { $0.urlForSearchResultThumbnailImage == nil }.forEach {
+                if let movie = $0 as? KrangMovie {
+                    imageUpdateGroup.enter()
+                    TMDBHelper.shared.update(movie: movie, completion: { (_, _) in
+                        imageUpdateGroup.leave()
+                    })
+                }
+            }
+            imageUpdateGroup.notify(queue: DispatchQueue.main) {
+                completion?(nil, result)
+            }
         }) { (error) in
             //Failure
             completion?(error, [])

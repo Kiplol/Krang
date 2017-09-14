@@ -32,7 +32,7 @@ class TMDBHelper: NSObject {
         }
     }
     
-    func update(movie:KrangMovie, completion:((_:Error?, _:KrangMovie?) -> ())?) {
+    func update(movie:KrangMovie, completion:((_:Error?, _:KrangMovie?) -> ())?, outsideOfWriteTransaction: Bool = false) {
         guard movie.tmdbID != -1 else {
             completion?(nil, movie)
             return
@@ -41,7 +41,11 @@ class TMDBHelper: NSObject {
         let _ = self.oauth.client.get(url, success: { (response) in
             //Yay
             let json = JSON(data: response.data)
-            self.update(movie: movie, withJSON: json)
+            if outsideOfWriteTransaction {
+                self.update(movie: movie, OutsideOfWriteTransactionWithJSON: json)
+            } else {
+                self.update(movie: movie, withJSON: json)
+            }
             completion?(nil, movie)
         }) { (error) in
             //Boo
@@ -116,19 +120,23 @@ class TMDBHelper: NSObject {
     
     private func update(movie:KrangMovie, withJSON json:JSON) {
         movie.makeChanges {
-            if let posterPath = json["poster_path"].string, self.configuration.posterSizes.count > 0 {
-                let posterURL = self.configuration.imageBaseURL + self.configuration.posterSizes[Int(3 * self.configuration.posterSizes.count / 4)] + posterPath
-                movie.posterImageURL = posterURL
-                let smallestPosterURL = self.configuration.imageBaseURL + self.configuration.posterSizes[0] + posterPath
-                movie.posterThumbnailImageURL = smallestPosterURL
-            }
-            
-            if let stillPath = json["backdrop_path"].string, self.configuration.backdropSizes.count > 0 {
-                let backdropURL = self.configuration.imageBaseURL + self.configuration.backdropSizes[Int(3 * self.configuration.backdropSizes.count / 4)] + stillPath
-                let smallestBackdropURL = self.configuration.imageBaseURL + self.configuration.backdropSizes[0] + stillPath
-                movie.backdropImageURL = backdropURL
-                movie.backdropThumbnailImageURL = smallestBackdropURL
-            }
+            self.update(movie: movie, OutsideOfWriteTransactionWithJSON: json)
+        }
+    }
+    
+    private func update(movie:KrangMovie, OutsideOfWriteTransactionWithJSON json:JSON) {
+        if let posterPath = json["poster_path"].string, self.configuration.posterSizes.count > 0 {
+            let posterURL = self.configuration.imageBaseURL + self.configuration.posterSizes[Int(3 * self.configuration.posterSizes.count / 4)] + posterPath
+            movie.posterImageURL = posterURL
+            let smallestPosterURL = self.configuration.imageBaseURL + self.configuration.posterSizes[0] + posterPath
+            movie.posterThumbnailImageURL = smallestPosterURL
+        }
+        
+        if let stillPath = json["backdrop_path"].string, self.configuration.backdropSizes.count > 0 {
+            let backdropURL = self.configuration.imageBaseURL + self.configuration.backdropSizes[Int(3 * self.configuration.backdropSizes.count / 4)] + stillPath
+            let smallestBackdropURL = self.configuration.imageBaseURL + self.configuration.backdropSizes[0] + stillPath
+            movie.backdropImageURL = backdropURL
+            movie.backdropThumbnailImageURL = smallestBackdropURL
         }
     }
     
