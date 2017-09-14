@@ -20,6 +20,7 @@ class Constants: NSObject {
     open class var traktBaseURL: String { get { return "https://api.trakt.tv" } }
     open class var traktWatchingURLFormat: String { get { return Constants.traktBaseURL + "/users/%@/watching" } }
     class var traktSearchURLFormat: String { return Constants.traktBaseURL + "/search/movie,show?query=%@" }
+    class var trackCheckInURL: String { return Constants.traktBaseURL + "/checkin" }
     
     //MARK:- TMDB
     open class var tmdbAPIKey: String { get { return "42261ec0aa6d07687f189a56f7b2363d" } }
@@ -42,4 +43,5 @@ extension UIColor {
 extension Notification.Name {
 //    public static var willEnterForeground: Notification.Name { get { return Notification.Name("willEnterForeground") } }
 //    public static var didEnterBackground: Notification.Name { get { return Notification.Name("didEnterBackground") } }
+    static var didCheckInToWatchable: Notification.Name { return Notification.Name("didCheckInToWatchable") }
 }

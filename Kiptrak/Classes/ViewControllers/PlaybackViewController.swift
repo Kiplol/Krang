@@ -68,6 +68,7 @@ class PlaybackViewController: KrangViewController {
         self.stackViewForButtons.removeArrangedSubview(self.buttonIMDB)
         self.stackViewForButtons.removeArrangedSubview(self.buttonTMDB)
         self.stackViewForButtons.removeArrangedSubview(self.buttonTrakt)
+        NotificationCenter.default.addObserver(self, selector: #selector(PlaybackViewController.didCheckInToAWatchable(_:)), name: Notification.Name.didCheckInToWatchable, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -138,6 +139,11 @@ class PlaybackViewController: KrangViewController {
         }
         
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
+    
+    //MARK:- Notifications
+    func didCheckInToAWatchable(_ notfic: Notification) {
+        self.refreshCheckin(nil)
     }
     //MARK:-
     func updateViews(withWatchable watchable:KrangWatchable?) {

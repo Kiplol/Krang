@@ -27,6 +27,7 @@ class KrangEpisode: Object {
     dynamic var stillImageURL: String? = nil
     dynamic var stillThumbnailImageURL: String? = nil
     dynamic var checkin:KrangCheckin? = nil
+    dynamic var originalJSONString: String = ""
     let shows = LinkingObjects(fromType: KrangShow.self, property: "episodes")
     var show: KrangShow? {
         get {
@@ -42,6 +43,8 @@ class KrangEpisode: Object {
         guard type == "episode" else {
             return
         }
+        
+        self.originalJSONString = json.rawString() ?? ""
         
         self.episode = json["episode"]["number"].int ?? -1
         self.season = json["episode"]["season"].int ?? -1

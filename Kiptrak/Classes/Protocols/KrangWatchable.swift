@@ -25,4 +25,6 @@ protocol KrangWatchable {
     
     var fanartImageURL: URL? { get }
     var fanartBlurrableImageURL : URL? { get }
+    
+    var originalJSONString: String { get }
 }

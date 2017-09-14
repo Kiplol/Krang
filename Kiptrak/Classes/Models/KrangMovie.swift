@@ -25,6 +25,7 @@ class KrangMovie: Object {
     dynamic var backdropImageURL:String? = nil
     dynamic var backdropThumbnailImageURL: String? = nil
     dynamic var checkin:KrangCheckin? = nil
+    dynamic var originalJSONString: String = ""
     
     func update(withJSON json:JSON) {
         guard let type = json["type"].string else {
@@ -34,6 +35,8 @@ class KrangMovie: Object {
         guard type == "movie" else {
             return
         }
+        
+        self.originalJSONString = json.rawString() ?? ""
         
         self.title = json["movie"]["title"].string ?? KrangMovie.placeholderUnknown
         self.year = json["movie"]["year"].int ?? -1

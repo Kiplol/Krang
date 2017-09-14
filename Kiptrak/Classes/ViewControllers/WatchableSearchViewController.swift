@@ -65,7 +65,16 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
         }
         return cell!
     }
+    
     //MARK:- UITableViewDelegate
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if let watchable = self.searchResults[indexPath.row] as? KrangWatchable {
+            TraktHelper.shared.checkIn(to: watchable, completion: { (error, checkedInWatchable) in
+                print(checkedInWatchable ?? "Shit")
+            })
+        }
+    }
 }
 
 extension WatchableSearchViewController: PulleyDrawerViewControllerDelegate, UISearchBarDelegate {
