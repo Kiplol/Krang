@@ -69,7 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func setupAppearance() {
         UIWindow.appearance().tintColor = UIColor.white
-        UIView.appearance().tintColor = UIColor.white
+//        UIView.appearance().tintColor = UIColor.white
         
         //Navigation Bar
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
@@ -77,23 +77,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().isTranslucent = false
         
         //Labels
-        UILabel.appearance().textColor = UIColor.white
-//        UILabel.appearance().font = UIFont(name: "Exo-Light-Italic", size: 20.0)
-        UILabel.appearance().fontName = "Exo-Light-Italic" //This seems to make it so that I can't ever set the font to something else...
-//        UILabel.appearance().font = UIFont(name: "Exo-Black", size: 15.0)
-//        for family: String in UIFont.familyNames
-//        {
-//            print("\(family)")
-//            for names: String in UIFont.fontNames(forFamilyName: family)
-//            {
-//                print("== \(names)")
-//            }
-//        }
+        let labelAppearance = UILabel.appearance()
+        labelAppearance.textColor = UIColor.white
+        labelAppearance.fontName = "Exo-Light-Italic" //This seems to make it so that I can't ever set the font to something else...
         
         //Search Bars
         let searchBarTextFieldAppearance = UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self])
-        searchBarTextFieldAppearance.backgroundColor = UIColor(white: 0.4, alpha: 1.0)
         searchBarTextFieldAppearance.textColor = UILabel.appearance().textColor
+        searchBarTextFieldAppearance.tintColor = UIColor.white
+        searchBarTextFieldAppearance.backgroundColor = UIColor(white: 0.2, alpha: 1.0)
         searchBarTextFieldAppearance.font = UIFont(name: "Exo-Light-Italic", size: 16.0)
     }
     

@@ -98,6 +98,7 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
             actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
                 
             }))
+            actionSheet.view.tintColor = UIColor.darkBackground
             self.present(actionSheet, animated: true, completion: nil)
         }
     }
