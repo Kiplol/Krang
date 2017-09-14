@@ -94,10 +94,13 @@
         <scene sceneID="VUm-dh-3Ha">
             <objects>
                 <navigationController navigationBarHidden="YES" id="EFV-ht-fKL" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="et8-3q-Jsb">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="et8-3q-Jsb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabled" value="YES"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <segue destination="l27-XG-v9Z" kind="relationship" relationship="rootViewController" id="mTY-zb-m2k"/>
                     </connections>
