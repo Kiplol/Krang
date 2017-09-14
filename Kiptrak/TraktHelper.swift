@@ -246,23 +246,34 @@ class TraktHelper: NSObject {
     }
     
     func checkIn(to watchable: KrangWatchable, completion: ((Error?, KrangWatchable?) -> ())?) {
-        let url = Constants.trackCheckInURL
-        guard var body = JSON(parseJSON: watchable.originalJSONString).dictionaryObject else {
-            //@TODO: Error
-            completion?(nil, nil)
-            return
-        }
-        body["app_version"] = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
-        let _ = self.oauth.client.post(url, parameters: body, headers: TraktHelper.defaultHeaders(), body: nil, success: { (response) in
-            //Success
-            completion?(nil, watchable)
-            DispatchQueue.main.async {
-                NotificationCenter.default.post(name: Notification.Name.didCheckInToWatchable, object: nil, userInfo: nil)
+        self.cancelAllCheckins() { cancelError in
+            let url = Constants.traktCheckInURL
+            guard var body = JSON(parseJSON: watchable.originalJSONString).dictionaryObject else {
+                //@TODO: Error
+                completion?(nil, nil)
+                return
             }
+            body["app_version"] = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
+            let _ = self.oauth.client.post(url, parameters: body, headers: TraktHelper.defaultHeaders(), body: nil, success: { (response) in
+                //Success
+                completion?(nil, watchable)
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: Notification.Name.didCheckInToWatchable, object: nil, userInfo: nil)
+                }
+            }) { (error) in
+                //Failure
+                print(error)
+                completion?(error, nil)
+            }
+        }
+    }
+    
+    func cancelAllCheckins(_ completion: ((Error?) -> ())? ) {
+        let url = Constants.traktCheckInURL
+        let _ = self.oauth.client.delete(url, parameters: [:], headers: TraktHelper.defaultHeaders(), success: { (_) in
+            completion?(nil)
         }) { (error) in
-            //Failure
-            print(error)
-            completion?(error, nil)
+            completion?(error)
         }
     }
     
