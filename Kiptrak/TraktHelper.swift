@@ -173,29 +173,49 @@ class TraktHelper: NSObject {
         }
     }
     
-    func search(withQuery query: String, completion: ((Error?, [Object]) -> ())?) {
+    func search(withQuery query: String, completion: ((Error?, [KrangSearchable]) -> ())?) {
         guard !query.isEmpty else {
             completion?(nil, [])
             return
         }
-        let url = String(format: Constants.traktSearchURLFormat, query)
+        guard let escapedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completion?(nil, [])
+            return
+        }
+        let url = String(format: Constants.traktSearchURLFormat, escapedQuery)
         let _ = self.oauth.client.get(url, parameters: [:], headers: TraktHelper.defaultHeaders(), success: { (response) in
             //Success
             let json = JSON(data: response.data)
-            var result: [Object] = []
+            var result: [KrangSearchable] = []
             if let matchDics = json.array {
-                matchDics.forEach {
-                    guard let type = $0["type"].string else {
-                        return
-                    }
-                    
-                    switch type {
-                    case "movie":
-                        if let movie = KrangMovie.from(json: $0) {
-                            result.append(movie)
+                KrangRealmUtils.makeChanges {
+                    matchDics.forEach {
+                        guard let type = $0["type"].string else {
+                            return
                         }
-                    default:
-                        break
+                        
+                        switch type {
+                        case "movie":
+                            guard let traktID = $0["movie"]["ids"]["trakt"].int else {
+                                return
+                            }
+                            
+                            let thisJSON = $0
+                            let movie:KrangMovie = {
+                                if let existingMovie = KrangMovie.with(traktID: traktID) {
+                                    existingMovie.update(withJSON: thisJSON)
+                                    return existingMovie
+                                } else {
+                                    let newMovie = KrangMovie()
+                                    newMovie.update(withJSON: thisJSON)
+                                    newMovie.saveToDatabaseOutsideWriteTransaction()
+                                    return newMovie
+                                }
+                            }()
+                            result.append(movie)
+                        default:
+                            break
+                        }
                     }
                 }
             }

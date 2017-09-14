@@ -64,6 +64,11 @@
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="imageViewThumbnail" destination="5eP-1e-IIL" id="Ekp-OD-eIS"/>
+                <outlet property="labelSubtitle" destination="0qq-tA-1Df" id="erg-WI-ZNI"/>
+                <outlet property="labelTitle" destination="Hb8-4m-zjf" id="1G3-Mt-FbK"/>
+            </connections>
             <point key="canvasLocation" x="34" y="68.5"/>
         </tableViewCell>
     </objects>

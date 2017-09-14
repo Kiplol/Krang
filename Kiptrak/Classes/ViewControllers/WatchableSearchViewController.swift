@@ -27,7 +27,7 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
     
     //MARK:- ivars
     fileprivate let searchController = UISearchController(searchResultsController: nil)
-    fileprivate var searchResults = [Object]()
+    fileprivate var searchResults = [KrangSearchable]()
     
     //MARK:- View Lifecycle
     override func viewDidLoad() {
@@ -45,7 +45,6 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
     func updateSearchResults(for searchController: UISearchController) {
         // TODO
         TraktHelper.shared.search(withQuery: searchController.searchBar.text ?? "") { (error, results) in
-            print(results)
             self.searchResults.removeAll()
             self.searchResults.append(contentsOf: results)
             self.tableView.reloadData()
@@ -59,7 +58,9 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: WatchableSearchViewController.cellReuseIdentifier)
-        
+        if let searchResultCell = cell as? WatchableSearchResultTableViewCell {
+            searchResultCell.update(withSearchable: self.searchResults[indexPath.row])
+        }
         return cell!
     }
     //MARK:- UITableViewDelegate

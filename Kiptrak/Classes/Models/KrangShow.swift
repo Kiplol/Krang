@@ -45,3 +45,17 @@ class KrangShow: Object {
         self.tvRageID = json["ids"]["tvrage"].int ?? -1
     }
 }
+
+extension KrangShow: KrangSearchable {
+    
+    //@TODO: Thumbnails
+    var urlForSearchResultThumbnailImage: URL? { return nil }
+    var titleForSearchResult: String? { return self.title }
+    var subtitleForSearchResult: String? {
+        if self.year > -1 {
+            return "\(self.year)"
+        }
+        return nil
+    }
+    
+}

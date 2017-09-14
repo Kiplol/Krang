@@ -165,3 +165,16 @@ extension KrangMovie: KrangWatchable {
         }
     }
 }
+
+extension KrangMovie: KrangSearchable {
+    
+    var urlForSearchResultThumbnailImage: URL? { return self.posterThumbnailURL }
+    var titleForSearchResult: String? { return self.title }
+    var subtitleForSearchResult: String? {
+        if self.year > -1 {
+            return "\(self.year)"
+        }
+        return nil
+    }
+    
+}
