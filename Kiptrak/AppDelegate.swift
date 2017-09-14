@@ -76,6 +76,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().barTintColor = UIColor.darkBackground
         UINavigationBar.appearance().isTranslucent = false
         
+        //Buttons
+        UIButton.appearance().tintColor = UIColor.white
+        
         //Labels
         let labelAppearance = UILabel.appearance()
         labelAppearance.textColor = UIColor.white

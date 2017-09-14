@@ -35,7 +35,7 @@ class PlaybackViewController: KrangViewController {
     }
     @IBOutlet weak var infoContainer: UIView! {
         didSet {
-            self.infoContainer.heroModifiers = [.zPosition(4.0), .translate(x: 0.0, y: 120.0, z: 0.0)]
+            self.infoContainer.heroModifiers = [.zPosition(4.0), .fade]
         }
     }
     @IBOutlet weak var progressView: KrangProgressView!
