@@ -223,9 +223,9 @@ class TraktHelper: NSObject {
             
             result.filter { $0.urlForSearchResultThumbnailImage == nil }.forEach {
                 if let movie = $0 as? KrangMovie {
-                    imageUpdateGroup.enter()
+//                    imageUpdateGroup.enter()
                     TMDBHelper.shared.update(movie: movie, completion: { (_, _) in
-                        imageUpdateGroup.leave()
+//                        imageUpdateGroup.leave()
                     })
                 }
             }
