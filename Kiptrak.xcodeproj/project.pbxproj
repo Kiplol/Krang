@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		179CEC7EACB5ED082D52817F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B85F2574DB715286FF1AF483 /* SystemConfiguration.framework */; };
+		36777D9C2B7E598390DF820E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15213CB89E0A6B9D090DF2E5 /* QuartzCore.framework */; };
 		3724CBAA1E2474AF005387D1 /* KrangViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724CBA91E2474AF005387D1 /* KrangViewController.swift */; };
 		3724CBAC1E247557005387D1 /* PlaybackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724CBAB1E247557005387D1 /* PlaybackViewController.swift */; };
 		373D32961E22C05C00980925 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373D32951E22C05C00980925 /* Constants.swift */; };
@@ -98,7 +100,14 @@
 		37ED660A1E2D7E5400AEE3F4 /* DeeplinkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37ED66091E2D7E5400AEE3F4 /* DeeplinkHandler.swift */; };
 		37F0DB671E31705300FAC6DB /* KrangProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F0DB661E31705300FAC6DB /* KrangProgressView.swift */; };
 		37F0DB681E31705300FAC6DB /* KrangProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F0DB661E31705300FAC6DB /* KrangProgressView.swift */; };
+		68A85681C2C138574CF07450 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4682B0B4C4E6D0EC612DC186 /* CoreText.framework */; };
+		771F5EE31D27AE8014250A86 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 338B469DF7479164D6D797C8 /* CoreMedia.framework */; };
+		A17C286F4A01541C882FCF85 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EBED3ECC65FC90281B1331E /* AVFoundation.framework */; };
+		A250AB0669B85C51937752EA /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C5127FC6F5BCE0C9A2E5C5C /* AssetsLibrary.framework */; };
 		CCECAB0157942143A8E08CB2 /* Pods_Kiptrak.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37B22421F8414CC64C2C4B78 /* Pods_Kiptrak.framework */; };
+		E1820F6FBD891B52A6A6D1FF /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55EC0545D837BD5B8104ACC0 /* CoreTelephony.framework */; };
+		E4D2C1CD1B28EAF4E8E2A010 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBABE8C5F4AFA6AC90C42ADD /* CoreVideo.framework */; };
+		F03834CEB933E902BF4940E8 /* BuddyBuildSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF9B032F94E89D24645A3AB /* BuddyBuildSDK.framework */; };
 		FB3E162D1E45A3E736A6C43D /* Pods_Currently_Watching_Widget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98F45B548DC94C8289E45742 /* Pods_Currently_Watching_Widget.framework */; };
 /* End PBXBuildFile section */
 
@@ -127,7 +136,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0FF9B032F94E89D24645A3AB /* BuddyBuildSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BuddyBuildSDK.framework; path = BuddyBuildSDK.framework; sourceTree = "<group>"; };
+		15213CB89E0A6B9D090DF2E5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		1EBED3ECC65FC90281B1331E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		30BCC36AEA18296CBF311C9C /* Pods-Currently Watching Widget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Currently Watching Widget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Currently Watching Widget/Pods-Currently Watching Widget.debug.xcconfig"; sourceTree = "<group>"; };
+		338B469DF7479164D6D797C8 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		3724CBA91E2474AF005387D1 /* KrangViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KrangViewController.swift; path = Classes/ViewControllers/KrangViewController.swift; sourceTree = "<group>"; };
 		3724CBAB1E247557005387D1 /* PlaybackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlaybackViewController.swift; path = Classes/ViewControllers/PlaybackViewController.swift; sourceTree = "<group>"; };
 		373D32951E22C05C00980925 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Classes/Constants.swift; sourceTree = "<group>"; };
@@ -191,9 +204,15 @@
 		37E957841F69CB03003D6D74 /* WatchableSearchResultTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WatchableSearchResultTableViewCell.xib; path = Kiptrak/Classes/Views/Cells/WatchableSearchResultTableViewCell.xib; sourceTree = "<group>"; };
 		37ED66091E2D7E5400AEE3F4 /* DeeplinkHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeeplinkHandler.swift; path = Classes/Managers/DeeplinkHandler.swift; sourceTree = "<group>"; };
 		37F0DB661E31705300FAC6DB /* KrangProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KrangProgressView.swift; path = Kiptrak/Classes/Views/KrangProgressView.swift; sourceTree = "<group>"; };
+		4682B0B4C4E6D0EC612DC186 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		55EC0545D837BD5B8104ACC0 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		57BCB84000D2751D40C37EC7 /* Pods-Kiptrak.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kiptrak.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kiptrak/Pods-Kiptrak.debug.xcconfig"; sourceTree = "<group>"; };
+		6C5127FC6F5BCE0C9A2E5C5C /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		98F45B548DC94C8289E45742 /* Pods_Currently_Watching_Widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Currently_Watching_Widget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0DBC2C2D99275125265CBBB /* Pods-Currently Watching Widget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Currently Watching Widget.release.xcconfig"; path = "Pods/Target Support Files/Pods-Currently Watching Widget/Pods-Currently Watching Widget.release.xcconfig"; sourceTree = "<group>"; };
+		B85F2574DB715286FF1AF483 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		DBABE8C5F4AFA6AC90C42ADD /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		F584FEFC695E49CA9E9F79BC /* Bridging-Header.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		FC6C3DDC87919D26314AE58D /* Pods-Kiptrak.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kiptrak.release.xcconfig"; path = "Pods/Target Support Files/Pods-Kiptrak/Pods-Kiptrak.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -203,6 +222,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCECAB0157942143A8E08CB2 /* Pods_Kiptrak.framework in Frameworks */,
+				F03834CEB933E902BF4940E8 /* BuddyBuildSDK.framework in Frameworks */,
+				A250AB0669B85C51937752EA /* AssetsLibrary.framework in Frameworks */,
+				68A85681C2C138574CF07450 /* CoreText.framework in Frameworks */,
+				E1820F6FBD891B52A6A6D1FF /* CoreTelephony.framework in Frameworks */,
+				179CEC7EACB5ED082D52817F /* SystemConfiguration.framework in Frameworks */,
+				36777D9C2B7E598390DF820E /* QuartzCore.framework in Frameworks */,
+				A17C286F4A01541C882FCF85 /* AVFoundation.framework in Frameworks */,
+				771F5EE31D27AE8014250A86 /* CoreMedia.framework in Frameworks */,
+				E4D2C1CD1B28EAF4E8E2A010 /* CoreVideo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,6 +290,7 @@
 				37870B1D1E22BA6A00A2EC00 /* Products */,
 				12EE2D71C67781060DB8F8AE /* Pods */,
 				4679527081A47D22E35BDC47 /* Frameworks */,
+				F584FEFC695E49CA9E9F79BC /* Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -401,6 +430,15 @@
 				37B22421F8414CC64C2C4B78 /* Pods_Kiptrak.framework */,
 				37A19E641E2BFDD9007877B4 /* NotificationCenter.framework */,
 				98F45B548DC94C8289E45742 /* Pods_Currently_Watching_Widget.framework */,
+				0FF9B032F94E89D24645A3AB /* BuddyBuildSDK.framework */,
+				6C5127FC6F5BCE0C9A2E5C5C /* AssetsLibrary.framework */,
+				4682B0B4C4E6D0EC612DC186 /* CoreText.framework */,
+				55EC0545D837BD5B8104ACC0 /* CoreTelephony.framework */,
+				B85F2574DB715286FF1AF483 /* SystemConfiguration.framework */,
+				15213CB89E0A6B9D090DF2E5 /* QuartzCore.framework */,
+				1EBED3ECC65FC90281B1331E /* AVFoundation.framework */,
+				338B469DF7479164D6D797C8 /* CoreMedia.framework */,
+				DBABE8C5F4AFA6AC90C42ADD /* CoreVideo.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -872,10 +910,15 @@
 				CODE_SIGN_ENTITLEMENTS = Kiptrak/Kiptrak.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = LSB86U552U;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Kiptrak/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kip.krang;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -889,10 +932,15 @@
 				CODE_SIGN_ENTITLEMENTS = Kiptrak/Kiptrak.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = LSB86U552U;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Kiptrak/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kip.krang;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
