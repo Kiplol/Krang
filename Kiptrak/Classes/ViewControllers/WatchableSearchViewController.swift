@@ -8,18 +8,26 @@
 
 import UIKit
 import Pulley
+import RealmSwift
 
-class WatchableSearchViewController: KrangViewController, UISearchResultsUpdating {
+class WatchableSearchViewController: KrangViewController, UISearchResultsUpdating, UITableViewDataSource, UITableViewDelegate {
+    
+    static let cellReuseIdentifier = "searchResultsCell"
 
     //MARK:- IBOutlets
     @IBOutlet weak var grabberView: UIView!
     @IBOutlet weak var searchBarContainerView: UIView!
-    @IBOutlet weak var tableView: UITableView!
-    
+    @IBOutlet weak var tableView: UITableView! {
+        didSet {
+            let nib = UINib(nibName: "WatchableSearchResultTableViewCell", bundle: Bundle.main)
+            self.tableView.register(nib, forCellReuseIdentifier: WatchableSearchViewController.cellReuseIdentifier)
+        }
+    }
     @IBOutlet weak var constraintSearchBarContainerHeight: NSLayoutConstraint!
     
     //MARK:- ivars
     fileprivate let searchController = UISearchController(searchResultsController: nil)
+    fileprivate var searchResults = [Object]()
     
     //MARK:- View Lifecycle
     override func viewDidLoad() {
@@ -36,7 +44,25 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
     //MARK:- UISearchResultsUpdating
     func updateSearchResults(for searchController: UISearchController) {
         // TODO
+        TraktHelper.shared.search(withQuery: searchController.searchBar.text ?? "") { (error, results) in
+            print(results)
+            self.searchResults.removeAll()
+            self.searchResults.append(contentsOf: results)
+            self.tableView.reloadData()
+        }
     }
+    
+    //MARK:- UITableViewDataSource
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.searchResults.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: WatchableSearchViewController.cellReuseIdentifier)
+        
+        return cell!
+    }
+    //MARK:- UITableViewDelegate
 }
 
 extension WatchableSearchViewController: PulleyDrawerViewControllerDelegate, UISearchBarDelegate {

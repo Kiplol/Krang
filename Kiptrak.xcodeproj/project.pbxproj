@@ -91,6 +91,8 @@
 		37E7B7591E2DA17B001D4799 /* KrangDateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E7B7581E2DA17B001D4799 /* KrangDateUtils.swift */; };
 		37E7B75A1E2DA17B001D4799 /* KrangDateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E7B7581E2DA17B001D4799 /* KrangDateUtils.swift */; };
 		37E957811F6992B9003D6D74 /* WatchableSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E957801F6992B9003D6D74 /* WatchableSearchViewController.swift */; };
+		37E957851F69CB03003D6D74 /* WatchableSearchResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E957831F69CB03003D6D74 /* WatchableSearchResultTableViewCell.swift */; };
+		37E957861F69CB03003D6D74 /* WatchableSearchResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37E957841F69CB03003D6D74 /* WatchableSearchResultTableViewCell.xib */; };
 		37ED660A1E2D7E5400AEE3F4 /* DeeplinkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37ED66091E2D7E5400AEE3F4 /* DeeplinkHandler.swift */; };
 		37F0DB671E31705300FAC6DB /* KrangProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F0DB661E31705300FAC6DB /* KrangProgressView.swift */; };
 		37F0DB681E31705300FAC6DB /* KrangProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F0DB661E31705300FAC6DB /* KrangProgressView.swift */; };
@@ -182,6 +184,8 @@
 		37E7B7551E2DA023001D4799 /* KrangCheckin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KrangCheckin.swift; path = Classes/Models/KrangCheckin.swift; sourceTree = "<group>"; };
 		37E7B7581E2DA17B001D4799 /* KrangDateUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KrangDateUtils.swift; path = Classes/Utils/KrangDateUtils.swift; sourceTree = "<group>"; };
 		37E957801F6992B9003D6D74 /* WatchableSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WatchableSearchViewController.swift; path = Classes/ViewControllers/WatchableSearchViewController.swift; sourceTree = "<group>"; };
+		37E957831F69CB03003D6D74 /* WatchableSearchResultTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WatchableSearchResultTableViewCell.swift; path = Kiptrak/Classes/Views/Cells/WatchableSearchResultTableViewCell.swift; sourceTree = "<group>"; };
+		37E957841F69CB03003D6D74 /* WatchableSearchResultTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WatchableSearchResultTableViewCell.xib; path = Kiptrak/Classes/Views/Cells/WatchableSearchResultTableViewCell.xib; sourceTree = "<group>"; };
 		37ED66091E2D7E5400AEE3F4 /* DeeplinkHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeeplinkHandler.swift; path = Classes/Managers/DeeplinkHandler.swift; sourceTree = "<group>"; };
 		37F0DB661E31705300FAC6DB /* KrangProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KrangProgressView.swift; path = Kiptrak/Classes/Views/KrangProgressView.swift; sourceTree = "<group>"; };
 		57BCB84000D2751D40C37EC7 /* Pods-Kiptrak.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kiptrak.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kiptrak/Pods-Kiptrak.debug.xcconfig"; sourceTree = "<group>"; };
@@ -318,6 +322,7 @@
 			children = (
 				37F0DB661E31705300FAC6DB /* KrangProgressView.swift */,
 				379C55551E259BD000D51019 /* KrangAvatarView.swift */,
+				37E957821F69CAD4003D6D74 /* Cells */,
 			);
 			name = Views;
 			path = ..;
@@ -373,6 +378,15 @@
 				37A19E741E2BFE34007877B4 /* KrangWatchable.swift */,
 			);
 			name = Protocols;
+			sourceTree = "<group>";
+		};
+		37E957821F69CAD4003D6D74 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				37E957831F69CB03003D6D74 /* WatchableSearchResultTableViewCell.swift */,
+				37E957841F69CB03003D6D74 /* WatchableSearchResultTableViewCell.xib */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 		4679527081A47D22E35BDC47 /* Frameworks */ = {
@@ -497,6 +511,7 @@
 				37870B2A1E22BA6A00A2EC00 /* LaunchScreen.storyboard in Resources */,
 				37A19E2F1E25BAEF007877B4 /* Images.xcassets in Resources */,
 				37870B271E22BA6A00A2EC00 /* Assets.xcassets in Resources */,
+				37E957861F69CB03003D6D74 /* WatchableSearchResultTableViewCell.xib in Resources */,
 				37870B251E22BA6A00A2EC00 /* Main.storyboard in Resources */,
 				37A19E5C1E288FFD007877B4 /* Exo-Regular.otf in Resources */,
 				37A19E581E288FFD007877B4 /* Exo-Light.otf in Resources */,
@@ -661,6 +676,7 @@
 				37E7B7561E2DA023001D4799 /* KrangCheckin.swift in Sources */,
 				37A19E341E26E914007877B4 /* TMDBHelper.swift in Sources */,
 				3724CBAA1E2474AF005387D1 /* KrangViewController.swift in Sources */,
+				37E957851F69CB03003D6D74 /* WatchableSearchResultTableViewCell.swift in Sources */,
 				379C55471E248B4F00D51019 /* RealmManager.swift in Sources */,
 				379C554F1E25586900D51019 /* SettingsViewController.swift in Sources */,
 				373D32961E22C05C00980925 /* Constants.swift in Sources */,

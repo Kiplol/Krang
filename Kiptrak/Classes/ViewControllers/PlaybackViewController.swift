@@ -76,6 +76,10 @@ class PlaybackViewController: KrangViewController {
         self.refreshCheckin { 
             //Completion
         }
+        
+        if let drawerVC = self.parent as? PulleyViewController {
+            drawerVC.drawerBackgroundVisualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {

@@ -10,6 +10,7 @@ import UIKit
 
 import OAuthSwift
 import SwiftyJSON
+import RealmSwift
 
 class TraktHelper: NSObject {
     
@@ -169,6 +170,39 @@ class TraktHelper: NSObject {
             //Boo
             KrangLogger.log.error("Error getting currently watching movie or episode: \(error)")
             completion?(error, nil, nil)
+        }
+    }
+    
+    func search(withQuery query: String, completion: ((Error?, [Object]) -> ())?) {
+        guard !query.isEmpty else {
+            completion?(nil, [])
+            return
+        }
+        let url = String(format: Constants.traktSearchURLFormat, query)
+        let _ = self.oauth.client.get(url, parameters: [:], headers: TraktHelper.defaultHeaders(), success: { (response) in
+            //Success
+            let json = JSON(data: response.data)
+            var result: [Object] = []
+            if let matchDics = json.array {
+                matchDics.forEach {
+                    guard let type = $0["type"].string else {
+                        return
+                    }
+                    
+                    switch type {
+                    case "movie":
+                        if let movie = KrangMovie.from(json: $0) {
+                            result.append(movie)
+                        }
+                    default:
+                        break
+                    }
+                }
+            }
+            completion?(nil, result)
+        }) { (error) in
+            //Failure
+            completion?(error, [])
         }
     }
     
