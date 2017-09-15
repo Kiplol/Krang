@@ -19,6 +19,8 @@ class DeeplinkHandler: NSObject {
                 self.handleExternalURL(url: url)
             case "traktlogin":
                 self.handleTraktLogin(url: url)
+            case "search":
+                self.handleSearch(url: url)
             default:
                 break
             }
@@ -55,5 +57,16 @@ class DeeplinkHandler: NSObject {
         }
         
         splashVC?.loginAfterAppear()
+    }
+    
+    func handleSearch(url: URL) {
+        guard url.host == "search" else {
+            return
+        }
+        
+        guard TraktHelper.shared.credentialsAreValid() else {
+            return
+        }
+        //TODO
     }
 }

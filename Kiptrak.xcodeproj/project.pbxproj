@@ -18,6 +18,8 @@
 		376011631F6ACDF0004ED6EF /* KrangSearchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376011611F6ACDF0004ED6EF /* KrangSearchable.swift */; };
 		376011661F6C382A004ED6EF /* KrangLinkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376011651F6C382A004ED6EF /* KrangLinkable.swift */; };
 		376011671F6C38D2004ED6EF /* KrangLinkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376011651F6C382A004ED6EF /* KrangLinkable.swift */; };
+		376011691F6C524E004ED6EF /* KrangSeason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376011681F6C524E004ED6EF /* KrangSeason.swift */; };
+		3760116A1F6C524E004ED6EF /* KrangSeason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376011681F6C524E004ED6EF /* KrangSeason.swift */; };
 		376713821F61B98000024036 /* KrangUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376713811F61B98000024036 /* KrangUtils.swift */; };
 		37870B201E22BA6A00A2EC00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37870B1F1E22BA6A00A2EC00 /* AppDelegate.swift */; };
 		37870B221E22BA6A00A2EC00 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37870B211E22BA6A00A2EC00 /* SplashViewController.swift */; };
@@ -151,6 +153,7 @@
 		375FD4E81EDB56710022C4C9 /* UIViewController+Krang.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIViewController+Krang.swift"; path = "Classes/ViewControllers/UIViewController+Krang.swift"; sourceTree = "<group>"; };
 		376011611F6ACDF0004ED6EF /* KrangSearchable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KrangSearchable.swift; path = Classes/Protocols/KrangSearchable.swift; sourceTree = "<group>"; };
 		376011651F6C382A004ED6EF /* KrangLinkable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KrangLinkable.swift; path = Classes/Protocols/KrangLinkable.swift; sourceTree = "<group>"; };
+		376011681F6C524E004ED6EF /* KrangSeason.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KrangSeason.swift; path = Classes/Models/KrangSeason.swift; sourceTree = "<group>"; };
 		376713811F61B98000024036 /* KrangUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KrangUtils.swift; path = Classes/Utils/KrangUtils.swift; sourceTree = "<group>"; };
 		37870B1C1E22BA6A00A2EC00 /* Kiptrak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kiptrak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37870B1F1E22BA6A00A2EC00 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -331,6 +334,7 @@
 		379C55451E247F9F00D51019 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				376011681F6C524E004ED6EF /* KrangSeason.swift */,
 				37E7B7551E2DA023001D4799 /* KrangCheckin.swift */,
 				37A19E351E27F0B3007877B4 /* KrangEpisode.swift */,
 				37A19E371E27F290007877B4 /* KrangShow.swift */,
@@ -738,6 +742,7 @@
 				379C55561E259BD000D51019 /* KrangAvatarView.swift in Sources */,
 				37F0DB671E31705300FAC6DB /* KrangProgressView.swift in Sources */,
 				37E7B7591E2DA17B001D4799 /* KrangDateUtils.swift in Sources */,
+				376011691F6C524E004ED6EF /* KrangSeason.swift in Sources */,
 				37870B201E22BA6A00A2EC00 /* AppDelegate.swift in Sources */,
 				375FD4E91EDB56710022C4C9 /* UIViewController+Krang.swift in Sources */,
 				376713821F61B98000024036 /* KrangUtils.swift in Sources */,
@@ -754,6 +759,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3760116A1F6C524E004ED6EF /* KrangSeason.swift in Sources */,
 				37A19E7B1E2BFF4A007877B4 /* KrangUser.swift in Sources */,
 				37E7B75A1E2DA17B001D4799 /* KrangDateUtils.swift in Sources */,
 				37A19E781E2BFF4A007877B4 /* KrangEpisode.swift in Sources */,

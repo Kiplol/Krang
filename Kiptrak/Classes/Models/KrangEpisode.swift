@@ -15,7 +15,7 @@ class KrangEpisode: Object {
     private static let placeholderUnknown = "Unknown"
     
     dynamic var episode:Int = -1
-    dynamic var season:Int = -1
+    dynamic var seasonNumber:Int = -1
     dynamic var title:String = KrangEpisode.placeholderUnknown
     dynamic var traktID: Int = -1
     dynamic var imdbID: String? = nil
@@ -34,6 +34,12 @@ class KrangEpisode: Object {
             return self.shows.first
         }
     }
+    let seasons = LinkingObjects(fromType: KrangSeason.self, property: "episodes")
+    var season: KrangSeason? {
+        get {
+            return self.seasons.first
+        }
+    }
     
     func update(withJSON json:JSON) {
         guard let type = json["type"].string else {
@@ -47,7 +53,7 @@ class KrangEpisode: Object {
         self.originalJSONString = json.rawString() ?? ""
         
         self.episode = json["episode"]["number"].int ?? -1
-        self.season = json["episode"]["season"].int ?? -1
+        self.seasonNumber = json["episode"]["season"].int ?? -1
         self.title = json["episode"]["title"].string ?? KrangEpisode.placeholderUnknown
         self.traktID = json["episode"]["ids"]["trakt"].int ?? -1
         self.imdbID = json["episode"]["ids"]["imdb"].string
@@ -155,7 +161,7 @@ extension KrangEpisode: KrangWatchable {
                 return nil
             }
             
-            let szURL = "https://www.themoviedb.org/tv/\(show.tmdbID)-\(show.slug)/season/\(self.season)/episode/\(self.episode)"
+            let szURL = "https://www.themoviedb.org/tv/\(show.tmdbID)-\(show.slug)/season/\(self.seasonNumber)/episode/\(self.episode)"
             return URL(string: szURL)
         }
     }
@@ -166,7 +172,7 @@ extension KrangEpisode: KrangWatchable {
                 return nil
             }
             
-            let szURL = "https://www.trakt.tv/shows/\(show.slug)/seasons/\(self.season)/episodes/\(self.episode)"
+            let szURL = "https://www.trakt.tv/shows/\(show.slug)/seasons/\(self.seasonNumber)/episodes/\(self.episode)"
             return URL(string: szURL)
         }
     }

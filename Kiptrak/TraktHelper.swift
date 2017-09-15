@@ -174,6 +174,45 @@ class TraktHelper: NSObject {
         }
     }
     
+    func getAllSeasons(forShow show: KrangShow, completion: ((Error?, KrangShow?) -> ())?) {
+        let url = String(format: Constants.traktGetShowSeasonsURLFormat, show.slug)
+        let _ = self.oauth.client.get(url, parameters: [:], headers: TraktHelper.defaultHeaders(), success: { (response) in
+            //Success
+            let json = JSON(data: response.data)
+            
+            if let seasonDics = json.array {
+                KrangRealmUtils.makeChanges {
+                    for seasonDic in seasonDics {
+                        guard let traktID = seasonDic["ids"]["trakt"].int else {
+                            continue
+                        }
+                        
+                        let season: KrangSeason = {
+                            if let existingSeason = KrangSeason.with(traktID: traktID) {
+                                existingSeason.update(withJSON: seasonDic)
+                                return existingSeason
+                            } else {
+                                let newSeason = KrangSeason()
+                                newSeason.update(withJSON: seasonDic)
+                                newSeason.saveToDatabaseOutsideWriteTransaction()
+                                return newSeason
+                            }
+                        }()
+                        if !season.shows.contains(show) {
+                            show.seasons.append(season)
+                        }
+                        //@TODO: Add existing episodes to season
+                    }
+                }
+            }
+            
+            completion?(nil, show)
+        }) { (error) in
+            //Failure
+            completion?(error, show)
+        }
+    }
+    
     func search(withQuery query: String, completion: ((Error?, [KrangSearchable]) -> ())?) -> OAuthSwiftRequestHandle? {
         guard !query.isEmpty else {
             completion?(nil, [])
@@ -343,9 +382,13 @@ class TraktHelper: NSObject {
                         }
                     }()
                     
-                    
                     if !episode.shows.contains(show) {
                         show.episodes.append(episode)
+                    }
+                    if let season = show.getSeason(withSeasonNumber: episode.seasonNumber) {
+                        if !episode.seasons.contains(season) {
+                            show.seasons.append(season)
+                        }
                     }
                 }
                 

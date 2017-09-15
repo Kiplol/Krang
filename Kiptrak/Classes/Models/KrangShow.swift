@@ -15,6 +15,7 @@ class KrangShow: Object {
     private static let placeholderUnknown = "Unknown"
     
     let episodes = List<KrangEpisode>()
+    let seasons = List<KrangSeason>()
     dynamic var title:String = KrangShow.placeholderUnknown
     dynamic var year:Int = -1
     dynamic var traktID: Int = -1
@@ -47,6 +48,15 @@ class KrangShow: Object {
         self.imdbID = json["ids"]["imdb"].string
         self.tmdbID = json["ids"]["tmdb"].int ?? -1
         self.tvRageID = json["ids"]["tvrage"].int ?? -1
+    }
+    
+    func getSeason(withSeasonNumber number: Int) -> KrangSeason? {
+        for season in self.seasons {
+            if season.seasonNumber == number {
+                return season
+            }
+        }
+        return nil
     }
 }
 

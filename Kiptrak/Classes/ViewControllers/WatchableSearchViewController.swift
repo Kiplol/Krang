@@ -105,6 +105,12 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
             actionSheet.view.tintColor = UIColor.darkBackground
             self.present(actionSheet, animated: true, completion: nil)
         }
+        
+        if let show = selectedObject as? KrangShow {
+            TraktHelper.shared.getAllSeasons(forShow: show, completion: { (error, updatedShow) in
+                print(updatedShow ?? "Barf")
+            })
+        }
     }
 }
 
