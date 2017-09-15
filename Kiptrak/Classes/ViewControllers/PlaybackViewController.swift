@@ -78,7 +78,7 @@ class PlaybackViewController: KrangViewController {
             //Completion
         }
         
-        if let drawerVC = self.parent as? PulleyViewController {
+        if let drawerVC = self.pulleyViewController {
             drawerVC.drawerBackgroundVisualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
         }
     }
@@ -86,7 +86,7 @@ class PlaybackViewController: KrangViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.progressView.stop()
-        if let drawer = self.parent as? PulleyViewController {
+        if let drawer = self.pulleyViewController {
             drawer.setDrawerPosition(position: .collapsed, animated: animated)
         }
     }

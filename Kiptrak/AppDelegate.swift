@@ -78,6 +78,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //Buttons
         UIButton.appearance().tintColor = UIColor.white
+        UIBarButtonItem.appearance().tintColor = UIColor.white
         
         //Labels
         let labelAppearance = UILabel.appearance()

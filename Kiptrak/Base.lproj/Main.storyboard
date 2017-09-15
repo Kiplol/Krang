@@ -21,7 +21,7 @@
             <objects>
                 <navigationController storyboardIdentifier="initial" navigationBarHidden="YES" id="id2-XQ-XDI" sceneMemberID="viewController">
                     <nil key="simulatedTopBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="5RF-Bj-fFW">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="5RF-Bj-fFW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -130,7 +130,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o8p-Ph-wEU">
                                 <rect key="frame" x="0.0" y="343.5" width="375" height="323.5"/>
                                 <connections>
-                                    <segue destination="1k8-dh-FtJ" kind="embed" id="Anh-GR-UlI"/>
+                                    <segue destination="LiA-cU-CVI" kind="embed" id="qGH-At-ss0"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -209,11 +209,11 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
-                                    <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="WBv-kv-rbR">
-                                        <rect key="frame" x="79" y="68" width="280" height="44"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" ambiguous="YES" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="WBv-kv-rbR">
+                                        <rect key="frame" x="79" y="68" width="0.0" height="0.0"/>
                                         <subviews>
-                                            <button hidden="YES" opaque="NO" alpha="0.80000001192092896" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SY8-SC-PkJ">
-                                                <rect key="frame" x="0.0" y="0.0" width="88" height="44"/>
+                                            <button hidden="YES" opaque="NO" alpha="0.80000001192092896" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SY8-SC-PkJ">
+                                                <rect key="frame" x="-359" y="-315.5" width="0.0" height="44"/>
                                                 <state key="normal" image="button_trakt_small"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
@@ -230,8 +230,8 @@
                                                     <action selector="traktTapped:" destination="4EL-Ga-1bM" eventType="touchUpInside" id="vOr-P3-h9B"/>
                                                 </connections>
                                             </button>
-                                            <button hidden="YES" opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UPE-r7-PhN">
-                                                <rect key="frame" x="96" y="0.0" width="88" height="44"/>
+                                            <button hidden="YES" opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UPE-r7-PhN">
+                                                <rect key="frame" x="-359" y="-315.5" width="0.0" height="44"/>
                                                 <state key="normal" image="button_imdb_small"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
@@ -248,8 +248,8 @@
                                                     <action selector="imdbTapped:" destination="4EL-Ga-1bM" eventType="touchUpInside" id="dYm-tC-Plu"/>
                                                 </connections>
                                             </button>
-                                            <button hidden="YES" opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Coe-6v-C0y">
-                                                <rect key="frame" x="192" y="0.0" width="88" height="44"/>
+                                            <button hidden="YES" opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Coe-6v-C0y">
+                                                <rect key="frame" x="-359" y="-315.5" width="0.0" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="Ilj-wl-XLQ"/>
                                                     <constraint firstAttribute="width" constant="88" id="Irx-75-eS0"/>
@@ -476,6 +476,7 @@
                             <constraint firstAttribute="trailing" secondItem="NJG-If-Ilk" secondAttribute="trailing" id="vdH-F0-Ece"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="J7s-hh-tAn"/>
                     <connections>
                         <outlet property="constraintSearchBarContainerHeight" destination="Aj8-NK-m7r" id="3KE-nA-kw4"/>
                         <outlet property="grabberView" destination="qDe-dT-kMI" id="FUp-05-jmJ"/>
@@ -485,14 +486,48 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i2i-4O-AeW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2591.1999999999998" y="422.78860569715147"/>
+            <point key="canvasLocation" x="3054" y="412"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="0i1-wL-0uw">
+            <objects>
+                <viewController id="VeU-Xb-GYC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2uu-sn-6BI"/>
+                        <viewControllerLayoutGuide type="bottom" id="Bo5-N8-SJc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xkD-89-2ht">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wa2-IW-wEi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3823" y="378"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="b5t-5p-l2r">
+            <objects>
+                <navigationController navigationBarHidden="YES" id="LiA-cU-CVI" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="m5f-YS-G9z">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="1k8-dh-FtJ" kind="relationship" relationship="rootViewController" id="cpp-RT-Efe"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kva-Pl-Afk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2383" y="412"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="qf6-Wl-jpd">
             <objects>
                 <navigationController navigationBarHidden="YES" id="xJp-HJ-PiM" sceneMemberID="viewController">
                     <nil key="simulatedTopBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="KPY-Pv-Af8">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="KPY-Pv-Af8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

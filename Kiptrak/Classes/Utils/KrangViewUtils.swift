@@ -112,6 +112,6 @@ extension UISearchBar {
         self.backgroundImage = UIImage()
         self.isTranslucent = true
         self.barTintColor = UIColor.accent
-        self.tintColor = UIColor.darkBackground
+        self.tintColor = UIColor.white
     }
 }

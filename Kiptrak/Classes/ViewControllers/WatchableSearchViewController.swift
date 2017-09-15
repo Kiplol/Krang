@@ -91,11 +91,17 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
                 actionSheet.addAction(UIAlertAction(title: "Check In", style: .default, handler: { (action) in
                     TraktHelper.shared.checkIn(to: watchable, completion: { (error, checkedInWatchable) in
                         if checkedInWatchable != nil {
-                            if let drawer = self.parent as? PulleyViewController {
+                            if let drawer = self.pulleyViewController {
                                 drawer.setDrawerPosition(position: .collapsed, animated: true)
                             }
                         }
                     })
+                }))
+            } else if let show = linkable as? KrangShow {
+                actionSheet.addAction(UIAlertAction(title: "Check In", style: .default, handler: { (action) in
+                    let lol = UIViewController()
+                    self.navigationController?.pushViewController(lol, animated: true)
+                    self.navigationController?.setNavigationBarHidden(false, animated: true)
                 }))
             }
             
@@ -147,7 +153,7 @@ extension WatchableSearchViewController: PulleyDrawerViewControllerDelegate, UIS
     //MARK:- UISearchBarDelegate
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = true
-        if let drawerVC = self.parent as? PulleyViewController
+        if let drawerVC = self.pulleyViewController
         {
             drawerVC.setDrawerPosition(position: .open, animated: true)
         }
@@ -158,7 +164,7 @@ extension WatchableSearchViewController: PulleyDrawerViewControllerDelegate, UIS
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        if let drawerVC = self.parent as? PulleyViewController
+        if let drawerVC = self.pulleyViewController
         {
             drawerVC.setDrawerPosition(position: .collapsed, animated: true)
         }

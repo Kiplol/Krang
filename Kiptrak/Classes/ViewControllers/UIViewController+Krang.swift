@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Pulley
 
 extension UIViewController {
     
@@ -20,4 +21,16 @@ extension UIViewController {
         }
     }
     
+    var pulleyViewController: PulleyViewController? {
+        return UIViewController.getPulleyViewController(containing: self)
+    }
+    
+    fileprivate class func getPulleyViewController(containing viewController: UIViewController) -> PulleyViewController? {
+        if let pulleyVC = viewController as? PulleyViewController {
+            return pulleyVC
+        } else if let parent = viewController.parent {
+            return UIViewController.getPulleyViewController(containing: parent)
+        }
+        return nil
+    }
 }
