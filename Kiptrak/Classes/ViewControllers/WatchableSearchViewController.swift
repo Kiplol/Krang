@@ -124,18 +124,26 @@ extension WatchableSearchViewController: PulleyDrawerViewControllerDelegate, UIS
     //MARK:- PulleyDrawerViewControllerDelegate
     func collapsedDrawerHeight() -> CGFloat
     {
-        return self.searchBarContainerView.frame.maxY
+        if self.isViewLoaded {
+            return self.searchBarContainerView.frame.maxY
+        } else {
+            return 68.0
+        }
     }
     
     func partialRevealDrawerHeight() -> CGFloat
     {
-        let rowHeight = self.tableView.rowHeight
-        let maxHeight = 2.5 * rowHeight
-        let minHeight = rowHeight * 1.5
-        let searchResultsHeight = (max(1.0, CGFloat(self.searchResults.count)) - 0.5) * rowHeight
-        let tableViewHeight = max(minHeight, min(maxHeight, searchResultsHeight))
-        let searchBarHeight = self.searchBarContainerView.frame.maxY
-        return tableViewHeight + searchBarHeight
+        if self.isViewLoaded {
+            let rowHeight = self.tableView.rowHeight
+            let maxHeight = 2.5 * rowHeight
+            let minHeight = rowHeight * 1.5
+            let searchResultsHeight = (max(1.0, CGFloat(self.searchResults.count)) - 0.5) * rowHeight
+            let tableViewHeight = max(minHeight, min(maxHeight, searchResultsHeight))
+            let searchBarHeight = self.searchBarContainerView.frame.maxY
+            return tableViewHeight + searchBarHeight
+        } else {
+            return 264.0
+        }
     }
     
     func supportedDrawerPositions() -> [PulleyPosition] {
@@ -144,9 +152,11 @@ extension WatchableSearchViewController: PulleyDrawerViewControllerDelegate, UIS
     
     func drawerPositionDidChange(drawer: PulleyViewController)
     {
-        self.tableView.isScrollEnabled = drawer.drawerPosition == .open
-        if drawer.drawerPosition != .open {
-            self.searchController.searchBar.resignFirstResponder()
+        if self.isViewLoaded {
+            self.tableView.isScrollEnabled = drawer.drawerPosition == .open
+            if drawer.drawerPosition != .open {
+                self.searchController.searchBar.resignFirstResponder()
+            }
         }
     }
     

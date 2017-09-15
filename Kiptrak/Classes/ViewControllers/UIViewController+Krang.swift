@@ -34,3 +34,36 @@ extension UIViewController {
         return nil
     }
 }
+
+extension UINavigationController: PulleyDrawerViewControllerDelegate {
+    
+    public func collapsedDrawerHeight() -> CGFloat
+    {
+        if let drawer = self.topViewController as? PulleyDrawerViewControllerDelegate {
+            return drawer.collapsedDrawerHeight()
+        }
+        return 68.0
+    }
+    
+    public func partialRevealDrawerHeight() -> CGFloat
+    {
+        if let drawer = self.topViewController as? PulleyDrawerViewControllerDelegate {
+            return drawer.partialRevealDrawerHeight()
+        }
+        return 264.0
+    }
+    
+    public func supportedDrawerPositions() -> [PulleyPosition] {
+        if let drawer = self.topViewController as? PulleyDrawerViewControllerDelegate {
+            return drawer.supportedDrawerPositions()
+        }
+        return PulleyPosition.all
+    }
+    
+    public func drawerPositionDidChange(drawer: PulleyViewController)
+    {
+        if let drawerTopVC = self.topViewController as? PulleyDrawerViewControllerDelegate {
+            drawerTopVC.drawerPositionDidChange?(drawer: drawer)
+        }
+    }
+}
