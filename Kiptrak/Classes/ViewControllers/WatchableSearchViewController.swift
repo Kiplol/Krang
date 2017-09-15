@@ -69,32 +69,36 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
     //MARK:- UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if let watchable = self.searchResults[indexPath.row] as? KrangWatchable {
-            let actionSheet = UIAlertController(title: watchable.title, message: nil, preferredStyle: .actionSheet)
-            if let tmbdURL = watchable.urlForTMDB {
+        let selectedObject = self.searchResults[indexPath.row]
+        if let linkable = selectedObject as? KrangLinkable {
+            let actionSheet = UIAlertController(title: linkable.title, message: nil, preferredStyle: .actionSheet)
+            if let tmbdURL = linkable.urlForTMDB {
                 actionSheet.addAction(UIAlertAction(title: "Open in TMDB", style: .default, handler: { (action) in
                     UIApplication.shared.open(tmbdURL, options: [:], completionHandler: nil)
                 }))
             }
-            if let traktURL = watchable.urlForTrakt {
+            if let traktURL = linkable.urlForTrakt {
                 actionSheet.addAction(UIAlertAction(title: "Open in Trakt.TV", style: .default, handler: { (action) in
                     UIApplication.shared.open(traktURL, options: [:], completionHandler: nil)
                 }))
             }
-            if let imdbURL = watchable.urlForIMDB {
+            if let imdbURL = linkable.urlForIMDB {
                 actionSheet.addAction(UIAlertAction(title: "Open in IMDB", style: .default, handler: { (action) in
                     UIApplication.shared.open(imdbURL, options: [:], completionHandler: nil)
                 }))
             }
-            actionSheet.addAction(UIAlertAction(title: "Check In", style: .default, handler: { (action) in
-                TraktHelper.shared.checkIn(to: watchable, completion: { (error, checkedInWatchable) in
-                    if checkedInWatchable != nil {
-                        if let drawer = self.parent as? PulleyViewController {
-                            drawer.setDrawerPosition(position: .collapsed, animated: true)
+            if let watchable = linkable as? KrangWatchable {
+                actionSheet.addAction(UIAlertAction(title: "Check In", style: .default, handler: { (action) in
+                    TraktHelper.shared.checkIn(to: watchable, completion: { (error, checkedInWatchable) in
+                        if checkedInWatchable != nil {
+                            if let drawer = self.parent as? PulleyViewController {
+                                drawer.setDrawerPosition(position: .collapsed, animated: true)
+                            }
                         }
-                    }
-                })
-            }))
+                    })
+                }))
+            }
+            
             actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
                 
             }))

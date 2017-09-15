@@ -53,6 +53,16 @@ class WatchableSearchResultTableViewCell: UITableViewCell {
                         }
                     }
                 }
+            } else if let show = searchable as? KrangShow {
+                let showID = show.traktID
+                let query = try! Realm().objects(KrangShow.self).filter("traktID == %d", showID)
+                self.realmChangeToken = query.addNotificationBlock() { [unowned self] change in
+                    if query.count > 0 {
+                        if let updatedThumnailURL = query[0].urlForSearchResultThumbnailImage {
+                            self.retrieveImageTask = self.imageViewThumbnail.kf.setImage(with: updatedThumnailURL)
+                        }
+                    }
+                }
             }
         }
         self.labelTitle.text = searchable.titleForSearchResult

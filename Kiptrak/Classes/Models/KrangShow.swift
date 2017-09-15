@@ -22,6 +22,10 @@ class KrangShow: Object {
     dynamic var imdbID: String? = nil
     dynamic var tmdbID: Int = -1
     dynamic var tvRageID: Int = -1
+    dynamic var imageBackdropURL: String? = nil
+    dynamic var imagePosterURL: String? = nil
+    var imagePosterURLs: List<RealmString> = List<RealmString>()
+    dynamic var overview: String = ""
     
     class func with(traktID: Int) -> KrangShow? {
         if traktID == -1 {
@@ -46,10 +50,40 @@ class KrangShow: Object {
     }
 }
 
+extension KrangShow: KrangLinkable {
+    var urlForIMDB: URL? {
+        guard let imdbID = self.imdbID else {
+            return nil
+        }
+        
+        let szURL = String(format: Constants.imdbURLFormat, imdbID)
+        return URL(string: szURL)
+    }
+    
+    var urlForTMDB: URL? {
+        guard self.tmdbID != -1 else {
+            return nil
+        }
+        
+        let szURL = "https://www.themoviedb.org/movie/\(self.tmdbID)-\(self.slug)"
+        return URL(string: szURL)
+    }
+    
+    var urlForTrakt: URL? {
+        let szURL = "https://trakt.tv/movies/\(self.slug)"
+        return URL(string: szURL)
+    }
+}
+
 extension KrangShow: KrangSearchable {
     
     //@TODO: Thumbnails
-    var urlForSearchResultThumbnailImage: URL? { return nil }
+    var urlForSearchResultThumbnailImage: URL? {
+        if let szURL = self.imagePosterURL {
+            return URL(string: szURL)
+        }
+        return nil
+    }
     var titleForSearchResult: String? { return self.title }
     var subtitleForSearchResult: String? {
         if self.year > -1 {

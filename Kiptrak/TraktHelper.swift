@@ -214,6 +214,25 @@ class TraktHelper: NSObject {
                                 }
                             }()
                             result.append(movie)
+                        case "show":
+//                            print($0)
+                            guard let traktID = $0["show"]["ids"]["trakt"].int else {
+                                return
+                            }
+                            
+                            let thisJSON = $0["show"]
+                            let show:KrangShow = {
+                                if let existingShow = KrangShow.with(traktID: traktID) {
+                                    existingShow.update(withJSON: thisJSON)
+                                    return existingShow
+                                } else {
+                                    let newShow = KrangShow()
+                                    newShow.update(withJSON: thisJSON)
+                                    newShow.saveToDatabaseOutsideWriteTransaction()
+                                    return newShow
+                                }
+                            }()
+                            result.append(show)
                         default:
                             break
                         }
@@ -228,6 +247,15 @@ class TraktHelper: NSObject {
                         imageUpdateGroup.enter()
                     }
                     TMDBHelper.shared.update(movie: movie, completion: { (_, updatedMovie) in
+                        if !TraktHelper.asyncImageLoadingOnSearch {
+                            imageUpdateGroup.leave()
+                        }
+                    })
+                } else if let show = $0 as? KrangShow {
+                    if !TraktHelper.asyncImageLoadingOnSearch {
+                        imageUpdateGroup.enter()
+                    }
+                    TMDBHelper.shared.update(show: show, completion: { (_, updatedShow) in
                         if !TraktHelper.asyncImageLoadingOnSearch {
                             imageUpdateGroup.leave()
                         }

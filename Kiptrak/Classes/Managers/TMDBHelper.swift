@@ -98,8 +98,17 @@ class TMDBHelper: NSObject {
             return
         }
         
-        //TODO
-        completion?(nil, show)
+        KrangLogger.log.debug("Updating show")
+        let url = String(format: Constants.tmdbShowGetURLFormat, show.tmdbID, show.slug)
+        let _ = self.oauth.client.get(url, success: { (response) in
+            //Success
+            let showJSON = JSON(data: response.data)
+            self.update(show: show, withJSON: showJSON)
+            completion?(nil, show)
+        }) { (error) in
+            //Faliure
+            completion?(error, show)
+        }
     }
     
     class Configuration {
@@ -166,6 +175,23 @@ class TMDBHelper: NSObject {
                 episode.posterImageURL = posterURL
                 episode.posterThumbnailImageURL = smallestPosterURL
                 episode.posterImageURLs = List<RealmString>(realmStringURLs)
+            }
+        }
+    }
+    
+    private func update(show: KrangShow, withJSON json: JSON) {
+        show.makeChanges {
+            if let posterPath = json["poster_path"].string, self.configuration.posterSizes.count > 0 {
+                let posterURL = self.configuration.imageBaseURL + self.configuration.posterSizes[Int(3 * self.configuration.posterSizes.count / 4)] + posterPath
+                
+                let realmStringURLs = self.configuration.posterSizes.map({ sizeString in
+                    self.configuration.imageBaseURL + sizeString + posterPath
+                }).map({ fullURL in
+                    RealmString.with(value: fullURL)
+                })
+                
+                show.imagePosterURL = posterURL
+                show.imagePosterURLs = List<RealmString>(realmStringURLs)
             }
         }
     }
