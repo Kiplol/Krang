@@ -15,7 +15,7 @@ import RealmSwift
 class TraktHelper: NSObject {
     
     static let shared = TraktHelper()
-    static let asyncImageLoadingOnSearch = false
+    static let asyncImageLoadingOnSearch = true
     
     let oauth = OAuth2Swift(consumerKey: Constants.traktClientID, consumerSecret: Constants.traktClientSecret, authorizeUrl: Constants.traktAuthorizeURL, accessTokenUrl: Constants.traktAccessTokenURL, responseType: "code")
     private var didGetCredentials = false

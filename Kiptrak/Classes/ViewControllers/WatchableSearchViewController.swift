@@ -81,7 +81,7 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
                     UIApplication.shared.open(traktURL, options: [:], completionHandler: nil)
                 }))
             }
-            if let imdbURL = watchable.urlForTrakt {
+            if let imdbURL = watchable.urlForIMDB {
                 actionSheet.addAction(UIAlertAction(title: "Open in IMDB", style: .default, handler: { (action) in
                     UIApplication.shared.open(imdbURL, options: [:], completionHandler: nil)
                 }))
