@@ -80,7 +80,7 @@ extension KrangShow: KrangLinkable {
     }
     
     var urlForTrakt: URL? {
-        let szURL = "https://trakt.tv/movies/\(self.slug)"
+        let szURL = "https://trakt.tv/shows/\(self.slug)"
         return URL(string: szURL)
     }
 }
