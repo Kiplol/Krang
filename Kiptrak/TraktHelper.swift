@@ -325,7 +325,7 @@ class TraktHelper: NSObject {
     }
     
     func checkIn(to watchable: KrangWatchable, completion: ((Error?, KrangWatchable?) -> ())?) {
-        self.cancelAllCheckins() { cancelError in
+        self._cancelAllCheckins() { cancelError in
             let url = Constants.traktCheckInURL
             guard var body = JSON(parseJSON: watchable.originalJSONString).dictionaryObject else {
                 //@TODO: Error
@@ -347,6 +347,17 @@ class TraktHelper: NSObject {
     }
     
     func cancelAllCheckins(_ completion: ((Error?) -> ())? ) {
+        self._cancelAllCheckins { (error) in
+            if error == nil {
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: Notification.Name.didCheckInToWatchable, object: nil, userInfo: nil)
+                }
+            }
+            completion?(error)
+        }
+    }
+    
+    private func _cancelAllCheckins(_ completion: ((Error?) -> ())? ) {
         let url = Constants.traktCheckInURL
         let _ = self.oauth.client.delete(url, parameters: [:], headers: TraktHelper.defaultHeaders(), success: { (_) in
             completion?(nil)

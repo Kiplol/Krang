@@ -38,6 +38,7 @@ class PlaybackViewController: KrangViewController {
             self.infoContainer.heroModifiers = [.zPosition(4.0), .fade]
         }
     }
+    @IBOutlet weak var buttonCancel: UIButton!
     @IBOutlet weak var progressView: KrangProgressView!
     @IBOutlet weak var shadowTop: UIImageView! {
         didSet {
@@ -141,6 +142,12 @@ class PlaybackViewController: KrangViewController {
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
+    @IBAction func cancelTapped(_ sender: Any) {
+        TraktHelper.shared.cancelAllCheckins { (error) in
+            
+        }
+    }
+    
     //MARK:- Notifications
     func didCheckInToAWatchable(_ notfic: Notification) {
         self.refreshCheckin(nil)
@@ -153,7 +160,9 @@ class PlaybackViewController: KrangViewController {
         self.buttonIMDB.isHidden = true
         self.buttonTMDB.isHidden = true
         self.buttonTrakt.isHidden = true
+        self.buttonCancel.isHidden = true
         if let watchable = watchable {
+            self.buttonCancel.isHidden = false
             self.imagePosterBackground.setPoster(fromWatchable: watchable)
             self.labelDisplayName.text = watchable.titleDisplayString
             self.labelNowWatching.isHidden = false
