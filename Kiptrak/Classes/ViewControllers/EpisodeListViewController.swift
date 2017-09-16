@@ -91,6 +91,14 @@ class EpisodeListViewController: KrangViewController, UITableViewDataSource, UIT
     }
     
     //MARK:- UITableViewDelegate
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        TraktHelper.shared.checkIn(to: self.season.episodes[indexPath.row]) { (error, watchable) in
+            if let drawer = self.pulleyViewController {
+                drawer.setDrawerPosition(position: .collapsed, animated: true)
+            }
+        }
+    }
     
     //MARK:- SwipeTableViewCellDelegate
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
