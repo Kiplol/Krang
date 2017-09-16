@@ -69,9 +69,16 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: WatchableSearchViewController.cellReuseIdentifier)
+        let searchable = self.searchResults[indexPath.row]
         if let searchResultCell = cell as? WatchableSearchResultTableViewCell {
-            searchResultCell.update(withSearchable: self.searchResults[indexPath.row])
+            searchResultCell.update(withSearchable: searchable)
             searchResultCell.delegate = self
+            switch searchable {
+            case is KrangShow:
+                searchResultCell.accessoryType = .disclosureIndicator
+            default:
+                searchResultCell.accessoryType = .none
+            }
         }
         return cell!
     }
