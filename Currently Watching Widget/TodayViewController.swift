@@ -12,6 +12,7 @@ import MarqueeLabel
 
 class TodayViewController: UIViewController, NCWidgetProviding {
     
+    private static let openURLsInAppFirst = false
     //MARK:- ivars
     @IBOutlet weak var labelTitle: MarqueeLabel!
     @IBOutlet weak var imageBackground: UIImageView!
@@ -70,8 +71,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             return
         }
         
-        let szURL = "krang://externalurl/\(tmdbURL.absoluteString)"
-        self.extensionContext?.open(URL(string: szURL)!, completionHandler: nil)
+        if TodayViewController.openURLsInAppFirst {
+            let szURL = "krang://externalurl/\(tmdbURL.absoluteString)"
+            self.extensionContext?.open(URL(string: szURL)!, completionHandler: nil)
+        } else {
+            self.extensionContext?.open(tmdbURL, completionHandler: nil)
+        }
     }
     
     @IBAction func imdbTapped(_ sender: Any) {
@@ -83,8 +88,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             return
         }
         
-        let szURL = "krang://externalurl/\(imdbURL.absoluteString)"
-        self.extensionContext?.open(URL(string: szURL)!, completionHandler: nil)
+        if TodayViewController.openURLsInAppFirst {
+            let szURL = "krang://externalurl/\(imdbURL.absoluteString)"
+            self.extensionContext?.open(URL(string: szURL)!, completionHandler: nil)
+        } else {
+            self.extensionContext?.open(imdbURL, completionHandler: nil)
+        }
     }
     
     @IBAction func traktTapped(_ sender: Any) {
@@ -92,12 +101,16 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             return
         }
         
-        guard let imdbURL = watchable.urlForTrakt else {
+        guard let traktURL = watchable.urlForTrakt else {
             return
         }
         
-        let szURL = "krang://externalurl/\(imdbURL.absoluteString)"
-        self.extensionContext?.open(URL(string: szURL)!, completionHandler: nil)
+        if TodayViewController.openURLsInAppFirst {
+            let szURL = "krang://externalurl/\(traktURL.absoluteString)"
+            self.extensionContext?.open(URL(string: szURL)!, completionHandler: nil)
+        } else {
+            self.extensionContext?.open(traktURL, completionHandler: nil)
+        }
     }
     
     //MARK:-
