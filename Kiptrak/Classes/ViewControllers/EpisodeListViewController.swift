@@ -8,8 +8,9 @@
 
 import UIKit
 import RealmSwift
+import SwipeCellKit
 
-class EpisodeListViewController: KrangViewController, UITableViewDataSource, UITableViewDelegate {
+class EpisodeListViewController: KrangViewController, UITableViewDataSource, UITableViewDelegate, SwipeTableViewCellDelegate {
 
     private static let cellReuseIdentifier = "episodeCell"
     
@@ -28,11 +29,11 @@ class EpisodeListViewController: KrangViewController, UITableViewDataSource, UIT
             self.episodesNotificationToken = nil
         }
         didSet {
-            if let show = season.show {
-                self.title = "\(show.title) - \(season.title)"
-            } else {
+            //if let show = season.show {
+            //    self.title = "\(show.title) - \(season.title)"
+            //} else {
                 self.title = season.title
-            }
+            //}
             self.episodesNotificationToken = self.season.episodes.addNotificationBlock() { change in
                 if self.isViewLoaded {
                     switch change {
@@ -76,14 +77,67 @@ class EpisodeListViewController: KrangViewController, UITableViewDataSource, UIT
         let cell = tableView.dequeueReusableCell(withIdentifier: EpisodeListViewController.cellReuseIdentifier, for: indexPath)
         if let episodeCell = cell as? EpisodeTableViewCell {
             episodeCell.update(withEpisode: self.season.episodes[indexPath.row])
+            episodeCell.delegate = self
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80.0
+        return 90.0
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 90.0
     }
     
     //MARK:- UITableViewDelegate
+    
+    //MARK:- SwipeTableViewCellDelegate
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        guard orientation == .right else { return nil }
+        
+        let selectedObject = self.season.episodes[indexPath.row]
+        var options = [SwipeAction]()
+        if let linkable = selectedObject as? KrangLinkable {
+            if let tmbdURL = linkable.urlForTMDB {
+                let tmdbAction = SwipeAction(style: .default, title: "TMDB") { action, indexPath in
+                    UIApplication.shared.open(tmbdURL, options: [:], completionHandler: nil)
+                }
+                tmdbAction.image = #imageLiteral(resourceName: "logo_tmdb_70_color")
+                tmdbAction.backgroundColor = UIColor.tmdbBrandPrimaryDark
+                tmdbAction.textColor = UIColor.tmdbBrandPrimaryLight
+                tmdbAction.title = nil
+                options.append(tmdbAction)
+            }
+            if let traktURL = linkable.urlForTrakt {
+                let traktAction = SwipeAction(style: .default, title: "Trakt") { action, indexPath in
+                    UIApplication.shared.open(traktURL, options: [:], completionHandler: nil)
+                }
+                traktAction.image = #imageLiteral(resourceName: "logo_trakt_70_color")
+                traktAction.backgroundColor = UIColor.black
+                traktAction.textColor = UIColor.traktBrandPrimary
+                traktAction.title = nil
+                options.append(traktAction)
+            }
+            if let imdbURL = linkable.urlForIMDB {
+                let imdbAction = SwipeAction(style: .default, title: "IMDb") { action, indexPath in
+                    UIApplication.shared.open(imdbURL, options: [:], completionHandler: nil)
+                }
+                imdbAction.image = #imageLiteral(resourceName: "logo_imdb_70_color")
+                imdbAction.backgroundColor = UIColor.imdbBrandPrimary
+                imdbAction.textColor = UIColor.black
+                imdbAction.title = nil
+                options.append(imdbAction)
+            }
+        }
+        
+        return options.isEmpty ? nil : options
+    }
+
+    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeTableOptions {
+        var options = SwipeTableOptions()
+        options.transitionStyle = .drag
+        return options
+    }
 
 }

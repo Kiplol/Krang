@@ -244,14 +244,15 @@ class TraktHelper: NSObject {
                         guard let traktID = episodeDic["ids"]["trakt"].int else {
                             continue
                         }
-                        
+                        var jsonForUpdating = JSON(["type": "episode"])
+                        jsonForUpdating["episode"] = episodeDic
                         let episode: KrangEpisode = {
                             if let existingEpisode = KrangEpisode.with(traktID: traktID) {
-                                existingEpisode.update(withJSON: episodeDic)
+                                existingEpisode.update(withJSON: jsonForUpdating)
                                 return existingEpisode
                             } else {
                                 let newEpisode = KrangEpisode()
-                                newEpisode.update(withJSON: episodeDic)
+                                newEpisode.update(withJSON: jsonForUpdating)
                                 newEpisode.saveToDatabaseOutsideWriteTransaction()
                                 return newEpisode
                             }

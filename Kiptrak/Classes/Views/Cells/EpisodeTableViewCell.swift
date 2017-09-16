@@ -12,7 +12,7 @@ import SwipeCellKit
 class EpisodeTableViewCell: SwipeTableViewCell {
 
     //MARK:- IBOutlets
-    @IBOutlet weak var imageViewPreview: UIImageView!
+//    @IBOutlet weak var imageViewPreview: UIImageView!
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelDescription: UILabel!
     //MARK:- ivars
@@ -32,11 +32,12 @@ class EpisodeTableViewCell: SwipeTableViewCell {
     func update(withEpisode episode: KrangEpisode) {
         self.labelTitle.text = "\(episode.episode). \(episode.title)"
         self.labelDescription.text = episode.overview
-        if let szImageURL = episode.stillImageURL {
-            self.imageViewPreview.kf.setImage(with: URL(string: szImageURL), placeholder: self.imageViewPreview.image, options: [.transition(.fade(0.2))], progressBlock: nil, completionHandler: nil)
-        } else {
-            self.imageViewPreview.image = nil
-        }
+//        if let szImageURL = episode.stillThumbnailImageURL {
+//            self.imageViewPreview.kf.setImage(with: URL(string: szImageURL), placeholder: self.imageViewPreview.image, options: [.transition(.fade(0.2))], progressBlock: nil, completionHandler: nil)
+//        } else {
+//            self.imageViewPreview.image = nil
+//        }
+        self.layoutIfNeeded()
     }
     
 }
