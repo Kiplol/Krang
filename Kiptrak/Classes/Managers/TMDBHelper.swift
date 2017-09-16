@@ -98,7 +98,7 @@ class TMDBHelper: NSObject {
             return
         }
         
-        KrangLogger.log.debug("Updating show")
+        KrangLogger.log.debug("Updating show (\(show.title))")
         let url = String(format: Constants.tmdbShowGetURLFormat, show.tmdbID, show.slug)
         let _ = self.oauth.client.get(url, success: { (response) in
             //Success
@@ -108,6 +108,30 @@ class TMDBHelper: NSObject {
         }) { (error) in
             //Faliure
             completion?(error, show)
+        }
+    }
+    
+    func update(season:KrangSeason, completion:((Error?, KrangSeason?) -> ())?) {
+        guard season.tmdbID != -1 else {
+            completion?(NSError(domain: "Krang", code: -1, userInfo: ["debugMessage": "tmdbID = -1"]), season)
+            return
+        }
+        
+        guard let show = season.show else {
+            completion?(NSError(domain: "Krang", code: -1, userInfo: ["debugMessage": "no show for season"]), season)
+            return
+        }
+        
+        KrangLogger.log.debug("Updating season (\(show.title) \(season.title))")
+        let url = String(format: Constants.tmdbSeasonGetURLFormat, show.tmdbID, show.slug, season.seasonNumber)
+        let _ = self.oauth.client.get(url, success: { (response) in
+            //Success
+            let json = JSON(data: response.data)
+            self.update(season: season, withJSON: json)
+            completion?(nil, season)
+        }) { (error) in
+            //Failure
+            completion?(error, season)
         }
     }
     
@@ -192,6 +216,14 @@ class TMDBHelper: NSObject {
                 
                 show.imagePosterURL = posterURL
                 show.imagePosterURLs = List<RealmString>(realmStringURLs)
+            }
+        }
+    }
+    
+    private func update(season: KrangSeason, withJSON json: JSON) {
+        season.makeChanges {
+            if let posterPath = json["poster_path"].string {
+                season.posterImageURL = self.configuration.imageBaseURL + self.configuration.posterSizes[Int(3 * self.configuration.posterSizes.count / 4)] + posterPath
             }
         }
     }

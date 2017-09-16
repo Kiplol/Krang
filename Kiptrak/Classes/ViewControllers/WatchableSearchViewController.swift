@@ -123,7 +123,7 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
         
         if let show = selectedObject as? KrangShow {
             TraktHelper.shared.getAllSeasons(forShow: show, completion: { (error, updatedShow) in
-                print(updatedShow ?? "Barf")
+
             })
         }
     }

@@ -206,7 +206,20 @@ class TraktHelper: NSObject {
                 }
             }
             
-            completion?(nil, show)
+            let imageUpdateGroup = DispatchGroup()
+            show.seasons.filter { $0.posterImageURL == nil }.forEach {
+                if !TraktHelper.asyncImageLoadingOnSearch {
+                    imageUpdateGroup.enter()
+                }
+                TMDBHelper.shared.update(season: $0, completion: { (imageError, updatedSeason) in
+                    if !TraktHelper.asyncImageLoadingOnSearch {
+                        imageUpdateGroup.leave()
+                    }
+                })
+            }
+            imageUpdateGroup.notify(queue: DispatchQueue.main) {
+                completion?(nil, show)
+            }
         }) { (error) in
             //Failure
             completion?(error, show)
@@ -254,7 +267,6 @@ class TraktHelper: NSObject {
                             }()
                             result.append(movie)
                         case "show":
-//                            print($0)
                             guard let traktID = $0["show"]["ids"]["trakt"].int else {
                                 return
                             }
@@ -278,8 +290,8 @@ class TraktHelper: NSObject {
                     }
                 }
             }
-            let imageUpdateGroup = DispatchGroup()
             
+            let imageUpdateGroup = DispatchGroup()
             result.filter { $0.urlForSearchResultThumbnailImage == nil }.forEach {
                 if let movie = $0 as? KrangMovie {
                     if !TraktHelper.asyncImageLoadingOnSearch {
@@ -329,7 +341,6 @@ class TraktHelper: NSObject {
                 }
             }) { (error) in
                 //Failure
-                print(error)
                 completion?(error, nil)
             }
         }

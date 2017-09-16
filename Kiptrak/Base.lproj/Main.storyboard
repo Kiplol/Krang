@@ -500,8 +500,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zXr-AU-H5C">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" indicatorStyle="white" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zXr-AU-H5C">
+                                <rect key="frame" x="0.0" y="20" width="375" height="627"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="XEw-4k-LbL">
                                     <size key="itemSize" width="50" height="50"/>
@@ -527,7 +527,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Bo5-N8-SJc" firstAttribute="top" secondItem="zXr-AU-H5C" secondAttribute="bottom" id="EsO-YI-shC"/>
+                            <constraint firstItem="Bo5-N8-SJc" firstAttribute="top" secondItem="zXr-AU-H5C" secondAttribute="bottom" constant="20" id="EsO-YI-shC"/>
                             <constraint firstItem="zXr-AU-H5C" firstAttribute="leading" secondItem="xkD-89-2ht" secondAttribute="leading" id="KbK-Zq-VxO"/>
                             <constraint firstItem="zXr-AU-H5C" firstAttribute="top" secondItem="2uu-sn-6BI" secondAttribute="bottom" id="YtK-JB-WOX"/>
                             <constraint firstAttribute="trailing" secondItem="zXr-AU-H5C" secondAttribute="trailing" id="zBh-uJ-5MJ"/>

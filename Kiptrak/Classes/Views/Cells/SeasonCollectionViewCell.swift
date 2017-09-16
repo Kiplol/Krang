@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Kingfisher
+import RealmSwift
 
 class SeasonCollectionViewCell: UICollectionViewCell, SelfSizingCell {
 
@@ -15,6 +17,8 @@ class SeasonCollectionViewCell: UICollectionViewCell, SelfSizingCell {
     //MARK:- IBOutlets
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var labelTitle: UILabel!
+    var realmChangeToken: NotificationToken? = nil
+    var retrieveImageTask: RetrieveImageTask? = nil
     
     //MARK:-
     override func awakeFromNib() {
@@ -22,10 +26,33 @@ class SeasonCollectionViewCell: UICollectionViewCell, SelfSizingCell {
         // Initialization code
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.realmChangeToken?.stop()
+        self.imageView.image = nil
+        self.retrieveImageTask?.cancel()
+        self.retrieveImageTask = nil
+    }
+    
     func update(withSeason season: KrangSeason) {
         self.labelTitle.text = season.title
-        self.imageView.kf.setImage(with: URL.from(string: season.posterImageURL))
-        //@TODO
+        
+        self.realmChangeToken?.stop()
+        self.retrieveImageTask?.cancel()
+        self.retrieveImageTask = nil
+        
+        if season.posterImageURL != nil {
+            self.imageView.kf.setImage(with: URL.from(string: season.posterImageURL))
+        } else {
+            let query = try! Realm().objects(KrangSeason.self).filter("traktID == %d", season.traktID)
+            self.realmChangeToken = query.addNotificationBlock({ change in
+                if query.count > 0 {
+                    if let updatedPosterImageURL = query[0].posterImageURL {
+                        self.imageView.kf.setImage(with: URL(string: updatedPosterImageURL))
+                    }
+                }
+            })
+        }
     }
     
     //MARK:- SelfSizingCell

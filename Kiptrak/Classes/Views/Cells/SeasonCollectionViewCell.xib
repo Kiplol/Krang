@@ -19,13 +19,42 @@
                 <rect key="frame" x="0.0" y="0.0" width="168" height="207"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TUt-sj-mug">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qHF-8A-Q3Z" userLabel="Image Container View">
                         <rect key="frame" x="25" y="5" width="118" height="168"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TUt-sj-mug">
+                                <rect key="frame" x="0.0" y="0.0" width="118" height="168"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="0.20384738869863014" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="TUt-sj-mug" secondAttribute="height" multiplier="19:27" id="lBq-qp-Cpl"/>
+                            <constraint firstAttribute="bottom" secondItem="TUt-sj-mug" secondAttribute="bottom" id="Ac2-qW-PQ4"/>
+                            <constraint firstItem="TUt-sj-mug" firstAttribute="top" secondItem="qHF-8A-Q3Z" secondAttribute="top" id="Qhf-YN-ih6"/>
+                            <constraint firstAttribute="width" secondItem="qHF-8A-Q3Z" secondAttribute="height" multiplier="19:27" id="lSj-bL-E66"/>
+                            <constraint firstItem="TUt-sj-mug" firstAttribute="leading" secondItem="qHF-8A-Q3Z" secondAttribute="leading" id="lf1-3W-vsL"/>
+                            <constraint firstAttribute="trailing" secondItem="TUt-sj-mug" secondAttribute="trailing" id="q2d-6W-sHB"/>
                         </constraints>
-                    </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2gl-rI-pI1">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                <color key="value" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2gl-rI-pI1">
                         <rect key="frame" x="8" y="181" width="152" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
@@ -36,10 +65,10 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="2gl-rI-pI1" secondAttribute="trailing" constant="8" id="0Q2-bq-nYG"/>
                 <constraint firstItem="2gl-rI-pI1" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="5ur-1i-KDU"/>
-                <constraint firstItem="TUt-sj-mug" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="AAw-II-kmD"/>
+                <constraint firstItem="2gl-rI-pI1" firstAttribute="top" secondItem="qHF-8A-Q3Z" secondAttribute="bottom" constant="8" id="EsF-h1-ty4"/>
                 <constraint firstAttribute="bottom" secondItem="2gl-rI-pI1" secondAttribute="bottom" constant="8" id="G2n-2R-51f"/>
-                <constraint firstItem="2gl-rI-pI1" firstAttribute="top" secondItem="TUt-sj-mug" secondAttribute="bottom" constant="8" id="a5S-Rg-PVK"/>
-                <constraint firstItem="TUt-sj-mug" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="k4M-Nz-T5J"/>
+                <constraint firstItem="qHF-8A-Q3Z" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="pLr-WQ-WZA"/>
+                <constraint firstItem="qHF-8A-Q3Z" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="wey-bW-vgf"/>
             </constraints>
             <size key="customSize" width="168" height="207"/>
             <connections>
