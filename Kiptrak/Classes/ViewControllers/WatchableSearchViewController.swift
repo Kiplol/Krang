@@ -34,6 +34,7 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
     //MARK:- View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Search"
         self.searchController.searchResultsUpdater = self
         self.searchController.dimsBackgroundDuringPresentation = false
         self.searchController.searchBar.placeholder = "American Psycho, Law & Order, etc..."
@@ -41,6 +42,13 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
         self.searchController.searchBar.applyKrangStyle()
         self.definesPresentationContext = true
         self.searchBarContainerView.addSubview(self.searchController.searchBar)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if self.pulleyViewController != nil {
+            self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        }
     }
     
     //MARK:- UISearchResultsUpdating
@@ -99,7 +107,8 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
                 }))
             } else if let show = linkable as? KrangShow {
                 actionSheet.addAction(UIAlertAction(title: "Check In", style: .default, handler: { (action) in
-                    let lol = UIViewController()
+                    let lol = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "seasonList") as! SeasonListViewController
+                    lol.show = show
                     self.navigationController?.pushViewController(lol, animated: true)
                     self.navigationController?.setNavigationBarHidden(false, animated: true)
                 }))

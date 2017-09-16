@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="SeasonCollectionViewCell" customModule="Kiptrak" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="168" height="207"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="168" height="207"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TUt-sj-mug">
+                        <rect key="frame" x="25" y="5" width="118" height="168"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="TUt-sj-mug" secondAttribute="height" multiplier="19:27" id="lBq-qp-Cpl"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2gl-rI-pI1">
+                        <rect key="frame" x="8" y="181" width="152" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="2gl-rI-pI1" secondAttribute="trailing" constant="8" id="0Q2-bq-nYG"/>
+                <constraint firstItem="2gl-rI-pI1" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="5ur-1i-KDU"/>
+                <constraint firstItem="TUt-sj-mug" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="AAw-II-kmD"/>
+                <constraint firstAttribute="bottom" secondItem="2gl-rI-pI1" secondAttribute="bottom" constant="8" id="G2n-2R-51f"/>
+                <constraint firstItem="2gl-rI-pI1" firstAttribute="top" secondItem="TUt-sj-mug" secondAttribute="bottom" constant="8" id="a5S-Rg-PVK"/>
+                <constraint firstItem="TUt-sj-mug" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="k4M-Nz-T5J"/>
+            </constraints>
+            <size key="customSize" width="168" height="207"/>
+            <connections>
+                <outlet property="imageView" destination="TUt-sj-mug" id="9FZ-ra-5f7"/>
+                <outlet property="labelTitle" destination="2gl-rI-pI1" id="VYH-vC-WZM"/>
+            </connections>
+            <point key="canvasLocation" x="93" y="137.5"/>
+        </collectionViewCell>
+    </objects>
+</document>

@@ -20,6 +20,10 @@
 		376011671F6C38D2004ED6EF /* KrangLinkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376011651F6C382A004ED6EF /* KrangLinkable.swift */; };
 		376011691F6C524E004ED6EF /* KrangSeason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376011681F6C524E004ED6EF /* KrangSeason.swift */; };
 		3760116A1F6C524E004ED6EF /* KrangSeason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376011681F6C524E004ED6EF /* KrangSeason.swift */; };
+		3760116C1F6C9BC7004ED6EF /* SeasonListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3760116B1F6C9BC7004ED6EF /* SeasonListViewController.swift */; };
+		3760116F1F6C9E29004ED6EF /* SeasonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3760116D1F6C9E29004ED6EF /* SeasonCollectionViewCell.swift */; };
+		376011701F6C9E29004ED6EF /* SeasonCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3760116E1F6C9E29004ED6EF /* SeasonCollectionViewCell.xib */; };
+		376011721F6CA021004ED6EF /* SelfSizingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376011711F6CA021004ED6EF /* SelfSizingCell.swift */; };
 		376713821F61B98000024036 /* KrangUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376713811F61B98000024036 /* KrangUtils.swift */; };
 		37870B201E22BA6A00A2EC00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37870B1F1E22BA6A00A2EC00 /* AppDelegate.swift */; };
 		37870B221E22BA6A00A2EC00 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37870B211E22BA6A00A2EC00 /* SplashViewController.swift */; };
@@ -154,6 +158,10 @@
 		376011611F6ACDF0004ED6EF /* KrangSearchable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KrangSearchable.swift; path = Classes/Protocols/KrangSearchable.swift; sourceTree = "<group>"; };
 		376011651F6C382A004ED6EF /* KrangLinkable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KrangLinkable.swift; path = Classes/Protocols/KrangLinkable.swift; sourceTree = "<group>"; };
 		376011681F6C524E004ED6EF /* KrangSeason.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KrangSeason.swift; path = Classes/Models/KrangSeason.swift; sourceTree = "<group>"; };
+		3760116B1F6C9BC7004ED6EF /* SeasonListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SeasonListViewController.swift; path = Kiptrak/Classes/ViewControllers/SeasonListViewController.swift; sourceTree = "<group>"; };
+		3760116D1F6C9E29004ED6EF /* SeasonCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SeasonCollectionViewCell.swift; path = Kiptrak/Classes/Views/Cells/SeasonCollectionViewCell.swift; sourceTree = "<group>"; };
+		3760116E1F6C9E29004ED6EF /* SeasonCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SeasonCollectionViewCell.xib; path = Kiptrak/Classes/Views/Cells/SeasonCollectionViewCell.xib; sourceTree = "<group>"; };
+		376011711F6CA021004ED6EF /* SelfSizingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelfSizingCell.swift; path = Classes/Protocols/SelfSizingCell.swift; sourceTree = "<group>"; };
 		376713811F61B98000024036 /* KrangUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KrangUtils.swift; path = Classes/Utils/KrangUtils.swift; sourceTree = "<group>"; };
 		37870B1C1E22BA6A00A2EC00 /* Kiptrak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kiptrak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37870B1F1E22BA6A00A2EC00 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -291,6 +299,7 @@
 		37870B131E22BA6A00A2EC00 = {
 			isa = PBXGroup;
 			children = (
+				3760116B1F6C9BC7004ED6EF /* SeasonListViewController.swift */,
 				37870B1E1E22BA6A00A2EC00 /* Kiptrak */,
 				37A19E661E2BFDD9007877B4 /* Currently Watching Widget */,
 				37870B1D1E22BA6A00A2EC00 /* Products */,
@@ -414,6 +423,7 @@
 		37A19E771E2BFE39007877B4 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				376011711F6CA021004ED6EF /* SelfSizingCell.swift */,
 				376011651F6C382A004ED6EF /* KrangLinkable.swift */,
 				37A19E741E2BFE34007877B4 /* KrangWatchable.swift */,
 				376011611F6ACDF0004ED6EF /* KrangSearchable.swift */,
@@ -424,6 +434,8 @@
 		37E957821F69CAD4003D6D74 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				3760116D1F6C9E29004ED6EF /* SeasonCollectionViewCell.swift */,
+				3760116E1F6C9E29004ED6EF /* SeasonCollectionViewCell.xib */,
 				37E957831F69CB03003D6D74 /* WatchableSearchResultTableViewCell.swift */,
 				37E957841F69CB03003D6D74 /* WatchableSearchResultTableViewCell.xib */,
 			);
@@ -578,6 +590,7 @@
 				37A19E5A1E288FFD007877B4 /* Exo-Medium.otf in Resources */,
 				37A19E531E288FFD007877B4 /* Exo-ExtraBold-Italic.otf in Resources */,
 				37A19E571E288FFD007877B4 /* Exo-Light-Italic.otf in Resources */,
+				376011701F6C9E29004ED6EF /* SeasonCollectionViewCell.xib in Resources */,
 				37A19E511E288FFD007877B4 /* Exo-DemiBold-Italic.otf in Resources */,
 				37A19E4F1E288FFD007877B4 /* Exo-Bold-Italic.otf in Resources */,
 			);
@@ -731,6 +744,7 @@
 				376011621F6ACDF0004ED6EF /* KrangSearchable.swift in Sources */,
 				379C55471E248B4F00D51019 /* RealmManager.swift in Sources */,
 				379C554F1E25586900D51019 /* SettingsViewController.swift in Sources */,
+				3760116F1F6C9E29004ED6EF /* SeasonCollectionViewCell.swift in Sources */,
 				373D32961E22C05C00980925 /* Constants.swift in Sources */,
 				37ED660A1E2D7E5400AEE3F4 /* DeeplinkHandler.swift in Sources */,
 				37870B221E22BA6A00A2EC00 /* SplashViewController.swift in Sources */,
@@ -748,10 +762,12 @@
 				376713821F61B98000024036 /* KrangUtils.swift in Sources */,
 				37E957811F6992B9003D6D74 /* WatchableSearchViewController.swift in Sources */,
 				374C2AA01E242BCD0094D7A4 /* TraktHelper.swift in Sources */,
+				3760116C1F6C9BC7004ED6EF /* SeasonListViewController.swift in Sources */,
 				379C554D1E25529600D51019 /* KrangImageUtils.swift in Sources */,
 				37A19E381E27F290007877B4 /* KrangShow.swift in Sources */,
 				379C55511E2564D100D51019 /* KrangLogger.swift in Sources */,
 				37A19E751E2BFE34007877B4 /* KrangWatchable.swift in Sources */,
+				376011721F6CA021004ED6EF /* SelfSizingCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

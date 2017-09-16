@@ -74,6 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Navigation Bar
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         UINavigationBar.appearance().barTintColor = UIColor.darkBackground
+        UINavigationBar.appearance().tintColor = UIColor.white
         UINavigationBar.appearance().isTranslucent = false
         
         //Buttons

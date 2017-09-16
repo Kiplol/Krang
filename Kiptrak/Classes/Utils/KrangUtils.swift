@@ -26,3 +26,13 @@ class KrangUtils: NSObject {
         return "\(versionNumberString) (\(buildNumberString))"
     }
 }
+
+extension URL {
+    static func from(string: String?) -> URL? {
+        if let string = string {
+            return URL(string: string)
+        } else {
+            return nil
+        }
+    }
+}
