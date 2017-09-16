@@ -41,6 +41,7 @@ class SeasonCollectionViewCell: UICollectionViewCell, SelfSizingCell {
         self.retrieveImageTask?.cancel()
         self.retrieveImageTask = nil
         
+        //@TODO: Use image that's already in there as a placeholder
         if let posterImageURL = season.posterImageURL {
             self.imageView.kf.setImage(with: URL(string: posterImageURL), options: [.transition(.fade(0.2))])
         } else if SeasonCollectionViewCell.listenForRealmChanges {

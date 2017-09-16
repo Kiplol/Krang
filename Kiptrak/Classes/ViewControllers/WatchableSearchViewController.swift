@@ -108,65 +108,36 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
         guard orientation == .right else { return nil }
         
         let selectedObject = self.searchResults[indexPath.row]
-//        let optionsAction = SwipeAction(style: .default, title: "Options") { action, indexPath in
-//            if let linkable = selectedObject as? KrangLinkable {
-//                let actionSheet = UIAlertController(title: linkable.title, message: nil, preferredStyle: .actionSheet)
-//                if let tmbdURL = linkable.urlForTMDB {
-//                    actionSheet.addAction(UIAlertAction(title: "Open in TMDB", style: .default, handler: { (action) in
-//                        UIApplication.shared.open(tmbdURL, options: [:], completionHandler: nil)
-//                    }))
-//                }
-//                if let traktURL = linkable.urlForTrakt {
-//                    actionSheet.addAction(UIAlertAction(title: "Open in Trakt.TV", style: .default, handler: { (action) in
-//                        UIApplication.shared.open(traktURL, options: [:], completionHandler: nil)
-//                    }))
-//                }
-//                if let imdbURL = linkable.urlForIMDB {
-//                    actionSheet.addAction(UIAlertAction(title: "Open in IMDB", style: .default, handler: { (action) in
-//                        UIApplication.shared.open(imdbURL, options: [:], completionHandler: nil)
-//                    }))
-//                }
-//                
-//                actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
-//                    
-//                }))
-//                actionSheet.view.tintColor = UIColor.darkBackground
-//                self.present(actionSheet, animated: true, completion: nil)
-//            }
-//        }
-//        
-//        // customize the action appearance
-////        deleteAction.image = UIImage(named: "delete")
-//        
-//        return [optionsAction]
-        
         var options = [SwipeAction]()
         if let linkable = selectedObject as? KrangLinkable {
             if let tmbdURL = linkable.urlForTMDB {
                 let tmdbAction = SwipeAction(style: .default, title: "TMDB") { action, indexPath in
                     UIApplication.shared.open(tmbdURL, options: [:], completionHandler: nil)
                 }
-//                tmdbAction.image = #imageLiteral(resourceName: "logo_tmdb_100")
+                tmdbAction.image = #imageLiteral(resourceName: "logo_tmdb_70_color")
                 tmdbAction.backgroundColor = UIColor.tmdbBrandPrimaryDark
                 tmdbAction.textColor = UIColor.tmdbBrandPrimaryLight
+                tmdbAction.title = nil
                 options.append(tmdbAction)
             }
             if let traktURL = linkable.urlForTrakt {
                 let traktAction = SwipeAction(style: .default, title: "Trakt") { action, indexPath in
                     UIApplication.shared.open(traktURL, options: [:], completionHandler: nil)
                 }
-//                traktAction.image = #imageLiteral(resourceName: "logo_trakt")
-                traktAction.backgroundColor = UIColor.traktBrandPrimary
-                traktAction.textColor = UIColor.white
+                traktAction.image = #imageLiteral(resourceName: "logo_trakt_70_color")
+                traktAction.backgroundColor = UIColor.black
+                traktAction.textColor = UIColor.traktBrandPrimary
+                traktAction.title = nil
                 options.append(traktAction)
             }
             if let imdbURL = linkable.urlForIMDB {
                 let imdbAction = SwipeAction(style: .default, title: "IMDb") { action, indexPath in
                     UIApplication.shared.open(imdbURL, options: [:], completionHandler: nil)
                 }
-//                imdbAction.image = #imageLiteral(resourceName: "logo_imdb_100")
+                imdbAction.image = #imageLiteral(resourceName: "logo_imdb_70_color")
                 imdbAction.backgroundColor = UIColor.imdbBrandPrimary
                 imdbAction.textColor = UIColor.black
+                imdbAction.title = nil
                 options.append(imdbAction)
             }
         }
