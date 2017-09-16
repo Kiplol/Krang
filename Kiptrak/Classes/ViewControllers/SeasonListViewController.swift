@@ -22,16 +22,27 @@ class SeasonListViewController: KrangViewController, UICollectionViewDataSource,
     
     //MARK:- ivars
     var show: KrangShow! {
+        willSet {
+            self.seasonsNotificationToken?.stop()
+            self.seasonsNotificationToken = nil
+        }
         didSet {
             self.title = show.title
+            self.seasonsNotificationToken = self.show.seasons.addNotificationBlock() {change in
+                if self.isViewLoaded {
+                    self.collectionView.reloadData()
+                }
+            }
         }
     }
+    var seasonsNotificationToken: NotificationToken? = nil
     
     //MAARK:- View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        TraktHelper.shared.getAllSeasons(forShow: self.show) { (error, updatedShow) in
+            
+        }
     }
 
     //MARK:- UICollectionViewDataSource

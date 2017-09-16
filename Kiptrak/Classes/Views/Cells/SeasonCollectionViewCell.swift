@@ -41,13 +41,13 @@ class SeasonCollectionViewCell: UICollectionViewCell, SelfSizingCell {
         self.retrieveImageTask?.cancel()
         self.retrieveImageTask = nil
         
-        if season.posterImageURL != nil {
-            self.imageView.kf.setImage(with: URL.from(string: season.posterImageURL))
+        if let posterImageURL = season.posterImageURL ?? season.show?.imagePosterURL {
+            self.imageView.kf.setImage(with: URL(string: posterImageURL))
         } else {
             let query = try! Realm().objects(KrangSeason.self).filter("traktID == %d", season.traktID)
             self.realmChangeToken = query.addNotificationBlock({ change in
                 if query.count > 0 {
-                    if let updatedPosterImageURL = query[0].posterImageURL {
+                    if let updatedPosterImageURL = query[0].posterImageURL ?? query[0].show?.imagePosterURL {
                         self.imageView.kf.setImage(with: URL(string: updatedPosterImageURL))
                     }
                 }
