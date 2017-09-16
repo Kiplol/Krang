@@ -25,6 +25,9 @@
 		376011701F6C9E29004ED6EF /* SeasonCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3760116E1F6C9E29004ED6EF /* SeasonCollectionViewCell.xib */; };
 		376011721F6CA021004ED6EF /* SelfSizingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376011711F6CA021004ED6EF /* SelfSizingCell.swift */; };
 		376713821F61B98000024036 /* KrangUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376713811F61B98000024036 /* KrangUtils.swift */; };
+		377463F11F6DD16800F08029 /* EpisodeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377463F01F6DD16800F08029 /* EpisodeListViewController.swift */; };
+		377463F41F6DD1FE00F08029 /* EpisodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377463F21F6DD1FE00F08029 /* EpisodeTableViewCell.swift */; };
+		377463F51F6DD1FE00F08029 /* EpisodeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 377463F31F6DD1FE00F08029 /* EpisodeTableViewCell.xib */; };
 		37870B201E22BA6A00A2EC00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37870B1F1E22BA6A00A2EC00 /* AppDelegate.swift */; };
 		37870B221E22BA6A00A2EC00 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37870B211E22BA6A00A2EC00 /* SplashViewController.swift */; };
 		37870B251E22BA6A00A2EC00 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37870B231E22BA6A00A2EC00 /* Main.storyboard */; };
@@ -163,6 +166,9 @@
 		3760116E1F6C9E29004ED6EF /* SeasonCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SeasonCollectionViewCell.xib; path = Kiptrak/Classes/Views/Cells/SeasonCollectionViewCell.xib; sourceTree = "<group>"; };
 		376011711F6CA021004ED6EF /* SelfSizingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelfSizingCell.swift; path = Classes/Protocols/SelfSizingCell.swift; sourceTree = "<group>"; };
 		376713811F61B98000024036 /* KrangUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KrangUtils.swift; path = Classes/Utils/KrangUtils.swift; sourceTree = "<group>"; };
+		377463F01F6DD16800F08029 /* EpisodeListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EpisodeListViewController.swift; path = Classes/ViewControllers/EpisodeListViewController.swift; sourceTree = "<group>"; };
+		377463F21F6DD1FE00F08029 /* EpisodeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EpisodeTableViewCell.swift; path = Kiptrak/Classes/Views/Cells/EpisodeTableViewCell.swift; sourceTree = "<group>"; };
+		377463F31F6DD1FE00F08029 /* EpisodeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EpisodeTableViewCell.xib; path = Kiptrak/Classes/Views/Cells/EpisodeTableViewCell.xib; sourceTree = "<group>"; };
 		37870B1C1E22BA6A00A2EC00 /* Kiptrak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kiptrak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37870B1F1E22BA6A00A2EC00 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37870B211E22BA6A00A2EC00 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
@@ -274,6 +280,7 @@
 		373D32911E22BE9700980925 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				377463F01F6DD16800F08029 /* EpisodeListViewController.swift */,
 				37E957801F6992B9003D6D74 /* WatchableSearchViewController.swift */,
 				3724CBA91E2474AF005387D1 /* KrangViewController.swift */,
 				379C554E1E25586900D51019 /* SettingsViewController.swift */,
@@ -434,6 +441,8 @@
 		37E957821F69CAD4003D6D74 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				377463F21F6DD1FE00F08029 /* EpisodeTableViewCell.swift */,
+				377463F31F6DD1FE00F08029 /* EpisodeTableViewCell.xib */,
 				3760116D1F6C9E29004ED6EF /* SeasonCollectionViewCell.swift */,
 				3760116E1F6C9E29004ED6EF /* SeasonCollectionViewCell.xib */,
 				37E957831F69CB03003D6D74 /* WatchableSearchResultTableViewCell.swift */,
@@ -572,6 +581,7 @@
 				37A19E561E288FFD007877B4 /* Exo-ExtraLight.otf in Resources */,
 				37870B2A1E22BA6A00A2EC00 /* LaunchScreen.storyboard in Resources */,
 				37A19E2F1E25BAEF007877B4 /* Images.xcassets in Resources */,
+				377463F51F6DD1FE00F08029 /* EpisodeTableViewCell.xib in Resources */,
 				37870B271E22BA6A00A2EC00 /* Assets.xcassets in Resources */,
 				37E957861F69CB03003D6D74 /* WatchableSearchResultTableViewCell.xib in Resources */,
 				37870B251E22BA6A00A2EC00 /* Main.storyboard in Resources */,
@@ -745,10 +755,12 @@
 				37E957851F69CB03003D6D74 /* WatchableSearchResultTableViewCell.swift in Sources */,
 				376011621F6ACDF0004ED6EF /* KrangSearchable.swift in Sources */,
 				379C55471E248B4F00D51019 /* RealmManager.swift in Sources */,
+				377463F41F6DD1FE00F08029 /* EpisodeTableViewCell.swift in Sources */,
 				379C554F1E25586900D51019 /* SettingsViewController.swift in Sources */,
 				3760116F1F6C9E29004ED6EF /* SeasonCollectionViewCell.swift in Sources */,
 				373D32961E22C05C00980925 /* Constants.swift in Sources */,
 				37ED660A1E2D7E5400AEE3F4 /* DeeplinkHandler.swift in Sources */,
+				377463F11F6DD16800F08029 /* EpisodeListViewController.swift in Sources */,
 				37870B221E22BA6A00A2EC00 /* SplashViewController.swift in Sources */,
 				3724CBAC1E247557005387D1 /* PlaybackViewController.swift in Sources */,
 				37A19E9C1E2D512E007877B4 /* KrangViewUtils.swift in Sources */,

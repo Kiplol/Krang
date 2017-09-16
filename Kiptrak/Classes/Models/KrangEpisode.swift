@@ -17,6 +17,7 @@ class KrangEpisode: Object {
     dynamic var episode:Int = -1
     dynamic var seasonNumber:Int = -1
     dynamic var title:String = KrangEpisode.placeholderUnknown
+    dynamic var overview: String = KrangEpisode.placeholderUnknown
     dynamic var traktID: Int = -1
     dynamic var imdbID: String? = nil
     dynamic var tmdbID: Int = -1
@@ -59,6 +60,7 @@ class KrangEpisode: Object {
         self.imdbID = json["episode"]["ids"]["imdb"].string
         self.tmdbID = json["episode"]["ids"]["tmdb"].int ?? -1
         self.tvRageID = json["episode"]["ids"]["tvrage"].int ?? -1
+        self.overview = json["episode"]["overview"].string ?? KrangEpisode.placeholderUnknown
         
         if let szStartedAt = json["started_at"].string,
             let szExpiresAt = json["expires_at"].string,

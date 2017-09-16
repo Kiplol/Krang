@@ -75,6 +75,12 @@ class SeasonListViewController: KrangViewController, UICollectionViewDataSource,
     }
     
     //MARK:- UICollectionViewDelegate
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let season = self.show.seasons[indexPath.row]
+        let episodesVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "episodeList") as! EpisodeListViewController
+        episodesVC.season = season
+        self.navigationController?.pushViewController(episodesVC, animated: true)
+    }
     
     //MARK:- UICollectionViewDelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

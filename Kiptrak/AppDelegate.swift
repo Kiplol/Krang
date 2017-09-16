@@ -81,7 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Buttons
         UIButton.appearance().tintColor = UIColor.white
         UIBarButtonItem.appearance().tintColor = UIColor.white
-        UIBarButtonItem.appearance().setTitleTextAttributes(UINavigationBar.appearance().titleTextAttributes, for: .normal)
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Exo-Light-Italic", size: 13.0)!, NSForegroundColorAttributeName: UIColor.white], for: .normal)
         
         //Labels
         let labelAppearance = UILabel.appearance()

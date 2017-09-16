@@ -226,6 +226,69 @@ class TraktHelper: NSObject {
         }
     }
     
+    func getAllEpisodes(forSeason season: KrangSeason, completion: ((Error?, KrangSeason?) -> ())?) {
+        //@TODO
+        guard let show = season.show else {
+            completion?(NSError(domain: "Krang", code: -1, userInfo: ["debugMessage": "no show for season"]), season)
+            return
+        }
+        
+        let url = String(format: Constants.traktGetEpisodesForSeasonURLFormat, show.slug, season.seasonNumber)
+        let _ = self.oauth.client.get(url, parameters: [:], headers: TraktHelper.defaultHeaders(), success: { (response) in
+            //Success
+            let json = JSON(data: response.data)
+            var theseEpisodes = [KrangEpisode]()
+            if let episodeDics = json.array {
+                KrangRealmUtils.makeChanges {
+                    for episodeDic in episodeDics {
+                        guard let traktID = episodeDic["ids"]["trakt"].int else {
+                            continue
+                        }
+                        
+                        let episode: KrangEpisode = {
+                            if let existingEpisode = KrangEpisode.with(traktID: traktID) {
+                                existingEpisode.update(withJSON: episodeDic)
+                                return existingEpisode
+                            } else {
+                                let newEpisode = KrangEpisode()
+                                newEpisode.update(withJSON: episodeDic)
+                                newEpisode.saveToDatabaseOutsideWriteTransaction()
+                                return newEpisode
+                            }
+                        }()
+                        if !episode.seasons.contains(season) {
+                            season.episodes.append(episode)
+                        }
+                        if !episode.shows.contains(show) {
+                            show.episodes.append(episode)
+                        }
+                        theseEpisodes.append(episode)
+                    }
+                }
+                
+                //Update images
+                let imageUpdateGroup = DispatchGroup()
+                theseEpisodes.filter { $0.stillImageURL == nil }.forEach {
+                    if !TraktHelper.asyncImageLoadingOnSearch {
+                        imageUpdateGroup.enter()
+                    }
+                    TMDBHelper.shared.update(episode: $0, completion: { (error, updatedEpisode) in
+                        if !TraktHelper.asyncImageLoadingOnSearch {
+                            imageUpdateGroup.leave()
+                        }
+                    })
+                }
+                imageUpdateGroup.notify(queue: DispatchQueue.main) {
+                    completion?(nil, season)
+                }
+            }
+            
+        }) { (error) in
+            //Failure
+            completion?(error, season)
+        }
+    }
+    
     func search(withQuery query: String, completion: ((Error?, [KrangSearchable]) -> ())?) -> OAuthSwiftRequestHandle? {
         guard !query.isEmpty else {
             completion?(nil, [])
