@@ -12,6 +12,7 @@ PODS:
     - Realm (= 2.1.2)
   - SwiftyBeaver (1.1.1)
   - SwiftyJSON (3.1.4)
+  - SwipeCellKit (1.9.1)
 
 DEPENDENCIES:
   - Hero
@@ -23,6 +24,7 @@ DEPENDENCIES:
   - RealmSwift
   - SwiftyBeaver
   - SwiftyJSON
+  - SwipeCellKit
 
 SPEC CHECKSUMS:
   Hero: 14038043c41ea53ba1aa43b4d3655f377d78bea6
@@ -35,7 +37,8 @@ SPEC CHECKSUMS:
   RealmSwift: 17d6ee30b6f9df86364408c2197492e33bfea567
   SwiftyBeaver: 2b68694df862381235e32bcfc4ec991e26bf131d
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
+  SwipeCellKit: e9ff953c820394a4e641cfb0118b6c959506aec2
 
-PODFILE CHECKSUM: 3d9b335e0285aa5c8c78d7489f6ba4159a40ee08
+PODFILE CHECKSUM: 2b80cf3a56c6894513331a7673580a07cbadcfeb
 
 COCOAPODS: 1.3.1

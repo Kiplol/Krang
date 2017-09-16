@@ -15,6 +15,7 @@ target 'Kiptrak' do
 	shared_pods
 	pod 'Hero'
 	pod 'Pulley'
+	pod 'SwipeCellKit'
 end
 
 target 'Currently Watching Widget' do

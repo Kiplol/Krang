@@ -78,54 +78,68 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let selectedObject = self.searchResults[indexPath.row]
-        if let linkable = selectedObject as? KrangLinkable {
-            let actionSheet = UIAlertController(title: linkable.title, message: nil, preferredStyle: .actionSheet)
-            if let tmbdURL = linkable.urlForTMDB {
-                actionSheet.addAction(UIAlertAction(title: "Open in TMDB", style: .default, handler: { (action) in
-                    UIApplication.shared.open(tmbdURL, options: [:], completionHandler: nil)
-                }))
-            }
-            if let traktURL = linkable.urlForTrakt {
-                actionSheet.addAction(UIAlertAction(title: "Open in Trakt.TV", style: .default, handler: { (action) in
-                    UIApplication.shared.open(traktURL, options: [:], completionHandler: nil)
-                }))
-            }
-            if let imdbURL = linkable.urlForIMDB {
-                actionSheet.addAction(UIAlertAction(title: "Open in IMDB", style: .default, handler: { (action) in
-                    UIApplication.shared.open(imdbURL, options: [:], completionHandler: nil)
-                }))
-            }
-            if let watchable = linkable as? KrangWatchable {
-                actionSheet.addAction(UIAlertAction(title: "Check In", style: .default, handler: { (action) in
-                    TraktHelper.shared.checkIn(to: watchable, completion: { (error, checkedInWatchable) in
-                        if checkedInWatchable != nil {
-                            if let drawer = self.pulleyViewController {
-                                drawer.setDrawerPosition(position: .collapsed, animated: true)
-                            }
-                        }
-                    })
-                }))
-            } else if let show = linkable as? KrangShow {
-                actionSheet.addAction(UIAlertAction(title: "Check In", style: .default, handler: { (action) in
-                    let lol = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "seasonList") as! SeasonListViewController
-                    lol.show = show
-                    self.navigationController?.pushViewController(lol, animated: true)
-                    self.navigationController?.setNavigationBarHidden(false, animated: true)
-                }))
-            }
-            
-            actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
-                
-            }))
-            actionSheet.view.tintColor = UIColor.darkBackground
-            self.present(actionSheet, animated: true, completion: nil)
-        }
-        
-        if let show = selectedObject as? KrangShow {
-            TraktHelper.shared.getAllSeasons(forShow: show, completion: { (error, updatedShow) in
-
+        if let watchable = selectedObject as? KrangWatchable {
+            TraktHelper.shared.checkIn(to: watchable, completion: { (error, checkedInWatchable) in
+                if checkedInWatchable != nil {
+                    if let drawer = self.pulleyViewController {
+                        drawer.setDrawerPosition(position: .collapsed, animated: true)
+                    }
+                }
             })
+        } else if let show = selectedObject as? KrangShow {
+            let seasonsVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "seasonList") as! SeasonListViewController
+            seasonsVC.show = show
+            self.navigationController?.pushViewController(seasonsVC, animated: true)
+            self.navigationController?.setNavigationBarHidden(false, animated: true)
         }
+//        if let linkable = selectedObject as? KrangLinkable {
+//            let actionSheet = UIAlertController(title: linkable.title, message: nil, preferredStyle: .actionSheet)
+//            if let tmbdURL = linkable.urlForTMDB {
+//                actionSheet.addAction(UIAlertAction(title: "Open in TMDB", style: .default, handler: { (action) in
+//                    UIApplication.shared.open(tmbdURL, options: [:], completionHandler: nil)
+//                }))
+//            }
+//            if let traktURL = linkable.urlForTrakt {
+//                actionSheet.addAction(UIAlertAction(title: "Open in Trakt.TV", style: .default, handler: { (action) in
+//                    UIApplication.shared.open(traktURL, options: [:], completionHandler: nil)
+//                }))
+//            }
+//            if let imdbURL = linkable.urlForIMDB {
+//                actionSheet.addAction(UIAlertAction(title: "Open in IMDB", style: .default, handler: { (action) in
+//                    UIApplication.shared.open(imdbURL, options: [:], completionHandler: nil)
+//                }))
+//            }
+//            if let watchable = linkable as? KrangWatchable {
+//                actionSheet.addAction(UIAlertAction(title: "Check In", style: .default, handler: { (action) in
+//                    TraktHelper.shared.checkIn(to: watchable, completion: { (error, checkedInWatchable) in
+//                        if checkedInWatchable != nil {
+//                            if let drawer = self.pulleyViewController {
+//                                drawer.setDrawerPosition(position: .collapsed, animated: true)
+//                            }
+//                        }
+//                    })
+//                }))
+//            } else if let show = linkable as? KrangShow {
+//                actionSheet.addAction(UIAlertAction(title: "Check In", style: .default, handler: { (action) in
+//                    let lol = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "seasonList") as! SeasonListViewController
+//                    lol.show = show
+//                    self.navigationController?.pushViewController(lol, animated: true)
+//                    self.navigationController?.setNavigationBarHidden(false, animated: true)
+//                }))
+//            }
+//            
+//            actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+//                
+//            }))
+//            actionSheet.view.tintColor = UIColor.darkBackground
+//            self.present(actionSheet, animated: true, completion: nil)
+//        }
+//        
+//        if let show = selectedObject as? KrangShow {
+//            TraktHelper.shared.getAllSeasons(forShow: show, completion: { (error, updatedShow) in
+//
+//            })
+//        }
     }
 }
 

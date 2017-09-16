@@ -13,6 +13,7 @@ import RealmSwift
 class SeasonCollectionViewCell: UICollectionViewCell, SelfSizingCell {
 
     static let aspectRatio: CGFloat = 19.0 / 27.0
+    private static let listenForRealmChanges = false
     
     //MARK:- IBOutlets
     @IBOutlet weak var imageView: UIImageView!
@@ -29,7 +30,6 @@ class SeasonCollectionViewCell: UICollectionViewCell, SelfSizingCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         self.realmChangeToken?.stop()
-        self.imageView.image = nil
         self.retrieveImageTask?.cancel()
         self.retrieveImageTask = nil
     }
@@ -41,9 +41,9 @@ class SeasonCollectionViewCell: UICollectionViewCell, SelfSizingCell {
         self.retrieveImageTask?.cancel()
         self.retrieveImageTask = nil
         
-        if let posterImageURL = season.posterImageURL ?? season.show?.imagePosterURL {
-            self.imageView.kf.setImage(with: URL(string: posterImageURL))
-        } else {
+        if let posterImageURL = season.posterImageURL {
+            self.imageView.kf.setImage(with: URL(string: posterImageURL), options: [.transition(.fade(0.2))])
+        } else if SeasonCollectionViewCell.listenForRealmChanges {
             let query = try! Realm().objects(KrangSeason.self).filter("traktID == %d", season.traktID)
             self.realmChangeToken = query.addNotificationBlock({ change in
                 if query.count > 0 {
@@ -52,6 +52,12 @@ class SeasonCollectionViewCell: UICollectionViewCell, SelfSizingCell {
                     }
                 }
             })
+        } else {
+            if let showPosterImage = season.show?.imagePosterURL {
+                self.imageView.kf.setImage(with: URL(string: showPosterImage))
+            } else {
+                self.imageView.image = nil
+            }
         }
     }
     

@@ -30,7 +30,25 @@ class SeasonListViewController: KrangViewController, UICollectionViewDataSource,
             self.title = show.title
             self.seasonsNotificationToken = self.show.seasons.addNotificationBlock() {change in
                 if self.isViewLoaded {
-                    self.collectionView.reloadData()
+                    switch change {
+                    case .initial(_):
+                        self.collectionView.reloadData()
+                    case .update(let results, deletions: let deletions, insertions: let insertions, modifications: let modifications):
+                        self.collectionView.performBatchUpdates({ 
+                            self.collectionView.insertItems(at: insertions.map { IndexPath(row: $0, section: 0) })
+                            self.collectionView.deleteItems(at: deletions.map { IndexPath(row: $0, section: 0) })
+                            for row in modifications {
+                                let indexPath = IndexPath(row: row, section: 0)
+                                let season = results[indexPath.row]
+                                if let cell = self.collectionView.cellForItem(at: indexPath) as? SeasonCollectionViewCell {
+                                    cell.update(withSeason: season)
+                                }
+                            }
+                        }, completion: nil)
+                    default:
+                        break
+                    }
+                    
                 }
             }
         }
