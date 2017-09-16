@@ -41,6 +41,10 @@ class Constants: NSObject {
 extension UIColor {
     class var darkBackground: UIColor { get { return UIColor(hex: "1E1E1E") } }
     class var accent: UIColor { get { return UIColor(white: 1.0, alpha: 0.1) } }
+    class var tmdbBrandPrimaryLight: UIColor { return UIColor(hex: "01d277") }
+    class var tmdbBrandPrimaryDark: UIColor { return UIColor(hex: "081c24") }
+    class var imdbBrandPrimary: UIColor { return UIColor(hex: "f5de50") }
+    class var traktBrandPrimary: UIColor { return UIColor(hex: "EA1921") }
 }
 
 extension Notification.Name {

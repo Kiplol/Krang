@@ -9,8 +9,9 @@
 import UIKit
 import RealmSwift
 import Kingfisher
+import SwipeCellKit
 
-class WatchableSearchResultTableViewCell: UITableViewCell {
+class WatchableSearchResultTableViewCell: SwipeTableViewCell {
 
     @IBOutlet weak var imageViewThumbnail: UIImageView!
     @IBOutlet weak var labelTitle: UILabel!

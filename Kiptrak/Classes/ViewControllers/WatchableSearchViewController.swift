@@ -10,8 +10,9 @@ import UIKit
 import Pulley
 import RealmSwift
 import OAuthSwift
+import SwipeCellKit
 
-class WatchableSearchViewController: KrangViewController, UISearchResultsUpdating, UITableViewDataSource, UITableViewDelegate {
+class WatchableSearchViewController: KrangViewController, UISearchResultsUpdating, UITableViewDataSource, UITableViewDelegate, SwipeTableViewCellDelegate {
     
     static let cellReuseIdentifier = "searchResultsCell"
 
@@ -70,6 +71,7 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
         let cell = tableView.dequeueReusableCell(withIdentifier: WatchableSearchViewController.cellReuseIdentifier)
         if let searchResultCell = cell as? WatchableSearchResultTableViewCell {
             searchResultCell.update(withSearchable: self.searchResults[indexPath.row])
+            searchResultCell.delegate = self
         }
         return cell!
     }
@@ -92,54 +94,77 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
             self.navigationController?.pushViewController(seasonsVC, animated: true)
             self.navigationController?.setNavigationBarHidden(false, animated: true)
         }
-//        if let linkable = selectedObject as? KrangLinkable {
-//            let actionSheet = UIAlertController(title: linkable.title, message: nil, preferredStyle: .actionSheet)
-//            if let tmbdURL = linkable.urlForTMDB {
-//                actionSheet.addAction(UIAlertAction(title: "Open in TMDB", style: .default, handler: { (action) in
-//                    UIApplication.shared.open(tmbdURL, options: [:], completionHandler: nil)
-//                }))
-//            }
-//            if let traktURL = linkable.urlForTrakt {
-//                actionSheet.addAction(UIAlertAction(title: "Open in Trakt.TV", style: .default, handler: { (action) in
-//                    UIApplication.shared.open(traktURL, options: [:], completionHandler: nil)
-//                }))
-//            }
-//            if let imdbURL = linkable.urlForIMDB {
-//                actionSheet.addAction(UIAlertAction(title: "Open in IMDB", style: .default, handler: { (action) in
-//                    UIApplication.shared.open(imdbURL, options: [:], completionHandler: nil)
-//                }))
-//            }
-//            if let watchable = linkable as? KrangWatchable {
-//                actionSheet.addAction(UIAlertAction(title: "Check In", style: .default, handler: { (action) in
-//                    TraktHelper.shared.checkIn(to: watchable, completion: { (error, checkedInWatchable) in
-//                        if checkedInWatchable != nil {
-//                            if let drawer = self.pulleyViewController {
-//                                drawer.setDrawerPosition(position: .collapsed, animated: true)
-//                            }
-//                        }
-//                    })
-//                }))
-//            } else if let show = linkable as? KrangShow {
-//                actionSheet.addAction(UIAlertAction(title: "Check In", style: .default, handler: { (action) in
-//                    let lol = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "seasonList") as! SeasonListViewController
-//                    lol.show = show
-//                    self.navigationController?.pushViewController(lol, animated: true)
-//                    self.navigationController?.setNavigationBarHidden(false, animated: true)
-//                }))
-//            }
-//            
-//            actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+    }
+    
+    //MARK:- SwipeTableViewCellDelegate
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        guard orientation == .right else { return nil }
+        
+        let selectedObject = self.searchResults[indexPath.row]
+//        let optionsAction = SwipeAction(style: .default, title: "Options") { action, indexPath in
+//            if let linkable = selectedObject as? KrangLinkable {
+//                let actionSheet = UIAlertController(title: linkable.title, message: nil, preferredStyle: .actionSheet)
+//                if let tmbdURL = linkable.urlForTMDB {
+//                    actionSheet.addAction(UIAlertAction(title: "Open in TMDB", style: .default, handler: { (action) in
+//                        UIApplication.shared.open(tmbdURL, options: [:], completionHandler: nil)
+//                    }))
+//                }
+//                if let traktURL = linkable.urlForTrakt {
+//                    actionSheet.addAction(UIAlertAction(title: "Open in Trakt.TV", style: .default, handler: { (action) in
+//                        UIApplication.shared.open(traktURL, options: [:], completionHandler: nil)
+//                    }))
+//                }
+//                if let imdbURL = linkable.urlForIMDB {
+//                    actionSheet.addAction(UIAlertAction(title: "Open in IMDB", style: .default, handler: { (action) in
+//                        UIApplication.shared.open(imdbURL, options: [:], completionHandler: nil)
+//                    }))
+//                }
 //                
-//            }))
-//            actionSheet.view.tintColor = UIColor.darkBackground
-//            self.present(actionSheet, animated: true, completion: nil)
+//                actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+//                    
+//                }))
+//                actionSheet.view.tintColor = UIColor.darkBackground
+//                self.present(actionSheet, animated: true, completion: nil)
+//            }
 //        }
 //        
-//        if let show = selectedObject as? KrangShow {
-//            TraktHelper.shared.getAllSeasons(forShow: show, completion: { (error, updatedShow) in
-//
-//            })
-//        }
+//        // customize the action appearance
+////        deleteAction.image = UIImage(named: "delete")
+//        
+//        return [optionsAction]
+        
+        var options = [SwipeAction]()
+        if let linkable = selectedObject as? KrangLinkable {
+            if let tmbdURL = linkable.urlForTMDB {
+                let tmdbAction = SwipeAction(style: .default, title: "TMDB") { action, indexPath in
+                    UIApplication.shared.open(tmbdURL, options: [:], completionHandler: nil)
+                }
+//                tmdbAction.image = #imageLiteral(resourceName: "logo_tmdb_100")
+                tmdbAction.backgroundColor = UIColor.tmdbBrandPrimaryDark
+                tmdbAction.textColor = UIColor.tmdbBrandPrimaryLight
+                options.append(tmdbAction)
+            }
+            if let traktURL = linkable.urlForTrakt {
+                let traktAction = SwipeAction(style: .default, title: "Trakt") { action, indexPath in
+                    UIApplication.shared.open(traktURL, options: [:], completionHandler: nil)
+                }
+//                traktAction.image = #imageLiteral(resourceName: "logo_trakt")
+                traktAction.backgroundColor = UIColor.traktBrandPrimary
+                traktAction.textColor = UIColor.white
+                options.append(traktAction)
+            }
+            if let imdbURL = linkable.urlForIMDB {
+                let imdbAction = SwipeAction(style: .default, title: "IMDb") { action, indexPath in
+                    UIApplication.shared.open(imdbURL, options: [:], completionHandler: nil)
+                }
+//                imdbAction.image = #imageLiteral(resourceName: "logo_imdb_100")
+                imdbAction.backgroundColor = UIColor.imdbBrandPrimary
+                imdbAction.textColor = UIColor.black
+                options.append(imdbAction)
+            }
+        }
+        
+        return options.isEmpty ? nil : options
     }
 }
 
