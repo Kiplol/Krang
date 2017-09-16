@@ -75,7 +75,7 @@ extension KrangShow: KrangLinkable {
             return nil
         }
         
-        let szURL = "https://www.themoviedb.org/movie/\(self.tmdbID)-\(self.slug)"
+        let szURL = "https://www.themoviedb.org/tv/\(self.tmdbID)-\(self.slug)"
         return URL(string: szURL)
     }
     
