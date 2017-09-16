@@ -144,6 +144,12 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
         
         return options.isEmpty ? nil : options
     }
+    
+    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeTableOptions {
+        var options = SwipeTableOptions()
+        options.transitionStyle = .drag
+        return options
+    }
 }
 
 extension WatchableSearchViewController: PulleyDrawerViewControllerDelegate, UISearchBarDelegate {
