@@ -59,12 +59,11 @@ class KrangActionableFullScreenAlertView: UIView {
         }
         
         let timeElapsed = Date().timeIntervalSince1970 - startTime.timeIntervalSince1970
-
         if timeElapsed < duration {
             let secondsLeft = String(format: "%.2f", duration - timeElapsed)
             self.labelTitle.text = "\(self.title != nil ? self.title! + " in " : "")\(secondsLeft)"
             let progress = timeElapsed / duration
-            self.progressView.progress = progress
+            self.progressView.progress = 1.0 - progress
         } else {
             self.labelTitle.text = self.title
             self.afterCountdownAction?(self)

@@ -143,13 +143,36 @@ class PlaybackViewController: KrangViewController {
     }
     
     @IBAction func cancelTapped(_ sender: Any) {
-        TraktHelper.shared.cancelAllCheckins { (error) in
-            
+        let _ = KrangActionableFullScreenAlertView.show(withTitle: "Cancelling checkin", countdownDuration: 3.0, afterCountdownAction: { (alert) in
+            TraktHelper.shared.cancelAllCheckins { (error) in
+                alert.dismiss(true)
+            }
+        }, buttonTitle: "Stay Checked In") { (alert, button) in
+            alert.dismiss(true)
         }
+        
     }
     
     //MARK:- Notifications
-    func didCheckInToAWatchable(_ notfic: Notification) {
+    func didCheckInToAWatchable(_ notif: Notification) {
+        if let watchable = notif.object as? KrangWatchable {
+            if let movie = watchable as? KrangMovie {
+                self.traktMovieID = movie.traktID
+                self.traktEpisodeID = nil
+            } else if let episode = watchable as? KrangEpisode {
+                self.traktEpisodeID = episode.traktID
+                self.traktMovieID = nil
+            }
+            self.watchable = watchable
+            if let coverImageURL = watchable.fanartImageURL {
+                KrangUser.getCurrentUser().makeChanges {
+                    KrangUser.getCurrentUser().coverImageURL = coverImageURL.absoluteString
+                }
+            }
+            self.updateViews(withWatchable: watchable)
+            self.updateProgressView(withCheckin: watchable.checkin)
+        }
+        //Still do this because we need the checkin.
         self.refreshCheckin(nil)
     }
     //MARK:-

@@ -28,9 +28,20 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L1t-9d-Y2j" customClass="KDCircularProgress" customModule="KDCircularProgress">
                                         <rect key="frame" x="0.0" y="0.0" width="250" height="250"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="IBColor1">
+                                                <color key="value" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="IBColor2">
+                                                <color key="value" red="0.55124022502033221" green="0.6012342555009248" blue="0.76822255710659904" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="IBColor3">
+                                                <color key="value" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HM1-gl-v0e">
-                                        <rect key="frame" x="26" y="113" width="198" height="24"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HM1-gl-v0e">
+                                        <rect key="frame" x="50" y="113" width="150" height="24"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -39,13 +50,13 @@
                                 <constraints>
                                     <constraint firstItem="HM1-gl-v0e" firstAttribute="centerY" secondItem="wR3-uf-y0z" secondAttribute="centerY" id="3Sl-0B-drz"/>
                                     <constraint firstAttribute="width" secondItem="wR3-uf-y0z" secondAttribute="height" multiplier="1:1" id="3Xa-cq-3yb"/>
-                                    <constraint firstItem="HM1-gl-v0e" firstAttribute="leading" secondItem="wR3-uf-y0z" secondAttribute="leading" constant="26" id="4bS-pG-CqI"/>
+                                    <constraint firstItem="HM1-gl-v0e" firstAttribute="leading" secondItem="wR3-uf-y0z" secondAttribute="leading" constant="50" id="4bS-pG-CqI"/>
                                     <constraint firstItem="L1t-9d-Y2j" firstAttribute="top" secondItem="wR3-uf-y0z" secondAttribute="top" id="Kmd-pq-3wI"/>
                                     <constraint firstItem="L1t-9d-Y2j" firstAttribute="leading" secondItem="wR3-uf-y0z" secondAttribute="leading" id="WL6-Eh-Btv"/>
                                     <constraint firstAttribute="bottom" secondItem="L1t-9d-Y2j" secondAttribute="bottom" id="Wfu-Zd-mpD"/>
                                     <constraint firstAttribute="width" constant="250" id="ec2-Aa-gGy"/>
                                     <constraint firstAttribute="trailing" secondItem="L1t-9d-Y2j" secondAttribute="trailing" id="jeK-2F-IjH"/>
-                                    <constraint firstAttribute="trailing" secondItem="HM1-gl-v0e" secondAttribute="trailing" constant="26" id="ypK-1i-H5W"/>
+                                    <constraint firstAttribute="trailing" secondItem="HM1-gl-v0e" secondAttribute="trailing" constant="50" id="ypK-1i-H5W"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">

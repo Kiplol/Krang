@@ -12,7 +12,7 @@ import MarqueeLabel
 
 class TodayViewController: UIViewController, NCWidgetProviding {
     
-    private static let openURLsInAppFirst = false
+    private static let openURLsInAppFirst = true
     //MARK:- ivars
     @IBOutlet weak var labelTitle: MarqueeLabel!
     @IBOutlet weak var imageBackground: UIImageView!

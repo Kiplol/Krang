@@ -180,6 +180,13 @@ class TMDBHelper: NSObject {
                 let smallestStillURL = self.configuration.imageBaseURL + self.configuration.stillSizes[0] + stillPath
                 episode.stillImageURL = stillURL
                 episode.stillThumbnailImageURL = smallestStillURL
+                
+                let realmStringURLs = self.configuration.stillSizes.map {
+                    self.configuration.imageBaseURL + $0 + stillPath
+                    }.map {
+                        RealmString.with(value: $0)
+                }
+                episode.stillImageURLs = List<RealmString>(realmStringURLs)
             }
         }
     }

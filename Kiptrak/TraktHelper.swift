@@ -401,7 +401,7 @@ class TraktHelper: NSObject {
                 //Success
                 completion?(nil, watchable)
                 DispatchQueue.main.async {
-                    NotificationCenter.default.post(name: Notification.Name.didCheckInToWatchable, object: nil, userInfo: nil)
+                    NotificationCenter.default.post(name: Notification.Name.didCheckInToWatchable, object: watchable, userInfo: nil)
                 }
             }) { (error) in
                 //Failure

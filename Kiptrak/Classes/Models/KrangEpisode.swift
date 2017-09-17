@@ -26,6 +26,7 @@ class KrangEpisode: Object {
     dynamic var posterThumbnailImageURL: String? = nil
     var posterImageURLs: List<RealmString> = List<RealmString>()
     dynamic var stillImageURL: String? = nil
+    var stillImageURLs: List<RealmString> = List<RealmString>()
     dynamic var stillThumbnailImageURL: String? = nil
     dynamic var checkin:KrangCheckin? = nil
     dynamic var originalJSONString: String = ""
