@@ -70,7 +70,7 @@ class KrangActionableFullScreenAlertView: UIView {
             self.afterCountdownAction?(self)
             self.afterCountdownAction = nil
             self.progressView.progress = 1.0 / 3.0
-            self.progressView.startAngle = timeElapsed
+            self.progressView.startAngle = timeElapsed * 100.0
         }
     }
 
