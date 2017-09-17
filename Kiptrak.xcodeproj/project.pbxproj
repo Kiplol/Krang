@@ -28,6 +28,8 @@
 		377463F11F6DD16800F08029 /* EpisodeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377463F01F6DD16800F08029 /* EpisodeListViewController.swift */; };
 		377463F41F6DD1FE00F08029 /* EpisodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377463F21F6DD1FE00F08029 /* EpisodeTableViewCell.swift */; };
 		377463F51F6DD1FE00F08029 /* EpisodeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 377463F31F6DD1FE00F08029 /* EpisodeTableViewCell.xib */; };
+		377463F71F6E340E00F08029 /* KrangActionableFullScreenAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377463F61F6E340E00F08029 /* KrangActionableFullScreenAlertView.swift */; };
+		377463F91F6F190500F08029 /* KrangActionableFullScreenAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 377463F81F6F190500F08029 /* KrangActionableFullScreenAlertView.xib */; };
 		37870B201E22BA6A00A2EC00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37870B1F1E22BA6A00A2EC00 /* AppDelegate.swift */; };
 		37870B221E22BA6A00A2EC00 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37870B211E22BA6A00A2EC00 /* SplashViewController.swift */; };
 		37870B251E22BA6A00A2EC00 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37870B231E22BA6A00A2EC00 /* Main.storyboard */; };
@@ -169,6 +171,8 @@
 		377463F01F6DD16800F08029 /* EpisodeListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EpisodeListViewController.swift; path = Classes/ViewControllers/EpisodeListViewController.swift; sourceTree = "<group>"; };
 		377463F21F6DD1FE00F08029 /* EpisodeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EpisodeTableViewCell.swift; path = Kiptrak/Classes/Views/Cells/EpisodeTableViewCell.swift; sourceTree = "<group>"; };
 		377463F31F6DD1FE00F08029 /* EpisodeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EpisodeTableViewCell.xib; path = Kiptrak/Classes/Views/Cells/EpisodeTableViewCell.xib; sourceTree = "<group>"; };
+		377463F61F6E340E00F08029 /* KrangActionableFullScreenAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KrangActionableFullScreenAlertView.swift; path = Kiptrak/Classes/Views/KrangActionableFullScreenAlertView.swift; sourceTree = "<group>"; };
+		377463F81F6F190500F08029 /* KrangActionableFullScreenAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KrangActionableFullScreenAlertView.xib; path = Kiptrak/Classes/Views/KrangActionableFullScreenAlertView.xib; sourceTree = "<group>"; };
 		37870B1C1E22BA6A00A2EC00 /* Kiptrak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kiptrak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37870B1F1E22BA6A00A2EC00 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37870B211E22BA6A00A2EC00 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
@@ -375,6 +379,8 @@
 		379C55531E259BAE00D51019 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				377463F61F6E340E00F08029 /* KrangActionableFullScreenAlertView.swift */,
+				377463F81F6F190500F08029 /* KrangActionableFullScreenAlertView.xib */,
 				37F0DB661E31705300FAC6DB /* KrangProgressView.swift */,
 				379C55551E259BD000D51019 /* KrangAvatarView.swift */,
 				37E957821F69CAD4003D6D74 /* Cells */,
@@ -594,6 +600,7 @@
 				37A19E4E1E288FFD007877B4 /* Exo-Black.otf in Resources */,
 				37A19E541E288FFD007877B4 /* Exo-ExtraBold.otf in Resources */,
 				37A19E501E288FFD007877B4 /* Exo-Bold.otf in Resources */,
+				377463F91F6F190500F08029 /* KrangActionableFullScreenAlertView.xib in Resources */,
 				37A19E551E288FFD007877B4 /* Exo-ExtraLight-Italic.otf in Resources */,
 				37A19E5E1E288FFD007877B4 /* Exo-Thin.otf in Resources */,
 				37A19E4D1E288FFD007877B4 /* Exo-Black-Italic.otf in Resources */,
@@ -711,6 +718,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Kiptrak/Pods-Kiptrak-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
 				"${BUILT_PRODUCTS_DIR}/Hue/Hue.framework",
+				"${BUILT_PRODUCTS_DIR}/KDCircularProgress/KDCircularProgress.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/OAuthSwift/OAuthSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Pulley/Pulley.framework",
@@ -725,6 +733,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hue.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KDCircularProgress.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OAuthSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pulley.framework",
@@ -749,6 +758,7 @@
 			files = (
 				37A19E321E269C96007877B4 /* KrangMovie.swift in Sources */,
 				376011661F6C382A004ED6EF /* KrangLinkable.swift in Sources */,
+				377463F71F6E340E00F08029 /* KrangActionableFullScreenAlertView.swift in Sources */,
 				37E7B7561E2DA023001D4799 /* KrangCheckin.swift in Sources */,
 				37A19E341E26E914007877B4 /* TMDBHelper.swift in Sources */,
 				3724CBAA1E2474AF005387D1 /* KrangViewController.swift in Sources */,

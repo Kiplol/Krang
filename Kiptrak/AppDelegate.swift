@@ -13,6 +13,7 @@ import OAuthSwift
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    static var instance: AppDelegate!
     
     static var shared: AppDelegate {
         get {
@@ -24,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         BuddyBuildSDK.setup()
         
+        AppDelegate.instance = self;
         self.setupAppearance()
         
         //Init the RealmManager

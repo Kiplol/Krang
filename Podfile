@@ -13,6 +13,7 @@ end
 
 target 'Kiptrak' do
 	shared_pods
+	pod 'KDCircularProgress'
 	pod 'Hero'
 	pod 'Pulley'
 	pod 'SwipeCellKit'

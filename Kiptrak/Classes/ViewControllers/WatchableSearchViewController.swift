@@ -88,12 +88,19 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
         tableView.deselectRow(at: indexPath, animated: true)
         let selectedObject = self.searchResults[indexPath.row]
         if let watchable = selectedObject as? KrangWatchable {
-            TraktHelper.shared.checkIn(to: watchable, completion: { (error, checkedInWatchable) in
-                if checkedInWatchable != nil {
-                    if let drawer = self.pulleyViewController {
-                        drawer.setDrawerPosition(position: .collapsed, animated: true)
+            let _ = KrangActionableFullScreenAlertView.show(withTitle: "Checking in to \(watchable.title)", countdownDuration: 3.0, afterCountdownAction: { (alert) in
+                alert.button.isHidden = true
+                TraktHelper.shared.checkIn(to: watchable, completion: { (error, checkedInWatchable) in
+                    alert.dismiss(true) {
+                        if checkedInWatchable != nil {
+                            if let drawer = self.pulleyViewController {
+                                drawer.setDrawerPosition(position: .collapsed, animated: true)
+                            }
+                        }
                     }
-                }
+                })
+            }, buttonTitle: "Cancel Checkin", buttonAction: { (alert, _) in
+                alert.dismiss(true)
             })
         } else if let show = selectedObject as? KrangShow {
             let seasonsVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "seasonList") as! SeasonListViewController

@@ -88,6 +88,11 @@ extension UIView {
         }
     }
     
+    func roundCorners() {
+        let dimension = min(self.bounds.size.height, self.bounds.size.width)
+        self.cornerRadius = dimension * 0.5
+    }
+    
 }
 
 extension UILabel {

@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>KDCircularProgress.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Kingfisher.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -72,17 +77,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>19E855264B2AE34A664C46A9AF2D41DD</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>320AD47B0C6BA014D301395D3BFC8FB6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4959842FE42FDD97E5ED77A63D1861E2</key>
+		<key>322428ECC8C5EC71F14C92233787C7AC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -97,17 +97,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>568F1DA46CDE33623140841B416AA87F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>62187D55222419E4F1610596C1CAB331</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>ACE110E902AA03BCB8C29FC306748ED6</key>
+		<key>89BD1229E52AE3BC07D6CBDCF4B80B59</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B02EEFA74480734E967D08C7978AA4A6</key>
+		<key>97287E2EEB0C3E5C0DDC91D44F6C593E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>ACE110E902AA03BCB8C29FC306748ED6</key>
 		<dict>
 			<key>primary</key>
 			<true/>

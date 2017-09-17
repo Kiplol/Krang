@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="KrangActionableFullScreenAlertView" customModule="Kiptrak" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bs5-85-rPR">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="aKo-gO-Nph">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wR3-uf-y0z">
+                                <rect key="frame" x="62.5" y="208" width="250" height="250"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L1t-9d-Y2j" customClass="KDCircularProgress" customModule="KDCircularProgress">
+                                        <rect key="frame" x="0.0" y="0.0" width="250" height="250"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HM1-gl-v0e">
+                                        <rect key="frame" x="26" y="113" width="198" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="HM1-gl-v0e" firstAttribute="centerY" secondItem="wR3-uf-y0z" secondAttribute="centerY" id="3Sl-0B-drz"/>
+                                    <constraint firstAttribute="width" secondItem="wR3-uf-y0z" secondAttribute="height" multiplier="1:1" id="3Xa-cq-3yb"/>
+                                    <constraint firstItem="HM1-gl-v0e" firstAttribute="leading" secondItem="wR3-uf-y0z" secondAttribute="leading" constant="26" id="4bS-pG-CqI"/>
+                                    <constraint firstItem="L1t-9d-Y2j" firstAttribute="top" secondItem="wR3-uf-y0z" secondAttribute="top" id="Kmd-pq-3wI"/>
+                                    <constraint firstItem="L1t-9d-Y2j" firstAttribute="leading" secondItem="wR3-uf-y0z" secondAttribute="leading" id="WL6-Eh-Btv"/>
+                                    <constraint firstAttribute="bottom" secondItem="L1t-9d-Y2j" secondAttribute="bottom" id="Wfu-Zd-mpD"/>
+                                    <constraint firstAttribute="width" constant="250" id="ec2-Aa-gGy"/>
+                                    <constraint firstAttribute="trailing" secondItem="L1t-9d-Y2j" secondAttribute="trailing" id="jeK-2F-IjH"/>
+                                    <constraint firstAttribute="trailing" secondItem="HM1-gl-v0e" secondAttribute="trailing" constant="26" id="ypK-1i-H5W"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                        <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                        <real key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffser">
+                                        <size key="value" width="0.0" height="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lX7-8o-7ey">
+                                <rect key="frame" x="164" y="587" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="buttonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="90R-Wz-gxQ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="wR3-uf-y0z" firstAttribute="centerX" secondItem="aKo-gO-Nph" secondAttribute="centerX" id="5ch-tF-UEt"/>
+                            <constraint firstAttribute="bottom" secondItem="lX7-8o-7ey" secondAttribute="bottom" constant="50" id="Hd0-es-jsE"/>
+                            <constraint firstItem="lX7-8o-7ey" firstAttribute="centerX" secondItem="aKo-gO-Nph" secondAttribute="centerX" id="Qu7-fy-MxB"/>
+                            <constraint firstItem="wR3-uf-y0z" firstAttribute="centerY" secondItem="aKo-gO-Nph" secondAttribute="centerY" id="eVE-EO-Cgb"/>
+                        </constraints>
+                    </view>
+                    <blurEffect style="regular"/>
+                </visualEffectView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Bs5-85-rPR" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="VTh-G8-bhx"/>
+                <constraint firstAttribute="trailing" secondItem="Bs5-85-rPR" secondAttribute="trailing" id="bJ5-PW-Z5d"/>
+                <constraint firstItem="Bs5-85-rPR" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="t6i-tT-EBu"/>
+                <constraint firstAttribute="bottom" secondItem="Bs5-85-rPR" secondAttribute="bottom" id="vNw-tq-6qR"/>
+            </constraints>
+            <connections>
+                <outlet property="button" destination="lX7-8o-7ey" id="2sx-Zf-Fjy"/>
+                <outlet property="centerContainerView" destination="wR3-uf-y0z" id="u7q-8P-Ojc"/>
+                <outlet property="labelTitle" destination="HM1-gl-v0e" id="V0N-Ux-m99"/>
+                <outlet property="progressView" destination="L1t-9d-Y2j" id="7jO-sh-lkP"/>
+                <outlet property="visualEffectView" destination="Bs5-85-rPR" id="9si-ej-WkW"/>
+            </connections>
+        </view>
+    </objects>
+</document>
