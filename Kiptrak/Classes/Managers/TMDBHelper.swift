@@ -186,7 +186,10 @@ class TMDBHelper: NSObject {
                     }.map {
                         RealmString.with(value: $0)
                 }
-                episode.stillImageURLs = List<RealmString>(realmStringURLs)
+                episode.stillImageURLs.removeAll()
+                episode.stillImageURLs.append(objectsIn: realmStringURLs)
+//                try! Realm().add(realmStringURLs, update: true)
+//                episode.stillImageURLs = List<RealmString>(realmStringURLs)
             }
         }
     }
