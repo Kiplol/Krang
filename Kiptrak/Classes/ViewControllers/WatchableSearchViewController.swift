@@ -15,6 +15,15 @@ import SwipeCellKit
 class WatchableSearchViewController: KrangViewController, UISearchResultsUpdating, UITableViewDataSource, UITableViewDelegate, SwipeTableViewCellDelegate {
     
     static let cellReuseIdentifier = "searchResultsCell"
+    static var hasShownDemoSwipe: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: "hasShownDemoSwipe")
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "hasShownDemoSwipe")
+            UserDefaults.standard.synchronize()
+        }
+    }
 
     //MARK:- IBOutlets
     @IBOutlet weak var grabberView: UIView!
@@ -109,6 +118,19 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
             self.navigationController?.setNavigationBarHidden(false, animated: true)
         }
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if let swipeCell = cell as? WatchableSearchResultTableViewCell, !WatchableSearchViewController.hasShownDemoSwipe, indexPath.row == 0 {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(0.3 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
+                swipeCell.showSwipe(orientation: .right, animated: true, completion: { (idunno) in
+                    swipeCell.hideSwipe(animated: true) { _ in
+                        WatchableSearchViewController.hasShownDemoSwipe = true
+                    }
+                })
+            })
+        }
+    }
+    
     
     //MARK:- SwipeTableViewCellDelegate
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {

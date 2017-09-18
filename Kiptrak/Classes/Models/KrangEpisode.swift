@@ -61,7 +61,7 @@ class KrangEpisode: Object {
         self.imdbID = json["episode"]["ids"]["imdb"].string
         self.tmdbID = json["episode"]["ids"]["tmdb"].int ?? -1
         self.tvRageID = json["episode"]["ids"]["tvrage"].int ?? -1
-        self.overview = json["episode"]["overview"].string ?? KrangEpisode.placeholderUnknown
+        self.overview = json["episode"]["overview"].string ?? self.overview ?? KrangEpisode.placeholderUnknown
         
         if let szStartedAt = json["started_at"].string,
             let szExpiresAt = json["expires_at"].string,

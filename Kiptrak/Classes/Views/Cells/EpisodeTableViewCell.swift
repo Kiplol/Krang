@@ -29,6 +29,13 @@ class EpisodeTableViewCell: SwipeTableViewCell {
         // Configure the view for the selected state
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.labelTitle.text = nil
+        self.labelDescription.text = nil
+        self.imageViewPreview.image = nil
+    }
+    
     func update(withEpisode episode: KrangEpisode) {
         self.labelTitle.text = "\(episode.episode). \(episode.title)"
         self.labelDescription.text = episode.overview
