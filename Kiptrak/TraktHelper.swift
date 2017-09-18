@@ -269,7 +269,7 @@ class TraktHelper: NSObject {
                 
                 //Update images
                 let imageUpdateGroup = DispatchGroup()
-                theseEpisodes.filter { $0.stillImageURL == nil }.forEach {
+                theseEpisodes.filter { $0.stillImageURL == nil || $0.stillImageURLs.isEmpty }.forEach {
                     if !TraktHelper.asyncImageLoadingOnSearch {
                         imageUpdateGroup.enter()
                     }

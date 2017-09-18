@@ -188,8 +188,6 @@ class TMDBHelper: NSObject {
                 }
                 episode.stillImageURLs.removeAll()
                 episode.stillImageURLs.append(objectsIn: realmStringURLs)
-//                try! Realm().add(realmStringURLs, update: true)
-//                episode.stillImageURLs = List<RealmString>(realmStringURLs)
             }
         }
     }
@@ -208,7 +206,8 @@ class TMDBHelper: NSObject {
                 
                 episode.posterImageURL = posterURL
                 episode.posterThumbnailImageURL = smallestPosterURL
-                episode.posterImageURLs = List<RealmString>(realmStringURLs)
+                episode.posterImageURLs.removeAll()
+                episode.posterImageURLs.append(objectsIn: realmStringURLs)
             }
         }
     }
