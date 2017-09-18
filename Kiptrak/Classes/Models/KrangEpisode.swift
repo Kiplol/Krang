@@ -77,10 +77,10 @@ class KrangEpisode: Object {
                 self.checkin?.saveToDatabaseOutsideWriteTransaction()
             }
         } else {
-            if let checkin = self.checkin {
-                checkin.dateStarted = nil
-                checkin.dateStarted = nil
-            }
+//            if let checkin = self.checkin {
+//                checkin.dateStarted = nil
+//                checkin.dateStarted = nil
+//            }
         }
     }
     
