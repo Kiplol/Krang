@@ -93,11 +93,6 @@ class EpisodeListViewController: KrangViewController, UITableViewDataSource, UIT
     //MARK:- UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        TraktHelper.shared.checkIn(to: self.season.episodes[indexPath.row]) { (error, watchable) in
-            if let drawer = self.pulleyViewController {
-                drawer.setDrawerPosition(position: .collapsed, animated: true)
-            }
-        }
         
         let episode = self.season.episodes[indexPath.row]
         let _ = KrangActionableFullScreenAlertView.show(withTitle: "Checking in to \(episode.title)", countdownDuration: 3.0, afterCountdownAction: { (alert) in
