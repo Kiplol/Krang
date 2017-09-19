@@ -97,6 +97,10 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
         tableView.deselectRow(at: indexPath, animated: true)
         let selectedObject = self.searchResults[indexPath.row]
         if let watchable = selectedObject as? KrangWatchable {
+            //Hide keyboard.
+            self.view.endEditing(true)
+            
+            //Check in.
             let _ = KrangActionableFullScreenAlertView.show(withTitle: "Checking in to \(watchable.title)", countdownDuration: 3.0, afterCountdownAction: { (alert) in
                 alert.button.isHidden = true
                 TraktHelper.shared.checkIn(to: watchable, completion: { (error, checkedInWatchable) in
@@ -112,6 +116,7 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
                 alert.dismiss(true)
             })
         } else if let show = selectedObject as? KrangShow {
+            //Navigate to seasons VC.
             let seasonsVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "seasonList") as! SeasonListViewController
             seasonsVC.show = show
             self.navigationController?.pushViewController(seasonsVC, animated: true)

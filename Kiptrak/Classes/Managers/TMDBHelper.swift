@@ -85,7 +85,19 @@ class TMDBHelper: NSObject {
                 KrangLogger.log.error("Error updating episode with season data.  Error: \(seasonError)\nEpisode: \(episode)")
                 completion?(seasonError, episode)
             })
-            
+            if episode.posterImageURL == nil || episode.posterImageURLs.isEmpty {
+                //
+                //We already tried to set this from the season, so now we must try the show.
+                episode.makeChanges() {
+                    if episode.posterImageURL == nil {
+                        episode.posterImageURL = show.imagePosterURL
+                    }
+                    if episode.posterImageURLs.isEmpty {
+                        episode.posterImageURLs.append(contentsOf: show.imagePosterURLs)
+                    }
+                }
+            }
+            //
         }) { (error) in
             KrangLogger.log.error("Error updating episode.  Error: \(error)\nEpisode: \(episode)")
             completion?(error, episode)
@@ -128,6 +140,11 @@ class TMDBHelper: NSObject {
             //Success
             let json = JSON(data: response.data)
             self.update(season: season, withJSON: json)
+            if season.posterImageURL == nil && show.imagePosterURL != nil{
+                season.makeChanges() {
+                    season.posterImageURL = show.imagePosterURL
+                }
+            }
             completion?(nil, season)
         }) { (error) in
             //Failure
