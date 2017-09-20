@@ -98,7 +98,7 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
         let selectedObject = self.searchResults[indexPath.row]
         if let watchable = selectedObject as? KrangWatchable {
             //Hide keyboard.
-            self.view.endEditing(true)
+            self.searchController.searchBar.resignFirstResponder()
             
             //Check in.
             let _ = KrangActionableFullScreenAlertView.show(withTitle: "Checking in to \(watchable.title)", countdownDuration: 3.0, afterCountdownAction: { (alert) in
