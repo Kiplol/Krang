@@ -23,6 +23,7 @@ class Constants: NSObject {
     class var traktCheckInURL: String { return Constants.traktBaseURL + "/checkin" }
     class var traktGetShowSeasonsURLFormat: String { return Constants.traktBaseURL + "/shows/%@/seasons?extended=full" }
     class var traktGetEpisodesForSeasonURLFormat: String { return Constants.traktBaseURL + "/shows/%@/seasons/%d?extended=full" }
+    class var traktGetShowHistory: String { return Constants.traktBaseURL + "/sync/history/shows" }
     
     //MARK:- TMDB
     class var tmdbAPIKey: String { get { return "42261ec0aa6d07687f189a56f7b2363d" } }

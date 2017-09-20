@@ -61,6 +61,9 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
         if self.pulleyViewController != nil {
             self.navigationController?.setNavigationBarHidden(true, animated: animated)
         }
+        TraktHelper.shared.getShowHistory { (error, shows) in
+            
+        }
     }
     
     //MARK:- UISearchResultsUpdating

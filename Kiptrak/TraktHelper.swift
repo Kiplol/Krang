@@ -290,6 +290,60 @@ class TraktHelper: NSObject {
         }
     }
     
+    func getShowHistory(_ completion: ((Error?, [KrangShow]) -> ())?) {
+        let url = Constants.traktGetShowHistory
+        let now = Date()
+        let aWeekAgo = Date(timeIntervalSince1970: now.timeIntervalSince1970 - (60.0 * 60.0 * 24.0 * 7.0))
+        let _ = self.oauth.client.get(url, parameters: ["start_at": aWeekAgo], headers: TraktHelper.defaultHeaders(), success: { (response) in
+            var results = [KrangShow]()
+            var showTraktIDs = [Int]()
+            let json = JSON(data: response.data)
+            if let dics = json.array {
+                KrangRealmUtils.makeChanges {
+                    dics.filter { $0["show"].exists() }.map { $0["show"] }.forEach {
+                        guard let traktID = $0["ids"]["trakt"].int else {
+                            return
+                        }
+                        guard !showTraktIDs.contains(traktID) else {
+                            return
+                        }
+                        showTraktIDs.append(traktID)
+                        let thisJSON = $0
+                        let show: KrangShow = {
+                            if let existingShow = KrangShow.with(traktID: traktID) {
+                                existingShow.update(withJSON: thisJSON)
+                                return existingShow
+                            } else {
+                                let newShow = KrangShow()
+                                newShow.update(withJSON: thisJSON)
+                                newShow.saveToDatabaseOutsideWriteTransaction()
+                                return newShow
+                            }
+                        }()
+                        results.append(show)
+                    }
+                }
+            }
+            
+            let imageUpdateGroup = DispatchGroup()
+            results.filter { $0.imagePosterURL == nil }.forEach {
+                if !TraktHelper.asyncImageLoadingOnSearch {
+                    imageUpdateGroup.enter()
+                }
+                TMDBHelper.shared.update(show: $0, completion: { (error, updatedShow) in
+                    if !TraktHelper.asyncImageLoadingOnSearch {
+                        imageUpdateGroup.leave()
+                    }
+                })
+            }
+            imageUpdateGroup.notify(queue: DispatchQueue.main) {
+                completion?(nil, results)
+            }
+        }) { (error) in
+            completion?(error, [KrangShow]())
+        }
+    }
+    
     func search(withQuery query: String, completion: ((Error?, [KrangSearchable]) -> ())?) -> OAuthSwiftRequestHandle? {
         guard !query.isEmpty else {
             completion?(nil, [])
