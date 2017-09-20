@@ -14,13 +14,7 @@ import RxKeyboard
 class KrangViewController: UIViewController {
 
     //MARK:- ivars
-    fileprivate var keyboardDisposable: Disposable? = nil
-    
-    
-    //MARK:-
-    deinit {
-        self.keyboardDisposable?.dispose()
-    }
+    fileprivate let disposeBag = DisposeBag()
     
     //MARK:- View Lifecycle
     override func viewDidLoad() {
@@ -29,10 +23,10 @@ class KrangViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(KrangViewController.willEnterForeground(_:)), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(KrangViewController.didEnterBackground(_:)), name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
-        self.keyboardDisposable = RxKeyboard.instance.visibleHeight
+        RxKeyboard.instance.visibleHeight
             .drive(onNext: { keyboardVisibleHeight in
                 self.keyboardVisibleHeightDidChange(keyboardVisibleHeight)
-            })
+            }).disposed(by: self.disposeBag)
     }
 
     override func didReceiveMemoryWarning() {
