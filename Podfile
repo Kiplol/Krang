@@ -16,6 +16,7 @@ target 'Kiptrak' do
 	pod 'KDCircularProgress'
 	pod 'Hero'
 	pod 'Pulley'
+	pod 'RxKeyboard'
 	pod 'SwipeCellKit'
 end
 

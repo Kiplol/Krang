@@ -2,15 +2,21 @@ PODS:
   - Hero (0.3.6)
   - Hue (2.0.1)
   - KDCircularProgress (1.5.2)
-  - Kingfisher (3.2.4)
-  - MarqueeLabel/Swift (3.0.1)
-  - OAuthSwift (1.1.0)
+  - Kingfisher (3.13.1)
+  - MarqueeLabel/Swift (3.1.3)
+  - OAuthSwift (1.1.2)
   - Pulley (1.5.2)
   - Realm (2.10.1):
     - Realm/Headers (= 2.10.1)
   - Realm/Headers (2.10.1)
   - RealmSwift (2.10.1):
     - Realm (= 2.10.1)
+  - RxCocoa (3.6.1):
+    - RxSwift (~> 3.6)
+  - RxKeyboard (0.6.2):
+    - RxCocoa (>= 3.4)
+    - RxSwift (>= 3.4)
+  - RxSwift (3.6.1)
   - SwiftyBeaver (1.4.1)
   - SwiftyJSON (3.1.4)
   - SwipeCellKit (1.9.1)
@@ -24,6 +30,7 @@ DEPENDENCIES:
   - OAuthSwift (~> 1.1.0)
   - Pulley
   - RealmSwift
+  - RxKeyboard
   - SwiftyBeaver
   - SwiftyJSON
   - SwipeCellKit
@@ -32,16 +39,19 @@ SPEC CHECKSUMS:
   Hero: d3c6f4dd80cdcdbb339be64e57ae3b5c3ab9938c
   Hue: 354caec055fdc9d38b5ef33ca2e7224721843baf
   KDCircularProgress: 12f677b2deb02409ab48c6cae1898d146b8ad549
-  Kingfisher: 8d80f39da403cd9c9ee11984e1655f4d6a566cdb
-  MarqueeLabel: 80ba85d2b76a9f5fa6c13de337db80bcd94feb1d
-  OAuthSwift: 7ec2c62274f6bdc30b1ba3b799c39a6fdcaea0e5
+  Kingfisher: ed9707a409cc47fddafbcd12a43a9757e3600af5
+  MarqueeLabel: baa5753dcbd36dca080e1f5c589a665aa5c906f1
+  OAuthSwift: 5aa5659984d3ca3206ba636a9e7a9c6626b2e8bd
   Pulley: f5213e59f3bc8f0d74e933d98b9b2000a0fd4d18
   Realm: fc7a317a5c2c9ba91f5f235ede4e2ea76e9eba0c
   RealmSwift: 505ed6c15942a2e76f5cfa78a8667cfa997ee75b
+  RxCocoa: 84a08739ab186248c7f31ce4ee92d6f8a947d690
+  RxKeyboard: 09e6bd45070888cd9701e941b2324a49cc974a1b
+  RxSwift: f9de85ea20cd2f7716ee5409fc13523dc638e4e4
   SwiftyBeaver: f04f739cca6826c5fb0f575fed8fa3293f76b83e
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   SwipeCellKit: e9ff953c820394a4e641cfb0118b6c959506aec2
 
-PODFILE CHECKSUM: 7d2237352cb03691140bb6086b381c95eb332919
+PODFILE CHECKSUM: 4e09657f94bd69106408847a17277a69d433e3d4
 
 COCOAPODS: 1.3.1

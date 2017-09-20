@@ -81,6 +81,13 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
         }
     }
     
+    //MARK:- KrangViewController
+    override func keyboardVisibleHeightDidChange(_ keyboardVisibleHeight: CGFloat) {
+        if self.tableView != nil {
+            self.tableView.contentInset.bottom = keyboardVisibleHeight
+        }
+    }
+    
     //MARK:- UISearchResultsUpdating
     func updateSearchResults(for searchController: UISearchController) {
         self.searchRequest?.cancel()

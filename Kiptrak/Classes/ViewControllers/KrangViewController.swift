@@ -8,15 +8,31 @@
 
 import UIKit
 import Hero
+import RxSwift
+import RxKeyboard
 
 class KrangViewController: UIViewController {
 
+    //MARK:- ivars
+    fileprivate var keyboardDisposable: Disposable? = nil
+    
+    
+    //MARK:-
+    deinit {
+        self.keyboardDisposable?.dispose()
+    }
+    
+    //MARK:- View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.darkBackground
         
         NotificationCenter.default.addObserver(self, selector: #selector(KrangViewController.willEnterForeground(_:)), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(KrangViewController.didEnterBackground(_:)), name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
+        self.keyboardDisposable = RxKeyboard.instance.visibleHeight
+            .drive(onNext: { keyboardVisibleHeight in
+                self.keyboardVisibleHeightDidChange(keyboardVisibleHeight)
+            })
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,14 +49,8 @@ class KrangViewController: UIViewController {
         //Override
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    //MARK:- Convenience
+    func keyboardVisibleHeightDidChange(_ keyboardVisibleHeight: CGFloat) {
+        //Override
     }
-    */
-
 }
