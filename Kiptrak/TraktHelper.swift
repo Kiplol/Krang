@@ -157,13 +157,13 @@ class TraktHelper: NSObject {
                     })
                 }
             } else if let actualEpisode = maybeMovieOrEpisode as? KrangEpisode {
-                if let _ = actualEpisode.posterImageURL {
-                    completion?(nil, nil, actualEpisode)
-                } else {
+//                if let _ = actualEpisode.posterImageURL {
+//                    completion?(nil, nil, actualEpisode)
+//                } else {
                     TMDBHelper.shared.update(episode: actualEpisode, completion: { (error, updatedEpisode) in
                         completion?(error, nil, updatedEpisode)
                     })
-                }
+//                }
             } else {
                 completion?(nil, nil, nil)
             }
