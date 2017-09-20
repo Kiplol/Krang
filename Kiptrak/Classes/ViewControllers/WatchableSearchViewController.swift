@@ -191,7 +191,8 @@ extension WatchableSearchViewController: PulleyDrawerViewControllerDelegate, UIS
     func collapsedDrawerHeight() -> CGFloat
     {
         if self.isViewLoaded {
-            return self.searchBarContainerView.frame.maxY
+            let bottomPadding: CGFloat = KrangUtils.Display.typeIsLike == .iphoneX ? 25.0 : 0.0
+            return self.searchBarContainerView.frame.maxY + bottomPadding
         } else {
             return 68.0
         }

@@ -1,17 +1,17 @@
 PODS:
-  - Hero (0.1.0)
+  - Hero (0.3.6)
   - Hue (2.0.1)
   - KDCircularProgress (1.5.2)
   - Kingfisher (3.2.4)
   - MarqueeLabel/Swift (3.0.1)
   - OAuthSwift (1.1.0)
   - Pulley (1.5.2)
-  - Realm (2.1.2):
-    - Realm/Headers (= 2.1.2)
-  - Realm/Headers (2.1.2)
-  - RealmSwift (2.1.2):
-    - Realm (= 2.1.2)
-  - SwiftyBeaver (1.1.1)
+  - Realm (2.10.1):
+    - Realm/Headers (= 2.10.1)
+  - Realm/Headers (2.10.1)
+  - RealmSwift (2.10.1):
+    - Realm (= 2.10.1)
+  - SwiftyBeaver (1.4.1)
   - SwiftyJSON (3.1.4)
   - SwipeCellKit (1.9.1)
 
@@ -29,16 +29,16 @@ DEPENDENCIES:
   - SwipeCellKit
 
 SPEC CHECKSUMS:
-  Hero: 14038043c41ea53ba1aa43b4d3655f377d78bea6
+  Hero: d3c6f4dd80cdcdbb339be64e57ae3b5c3ab9938c
   Hue: 354caec055fdc9d38b5ef33ca2e7224721843baf
   KDCircularProgress: 12f677b2deb02409ab48c6cae1898d146b8ad549
   Kingfisher: 8d80f39da403cd9c9ee11984e1655f4d6a566cdb
   MarqueeLabel: 80ba85d2b76a9f5fa6c13de337db80bcd94feb1d
   OAuthSwift: 7ec2c62274f6bdc30b1ba3b799c39a6fdcaea0e5
   Pulley: f5213e59f3bc8f0d74e933d98b9b2000a0fd4d18
-  Realm: efe855f4d977c8ce5a82d3116d9f1ff155a6550c
-  RealmSwift: 17d6ee30b6f9df86364408c2197492e33bfea567
-  SwiftyBeaver: 2b68694df862381235e32bcfc4ec991e26bf131d
+  Realm: fc7a317a5c2c9ba91f5f235ede4e2ea76e9eba0c
+  RealmSwift: 505ed6c15942a2e76f5cfa78a8667cfa997ee75b
+  SwiftyBeaver: f04f739cca6826c5fb0f575fed8fa3293f76b83e
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   SwipeCellKit: e9ff953c820394a4e641cfb0118b6c959506aec2
 
