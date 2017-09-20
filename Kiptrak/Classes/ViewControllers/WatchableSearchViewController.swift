@@ -52,6 +52,8 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
         self.searchController.searchBar.applyKrangStyle()
         self.definesPresentationContext = true
         self.searchBarContainerView.addSubview(self.searchController.searchBar)
+        self.constraintSearchBarContainerHeight.constant = self.searchController.searchBar.bounds.size.height
+        self.searchController.searchBar.frame = self.searchController.searchBar.superview!.bounds
     }
     
     override func viewWillAppear(_ animated: Bool) {
