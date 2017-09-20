@@ -22,7 +22,7 @@ class KrangAvatarView: UIView {
     }
     
     private func commonInit() {
-        self.clipsToBounds = false
+        self.clipsToBounds = true
         self.imageView.contentMode = .scaleAspectFill
         self.imageView.setAvatar(fromURL: KrangUser.getCurrentUser().avatarImageURL)
         self.imageView.clipsToBounds = true

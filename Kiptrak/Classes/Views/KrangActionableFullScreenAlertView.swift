@@ -106,6 +106,7 @@ class KrangActionableFullScreenAlertView: UIView {
         
         alert.alpha = 0.0
         window.addSubview(alert)
+        alert.frame = window.bounds
         UIView.animate(withDuration: 0.15, animations: { 
             alert.alpha = 1.0
         }) { (_) in
