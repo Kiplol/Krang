@@ -33,7 +33,7 @@ class EpisodeTableViewCell: SwipeTableViewCell {
         super.prepareForReuse()
         self.labelTitle.text = nil
         self.labelDescription.text = nil
-        self.imageViewPreview.image = nil
+        self.imageViewPreview.image = #imageLiteral(resourceName: "episode_still_placeholder")
     }
     
     func update(withEpisode episode: KrangEpisode) {
@@ -51,7 +51,7 @@ class EpisodeTableViewCell: SwipeTableViewCell {
         if let szImageURL = szImageURL {
             self.imageViewPreview.kf.setImage(with: URL(string: szImageURL), placeholder: self.imageViewPreview.image, options: [.transition(.fade(0.2))], progressBlock: nil, completionHandler: nil)
         } else {
-            self.imageViewPreview.image = nil
+            self.imageViewPreview.image = #imageLiteral(resourceName: "episode_still_placeholder")
         }
         self.layoutIfNeeded()
     }
