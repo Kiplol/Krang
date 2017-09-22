@@ -68,6 +68,11 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
         self.searchController.searchBar.frame = self.searchController.searchBar.superview!.bounds
     }
     
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.searchController.searchBar.frame = self.searchController.searchBar.superview!.bounds
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if self.pulleyViewController != nil {
