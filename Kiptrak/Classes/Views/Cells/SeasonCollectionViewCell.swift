@@ -57,7 +57,7 @@ class SeasonCollectionViewCell: UICollectionViewCell, SelfSizingCell {
             if let showPosterImage = season.show?.imagePosterURL {
                 self.imageView.kf.setImage(with: URL(string: showPosterImage))
             } else {
-                self.imageView.image = nil
+                self.imageView.image = #imageLiteral(resourceName: "poster_placeholder_dark")
             }
         }
     }

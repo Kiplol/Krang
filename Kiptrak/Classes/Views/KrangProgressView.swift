@@ -13,15 +13,14 @@ class KrangProgressView: UIView {
     //MARK:- ivars
     private let fillView = UIView()
     private var displayLink: CADisplayLink? = nil
-    
     var progress: Float = 0.0 {
         didSet {
             self.fillView.frame.size.width = self.bounds.size.width * CGFloat(self.progress)
         }
     }
-    
     var startDate:Date? = nil
     var endDate:Date? = nil
+    var didFinishClosure: ((KrangProgressView) -> ())? = nil
     
     //MARK:- Initializers
     override init(frame: CGRect) {
@@ -75,6 +74,13 @@ class KrangProgressView: UIView {
         
         let totalRunTime = endDate.timeIntervalSince1970 - startDate.timeIntervalSince1970
         let now = Date().timeIntervalSince1970
+        
+        guard now < endDate.timeIntervalSince1970 else {
+            self.stop()
+            self.reset()
+            self.didFinishClosure?(self)
+            return
+        }
         let watchedSoFar = now - startDate.timeIntervalSince1970
         self.progress = Float(Double(watchedSoFar) / Double(totalRunTime))
     }

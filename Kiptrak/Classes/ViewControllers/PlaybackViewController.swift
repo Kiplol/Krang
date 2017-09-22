@@ -220,6 +220,9 @@ class PlaybackViewController: KrangViewController {
         self.progressView.isHidden = false
         self.progressView.startDate = checkin.dateStarted
         self.progressView.endDate = checkin.dateExpires
+        self.progressView.didFinishClosure = { [unowned self] progressView in
+            self.refreshCheckin(nil)
+        }
         self.progressView.start()
     }
     
