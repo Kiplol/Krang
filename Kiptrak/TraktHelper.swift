@@ -161,7 +161,18 @@ class TraktHelper: NSObject {
 //                    completion?(nil, nil, actualEpisode)
 //                } else {
                     TMDBHelper.shared.update(episode: actualEpisode, completion: { (error, updatedEpisode) in
-                        completion?(error, nil, updatedEpisode)
+                        if let show = updatedEpisode?.show {
+                            TMDBHelper.shared.update(show: show, completion: { (showError, updatedShow) in
+                                if updatedEpisode!.posterImageURL == nil {
+                                    updatedEpisode!.makeChanges {
+                                        updatedEpisode?.posterImageURL = updatedShow?.imagePosterURL
+                                    }
+                                }
+                                completion?(error, nil, updatedEpisode)
+                            })
+                        } else {
+                            completion?(error, nil, updatedEpisode)
+                        }
                     })
 //                }
             } else {
