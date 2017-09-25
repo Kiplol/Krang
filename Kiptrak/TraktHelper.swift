@@ -301,11 +301,23 @@ class TraktHelper: NSObject {
         }
     }
     
+    func getFullHistory(since date: Date, completion: ((Error?) -> ())?) {
+        let url = Constants.traktGetHistory
+        let _ = self.oauth.client.get(url, parameters: ["start_at": date, "limit": 500], headers: TraktHelper.defaultHeaders(), success: { (response) in
+            //Success
+            let json = JSON(data: response.data)
+            print(json)
+        }) { (error) in
+            //Failure
+            completion?(error)
+        }
+    }
+    
     func getShowHistory(_ completion: ((Error?, [KrangShow]) -> ())?) {
         let url = Constants.traktGetShowHistory
         let now = Date()
         let fourWeeksAgo = Date(timeIntervalSince1970: now.timeIntervalSince1970 - (60.0 * 60.0 * 24.0 * 7.0 * 4.0))
-        let _ = self.oauth.client.get(url, parameters: ["start_at": fourWeeksAgo], headers: TraktHelper.defaultHeaders(), success: { (response) in
+        let _ = self.oauth.client.get(url, parameters: ["start_at": fourWeeksAgo, "limit": 50], headers: TraktHelper.defaultHeaders(), success: { (response) in
             var results = [KrangShow]()
             var showTraktIDs = [Int]()
             let json = JSON(data: response.data)

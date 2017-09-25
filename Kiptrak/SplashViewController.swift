@@ -52,6 +52,13 @@ class SplashViewController: KrangViewController {
                     //Peeee
                     if user != nil && user!.username.characters.count > 0 {
                         KrangLogger.log.debug("User \(user!.username) is already logged in, so proceed to playback")
+                        TraktHelper.shared.getFullHistory(since: user!.lastHistorySync, completion: { (historyError) in
+                            if historyError == nil {
+                                user!.makeChanges {
+//                                    user!.lastHistorySync = Date()
+                                }
+                            }
+                        })
                         self.goToPlayback()
                     } else {
                         self.goToOnboarding()

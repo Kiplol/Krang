@@ -24,6 +24,7 @@ class KrangUser: Object {
     dynamic var sharingTextWatching:String = "I'm watching [item]"
     dynamic var sharingTextWatched:String = "I just watched [item]"
     dynamic var isCurrentKrangUser:Bool = false
+    dynamic var lastHistorySync: Date = Date(timeIntervalSince1970: 0.0)
     
     override static func primaryKey() -> String? {
         return "username"

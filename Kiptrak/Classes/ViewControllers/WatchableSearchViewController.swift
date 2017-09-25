@@ -158,6 +158,16 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if let swipeCell = cell as? WatchableSearchResultTableViewCell, !WatchableSearchViewController.hasShownDemoSwipe, indexPath.row == 0 {
+            var shouldShowDemoSwipeThisTime = true
+            if let drawer = self.pulleyViewController {
+                switch drawer.drawerPosition {
+                case .closed, .collapsed:
+                    shouldShowDemoSwipeThisTime = false
+                default:
+                    break
+                }
+            }
+            if shouldShowDemoSwipeThisTime {
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(0.3 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
                 swipeCell.showSwipe(orientation: .right, animated: true, completion: { (idunno) in
                     swipeCell.hideSwipe(animated: true) { _ in
@@ -165,6 +175,7 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
                     }
                 })
             })
+            }
         }
     }
     
