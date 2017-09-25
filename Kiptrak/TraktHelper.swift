@@ -301,12 +301,79 @@ class TraktHelper: NSObject {
         }
     }
     
-    func getFullHistory(since date: Date, completion: ((Error?) -> ())?) {
+    func getFullHistory(since date: Date, page: Int = 1, progress: ((Int, Int) -> ())?, completion: ((Error?) -> ())?) {
         let url = Constants.traktGetHistory
-        let _ = self.oauth.client.get(url, parameters: ["start_at": date, "limit": 500], headers: TraktHelper.defaultHeaders(), success: { (response) in
+        let _ = self.oauth.client.get(url, parameters: ["start_at": date, "limit": 500, "page": page], headers: TraktHelper.defaultHeaders(), success: { (response) in
             //Success
+            guard let szPageCount = response.response.allHeaderFields["x-pagination-page-count"] as? String, let szCurrentPage = response.response.allHeaderFields["x-pagination-page"] as? String, let pageCount = Int(szPageCount), let currentPage = Int(szCurrentPage) else {
+                //@TODO: Error
+                completion?(nil)
+                return
+            }
             let json = JSON(data: response.data)
-            print(json)
+            var parsedShowIDs = [Int]()
+            if let dics = json.array {
+                KrangRealmUtils.makeChanges {
+                    dics.forEach {
+                        guard let szWatchedAt = $0["watched_at"].string, let watchedAt = Date.from(utcTimestamp: szWatchedAt) else {
+                            return
+                        }
+                        
+                        let thisJSON = $0
+                        if let episodeID = $0["episode"]["ids"]["trakt"].int {
+                            let episode: KrangEpisode = {
+                                if let existingEpisode = KrangEpisode.with(traktID: episodeID) {
+                                    existingEpisode.update(withJSON: thisJSON)
+                                    return existingEpisode
+                                } else {
+                                    let newEpisode = KrangEpisode()
+                                    newEpisode.update(withJSON: thisJSON)
+                                    newEpisode.saveToDatabaseOutsideWriteTransaction()
+                                    return newEpisode
+                                }
+                            }()
+                            episode.watchDate = watchedAt
+//                            KrangLogger.log.debug("Got episode \(episode.title) from history sync.")
+                        } else if let showID = $0["show"]["ids"]["trakt"].int {
+                            if parsedShowIDs.contains(showID) {
+                                return
+                            }
+                            let show: KrangShow = {
+                                if let existingShow = KrangShow.with(traktID: showID) {
+                                    existingShow.update(withJSON: thisJSON)
+                                    return existingShow
+                                } else {
+                                    let newShow = KrangShow()
+                                    newShow.update(withJSON: thisJSON)
+                                    newShow.saveToDatabaseOutsideWriteTransaction()
+                                    return newShow
+                                }
+                            }()
+//                            KrangLogger.log.debug("Got show \(show.title) from history sync.")
+                            parsedShowIDs.append(show.traktID)
+                        } else if let movieID = $0["movie"]["ids"]["trakt"].int {
+                            let movie: KrangMovie = {
+                                if let existingMovie = KrangMovie.with(traktID: movieID) {
+                                    existingMovie.update(withJSON: thisJSON)
+                                    return existingMovie
+                                } else {
+                                    let newMovie = KrangMovie()
+                                    newMovie.update(withJSON: thisJSON)
+                                    newMovie.saveToDatabaseOutsideWriteTransaction()
+                                    return newMovie
+                                }
+                            }()
+                            movie.watchDate = watchedAt
+                        }
+                    }
+                }
+            }
+            if currentPage < pageCount {
+                progress?(currentPage, pageCount)
+                self.getFullHistory(since: date, page: (currentPage + 1), progress: progress, completion: completion)
+            } else {
+                completion?(nil)
+            }
         }) { (error) in
             //Failure
             completion?(error)

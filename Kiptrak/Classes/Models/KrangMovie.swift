@@ -26,6 +26,7 @@ class KrangMovie: Object {
     dynamic var backdropThumbnailImageURL: String? = nil
     dynamic var checkin:KrangCheckin? = nil
     dynamic var originalJSONString: String = ""
+    dynamic var watchDate: Date? = nil
     
     func update(withJSON json:JSON) {
         guard let type = json["type"].string else {
