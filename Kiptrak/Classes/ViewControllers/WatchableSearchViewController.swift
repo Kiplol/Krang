@@ -41,6 +41,8 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
     fileprivate var searchResults = [KrangSearchable]()
     fileprivate var historyResults = [KrangSearchable]()
     fileprivate var searchRequest: OAuthSwiftRequestHandle? = nil
+    fileprivate let watchedShows = KrangShow.getWatchedShows()
+    fileprivate var watchesShowsNotificationToken: NotificationToken? = nil
     var isSearching: Bool {
 //        return self.searchController.isActive
         return !(self.searchController.searchBar.text ?? "").isEmpty
@@ -66,6 +68,11 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
         self.searchBarContainerView.addSubview(self.searchController.searchBar)
         self.constraintSearchBarContainerHeight.constant = self.searchController.searchBar.bounds.size.height
         self.searchController.searchBar.frame = self.searchController.searchBar.superview!.bounds
+        self.watchesShowsNotificationToken = self.watchedShows.addNotificationBlock { (changes) in
+            if !self.isSearching {
+                self.tableView.reloadData()
+            }
+        }
     }
     
     

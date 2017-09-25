@@ -311,7 +311,7 @@ class TraktHelper: NSObject {
                 return
             }
             let json = JSON(data: response.data)
-            var parsedShowIDs = [Int]()
+            var parsedShows = [Int: KrangShow]()
             if let dics = json.array {
                 KrangRealmUtils.makeChanges {
                     dics.forEach {
@@ -320,6 +320,23 @@ class TraktHelper: NSObject {
                         }
                         
                         let thisJSON = $0
+                        if let showID = $0["show"]["ids"]["trakt"].int {
+                            if !parsedShows.keys.contains(showID) {
+                                let show: KrangShow = {
+                                    if let existingShow = KrangShow.with(traktID: showID) {
+                                        existingShow.update(withJSON: thisJSON["show"])
+                                        return existingShow
+                                    } else {
+                                        let newShow = KrangShow()
+                                        newShow.update(withJSON: thisJSON["show"])
+                                        newShow.saveToDatabaseOutsideWriteTransaction()
+                                        return newShow
+                                    }
+                                }()
+                                //                            KrangLogger.log.debug("Got show \(show.title) from history sync.")
+                                parsedShows[showID] = show
+                            }
+                        }
                         if let episodeID = $0["episode"]["ids"]["trakt"].int {
                             let episode: KrangEpisode = {
                                 if let existingEpisode = KrangEpisode.with(traktID: episodeID) {
@@ -333,25 +350,16 @@ class TraktHelper: NSObject {
                                 }
                             }()
                             episode.watchDate = watchedAt
-//                            KrangLogger.log.debug("Got episode \(episode.title) from history sync.")
-                        } else if let showID = $0["show"]["ids"]["trakt"].int {
-                            if parsedShowIDs.contains(showID) {
-                                return
-                            }
-                            let show: KrangShow = {
-                                if let existingShow = KrangShow.with(traktID: showID) {
-                                    existingShow.update(withJSON: thisJSON)
-                                    return existingShow
-                                } else {
-                                    let newShow = KrangShow()
-                                    newShow.update(withJSON: thisJSON)
-                                    newShow.saveToDatabaseOutsideWriteTransaction()
-                                    return newShow
+                            if let showID = $0["show"]["ids"]["trakt"].int, let show = (KrangShow.with(traktID: showID) ?? parsedShows[showID]){
+                                if !show.episodes.contains(episode) {
+                                    show.episodes.append(episode)
                                 }
-                            }()
-//                            KrangLogger.log.debug("Got show \(show.title) from history sync.")
-                            parsedShowIDs.append(show.traktID)
-                        } else if let movieID = $0["movie"]["ids"]["trakt"].int {
+                                if let season = show.getSeason(withSeasonNumber: episode.seasonNumber), !season.episodes.contains(episode) {
+                                    season.episodes.append(episode)
+                                }
+                            }
+                        }
+                        if let movieID = $0["movie"]["ids"]["trakt"].int {
                             let movie: KrangMovie = {
                                 if let existingMovie = KrangMovie.with(traktID: movieID) {
                                     existingMovie.update(withJSON: thisJSON)

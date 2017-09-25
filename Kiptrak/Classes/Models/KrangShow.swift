@@ -58,6 +58,13 @@ class KrangShow: Object {
         }
         return nil
     }
+    
+    class func getWatchedShows() -> Results<KrangShow> {
+        let realm = try! Realm()
+//        let productMatches:RLMResults = SCProduct.objects(where: "ANY categories.categoryID contains %@ AND loaded = true AND disabled = false", categoryID).sortedResults(using: [ordinalDescriptor])
+        let matchingShows = realm.objects(KrangShow.self).filter("ANY episodes.watchDate != nil")
+        return matchingShows
+    }
 }
 
 extension KrangShow: KrangLinkable {
