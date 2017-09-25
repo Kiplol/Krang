@@ -57,7 +57,7 @@ class SplashViewController: KrangViewController {
                         }, completion: { (historyError) in
                             if historyError == nil {
                                 user!.makeChanges {
-//                                    user!.lastHistorySync = Date()
+                                    user!.lastHistorySync = Date()
                                 }
                             }
                         })

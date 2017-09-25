@@ -335,6 +335,9 @@ class TraktHelper: NSObject {
                                 }()
                                 //                            KrangLogger.log.debug("Got show \(show.title) from history sync.")
                                 parsedShows[showID] = show
+                                if show.imagePosterURL == nil {
+                                    TMDBHelper.shared.update(show: show, completion: nil)
+                                }
                             }
                         }
                         if let episodeID = $0["episode"]["ids"]["trakt"].int {
