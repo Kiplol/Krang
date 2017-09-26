@@ -202,9 +202,6 @@ class TMDBHelper: NSObject {
                 let smallestStillURL = self.configuration.imageBaseURL + self.configuration.stillSizes[0] + stillPath
                 episode.stillImageURL = stillURL
                 episode.stillThumbnailImageURL = smallestStillURL
-                if let szAirDate = json["air_date"].string, let airDate = TMDBHelper.airDateFormatter.date(from: szAirDate) {
-                    episode.airDate = airDate
-                }
                 
                 let realmStringURLs = self.configuration.stillSizes.map {
                     self.configuration.imageBaseURL + $0 + stillPath
@@ -213,6 +210,9 @@ class TMDBHelper: NSObject {
                 }
                 episode.stillImageURLs.removeAll()
                 episode.stillImageURLs.append(objectsIn: realmStringURLs)
+            }
+            if let szAirDate = json["air_date"].string, let airDate = TMDBHelper.airDateFormatter.date(from: szAirDate) {
+                episode.airDate = airDate
             }
         }
     }
