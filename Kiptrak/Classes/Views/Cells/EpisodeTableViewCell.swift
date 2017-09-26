@@ -17,6 +17,7 @@ class EpisodeTableViewCell: SwipeTableViewCell {
     @IBOutlet weak var labelDescription: UILabel!
     @IBOutlet weak var labelAirDate: UILabel!
     @IBOutlet weak var labelsStackView: UIStackView!
+    @IBOutlet weak var imageSeen: UIImageView!
     //MARK:- ivars
     
     //MARK:-
@@ -51,6 +52,8 @@ class EpisodeTableViewCell: SwipeTableViewCell {
                 self.labelsStackView.removeArrangedSubview(self.labelAirDate)
             }
         }
+        
+        self.imageSeen.isHidden = episode.watchDate == nil
         
         self.labelDescription.text = episode.overview
         let szImageURL: String? = {

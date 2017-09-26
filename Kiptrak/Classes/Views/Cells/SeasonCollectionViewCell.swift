@@ -17,6 +17,7 @@ class SeasonCollectionViewCell: UICollectionViewCell, SelfSizingCell {
     
     //MARK:- IBOutlets
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var imageSeen: UIImageView!
     @IBOutlet weak var labelTitle: UILabel!
     var realmChangeToken: NotificationToken? = nil
     var retrieveImageTask: RetrieveImageTask? = nil
@@ -40,6 +41,7 @@ class SeasonCollectionViewCell: UICollectionViewCell, SelfSizingCell {
         self.realmChangeToken?.stop()
         self.retrieveImageTask?.cancel()
         self.retrieveImageTask = nil
+        self.imageSeen.isHidden = season.hasUnseenEpisodes()
         
         //Use image that's already in there as a placeholder
         if let posterImageURL = season.posterImageURL {

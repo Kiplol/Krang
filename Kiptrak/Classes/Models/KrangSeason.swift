@@ -15,6 +15,7 @@ class KrangSeason: Object {
     private static let placeholderTitle = "Season"
     
     let episodes = List<KrangEpisode>()
+    dynamic var numberOfAiredEpisodes:Int = 0
     dynamic var seasonNumber:Int = -1
     dynamic var title:String = KrangSeason.placeholderTitle
     dynamic var traktID: Int = -1
@@ -48,6 +49,20 @@ class KrangSeason: Object {
         self.tvRageID = json["ids"]["tvrage"].int ?? -1
         self.title = json["title"].string ?? KrangSeason.placeholderTitle
         self.seasonNumber = json["number"].int ?? -1
+        self.numberOfAiredEpisodes = json["aired_episodes"].int ?? self.numberOfAiredEpisodes
+    }
+    
+    func unseenEpisodes() -> Results<KrangEpisode> {
+        let matches = self.episodes.filter("watchDate == nil")
+        return matches
+    }
+    
+    func hasUnseenEpisodes() -> Bool {
+        guard !self.episodes.isEmpty else {
+            return true
+        }
+        let hasThem = self.episodes.count - self.unseenEpisodes().count < self.numberOfAiredEpisodes
+        return hasThem
     }
 
 }
