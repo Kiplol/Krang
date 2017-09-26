@@ -41,7 +41,7 @@ class SeasonCollectionViewCell: UICollectionViewCell, SelfSizingCell {
         self.realmChangeToken?.stop()
         self.retrieveImageTask?.cancel()
         self.retrieveImageTask = nil
-        self.imageSeen.isHidden = season.hasUnseenEpisodes()
+        self.imageSeen.isHidden = true//season.hasUnseenEpisodes() //Must work on getting the entire show/season/episode data from the get-go.
         
         //Use image that's already in there as a placeholder
         if let posterImageURL = season.posterImageURL {
