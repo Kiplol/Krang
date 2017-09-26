@@ -12,6 +12,8 @@ import SwiftyJSON
 
 class KrangUser: Object {
     
+    static let neverSyncedBeforeDate = Date(timeIntervalSince1970: 0.0)
+    
     dynamic var username:String = ""
     dynamic var slug:String = ""
     dynamic var name:String? = nil
@@ -24,7 +26,7 @@ class KrangUser: Object {
     dynamic var sharingTextWatching:String = "I'm watching [item]"
     dynamic var sharingTextWatched:String = "I just watched [item]"
     dynamic var isCurrentKrangUser:Bool = false
-    dynamic var lastHistorySync: Date = Date(timeIntervalSince1970: 0.0)
+    dynamic var lastHistorySync: Date = KrangUser.neverSyncedBeforeDate
     
     override static func primaryKey() -> String? {
         return "username"

@@ -25,6 +25,7 @@ class KrangShow: Object {
     dynamic var tvRageID: Int = -1
     dynamic var imageBackdropURL: String? = nil
     dynamic var imagePosterURL: String? = nil
+    dynamic var lastWatchDate: Date? = nil
     var imagePosterURLs: List<RealmString> = List<RealmString>()
     dynamic var overview: String = ""
     
@@ -38,6 +39,16 @@ class KrangShow: Object {
             return matchingShows.first
         }
         return nil
+    }
+    
+    func setLastWatchDateIfNewer(_ date: Date) {
+        if let existingDate = self.lastWatchDate {
+            if date.compare(existingDate) == .orderedDescending {
+                self.lastWatchDate = date
+            }
+        } else {
+            self.lastWatchDate = date
+        }
     }
     
     func update(withJSON json:JSON) {
@@ -61,8 +72,7 @@ class KrangShow: Object {
     
     class func getWatchedShows() -> Results<KrangShow> {
         let realm = try! Realm()
-//        let productMatches:RLMResults = SCProduct.objects(where: "ANY categories.categoryID contains %@ AND loaded = true AND disabled = false", categoryID).sortedResults(using: [ordinalDescriptor])
-        let matchingShows = realm.objects(KrangShow.self).filter("ANY episodes.watchDate != nil")
+        let matchingShows = realm.objects(KrangShow.self).filter("ANY episodes.watchDate != nil").sorted(byKeyPath: "lastWatchDate", ascending: false)
         return matchingShows
     }
 }

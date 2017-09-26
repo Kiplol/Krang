@@ -142,6 +142,10 @@ class TraktHelper: NSObject {
         }
     }
     
+    func getLastActivityTime(_ completion: ((Error?, Date?) -> ())?) {
+        //@TODO
+    }
+    
     func getCheckedInMovieOrEpisode(completion: ((_:Error?, _:KrangMovie?, _:KrangEpisode?) -> ())?) {
         let url = String.init(format: Constants.traktWatchingURLFormat, KrangUser.getCurrentUser().slug)
         let _ = self.oauth.client.get(url, parameters: [:], headers: TraktHelper.defaultHeaders(), success: { (response) in
@@ -333,7 +337,7 @@ class TraktHelper: NSObject {
                                         return newShow
                                     }
                                 }()
-                                //                            KrangLogger.log.debug("Got show \(show.title) from history sync.")
+                                show.setLastWatchDateIfNewer(watchedAt)
                                 parsedShows[showID] = show
                                 if show.imagePosterURL == nil {
                                     TMDBHelper.shared.update(show: show, completion: nil)
@@ -360,6 +364,7 @@ class TraktHelper: NSObject {
                                 if let season = show.getSeason(withSeasonNumber: episode.seasonNumber), !season.episodes.contains(episode) {
                                     season.episodes.append(episode)
                                 }
+                                show.setLastWatchDateIfNewer(watchedAt)
                             }
                         }
                         if let movieID = $0["movie"]["ids"]["trakt"].int {
