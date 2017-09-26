@@ -15,6 +15,8 @@ class EpisodeTableViewCell: SwipeTableViewCell {
     @IBOutlet weak var imageViewPreview: UIImageView!
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelDescription: UILabel!
+    @IBOutlet weak var labelAirDate: UILabel!
+    @IBOutlet weak var labelsStackView: UIStackView!
     //MARK:- ivars
     
     //MARK:-
@@ -37,14 +39,17 @@ class EpisodeTableViewCell: SwipeTableViewCell {
     }
     
     func update(withEpisode episode: KrangEpisode) {
-        let titleText = "\(episode.episode). \(episode.title)"
+        self.labelTitle.text = "\(episode.episode). \(episode.title)"
         if let airDate = episode.airDate {
-            let attributedTitleText = NSMutableAttributedString(string: titleText)
-            let datePart = NSAttributedString(string: "\n"+DateFormatter.localizedString(from: airDate, dateStyle: .medium, timeStyle: .none), attributes: [NSFontAttributeName: UIFont(name: "Exo-Light-Italic", size: 10.0)])
-            attributedTitleText.append(datePart)
-            self.labelTitle.attributedText = attributedTitleText
+            let szAirDate = DateFormatter.localizedString(from: airDate, dateStyle: .medium, timeStyle: .none)
+            self.labelAirDate.text = szAirDate
+            if !self.labelsStackView.arrangedSubviews.contains(self.labelAirDate) {
+                self.labelsStackView.insertArrangedSubview(self.labelAirDate, at: 1)
+            }
         } else {
-            self.labelTitle.text = titleText
+            if self.labelsStackView.arrangedSubviews.contains(self.labelAirDate) {
+                self.labelsStackView.removeArrangedSubview(self.labelAirDate)
+            }
         }
         
         self.labelDescription.text = episode.overview
