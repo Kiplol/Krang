@@ -37,7 +37,16 @@ class EpisodeTableViewCell: SwipeTableViewCell {
     }
     
     func update(withEpisode episode: KrangEpisode) {
-        self.labelTitle.text = "\(episode.episode). \(episode.title)"
+        let titleText = "\(episode.episode). \(episode.title)"
+        if let airDate = episode.airDate {
+            let attributedTitleText = NSMutableAttributedString(string: titleText)
+            let datePart = NSAttributedString(string: "\n"+DateFormatter.localizedString(from: airDate, dateStyle: .medium, timeStyle: .none), attributes: [NSFontAttributeName: UIFont(name: "Exo-Light-Italic", size: 10.0)])
+            attributedTitleText.append(datePart)
+            self.labelTitle.attributedText = attributedTitleText
+        } else {
+            self.labelTitle.text = titleText
+        }
+        
         self.labelDescription.text = episode.overview
         let szImageURL: String? = {
             if episode.stillImageURLs.count > 1 {

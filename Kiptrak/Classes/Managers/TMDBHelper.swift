@@ -17,6 +17,11 @@ class TMDBHelper: NSObject {
     let oauth = OAuth2Swift(consumerKey: "", consumerSecret: "", authorizeUrl: "", responseType: "")
     var gotConfiguration = false
     var configuration = TMDBHelper.Configuration()
+    static let airDateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter
+    }()
     
     func getConfiguration(completion:((_:Error?) -> ())?) {
         let _ = self.oauth.client.get(Constants.tmdbConfigurationURL, success: { (response) in
@@ -197,6 +202,9 @@ class TMDBHelper: NSObject {
                 let smallestStillURL = self.configuration.imageBaseURL + self.configuration.stillSizes[0] + stillPath
                 episode.stillImageURL = stillURL
                 episode.stillThumbnailImageURL = smallestStillURL
+                if let szAirDate = json["air_date"].string, let airDate = TMDBHelper.airDateFormatter.date(from: szAirDate) {
+                    episode.airDate = airDate
+                }
                 
                 let realmStringURLs = self.configuration.stillSizes.map {
                     self.configuration.imageBaseURL + $0 + stillPath

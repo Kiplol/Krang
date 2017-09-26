@@ -31,6 +31,7 @@ class KrangEpisode: Object {
     dynamic var checkin:KrangCheckin? = nil
     dynamic var originalJSONString: String = ""
     dynamic var watchDate: Date? = nil
+    dynamic var airDate: Date? = nil
     let shows = LinkingObjects(fromType: KrangShow.self, property: "episodes")
     var show: KrangShow? {
         get {
