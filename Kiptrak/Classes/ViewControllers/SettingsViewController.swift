@@ -49,7 +49,11 @@ class SettingsViewController: KrangViewController, UITableViewDataSource, UITabl
     //MARK:- Ivars
     fileprivate var rows = [Row]()
     fileprivate class Row {
-        
+        let reuseID = "text"
+    }
+    fileprivate class LogoutRow: Row { }
+    fileprivate class VersionRow: Row {
+        let versionString = KrangUtils.versionAndBuildNumberString
     }
     
     //MARK:- View Lifecycle
@@ -62,7 +66,13 @@ class SettingsViewController: KrangViewController, UITableViewDataSource, UITabl
     //MARK:-
     private func populateViews() {
         self.labelName.text = KrangUser.getCurrentUser().name
-//        self.labelVersion.text = "Krang \(KrangUtils.versionAndBuildNumberString)"
+        self.rows.removeAll()
+        self.rows.append(LogoutRow())
+        self.rows.append(VersionRow())
+    }
+    
+    private func logout() {
+        self.performSegue(withIdentifier: "unwindToSplashSegueID", sender: self)
     }
     
     //MARK:- UITableViewDataSource
@@ -71,8 +81,32 @@ class SettingsViewController: KrangViewController, UITableViewDataSource, UITabl
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //@TODO
-        return UITableViewCell()
+        let row = self.rows[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: row.reuseID, for: indexPath)
+        switch row {
+        case is LogoutRow:
+            cell.textLabel?.text = "Logout"
+            cell.detailTextLabel?.text = nil
+            cell.accessoryType = .disclosureIndicator
+        case is VersionRow:
+            cell.textLabel?.text = "Krang Version"
+            cell.detailTextLabel?.text = (row as! VersionRow).versionString
+            cell.accessoryType = .none
+        default:
+            break
+        }
+        return cell
     }
+    
     //MARK:- UITableViewDelegate
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let row = self.rows[indexPath.row]
+        switch row {
+        case is LogoutRow:
+            self.logout()
+        default:
+            break
+        }
+    }
 }

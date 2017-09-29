@@ -44,9 +44,9 @@ class DeeplinkHandler: NSObject {
             return
         }
         
-        guard !TraktHelper.shared.credentialsAreValid() else {
-            return
-        }
+//        guard !TraktHelper.shared.credentialsAreValid() else {
+//            return
+//        }
         
         var splashVC: SplashViewController? = AppDelegate.shared.topViewController() as? SplashViewController
         
