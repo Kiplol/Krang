@@ -307,7 +307,7 @@ class TraktHelper: NSObject {
     
     func getFullHistory(since date: Date, page: Int = 1, progress: ((Int, Int) -> ())?, completion: ((Error?) -> ())?) {
         let url = Constants.traktGetHistory
-        let _ = self.oauth.client.get(url, parameters: ["start_at": date, "limit": 250, "page": page], headers: TraktHelper.defaultHeaders(), success: { (response) in
+        let _ = self.oauth.client.get(url, parameters: ["start_at": date, "limit": 500, "page": page], headers: TraktHelper.defaultHeaders(), success: { (response) in
             //Success
             guard let szPageCount = response.response.allHeaderFields["x-pagination-page-count"] as? String, let szCurrentPage = response.response.allHeaderFields["x-pagination-page"] as? String, let pageCount = Int(szPageCount), let currentPage = Int(szCurrentPage) else {
                 //@TODO: Error

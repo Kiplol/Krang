@@ -163,7 +163,7 @@
 		376011611F6ACDF0004ED6EF /* KrangSearchable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KrangSearchable.swift; path = Classes/Protocols/KrangSearchable.swift; sourceTree = "<group>"; };
 		376011651F6C382A004ED6EF /* KrangLinkable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KrangLinkable.swift; path = Classes/Protocols/KrangLinkable.swift; sourceTree = "<group>"; };
 		376011681F6C524E004ED6EF /* KrangSeason.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KrangSeason.swift; path = Classes/Models/KrangSeason.swift; sourceTree = "<group>"; };
-		3760116B1F6C9BC7004ED6EF /* SeasonListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SeasonListViewController.swift; path = Kiptrak/Classes/ViewControllers/SeasonListViewController.swift; sourceTree = "<group>"; };
+		3760116B1F6C9BC7004ED6EF /* SeasonListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SeasonListViewController.swift; path = Classes/ViewControllers/SeasonListViewController.swift; sourceTree = "<group>"; };
 		3760116D1F6C9E29004ED6EF /* SeasonCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SeasonCollectionViewCell.swift; path = Kiptrak/Classes/Views/Cells/SeasonCollectionViewCell.swift; sourceTree = "<group>"; };
 		3760116E1F6C9E29004ED6EF /* SeasonCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SeasonCollectionViewCell.xib; path = Kiptrak/Classes/Views/Cells/SeasonCollectionViewCell.xib; sourceTree = "<group>"; };
 		376011711F6CA021004ED6EF /* SelfSizingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelfSizingCell.swift; path = Classes/Protocols/SelfSizingCell.swift; sourceTree = "<group>"; };
@@ -284,6 +284,7 @@
 		373D32911E22BE9700980925 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				3760116B1F6C9BC7004ED6EF /* SeasonListViewController.swift */,
 				377463F01F6DD16800F08029 /* EpisodeListViewController.swift */,
 				37E957801F6992B9003D6D74 /* WatchableSearchViewController.swift */,
 				3724CBA91E2474AF005387D1 /* KrangViewController.swift */,
@@ -310,7 +311,6 @@
 		37870B131E22BA6A00A2EC00 = {
 			isa = PBXGroup;
 			children = (
-				3760116B1F6C9BC7004ED6EF /* SeasonListViewController.swift */,
 				37870B1E1E22BA6A00A2EC00 /* Kiptrak */,
 				37A19E661E2BFDD9007877B4 /* Currently Watching Widget */,
 				37870B1D1E22BA6A00A2EC00 /* Products */,
