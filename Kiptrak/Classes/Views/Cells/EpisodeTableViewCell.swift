@@ -53,7 +53,7 @@ class EpisodeTableViewCell: SwipeTableViewCell {
             }
         }
         
-        self.imageSeen.isHidden = true//episode.watchDate == nil
+        self.imageSeen.isHidden = UserPrefs.traktSync && episode.watchDate == nil
         
         self.labelDescription.text = episode.overview
         let szImageURL: String? = {

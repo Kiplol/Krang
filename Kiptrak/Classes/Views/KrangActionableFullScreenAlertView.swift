@@ -17,6 +17,7 @@ class KrangActionableFullScreenAlertView: UIView {
     @IBOutlet weak var button: UIButton!
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var progressView: KDCircularProgress!
+    var indeterminate = true
     
     //MARK:- ivars
     var title: String? = nil
@@ -68,8 +69,10 @@ class KrangActionableFullScreenAlertView: UIView {
             self.labelTitle.text = self.title
             self.afterCountdownAction?(self)
             self.afterCountdownAction = nil
-            self.progressView.progress = 1.0 / 3.0
-            self.progressView.startAngle = timeElapsed * 100.0
+            if self.indeterminate {
+                self.progressView.progress = 1.0 / 3.0
+                self.progressView.startAngle = timeElapsed * 100.0
+            }
         }
     }
 

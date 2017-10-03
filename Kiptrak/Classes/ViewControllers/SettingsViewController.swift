@@ -55,6 +55,15 @@ class SettingsViewController: KrangViewController, UITableViewDataSource, UITabl
     fileprivate class VersionRow: Row {
         let versionString = KrangUtils.versionAndBuildNumberString
     }
+    fileprivate class TraktSyncRow: Row {
+        var isOn = false
+        
+        convenience init(isOn: Bool) {
+            self.init()
+            self.isOn = isOn
+        }
+    }
+    fileprivate static let tagTraktSyncSwitch = 10
     
     //MARK:- View Lifecycle
     override func viewDidLoad() {
@@ -69,6 +78,7 @@ class SettingsViewController: KrangViewController, UITableViewDataSource, UITabl
         self.rows.removeAll()
         self.rows.append(LogoutRow())
         self.rows.append(VersionRow())
+        self.rows.append(TraktSyncRow(isOn: UserPrefs.traktSync))
     }
     
     private func logout() {
@@ -92,6 +102,14 @@ class SettingsViewController: KrangViewController, UITableViewDataSource, UITabl
             cell.textLabel?.text = "Krang Version"
             cell.detailTextLabel?.text = (row as! VersionRow).versionString
             cell.accessoryType = .none
+        case is TraktSyncRow:
+            cell.textLabel?.text = "Trakt Sync"
+            cell.detailTextLabel?.text = nil
+            let switchView = (cell.accessoryView as? UISwitch ?? UISwitch())
+            switchView.isOn = UserPrefs.traktSync
+            switchView.tag = SettingsViewController.tagTraktSyncSwitch
+            switchView.addTarget(self, action: #selector(SettingsViewController.switchSwitched(switchView:)), for: .valueChanged)
+            cell.accessoryView = switchView
         default:
             break
         }
@@ -109,4 +127,50 @@ class SettingsViewController: KrangViewController, UITableViewDataSource, UITabl
             break
         }
     }
+    
+    //MARK:- UISwitch
+    func switchSwitched(switchView: UISwitch) {
+        switch switchView.tag {
+        case SettingsViewController.tagTraktSyncSwitch:
+            KrangLogger.log.debug("Trakt Sync turned \(switchView.isOn ? "on" : "off")")
+            if switchView.isOn {
+                let fullscreenAlertView = KrangActionableFullScreenAlertView.show(withTitle: "Syncing with Trakt", countdownDuration: 3.0, afterCountdownAction: { (alert) in
+                    //@TODO
+                    TraktHelper.shared.getFullHistory(since: Date.distantPast, progress: { (currentPage, maxPage) in
+                        alert.progressView.progress = Double(currentPage) / Double(maxPage)
+                    }, completion: { (error) in
+                        UserPrefs.traktSync = switchView.isOn
+                        alert.dismiss(true)
+                    })
+                }, buttonTitle: "Cancel Sync", buttonAction: { (alert, _) in
+                    alert.dismiss(true)
+                })
+                fullscreenAlertView?.indeterminate = false
+            } else {
+                UserPrefs.traktSync = switchView.isOn
+            }
+        default:
+            break
+        }
+    }
+}
+
+class UserPrefs {
+    
+    class var traktSync: Bool {
+        get {
+            guard let sharedDefaults = UserDefaults(suiteName: "group.com.kip.krang") else {
+                return false
+            }
+            return sharedDefaults.object(forKey: "traktSync") as? Bool ?? false
+        }
+        set {
+            guard let sharedDefaults = UserDefaults(suiteName: "group.com.kip.krang") else {
+                return
+            }
+            sharedDefaults.set(newValue, forKey: "traktSync")
+            sharedDefaults.synchronize()
+        }
+    }
+    
 }
