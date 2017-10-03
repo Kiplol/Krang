@@ -359,13 +359,13 @@ class TraktHelper: NSObject {
                 parsedShows.values.forEach {
                     showUpdateGroup.enter()
                     self.getAllSeasons(forShow: $0, completion: { (seasonsError, updatedShow) in
-                        guard let updatedShow = updatedShow else {
+//                        guard let updatedShow = updatedShow else {
                             showUpdateGroup.leave()
-                            return
-                        }
-                        TMDBHelper.shared.update(show: updatedShow, completion: { (tmdbError, _) in
-                            showUpdateGroup.leave()
-                        })
+//                            return
+//                        }
+//                        TMDBHelper.shared.update(show: updatedShow, completion: { (tmdbError, _) in
+//                            showUpdateGroup.leave()
+//                        })
                     })
                 }
                 showUpdateGroup.notify(queue: DispatchQueue.main, execute: {
