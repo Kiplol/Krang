@@ -24,7 +24,7 @@ class Constants: NSObject {
     class var traktGetShowSeasonsURLFormat: String { return Constants.traktBaseURL + "/shows/%@/seasons?extended=full" }
     class var traktGetEpisodesForSeasonURLFormat: String { return Constants.traktBaseURL + "/shows/%@/seasons/%d?extended=full" }
     class var traktGetShowHistory: String { return Constants.traktBaseURL + "/sync/history/shows" }
-    class var traktGetHistory: String { return Constants.traktBaseURL + "/sync/history" }
+    class var traktGetHistory: String { return Constants.traktBaseURL + "/sync/history?extended=season" }
     class var traktGetActivity: String { return Constants.traktBaseURL + "/sync/last_activities" }
     
     //MARK:- TMDB

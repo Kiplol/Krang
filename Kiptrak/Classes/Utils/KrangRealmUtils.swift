@@ -13,6 +13,10 @@ class KrangRealmUtils : NSObject {
     
     class func makeChanges(changes:@escaping () -> Void) {
         let realm = try! Realm()
+        guard !realm.isInWriteTransaction else {
+            changes()
+            return
+        }
         try! realm.write({
             changes()
         })
