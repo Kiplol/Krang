@@ -24,17 +24,19 @@ class EpisodeListViewController: KrangViewController, UITableViewDataSource, UIT
     
     //MARK:- ivars
     var season: KrangSeason! {
+        didSet {
+            self.episodes = self.season.getEpisodesInOrder()
+            self.title = season.title
+        }
+    }
+    var episodesNotificationToken: NotificationToken? = nil
+    fileprivate var episodes: Results<KrangEpisode>! {
         willSet {
             self.episodesNotificationToken?.stop()
             self.episodesNotificationToken = nil
         }
         didSet {
-            //if let show = season.show {
-            //    self.title = "\(show.title) - \(season.title)"
-            //} else {
-                self.title = season.title
-            //}
-            self.episodesNotificationToken = self.season.episodes.addNotificationBlock() { change in
+            self.episodesNotificationToken = self.episodes.addNotificationBlock() { change in
                 if self.isViewLoaded {
                     switch change {
                     case .initial(_):
@@ -58,7 +60,6 @@ class EpisodeListViewController: KrangViewController, UITableViewDataSource, UIT
             }
         }
     }
-    var episodesNotificationToken: NotificationToken? = nil
     
     //MARK:- View Lifecycle
     override func viewDidLoad() {
@@ -70,13 +71,13 @@ class EpisodeListViewController: KrangViewController, UITableViewDataSource, UIT
     
     //MARK:- UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.season.episodes.count
+        return self.episodes.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: EpisodeListViewController.cellReuseIdentifier, for: indexPath)
         if let episodeCell = cell as? EpisodeTableViewCell {
-            episodeCell.update(withEpisode: self.season.episodes[indexPath.row])
+            episodeCell.update(withEpisode: self.episodes[indexPath.row])
             episodeCell.delegate = self
         }
         return cell
@@ -94,7 +95,7 @@ class EpisodeListViewController: KrangViewController, UITableViewDataSource, UIT
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let episode = self.season.episodes[indexPath.row]
+        let episode = self.episodes[indexPath.row]
         let _ = KrangActionableFullScreenAlertView.show(withTitle: "Checking in to \(episode.title)", countdownDuration: 3.0, afterCountdownAction: { (alert) in
             alert.button.isHidden = true
             TraktHelper.shared.checkIn(to: episode, completion: { (error, checkedInWatchable) in
@@ -116,7 +117,7 @@ class EpisodeListViewController: KrangViewController, UITableViewDataSource, UIT
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
         guard orientation == .right else { return nil }
         
-        let selectedObject = self.season.episodes[indexPath.row]
+        let selectedObject = self.episodes[indexPath.row]
         var options = [SwipeAction]()
         if let linkable = selectedObject as? KrangLinkable {
             if let tmbdURL = linkable.urlForTMDB {

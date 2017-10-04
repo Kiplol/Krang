@@ -42,6 +42,10 @@ class KrangSeason: Object {
         return nil
     }
     
+    func getEpisodesInOrder() -> Results<KrangEpisode> {
+        return self.episodes.sorted(byKeyPath: "episode")
+    }
+    
     func update(withJSON json:JSON) {
         self.traktID = json["ids"]["trakt"].int ?? -1
         self.imdbID = json["ids"]["imdb"].string
@@ -63,6 +67,10 @@ class KrangSeason: Object {
         }
         let hasThem = self.episodes.count - self.unseenEpisodes().count < self.numberOfAiredEpisodes
         return hasThem
+    }
+    
+    func hasBeenWatched() -> Bool {
+        return !self.hasUnseenEpisodes() && self.numberOfAiredEpisodes > 0
     }
 
 }

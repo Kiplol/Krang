@@ -276,13 +276,16 @@ class TraktHelper: NSObject {
                                     return
                                 }
                                 
+                                var jsonForUpdating = JSON(["type": "episode"])
+                                jsonForUpdating["episode"] = episodeJSON
+                                
                                 let episode: KrangEpisode = {
                                     if let existingEpisode = KrangEpisode.with(traktID: episodeID) {
-                                        existingEpisode.update(withJSON: episodeJSON)
+                                        existingEpisode.update(withJSON: jsonForUpdating)
                                         return existingEpisode
                                     } else {
                                         let newEpisode = KrangEpisode()
-                                        newEpisode.update(withJSON: episodeJSON)
+                                        newEpisode.update(withJSON: jsonForUpdating)
                                         newEpisode.saveToDatabaseOutsideWriteTransaction()
                                         return newEpisode
                                     }
