@@ -385,13 +385,18 @@ class TraktHelper: NSObject {
                 return
             }
             let json = JSON(data: response.data)
-            
             var parsedShows = [Int: KrangShow]()
+            let parsingGroup = DispatchGroup()
+            parsingGroup.enter()
+            
             if let dics = json.array {
                 let showDics = dics.filter { $0["show"]["ids"]["trakt"].int != nil }
                 let episodeDics = dics.filter { $0["episode"]["ids"]["trakt"].int != nil }
                 let movieDics = dics.filter { $0["movie"]["ids"]["trakt"].int != nil }
                 //First do the shows
+                
+                let showsGroup = DispatchGroup()
+                showsGroup.enter()
                 KrangRealmUtils.makeChanges {
                     showDics.forEach {
                         guard let szWatchedAt = $0["watched_at"].string, let watchedAt = Date.from(utcTimestamp: szWatchedAt) else {
@@ -402,7 +407,7 @@ class TraktHelper: NSObject {
                         guard let showID = thisJSON["ids"]["trakt"].int else {
                             return
                         }
-                        if parsedShows.keys.contains(showID) {
+                        if showIDs.contains(showID) {
                             return
                         }
                         
@@ -422,43 +427,52 @@ class TraktHelper: NSObject {
                         if !showIDs.contains(showID) {
                             showIDs.append(showID)
                         }
+                        
+                        showsGroup.enter()
+                        self.getAllSeasons(forShow: show, completion: { (_, _) in
+                            showsGroup.leave()
+                        })
                     }
                 }
-                
-                KrangLogger.log.debug("Finished parsing shows.")
-                KrangRealmUtils.makeChanges {
-                    episodeDics.forEach {
-                        guard let szWatchedAt = $0["watched_at"].string, let watchedAt = Date.from(utcTimestamp: szWatchedAt) else {
-                            return
-                        }
-                        let thisJSON = $0
-                        if let episodeID = $0["episode"]["ids"]["trakt"].int {
-                            let episode: KrangEpisode = {
-                                if let existingEpisode = KrangEpisode.with(traktID: episodeID) {
-                                    existingEpisode.update(withJSON: thisJSON)
-                                    return existingEpisode
-                                } else {
-                                    let newEpisode = KrangEpisode()
-                                    newEpisode.update(withJSON: thisJSON)
-                                    newEpisode.saveToDatabaseOutsideWriteTransaction()
-                                    return newEpisode
+                showsGroup.leave()
+                showsGroup.notify(queue: DispatchQueue.global(qos: DispatchQoS.background.qosClass), execute: {
+                    KrangLogger.log.debug("Finished parsing shows for page \(currentPage) of \(pageCount).")
+                    KrangRealmUtils.makeChanges {
+                        episodeDics.forEach {
+                            guard let szWatchedAt = $0["watched_at"].string, let watchedAt = Date.from(utcTimestamp: szWatchedAt) else {
+                                return
+                            }
+                            let thisJSON = $0
+                            if let episodeID = $0["episode"]["ids"]["trakt"].int {
+                                let episode: KrangEpisode = {
+                                    if let existingEpisode = KrangEpisode.with(traktID: episodeID) {
+                                        existingEpisode.update(withJSON: thisJSON)
+                                        return existingEpisode
+                                    } else {
+                                        let newEpisode = KrangEpisode()
+                                        newEpisode.update(withJSON: thisJSON)
+                                        newEpisode.saveToDatabaseOutsideWriteTransaction()
+                                        return newEpisode
+                                    }
+                                }()
+                                episode.watchDate = watchedAt
+                                if let showID = $0["show"]["ids"]["trakt"].int, let show = (KrangShow.with(traktID: showID) ?? parsedShows[showID]){
+                                    if !show.episodes.contains(episode) {
+                                        show.episodes.append(episode)
+                                    }
+                                    if let season = show.getSeason(withSeasonNumber: episode.seasonNumber), !season.episodes.contains(episode) {
+                                        season.episodes.append(episode)
+                                    }
+                                    show.setLastWatchDateIfNewer(watchedAt)
                                 }
-                            }()
-                            episode.watchDate = watchedAt
-                            if let showID = $0["show"]["ids"]["trakt"].int, let show = (KrangShow.with(traktID: showID) ?? parsedShows[showID]){
-                                if !show.episodes.contains(episode) {
-                                    show.episodes.append(episode)
-                                }
-                                if let season = show.getSeason(withSeasonNumber: episode.seasonNumber), !season.episodes.contains(episode) {
-                                    season.episodes.append(episode)
-                                }
-                                show.setLastWatchDateIfNewer(watchedAt)
                             }
                         }
                     }
-                }
+                    parsingGroup.leave()
+                })
                 
                 //Movies
+                parsingGroup.enter()
                 KrangRealmUtils.makeChanges {
                     movieDics.forEach {
                         guard let szWatchedAt = $0["watched_at"].string, let watchedAt = Date.from(utcTimestamp: szWatchedAt) else {
@@ -485,20 +499,12 @@ class TraktHelper: NSObject {
                 }
             }
             
+            parsingGroup.leave()
             if currentPage < pageCount {
                 progress?(currentPage, pageCount)
                 self.getFullHistory(since: date, page: (currentPage + 1), progress: progress, completion: completion, showIDsSoFar: showIDs)
             } else {
-                let showUpdateGroup = DispatchGroup()
-                showUpdateGroup.enter()
-                showIDs.filter { KrangShow.with(traktID: $0) != nil }.map { KrangShow.with(traktID: $0)! }.forEach {
-                    showUpdateGroup.enter()
-                    self.getAllSeasonsAndEpisodes(forShow: $0, completion: { (_, _) in
-                        showUpdateGroup.leave()
-                    })
-                }
-                showUpdateGroup.leave()
-                showUpdateGroup.notify(queue: DispatchQueue.main, execute: {
+                parsingGroup.notify(queue: DispatchQueue.main, execute: {
                     completion?(nil)
                 })
             }
