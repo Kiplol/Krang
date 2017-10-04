@@ -103,7 +103,7 @@ class SettingsViewController: KrangViewController, UITableViewDataSource, UITabl
             cell.detailTextLabel?.text = (row as! VersionRow).versionString
             cell.accessoryType = .none
         case is TraktSyncRow:
-            cell.textLabel?.text = "Trakt Sync"
+            cell.textLabel?.text = "Sync Trakt History"
             cell.detailTextLabel?.text = nil
             let switchView = (cell.accessoryView as? UISwitch ?? UISwitch())
             switchView.isOn = UserPrefs.traktSync
