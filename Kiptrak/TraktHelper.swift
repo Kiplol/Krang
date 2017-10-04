@@ -144,6 +144,18 @@ class TraktHelper: NSObject {
     
     func getLastActivityTime(_ completion: ((Error?, Date?) -> ())?) {
         //@TODO
+        let _ = self.oauth.client.get(Constants.traktGetActivity, parameters: [:], headers: TraktHelper.defaultHeaders(), success: { (response) in
+            //Yay
+            let json = JSON(data: response.data)
+            if let szTime = json["all"].string, let time = Date.from(utcTimestamp: szTime) {
+                completion?(nil, time)
+            } else {
+                completion?(nil, nil)
+            }
+        }) { (error) in
+            //Boo
+            completion?(error, nil)
+        }
     }
     
     func getCheckedInMovieOrEpisode(completion: ((_:Error?, _:KrangMovie?, _:KrangEpisode?) -> ())?) {

@@ -135,10 +135,13 @@ class SettingsViewController: KrangViewController, UITableViewDataSource, UITabl
             KrangLogger.log.debug("Trakt Sync turned \(switchView.isOn ? "on" : "off")")
             if switchView.isOn {
                 let fullscreenAlertView = KrangActionableFullScreenAlertView.show(withTitle: "Syncing with Trakt", countdownDuration: 3.0, afterCountdownAction: { (alert) in
-                    //@TODO
+                    alert.button.isHidden = true
                     TraktHelper.shared.getFullHistory(since: Date.distantPast, progress: { (currentPage, maxPage) in
                         alert.progressView.progress = Double(currentPage) / Double(maxPage)
                     }, completion: { (error) in
+                        KrangRealmUtils.makeChanges {
+                            KrangUser.getCurrentUser().lastHistorySync = Date()
+                        }
                         UserPrefs.traktSync = switchView.isOn
                         alert.dismiss(true)
                     })
@@ -148,6 +151,9 @@ class SettingsViewController: KrangViewController, UITableViewDataSource, UITabl
                 fullscreenAlertView?.indeterminate = false
             } else {
                 UserPrefs.traktSync = switchView.isOn
+                KrangRealmUtils.makeChanges {
+                    KrangUser.getCurrentUser().lastHistorySync = Date.distantPast
+                }
             }
         default:
             break

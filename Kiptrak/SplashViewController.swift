@@ -52,16 +52,38 @@ class SplashViewController: KrangViewController {
                     //Peeee
                     if user != nil && user!.username.characters.count > 0 {
                         KrangLogger.log.debug("User \(user!.username) is already logged in, so proceed to playback")
-//                        TraktHelper.shared.getFullHistory(since: user!.lastHistorySync, progress: { currentPage, numberOfPages in
-//                            KrangLogger.log.debug("Got history page \(currentPage) of \(numberOfPages).")
-//                        }, completion: { (historyError) in
-//                            if historyError == nil {
-//                                user!.makeChanges {
-//                                    user!.lastHistorySync = Date()
-//                                }
-//                            }
-//                        })
-                        self.goToPlayback()
+                        //TESTING
+                        if UserPrefs.traktSync {
+                            TraktHelper.shared.getLastActivityTime({ (activityError, poop) in
+                                if let lastActivityTime = poop {
+                                    let shouldSync: Bool = {
+                                        if !UserPrefs.traktSync {
+                                            return false
+                                        } else if let lastSyncTime = user?.lastHistorySync {
+                                            return lastActivityTime.timeIntervalSince1970 > lastSyncTime.timeIntervalSince1970
+                                        } else {
+                                            return true
+                                        }
+                                    }()
+                                    if shouldSync {
+                                        TraktHelper.shared.getFullHistory(since: user?.lastHistorySync ?? Date.distantPast, progress: { (currentPage, maxPage) in
+                                            
+                                        }, completion: { (historyError) in
+                                            if historyError == nil {
+                                                user?.makeChanges {
+                                                    user?.lastHistorySync = Date()
+                                                }
+                                            }
+                                            self.goToPlayback()
+                                        })
+                                    } else {
+                                        self.goToPlayback()
+                                    }
+                                }
+                            })
+                        } else {
+                            self.goToPlayback()
+                        }
                     } else {
                         self.goToOnboarding()
                     }
