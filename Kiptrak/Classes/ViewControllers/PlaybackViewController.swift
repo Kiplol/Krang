@@ -52,10 +52,14 @@ class PlaybackViewController: KrangViewController {
     @IBOutlet weak var buttonTrakt: UIButton!
     @IBOutlet weak var constraintBelowInfoContainer: NSLayoutConstraint!
     @IBOutlet weak var constraintBelowStackViewForButtons: NSLayoutConstraint!
+    @IBOutlet weak var constraintInfoContainerHeight: NSLayoutConstraint!
     
     var traktMovieID:Int? = nil
     var traktEpisodeID:Int? = nil
     var watchable: KrangWatchable? = nil
+    var correctionForDeviceType: CGFloat = 0.0
+    
+    fileprivate let defaultInfoContainerHeight: CGFloat = 120.0
 
     //MARK:- Initializers
     class func instantiatedFromStoryboard() -> PlaybackViewController {
@@ -70,6 +74,12 @@ class PlaybackViewController: KrangViewController {
         self.stackViewForButtons.removeArrangedSubview(self.buttonTMDB)
         self.stackViewForButtons.removeArrangedSubview(self.buttonTrakt)
         NotificationCenter.default.addObserver(self, selector: #selector(PlaybackViewController.didCheckInToAWatchable(_:)), name: Notification.Name.didCheckInToWatchable, object: nil)
+        
+//        let bottomPadding: CGFloat = KrangUtils.Display.typeIsLike == .iphoneX ? 25.0 : 0.0
+        if KrangUtils.Display.typeIsLike == .iphoneX {
+            correctionForDeviceType = 32.0
+            self.constraintInfoContainerHeight.constant += correctionForDeviceType
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -81,7 +91,12 @@ class PlaybackViewController: KrangViewController {
         
         if let drawerVC = self.pulleyViewController {
             drawerVC.drawerBackgroundVisualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+//            drawerVC.setDrawerPosition(position: .closed, animated: animated)
         }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -261,22 +276,25 @@ class PlaybackViewController: KrangViewController {
 
 extension PlaybackViewController: PulleyPrimaryContentControllerDelegate {
     
-    func makeUIAdjustmentsForFullscreen(progress: CGFloat)
-    {
+    func makeUIAdjustmentsForFullscreen(progress: CGFloat) {
 //        controlsContainer.alpha = 1.0 - progress
     }
     
-    func drawerPositionDidChange(drawer: PulleyViewController)
-    {
-        
+    func drawerPositionDidChange(drawer: PulleyViewController) {
+        switch drawer.drawerPosition {
+        case .closed:
+            self.constraintBelowStackViewForButtons.constant = 8.0
+        default:
+            self.constraintBelowStackViewForButtons.constant = 8.0 + drawer.drawerCornerRadius
+        }
+        self.constraintBelowStackViewForButtons.constant += correctionForDeviceType
+        self.view.layoutIfNeeded()
     }
     
-    func drawerChangedDistanceFromBottom(drawer: PulleyViewController, distance: CGFloat)
-    {
-        let overlap = drawer.drawerCornerRadius
-        let maxContentShrinkage: CGFloat = drawer.partialRevealDrawerHeight() - self.stackViewForButtons.bounds.size.height - overlap - 8.0
-        self.constraintBelowStackViewForButtons.constant = 8.0 + overlap
-        self.constraintBelowInfoContainer.constant = min(maxContentShrinkage, distance) - overlap
+    func drawerChangedDistanceFromBottom(drawer: PulleyViewController, distance: CGFloat) {
+        let overlap = drawer.drawerCornerRadius + self.correctionForDeviceType
+        let maxContentShrinkage: CGFloat = drawer.partialRevealDrawerHeight()
+        self.constraintBelowInfoContainer.constant = max(0.0, min(maxContentShrinkage, distance) - overlap) - correctionForDeviceType
         self.view.layoutIfNeeded()
     }
 }

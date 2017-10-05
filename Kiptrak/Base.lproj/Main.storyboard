@@ -315,7 +315,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NOW WATCHING" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jvF-h6-fN5">
-                                <rect key="frame" x="8" y="181.5" width="134.5" height="20"/>
+                                <rect key="frame" x="8" y="179" width="126.5" height="22.5"/>
                                 <fontDescription key="fontDescription" name="Exo-Black" family="Exo" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -425,6 +425,7 @@
                         <outlet property="buttonTrakt" destination="SY8-SC-PkJ" id="07n-G6-wv7"/>
                         <outlet property="constraintBelowInfoContainer" destination="3O8-HA-E9V" id="SMe-YQ-vNk"/>
                         <outlet property="constraintBelowStackViewForButtons" destination="dNu-jl-gNS" id="JwF-2D-226"/>
+                        <outlet property="constraintInfoContainerHeight" destination="hmA-ba-c4M" id="rGF-V4-3Rb"/>
                         <outlet property="imageInfoBackground" destination="Xfi-1B-afS" id="Aip-V9-wCR"/>
                         <outlet property="imagePosterBackground" destination="08k-fo-OJA" id="20M-fp-Eye"/>
                         <outlet property="infoContainer" destination="Wlr-5B-5Di" id="D9z-jC-SWM"/>

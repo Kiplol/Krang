@@ -372,6 +372,7 @@ class TraktHelper: NSObject {
         }
     }
     
+    //MARK:- History Sync
     func getFullHistory(since date: Date, page: Int = 1, progress: ((Int, Int) -> ())?, completion: ((Error?) -> ())?, showIDsSoFar: [Int] = []) {
         let url = Constants.traktGetHistory
         var showIDs = [Int]()
@@ -520,7 +521,9 @@ class TraktHelper: NSObject {
             let json = JSON(data: response.data)
             if let episodeDics = json.array {
                 KrangRealmUtils.makeChanges {
-                    show.episodes.forEach { $0.watchDate = nil }
+                    let watchedEpisodeIDs = episodeDics.filter { $0["episode"]["ids"]["trakt"].int != nil }.map { $0["episode"]["ids"]["trakt"].int! }
+                    let unwatchedEpisodes = show.episodes.filter { watchedEpisodeIDs.contains($0.traktID) }
+                    unwatchedEpisodes.forEach { $0.watchDate = nil }
                     episodeDics.forEach {
                         guard let traktID = $0["episode"]["ids"]["trakt"].int,
                             let szWatchedAt = $0["watched_at"].string,
@@ -612,6 +615,7 @@ class TraktHelper: NSObject {
         }
     }
     
+    //MARK:-
     func search(withQuery query: String, completion: ((Error?, [KrangSearchable]) -> ())?) -> OAuthSwiftRequestHandle? {
         guard !query.isEmpty else {
             completion?(nil, [])
