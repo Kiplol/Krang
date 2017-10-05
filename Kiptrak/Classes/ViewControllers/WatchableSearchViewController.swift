@@ -78,7 +78,7 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
         if self.pulleyViewController != nil {
             self.navigationController?.setNavigationBarHidden(true, animated: animated)
         }
-        TraktHelper.shared.getShowHistory { (error, shows) in
+        TraktHelper.shared.getRecentShowHistory { (error, shows) in
             self.historyResults = shows
             if !self.isSearching {
                 self.tableView.reloadData()
@@ -245,9 +245,9 @@ extension WatchableSearchViewController: PulleyDrawerViewControllerDelegate, UIS
     {
         if self.isViewLoaded {
             let rowHeight = self.tableView.rowHeight
-            let maxHeight = 2.5 * rowHeight
+            let maxHeight = 4.5 * rowHeight
             let minHeight = rowHeight * 1.5
-            let searchResultsHeight = 4 * rowHeight//(max(1.0, CGFloat(self.dataSet.count)) - 0.5) * rowHeight
+            let searchResultsHeight = (max(1.0, CGFloat(self.dataSet.count)) - 0.5) * rowHeight
             let tableViewHeight = max(minHeight, min(maxHeight, searchResultsHeight))
             let searchBarHeight = self.searchBarContainerView.frame.maxY
             return tableViewHeight + searchBarHeight

@@ -527,7 +527,38 @@ class TraktHelper: NSObject {
         }
     }
     
-    func getShowHistory(_ completion: ((Error?, [KrangShow]) -> ())?) {
+    func getHistory(forShow show: KrangShow, completion: ((Error?, KrangShow) -> ())?) {
+        let url = String(format: Constants.traktGetShowHistoryFormat, show.traktID)
+        let _ = self.oauth.client.get(url, parameters: ["limit":show.episodes.count], headers: TraktHelper.defaultHeaders(), success: { (response) in
+            //Yay
+            let json = JSON(data: response.data)
+            if let episodeDics = json.array {
+                KrangRealmUtils.makeChanges {
+                    show.episodes.forEach { $0.watchDate = nil }
+                    episodeDics.forEach {
+                        guard let traktID = $0["episode"]["ids"]["trakt"].int,
+                            let szWatchedAt = $0["watched_at"].string,
+                            let watchedAt = Date.from(utcTimestamp: szWatchedAt) else {
+                                return
+                        }
+                        
+                        guard let episode = KrangEpisode.with(traktID: traktID) else {
+                            KrangLogger.log.error("Couldn't find episode \(traktID)")
+                            return
+                        }
+                        
+                        episode.watchDate = watchedAt
+                    }
+                }
+            }
+            completion?(nil, show)
+        }) { (error) in
+            //Boo
+            completion?(error, show)
+        }
+    }
+    
+    func getRecentShowHistory(_ completion: ((Error?, [KrangShow]) -> ())?) {
         let url = Constants.traktGetShowHistory
         let now = Date()
         let fourWeeksAgo = Date(timeIntervalSince1970: now.timeIntervalSince1970 - (60.0 * 60.0 * 24.0 * 7.0 * 4.0))

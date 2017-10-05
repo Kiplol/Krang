@@ -22,45 +22,62 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qHF-8A-Q3Z" userLabel="Image Container View">
                         <rect key="frame" x="25" y="5" width="118" height="168"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="poster_placeholder_dark" translatesAutoresizingMaskIntoConstraints="NO" id="TUt-sj-mug">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lt8-c7-Svh" userLabel="Clipping View">
                                 <rect key="frame" x="0.0" y="0.0" width="118" height="168"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="poster_placeholder_dark" translatesAutoresizingMaskIntoConstraints="NO" id="TUt-sj-mug">
+                                        <rect key="frame" x="0.0" y="0.0" width="118" height="168"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="seen" translatesAutoresizingMaskIntoConstraints="NO" id="ACi-gb-S9r">
+                                        <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="Ngw-33-725"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                <real key="value" value="0.75"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                <real key="value" value="3"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="size" keyPath="shadowOffser">
+                                                <size key="value" width="1" height="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="TUt-sj-mug" firstAttribute="leading" secondItem="lt8-c7-Svh" secondAttribute="leading" id="58a-SR-hsi"/>
+                                    <constraint firstItem="ACi-gb-S9r" firstAttribute="width" secondItem="ACi-gb-S9r" secondAttribute="height" id="aqX-rk-Ilz"/>
+                                    <constraint firstItem="TUt-sj-mug" firstAttribute="top" secondItem="lt8-c7-Svh" secondAttribute="top" id="b9N-5o-QFT"/>
+                                    <constraint firstAttribute="bottom" secondItem="TUt-sj-mug" secondAttribute="bottom" id="jd2-GC-yVQ"/>
+                                    <constraint firstItem="ACi-gb-S9r" firstAttribute="leading" secondItem="TUt-sj-mug" secondAttribute="leading" id="skw-Bb-wnW"/>
+                                    <constraint firstItem="ACi-gb-S9r" firstAttribute="top" secondItem="TUt-sj-mug" secondAttribute="top" id="vDT-5l-cOZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="TUt-sj-mug" secondAttribute="trailing" id="zIU-RM-yT8"/>
+                                </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="seen" translatesAutoresizingMaskIntoConstraints="NO" id="ACi-gb-S9r">
-                                <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="Ngw-33-725"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                        <real key="value" value="0.75"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                        <real key="value" value="3"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffser">
-                                        <size key="value" width="3" height="3"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </imageView>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="0.20384738869863014" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="TUt-sj-mug" secondAttribute="bottom" id="Ac2-qW-PQ4"/>
-                            <constraint firstItem="TUt-sj-mug" firstAttribute="top" secondItem="qHF-8A-Q3Z" secondAttribute="top" id="Qhf-YN-ih6"/>
-                            <constraint firstItem="ACi-gb-S9r" firstAttribute="top" secondItem="TUt-sj-mug" secondAttribute="top" id="TZB-Vr-ipb"/>
-                            <constraint firstItem="ACi-gb-S9r" firstAttribute="leading" secondItem="TUt-sj-mug" secondAttribute="leading" id="XzP-Jy-fN3"/>
-                            <constraint firstItem="ACi-gb-S9r" firstAttribute="width" secondItem="ACi-gb-S9r" secondAttribute="height" id="i4o-VW-qrl"/>
+                            <constraint firstAttribute="trailing" secondItem="lt8-c7-Svh" secondAttribute="trailing" id="5zC-R0-ARo"/>
+                            <constraint firstItem="lt8-c7-Svh" firstAttribute="leading" secondItem="qHF-8A-Q3Z" secondAttribute="leading" id="JiM-Mr-fGG"/>
+                            <constraint firstItem="lt8-c7-Svh" firstAttribute="top" secondItem="qHF-8A-Q3Z" secondAttribute="top" id="Wjd-DR-aLW"/>
+                            <constraint firstAttribute="bottom" secondItem="lt8-c7-Svh" secondAttribute="bottom" id="jBe-3Q-DB0"/>
                             <constraint firstAttribute="width" secondItem="qHF-8A-Q3Z" secondAttribute="height" multiplier="19:27" id="lSj-bL-E66"/>
-                            <constraint firstItem="TUt-sj-mug" firstAttribute="leading" secondItem="qHF-8A-Q3Z" secondAttribute="leading" id="lf1-3W-vsL"/>
-                            <constraint firstAttribute="trailing" secondItem="TUt-sj-mug" secondAttribute="trailing" id="q2d-6W-sHB"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
