@@ -35,6 +35,20 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="Ngw-33-725"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                        <real key="value" value="0.75"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffser">
+                                        <size key="value" width="3" height="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="0.20384738869863014" colorSpace="calibratedWhite"/>
@@ -93,6 +107,6 @@
     </objects>
     <resources>
         <image name="poster_placeholder_dark" width="190" height="270"/>
-        <image name="seen" width="32" height="32"/>
+        <image name="seen" width="42" height="42"/>
     </resources>
 </document>

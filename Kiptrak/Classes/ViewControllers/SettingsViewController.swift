@@ -137,6 +137,7 @@ class SettingsViewController: KrangViewController, UITableViewDataSource, UITabl
                 let fullscreenAlertView = KrangActionableFullScreenAlertView.show(withTitle: "Syncing with Trakt", countdownDuration: 3.0, afterCountdownAction: { (alert) in
                     alert.button.isHidden = true
                     TraktHelper.shared.getFullHistory(since: Date.distantPast, progress: { (currentPage, maxPage) in
+                        //@TODO: Animate this
                         alert.progressView.progress = Double(currentPage) / Double(maxPage)
                     }, completion: { (error) in
                         KrangRealmUtils.makeChanges {
@@ -159,24 +160,4 @@ class SettingsViewController: KrangViewController, UITableViewDataSource, UITabl
             break
         }
     }
-}
-
-class UserPrefs {
-    
-    class var traktSync: Bool {
-        get {
-            guard let sharedDefaults = UserDefaults(suiteName: "group.com.kip.krang") else {
-                return false
-            }
-            return sharedDefaults.object(forKey: "traktSync") as? Bool ?? false
-        }
-        set {
-            guard let sharedDefaults = UserDefaults(suiteName: "group.com.kip.krang") else {
-                return
-            }
-            sharedDefaults.set(newValue, forKey: "traktSync")
-            sharedDefaults.synchronize()
-        }
-    }
-    
 }

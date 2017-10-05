@@ -11,6 +11,8 @@ import Pulley
 
 extension UIViewController {
     
+    class var defaultPartialRevealDrawerHeight: CGFloat { return 264.0 }
+    
     func topViewController() -> UIViewController {
         if let presentedViewController = self.presentedViewController {
             return presentedViewController.topViewController()
@@ -50,7 +52,7 @@ extension UINavigationController: PulleyDrawerViewControllerDelegate {
         if let drawer = self.topViewController as? PulleyDrawerViewControllerDelegate {
             return drawer.partialRevealDrawerHeight()
         }
-        return 264.0
+        return UIViewController.defaultPartialRevealDrawerHeight
     }
     
     public func supportedDrawerPositions() -> [PulleyPosition] {

@@ -247,12 +247,12 @@ extension WatchableSearchViewController: PulleyDrawerViewControllerDelegate, UIS
             let rowHeight = self.tableView.rowHeight
             let maxHeight = 2.5 * rowHeight
             let minHeight = rowHeight * 1.5
-            let searchResultsHeight = (max(1.0, CGFloat(self.searchResults.count)) - 0.5) * rowHeight
+            let searchResultsHeight = 4 * rowHeight//(max(1.0, CGFloat(self.dataSet.count)) - 0.5) * rowHeight
             let tableViewHeight = max(minHeight, min(maxHeight, searchResultsHeight))
             let searchBarHeight = self.searchBarContainerView.frame.maxY
             return tableViewHeight + searchBarHeight
         } else {
-            return 264.0
+            return UIViewController.defaultPartialRevealDrawerHeight
         }
     }
     

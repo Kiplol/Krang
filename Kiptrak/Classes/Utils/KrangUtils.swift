@@ -78,3 +78,27 @@ extension URL {
         }
     }
 }
+
+class UserPrefs {
+    
+    class var traktSync: Bool {
+        get {
+            guard let sharedDefaults = UserDefaults.krangDefaults else {
+                return false
+            }
+            return sharedDefaults.object(forKey: "traktSync") as? Bool ?? false
+        }
+        set {
+            guard let sharedDefaults = UserDefaults.krangDefaults else {
+                return
+            }
+            sharedDefaults.set(newValue, forKey: "traktSync")
+            sharedDefaults.synchronize()
+        }
+    }
+    
+}
+
+extension UserDefaults {
+    class var krangDefaults: UserDefaults? { return UserDefaults(suiteName: "group.com.kip.krang") }
+}

@@ -64,6 +64,12 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="blankSlate"/>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Rk-aJ-DIS">
+                                <rect key="frame" x="187.5" y="492" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -71,7 +77,9 @@
                             <constraint firstItem="2Ua-9U-zz9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Hkt-lL-V22"/>
                             <constraint firstItem="TgE-em-xKW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Jfp-ox-vqp"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="TgE-em-xKW" secondAttribute="bottom" constant="20" id="PEa-PD-t4V"/>
+                            <constraint firstItem="3Rk-aJ-DIS" firstAttribute="top" secondItem="Gpc-RB-YBd" secondAttribute="bottom" constant="63" id="T3n-14-LdJ"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="2Ua-9U-zz9" secondAttribute="bottom" id="TPJ-Nh-z3h"/>
+                            <constraint firstItem="3Rk-aJ-DIS" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="XvQ-gx-fZ1"/>
                             <constraint firstItem="Gpc-RB-YBd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="kv0-nr-8hg"/>
                             <constraint firstItem="2Ua-9U-zz9" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="qVL-0J-kxg"/>
                             <constraint firstItem="Gpc-RB-YBd" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="ukF-HU-Fxr"/>
@@ -81,6 +89,7 @@
                     <connections>
                         <outlet property="buttonLoginTrakt" destination="TgE-em-xKW" id="OM9-mf-bDl"/>
                         <outlet property="imageBackground" destination="2Ua-9U-zz9" id="fcj-3D-o4N"/>
+                        <outlet property="labelMessage" destination="3Rk-aJ-DIS" id="kUz-rO-qsN"/>
                         <segue destination="EFV-ht-fKL" kind="showDetail" identifier="toPlayback" id="Ijx-sb-Y21"/>
                     </connections>
                 </viewController>

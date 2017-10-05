@@ -13,6 +13,7 @@ class SplashViewController: KrangViewController {
 
     @IBOutlet weak var buttonLoginTrakt: UIButton!
     @IBOutlet weak var imageBackground: UIImageView!
+    @IBOutlet weak var labelMessage: UILabel!
     private var shouldLoginAfterAppear = false {
         didSet {
             if self.canLogin && shouldLoginAfterAppear {
@@ -52,8 +53,10 @@ class SplashViewController: KrangViewController {
                     //Peeee
                     if user != nil && user!.username.characters.count > 0 {
                         KrangLogger.log.debug("User \(user!.username) is already logged in, so proceed to playback")
-                        //TESTING
+                        
+                        //Trakt History Sync
                         if UserPrefs.traktSync {
+                            self.labelMessage.text = "Getting Trakt Activity";
                             TraktHelper.shared.getLastActivityTime({ (activityError, poop) in
                                 if let lastActivityTime = poop {
                                     let shouldSync: Bool = {
@@ -66,8 +69,8 @@ class SplashViewController: KrangViewController {
                                         }
                                     }()
                                     if shouldSync {
-                                        TraktHelper.shared.getFullHistory(since: user?.lastHistorySync ?? Date.distantPast, progress: { (currentPage, maxPage) in
-                                            
+                                        TraktHelper.shared.getFullHistory(since: user!.lastHistorySync, progress: { (currentPage, maxPage) in
+                                            self.labelMessage.text = String(format: "Getting Trakt Activity (%.0f%%)", (Double(currentPage) / Double(maxPage)) * 100.0)
                                         }, completion: { (historyError) in
                                             if historyError == nil {
                                                 user?.makeChanges {
@@ -96,6 +99,7 @@ class SplashViewController: KrangViewController {
     
     //MARK:-
     private func goToPlayback() {
+        self.labelMessage.text = nil
         self.performSegue(withIdentifier: "toPlayback", sender: nil)
     }
     
