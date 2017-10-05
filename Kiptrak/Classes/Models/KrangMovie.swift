@@ -100,6 +100,12 @@ class KrangMovie: Object {
         movie.update(withJSON: json)
         return movie
     }
+    
+    class func deleteAllMovies() {
+        let realm = try! Realm()
+        let allMovies = realm.objects(KrangMovie.self)
+        realm.delete(allMovies)
+    }
 }
 
 extension KrangMovie: KrangWatchable {

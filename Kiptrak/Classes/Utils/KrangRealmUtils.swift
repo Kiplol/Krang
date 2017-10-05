@@ -21,7 +21,6 @@ class KrangRealmUtils : NSObject {
             changes()
         })
     }
-    
 }
 
 class RealmString : Object {

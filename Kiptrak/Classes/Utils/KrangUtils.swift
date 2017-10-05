@@ -26,6 +26,22 @@ class KrangUtils: NSObject {
         return "\(versionNumberString) (\(buildNumberString))"
     }
     
+    class var lastRunVersionNumber: String? {
+        return UserDefaults.krangDefaults?.object(forKey: "lastRunVersionNumber") as? String
+    }
+    
+    class func setThisAsLastRunVersion() {
+        UserDefaults.krangDefaults?.set(KrangUtils.versionNumberString, forKey: "lastRunVersionNumber")
+        UserDefaults.krangDefaults?.synchronize()
+    }
+    
+    class var isFirstTimeRunningThisVersion: Bool {
+        guard let lastRunVersion = KrangUtils.lastRunVersionNumber else {
+            return true
+        }
+        return KrangUtils.versionNumberString == lastRunVersion
+    }
+    
     public enum DisplayType {
         case unknown
         case iphone4

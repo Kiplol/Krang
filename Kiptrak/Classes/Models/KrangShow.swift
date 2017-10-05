@@ -13,9 +13,6 @@ import SwiftyJSON
 class KrangShow: Object {
     
     private static let placeholderUnknown = "Unknown"
-    
-    let episodes = List<KrangEpisode>()
-    let seasons = List<KrangSeason>()
     dynamic var title:String = KrangShow.placeholderUnknown
     dynamic var year:Int = -1
     dynamic var traktID: Int = -1
@@ -27,6 +24,8 @@ class KrangShow: Object {
     dynamic var imagePosterURL: String? = nil
     dynamic var lastWatchDate: Date? = nil
     var imagePosterURLs: List<RealmString> = List<RealmString>()
+    let episodes = LinkingObjects(fromType: KrangEpisode.self, property: "show")
+    let seasons = LinkingObjects(fromType: KrangSeason.self, property: "show")
     dynamic var overview: String = ""
     
     class func with(traktID: Int) -> KrangShow? {
@@ -74,6 +73,12 @@ class KrangShow: Object {
         let realm = try! Realm()
         let matchingShows = realm.objects(KrangShow.self).filter("ANY episodes.watchDate != nil").sorted(byKeyPath: "lastWatchDate", ascending: false)
         return matchingShows
+    }
+    
+    class func deleteAllShows() {
+        let realm = try! Realm()
+        let allShows = realm.objects(KrangShow.self)
+        realm.delete(allShows)
     }
 }
 

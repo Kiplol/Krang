@@ -122,6 +122,12 @@ class KrangEpisode: Object {
         episode.update(withJSON: json)
         return episode
     }
+    
+    class func deleteAllEpisodes() {
+        let realm = try! Realm()
+        let allEpisodes = realm.objects(KrangEpisode.self)
+        realm.delete(allEpisodes)
+    }
 }
 
 extension KrangEpisode: KrangWatchable {

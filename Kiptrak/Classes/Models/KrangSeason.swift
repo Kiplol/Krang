@@ -72,5 +72,11 @@ class KrangSeason: Object {
     func hasBeenWatched() -> Bool {
         return !self.hasUnseenEpisodes() && self.numberOfAiredEpisodes > 0
     }
+    
+    class func deleteAllSeasons() {
+        let realm = try! Realm()
+        let allSeasons = realm.objects(KrangSeason.self)
+        realm.delete(allSeasons)
+    }
 
 }
