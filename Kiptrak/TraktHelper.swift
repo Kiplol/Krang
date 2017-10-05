@@ -225,10 +225,7 @@ class TraktHelper: NSObject {
                                 return newSeason
                             }
                         }()
-                        if !season.shows.contains(show) {
-                            show.seasons.append(season)
-                        }
-                        //@TODO: Add existing episodes to season
+                        season.show = show
                     }
                 }
             }
@@ -277,9 +274,7 @@ class TraktHelper: NSObject {
                                 return newSeason
                             }
                         }()
-                        if !show.seasons.contains(season) {
-                            show.seasons.append(season)
-                        }
+                        season.show = show
                         
                         if let episodeDics = thisJSON["episodes"].array {
                             episodeDics.forEach {
@@ -303,12 +298,8 @@ class TraktHelper: NSObject {
                                     }
                                 }()
                                 
-                                if !show.episodes.contains(episode) {
-                                    show.episodes.append(episode)
-                                }
-                                if !season.episodes.contains(episode) {
-                                    season.episodes.append(episode)
-                                }
+                                episode.season = season
+                                episode.show = show
                             }
                         }
                     }
@@ -352,12 +343,8 @@ class TraktHelper: NSObject {
                                 return newEpisode
                             }
                         }()
-                        if !episode.seasons.contains(season) {
-                            season.episodes.append(episode)
-                        }
-                        if !episode.shows.contains(show) {
-                            show.episodes.append(episode)
-                        }
+                        episode.season = season
+                        episode.show = show
                         theseEpisodes.append(episode)
                     }
                 }
@@ -469,11 +456,9 @@ class TraktHelper: NSObject {
                                 }()
                                 episode.watchDate = watchedAt
                                 if let showID = $0["show"]["ids"]["trakt"].int, let show = (KrangShow.with(traktID: showID) ?? parsedShows[showID]){
-                                    if !show.episodes.contains(episode) {
-                                        show.episodes.append(episode)
-                                    }
+                                    episode.show = show
                                     if let season = show.getSeason(withSeasonNumber: episode.seasonNumber), !season.episodes.contains(episode) {
-                                        season.episodes.append(episode)
+                                        episode.season = season
                                     }
                                     show.setLastWatchDateIfNewer(watchedAt)
                                 }
@@ -791,13 +776,9 @@ class TraktHelper: NSObject {
                         }
                     }()
                     
-                    if !episode.shows.contains(show) {
-                        show.episodes.append(episode)
-                    }
+                    episode.show = show
                     if let season = show.getSeason(withSeasonNumber: episode.seasonNumber) {
-                        if !episode.seasons.contains(season) {
-                            show.seasons.append(season)
-                        }
+                        episode.season = season
                     }
                 }
                 

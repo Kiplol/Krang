@@ -32,18 +32,8 @@ class KrangEpisode: Object {
     dynamic var originalJSONString: String = ""
     dynamic var watchDate: Date? = nil
     dynamic var airDate: Date? = nil
-    let shows = LinkingObjects(fromType: KrangShow.self, property: "episodes")
-    var show: KrangShow? {
-        get {
-            return self.shows.first
-        }
-    }
-    let seasons = LinkingObjects(fromType: KrangSeason.self, property: "episodes")
-    var season: KrangSeason? {
-        get {
-            return self.seasons.first
-        }
-    }
+    dynamic var show: KrangShow? = nil
+    dynamic var season: KrangSeason? = nil
     
     func update(withJSON json:JSON) {
         guard let type = json["type"].string else {

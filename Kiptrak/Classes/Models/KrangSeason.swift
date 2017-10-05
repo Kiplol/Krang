@@ -14,7 +14,6 @@ class KrangSeason: Object {
     
     private static let placeholderTitle = "Season"
     
-    let episodes = List<KrangEpisode>()
     dynamic var numberOfAiredEpisodes:Int = 0
     dynamic var seasonNumber:Int = -1
     dynamic var title:String = KrangSeason.placeholderTitle
@@ -23,12 +22,8 @@ class KrangSeason: Object {
     dynamic var tmdbID: Int = -1
     dynamic var tvRageID: Int = -1
     dynamic var posterImageURL: String? = nil
-    let shows = LinkingObjects(fromType: KrangShow.self, property: "seasons")
-    var show: KrangShow? {
-        get {
-            return self.shows.first
-        }
-    }
+    dynamic var show: KrangShow? = nil
+    let episodes = LinkingObjects(fromType: KrangEpisode.self, property: "season")
     
     class func with(traktID: Int) -> KrangSeason? {
         if traktID == -1 {
