@@ -529,7 +529,8 @@ class TraktHelper: NSObject {
     
     func getHistory(forShow show: KrangShow, completion: ((Error?, KrangShow) -> ())?) {
         let url = String(format: Constants.traktGetShowHistoryFormat, show.traktID)
-        let _ = self.oauth.client.get(url, parameters: ["limit":show.episodes.count], headers: TraktHelper.defaultHeaders(), success: { (response) in
+        //@TODO: Pagination?
+        let _ = self.oauth.client.get(url, parameters: ["limit":Int.max], headers: TraktHelper.defaultHeaders(), success: { (response) in
             //Yay
             let json = JSON(data: response.data)
             if let episodeDics = json.array {
