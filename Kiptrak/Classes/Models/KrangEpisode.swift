@@ -76,6 +76,11 @@ class KrangEpisode: Object {
         }
     }
     
+    class var allWatchedEpisodes: Results<KrangEpisode> {
+        let realm = try! Realm()
+        return realm.objects(KrangEpisode.self).filter("watchDate != nil")
+    }
+    
     class func with(traktID:Int) -> KrangEpisode? {
         if traktID == -1 {
             return nil
@@ -117,6 +122,10 @@ class KrangEpisode: Object {
         let realm = try! Realm()
         let allEpisodes = realm.objects(KrangEpisode.self)
         realm.delete(allEpisodes)
+    }
+    
+    class func removeAllWatchDates() {
+        KrangEpisode.allWatchedEpisodes.forEach { $0.watchDate = nil }
     }
 }
 

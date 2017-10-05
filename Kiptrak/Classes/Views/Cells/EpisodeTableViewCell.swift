@@ -44,13 +44,8 @@ class EpisodeTableViewCell: SwipeTableViewCell {
         if let airDate = episode.airDate {
             let szAirDate = DateFormatter.localizedString(from: airDate, dateStyle: .medium, timeStyle: .none)
             self.labelAirDate.text = szAirDate
-            if !self.labelsStackView.arrangedSubviews.contains(self.labelAirDate) {
-                self.labelsStackView.insertArrangedSubview(self.labelAirDate, at: 1)
-            }
         } else {
-            if self.labelsStackView.arrangedSubviews.contains(self.labelAirDate) {
-                self.labelsStackView.removeArrangedSubview(self.labelAirDate)
-            }
+            self.labelAirDate.text = "TBA"
         }
         
         let shouldCheckMark = episode.watchDate != nil && UserPrefs.traktSync

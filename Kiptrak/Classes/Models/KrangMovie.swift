@@ -101,10 +101,19 @@ class KrangMovie: Object {
         return movie
     }
     
+    class var allWatchedMovies : Results<KrangMovie> {
+        let realm = try! Realm()
+        return realm.objects(KrangMovie.self).filter("watchDate != nil")
+    }
+    
     class func deleteAllMovies() {
         let realm = try! Realm()
         let allMovies = realm.objects(KrangMovie.self)
         realm.delete(allMovies)
+    }
+    
+    class func removeAllWatchDates() {
+        KrangMovie.allWatchedMovies.forEach { $0.watchDate = nil}
     }
 }
 

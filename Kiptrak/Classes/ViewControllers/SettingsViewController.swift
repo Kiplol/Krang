@@ -154,6 +154,7 @@ class SettingsViewController: KrangViewController, UITableViewDataSource, UITabl
                 UserPrefs.traktSync = switchView.isOn
                 KrangRealmUtils.makeChanges {
                     KrangUser.getCurrentUser().lastHistorySync = Date.distantPast
+                    KrangRealmUtils.removeAllWatchDates()
                 }
             }
         default:

@@ -63,7 +63,7 @@ class SeasonListViewController: KrangViewController, UICollectionViewDataSource,
         }
         if UserPrefs.traktSync {
             TraktHelper.shared.getHistory(forShow: self.show, completion: { (historyError, updatedShow) in
-                
+                self.collectionView.reloadData()
             })
         }
     }

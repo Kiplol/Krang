@@ -21,6 +21,19 @@ class KrangRealmUtils : NSObject {
             changes()
         })
     }
+    
+    class func deleteAllMoviesShowsSeasonsEpisodes() {
+        KrangShow.deleteAllShows()
+        KrangMovie.deleteAllMovies()
+        KrangSeason.deleteAllSeasons()
+        KrangEpisode.deleteAllEpisodes()
+    }
+    
+    class func removeAllWatchDates() {
+        KrangShow.removeAllWatchDates()
+        KrangMovie.removeAllWatchDates()
+        KrangEpisode.removeAllWatchDates()
+    }
 }
 
 class RealmString : Object {

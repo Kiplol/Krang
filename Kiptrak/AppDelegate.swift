@@ -34,10 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if KrangUtils.isFirstTimeRunningThisVersion {
             //Delete all the movies, seasons, etc
             KrangRealmUtils.makeChanges {
-                KrangShow.deleteAllShows()
-                KrangMovie.deleteAllMovies()
-                KrangSeason.deleteAllSeasons()
-                KrangEpisode.deleteAllEpisodes()
+                KrangRealmUtils.deleteAllMoviesShowsSeasonsEpisodes()
             }
         }
         KrangUtils.setThisAsLastRunVersion()

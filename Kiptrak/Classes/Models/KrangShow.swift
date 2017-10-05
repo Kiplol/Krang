@@ -69,9 +69,9 @@ class KrangShow: Object {
         return nil
     }
     
-    class func getWatchedShows() -> Results<KrangShow> {
+    class var allWatchedShows: Results<KrangShow> {
         let realm = try! Realm()
-        let matchingShows = realm.objects(KrangShow.self).filter("ANY episodes.watchDate != nil").sorted(byKeyPath: "lastWatchDate", ascending: false)
+        let matchingShows = realm.objects(KrangShow.self).filter("lastWatchDate != nil").sorted(byKeyPath: "lastWatchDate", ascending: false)
         return matchingShows
     }
     
@@ -79,6 +79,10 @@ class KrangShow: Object {
         let realm = try! Realm()
         let allShows = realm.objects(KrangShow.self)
         realm.delete(allShows)
+    }
+    
+    class func removeAllWatchDates() {
+        KrangShow.allWatchedShows.forEach { $0.lastWatchDate = nil }
     }
 }
 
