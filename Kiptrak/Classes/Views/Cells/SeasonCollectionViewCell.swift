@@ -67,8 +67,10 @@ class SeasonCollectionViewCell: UICollectionViewCell, SelfSizingCell {
     //MARK:- SelfSizingCell
     static func size(forCollectionView collectionView: UICollectionView, withData data: Any?) -> CGSize {
         //@TODO: Content and section inset
+        let idealWidth: CGFloat = 160.0
         let collectionViewWidth = collectionView.bounds.size.width
-        let cellWidth = collectionViewWidth / 2.0
+        let numberOfColumns = floor(collectionViewWidth / idealWidth)
+        let cellWidth = collectionViewWidth / numberOfColumns
         let cellHeight = cellWidth / SeasonCollectionViewCell.aspectRatio
         return CGSize(width: cellWidth, height: cellHeight)
     }
