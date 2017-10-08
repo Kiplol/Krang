@@ -59,12 +59,11 @@ class SeasonListViewController: KrangViewController, UICollectionViewDataSource,
     override func viewDidLoad() {
         super.viewDidLoad()
         TraktHelper.shared.getAllSeasons(forShow: self.show) { (error, updatedShow) in
-            
-        }
-        if UserPrefs.traktSync {
-            TraktHelper.shared.getHistory(forShow: self.show, completion: { (historyError, updatedShow) in
-                self.collectionView.reloadData()
-            })
+            if UserPrefs.traktSync {
+                TraktHelper.shared.getHistory(forShow: self.show, completion: { (historyError, updatedShow) in
+                    self.collectionView.reloadData()
+                })
+            }
         }
     }
     

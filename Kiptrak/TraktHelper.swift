@@ -536,20 +536,20 @@ class TraktHelper: NSObject {
                             if let existingEpisode = KrangEpisode.with(traktID: traktID)  {
                                 return existingEpisode
                             } else {
-                                KrangLogger.log.error("Couldn't find episode \(traktID)")
+//                                KrangLogger.log.error("Couldn't find episode \(traktID)")
                                 let newEpisode = KrangEpisode()
                                 newEpisode.update(withJSON: thisJSON)
-                                newEpisode.show = show
-                                if let season = show.getSeason(withSeasonNumber: newEpisode.seasonNumber) {
-                                    newEpisode.season = season
-                                } else {
-                                    KrangLogger.log.error("Couldn't find a season for \(newEpisode.titleDisplayString)")
-                                }
                                 newEpisode.saveToDatabaseOutsideWriteTransaction()
                                 return newEpisode
                             }
                         }()
                         
+                        episode.show = show
+                        if let season = show.getSeason(withSeasonNumber: episode.seasonNumber) {
+                            episode.season = season
+                        } else {
+                            KrangLogger.log.error("Couldn't find a season for \(episode.titleDisplayString)")
+                        }
                         episode.watchDate = watchedAt
                     }
                 }
