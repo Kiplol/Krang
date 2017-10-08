@@ -87,6 +87,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().tintColor = UIColor.white
         UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: UIFont(name: "Exo-Light-Italic", size: 16.0)!, NSForegroundColorAttributeName: UIColor.white]
+        if #available(iOS 11.0, *) {
+            UINavigationBar.appearance().largeTitleTextAttributes = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "Exo-Black-Italic", size: 28.0)!]
+        }
         
         //Buttons
         UIButton.appearance().tintColor = UIColor.white

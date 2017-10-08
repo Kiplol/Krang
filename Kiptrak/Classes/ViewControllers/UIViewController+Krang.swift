@@ -11,7 +11,8 @@ import Pulley
 
 extension UIViewController {
     
-    class var defaultPartialRevealDrawerHeight: CGFloat { return 264.0 }
+    class var defaultPartialRevealDrawerHeight: CGFloat { return 300.0 }
+    class var defaultCollapsedDrawerHeight: CGFloat { return (68.0 + (KrangUtils.Display.typeIsLike == .iphoneX ? 25.0 : 0.0)) }
     
     func topViewController() -> UIViewController {
         if let presentedViewController = self.presentedViewController {
@@ -44,7 +45,7 @@ extension UINavigationController: PulleyDrawerViewControllerDelegate {
         if let drawer = self.topViewController as? PulleyDrawerViewControllerDelegate {
             return drawer.collapsedDrawerHeight()
         }
-        return 68.0
+        return UIViewController.defaultCollapsedDrawerHeight
     }
     
     public func partialRevealDrawerHeight() -> CGFloat

@@ -39,6 +39,7 @@
 	<array>
 		<string>Exo-Black.otf</string>
 		<string>Exo-Light-Italic.otf</string>
+		<string>Exo-Black-Italic.otf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

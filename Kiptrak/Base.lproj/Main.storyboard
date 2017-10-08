@@ -101,7 +101,7 @@
         <scene sceneID="VUm-dh-3Ha">
             <objects>
                 <navigationController navigationBarHidden="YES" id="EFV-ht-fKL" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="et8-3q-Jsb">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" largeTitles="YES" id="et8-3q-Jsb">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <userDefinedRuntimeAttributes>
@@ -491,7 +491,7 @@
                         <constraints>
                             <constraint firstItem="NJG-If-Ilk" firstAttribute="leading" secondItem="9Vk-ZM-QaF" secondAttribute="leading" id="5Pr-01-DLl"/>
                             <constraint firstItem="Q9g-cZ-fCV" firstAttribute="top" secondItem="qDe-dT-kMI" secondAttribute="bottom" constant="8" id="6Qj-52-RU5"/>
-                            <constraint firstItem="qDe-dT-kMI" firstAttribute="top" secondItem="r4R-pC-DwE" secondAttribute="bottom" constant="12" id="HIl-RO-bXG"/>
+                            <constraint firstItem="qDe-dT-kMI" firstAttribute="top" secondItem="9Vk-ZM-QaF" secondAttribute="topMargin" constant="12" id="Spc-8W-GID"/>
                             <constraint firstItem="w0H-uQ-9EG" firstAttribute="top" secondItem="NJG-If-Ilk" secondAttribute="bottom" constant="20" id="Z7j-J1-y7s"/>
                             <constraint firstItem="Q9g-cZ-fCV" firstAttribute="leading" secondItem="9Vk-ZM-QaF" secondAttribute="leading" id="aM3-QB-JE4"/>
                             <constraint firstItem="qDe-dT-kMI" firstAttribute="centerX" secondItem="9Vk-ZM-QaF" secondAttribute="centerX" id="dfp-7P-q8M"/>
@@ -607,7 +607,7 @@
         <scene sceneID="b5t-5p-l2r">
             <objects>
                 <navigationController navigationBarHidden="YES" id="LiA-cU-CVI" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="m5f-YS-G9z">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" largeTitles="YES" id="m5f-YS-G9z">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>

@@ -78,6 +78,7 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
         if self.pulleyViewController != nil {
             self.navigationController?.setNavigationBarHidden(true, animated: animated)
         }
+        self.view.layoutIfNeeded()
         TraktHelper.shared.getRecentShowHistory { (error, shows) in
             self.historyResults = shows
             if !self.isSearching {
@@ -152,7 +153,6 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
             let seasonsVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "seasonList") as! SeasonListViewController
             seasonsVC.show = show
             self.navigationController?.pushViewController(seasonsVC, animated: true)
-            self.navigationController?.setNavigationBarHidden(false, animated: true)
         }
     }
     
@@ -233,27 +233,29 @@ extension WatchableSearchViewController: PulleyDrawerViewControllerDelegate, UIS
     //MARK:- PulleyDrawerViewControllerDelegate
     func collapsedDrawerHeight() -> CGFloat
     {
-        if self.isViewLoaded {
-            let bottomPadding: CGFloat = KrangUtils.Display.typeIsLike == .iphoneX ? 25.0 : 0.0
-            return self.searchBarContainerView.frame.maxY + bottomPadding
-        } else {
-            return 68.0
-        }
+//        if self.isViewLoaded {
+//            let bottomPadding: CGFloat = KrangUtils.Display.typeIsLike == .iphoneX ? 25.0 : 0.0
+//            return self.searchBarContainerView.frame.maxY + bottomPadding
+//        } else {
+//            return 68.0
+//        }
+        return UIViewController.defaultCollapsedDrawerHeight
     }
     
     func partialRevealDrawerHeight() -> CGFloat
     {
-        if self.isViewLoaded {
-            let rowHeight = self.tableView.rowHeight
-            let maxHeight = 4.5 * rowHeight
-            let minHeight = rowHeight * 1.5
-            let searchResultsHeight = (max(1.0, CGFloat(self.dataSet.count)) - 0.5) * rowHeight
-            let tableViewHeight = max(minHeight, min(maxHeight, searchResultsHeight))
-            let searchBarHeight = self.searchBarContainerView.frame.maxY
-            return tableViewHeight + searchBarHeight
-        } else {
-            return UIViewController.defaultPartialRevealDrawerHeight
-        }
+//        if self.isViewLoaded {
+//            let rowHeight = self.tableView.rowHeight
+//            let maxHeight = 4.5 * rowHeight
+//            let minHeight = rowHeight * 1.5
+//            let searchResultsHeight = (max(1.0, CGFloat(self.dataSet.count)) - 0.5) * rowHeight
+//            let tableViewHeight = max(minHeight, min(maxHeight, searchResultsHeight))
+//            let searchBarHeight = self.searchBarContainerView.frame.maxY
+//            return tableViewHeight + searchBarHeight
+//        } else {
+//            return UIViewController.defaultPartialRevealDrawerHeight
+//        }
+        return UIViewController.defaultPartialRevealDrawerHeight
     }
     
     func supportedDrawerPositions() -> [PulleyPosition] {

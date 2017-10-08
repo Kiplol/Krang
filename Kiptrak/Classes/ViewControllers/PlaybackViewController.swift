@@ -271,7 +271,6 @@ class PlaybackViewController: KrangViewController {
     @IBAction func unwindToPlayback(_ sender:UIStoryboardSegue) {
         
     }
-
 }
 
 extension PlaybackViewController: PulleyPrimaryContentControllerDelegate {
