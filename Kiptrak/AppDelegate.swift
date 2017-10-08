@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Init the RealmManager
         let _ = RealmManager.shared
         
-        if KrangUtils.isFirstTimeRunningThisVersion {
+        if KrangUtils.isFirstTimeRunningThisVersion && !UserPrefs.traktSync {
             //Delete all the movies, seasons, etc
             KrangRealmUtils.makeChanges {
                 KrangRealmUtils.deleteAllMoviesShowsSeasonsEpisodes()
