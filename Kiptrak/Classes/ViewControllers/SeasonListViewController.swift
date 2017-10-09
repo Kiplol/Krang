@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import Pulley
 
 class SeasonListViewController: KrangViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
@@ -107,5 +108,29 @@ class SeasonListViewController: KrangViewController, UICollectionViewDataSource,
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0.0
+    }
+}
+
+extension SeasonListViewController: PulleyDrawerViewControllerDelegate {
+    //MARK:- PulleyDrawerViewControllerDelegate
+    func collapsedDrawerHeight() -> CGFloat
+    {
+        return UIViewController.defaultCollapsedDrawerHeight
+    }
+    
+    func partialRevealDrawerHeight() -> CGFloat
+    {
+        return UIViewController.defaultPartialRevealDrawerHeight
+    }
+    
+    func supportedDrawerPositions() -> [PulleyPosition] {
+        return PulleyPosition.all
+    }
+    
+    func drawerPositionDidChange(drawer: PulleyViewController)
+    {
+        if self.isViewLoaded {
+            self.collectionView.isScrollEnabled = drawer.drawerPosition == .open
+        }
     }
 }
