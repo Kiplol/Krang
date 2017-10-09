@@ -53,6 +53,7 @@ class PlaybackViewController: KrangViewController {
     @IBOutlet weak var constraintBelowInfoContainer: NSLayoutConstraint!
     @IBOutlet weak var constraintBelowStackViewForButtons: NSLayoutConstraint!
     @IBOutlet weak var constraintInfoContainerHeight: NSLayoutConstraint!
+    @IBOutlet weak var constraintAboveImagePosterBackground: NSLayoutConstraint!
     
     var traktMovieID:Int? = nil
     var traktEpisodeID:Int? = nil
@@ -79,6 +80,7 @@ class PlaybackViewController: KrangViewController {
         if KrangUtils.Display.typeIsLike == .iphoneX {
             correctionForDeviceType = 32.0
             self.constraintInfoContainerHeight.constant += correctionForDeviceType
+            self.constraintAboveImagePosterBackground.constant -= (correctionForDeviceType + 12.0)
         }
     }
     
