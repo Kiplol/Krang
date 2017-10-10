@@ -129,7 +129,7 @@ class SettingsViewController: KrangViewController, UITableViewDataSource, UITabl
     }
     
     //MARK:- UISwitch
-    func switchSwitched(switchView: UISwitch) {
+    @objc func switchSwitched(switchView: UISwitch) {
         switch switchView.tag {
         case SettingsViewController.tagTraktSyncSwitch:
             KrangLogger.log.debug("Trakt Sync turned \(switchView.isOn ? "on" : "off")")

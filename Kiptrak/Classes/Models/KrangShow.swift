@@ -13,20 +13,20 @@ import SwiftyJSON
 class KrangShow: Object {
     
     private static let placeholderUnknown = "Unknown"
-    dynamic var title:String = KrangShow.placeholderUnknown
-    dynamic var year:Int = -1
-    dynamic var traktID: Int = -1
-    dynamic var slug: String = ""
-    dynamic var imdbID: String? = nil
-    dynamic var tmdbID: Int = -1
-    dynamic var tvRageID: Int = -1
-    dynamic var imageBackdropURL: String? = nil
-    dynamic var imagePosterURL: String? = nil
-    dynamic var lastWatchDate: Date? = nil
+    @objc dynamic var title:String = KrangShow.placeholderUnknown
+    @objc dynamic var year:Int = -1
+    @objc dynamic var traktID: Int = -1
+    @objc dynamic var slug: String = ""
+    @objc dynamic var imdbID: String? = nil
+    @objc dynamic var tmdbID: Int = -1
+    @objc dynamic var tvRageID: Int = -1
+    @objc dynamic var imageBackdropURL: String? = nil
+    @objc dynamic var imagePosterURL: String? = nil
+    @objc dynamic var lastWatchDate: Date? = nil
     var imagePosterURLs: List<RealmString> = List<RealmString>()
     let episodes = LinkingObjects(fromType: KrangEpisode.self, property: "show")
     let seasons = LinkingObjects(fromType: KrangSeason.self, property: "show")
-    dynamic var overview: String = ""
+    @objc dynamic var overview: String = ""
     
     class func with(traktID: Int) -> KrangShow? {
         if traktID == -1 {

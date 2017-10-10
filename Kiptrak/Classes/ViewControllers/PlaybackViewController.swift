@@ -171,7 +171,7 @@ class PlaybackViewController: KrangViewController {
     }
     
     //MARK:- Notifications
-    func didCheckInToAWatchable(_ notif: Notification) {
+    @objc func didCheckInToAWatchable(_ notif: Notification) {
         if let watchable = notif.object as? KrangWatchable {
             if let movie = watchable as? KrangMovie {
                 self.traktMovieID = movie.traktID

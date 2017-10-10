@@ -19,7 +19,7 @@ class Constants: NSObject {
     open class var traktAccessTokenURL: String { get { return "https://api.trakt.tv/oauth/token" } }
     open class var traktBaseURL: String { get { return "https://api.trakt.tv" } }
     open class var traktWatchingURLFormat: String { get { return Constants.traktBaseURL + "/users/%@/watching" } }
-    class var traktSearchURLFormat: String { return Constants.traktBaseURL + "/search/movie,show?query=%@" }
+    class var traktSearchURLFormat: String { return Constants.traktBaseURL + "/search/movie,show?query=%@&extended=full" }
     class var traktCheckInURL: String { return Constants.traktBaseURL + "/checkin" }
     class var traktGetShowSeasonsURLFormat: String { return Constants.traktBaseURL + "/shows/%@/seasons?extended=full" }
     class var traktGetShowSeasonsAndEpisodesURLFormat: String { return Constants.traktBaseURL + "/shows/%@/seasons?extended=full,episodes" }

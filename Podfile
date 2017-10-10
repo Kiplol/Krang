@@ -5,7 +5,7 @@ def shared_pods
 	use_frameworks!
 	pod 'Hue'
 	pod 'Kingfisher', '~> 3.0'
-	pod 'OAuthSwift', '~> 1.1.0'
+	pod 'OAuthSwift', '~> 1.2.0'
 	pod 'RealmSwift'
 	pod 'SwiftyBeaver'
 	pod 'SwiftyJSON'
@@ -13,7 +13,9 @@ end
 
 target 'Kiptrak' do
 	shared_pods
+	pod 'CustomizableActionSheet'
 	pod 'KDCircularProgress'
+	pod 'LGAlertView'
 	pod 'Hero'
 	pod 'Pulley'
 	pod 'RxKeyboard'
@@ -27,9 +29,6 @@ end
 
 post_install do |installer|
   installer.pods_project.targets.each do |target|
-    target.build_configurations.each do |config|
-      config.build_settings['SWIFT_VERSION'] = '3.0'
-    end
     if target.name == "OAuthSwift"
             puts "Updating #{target.name} OTHER_SWIFT_FLAGS"
             target.build_configurations.each do |config|

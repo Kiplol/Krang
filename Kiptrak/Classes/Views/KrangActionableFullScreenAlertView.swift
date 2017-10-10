@@ -53,7 +53,7 @@ class KrangActionableFullScreenAlertView: UIView {
         self.displayLink!.add(to: RunLoop.main, forMode: RunLoopMode.defaultRunLoopMode)
     }
     
-    func displayLinkTick() {
+    @objc func displayLinkTick() {
         guard let startTime = self.startTime, let duration = self.countDownDuration else {
             self.displayLink?.invalidate()
             return

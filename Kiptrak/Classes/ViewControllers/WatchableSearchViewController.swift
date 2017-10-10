@@ -11,6 +11,7 @@ import Pulley
 import RealmSwift
 import OAuthSwift
 import SwipeCellKit
+import CustomizableActionSheet
 
 class WatchableSearchViewController: KrangViewController, UISearchResultsUpdating, UITableViewDataSource, UITableViewDelegate, SwipeTableViewCellDelegate {
     
@@ -133,21 +134,40 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
             //Hide keyboard.
             self.searchController.searchBar.resignFirstResponder()
             
-            //Check in.
-            let _ = KrangActionableFullScreenAlertView.show(withTitle: "Checking in to \(watchable.title)", countdownDuration: 3.0, afterCountdownAction: { (alert) in
-                alert.button.isHidden = true
-                TraktHelper.shared.checkIn(to: watchable, completion: { (error, checkedInWatchable) in
-                    alert.dismiss(true) {
-                        if checkedInWatchable != nil {
-                            if let drawer = self.pulleyViewController {
-                                drawer.setDrawerPosition(position: .collapsed, animated: true)
-                            }
-                        }
-                    }
-                })
-            }, buttonTitle: "Cancel Checkin", buttonAction: { (alert, _) in
-                alert.dismiss(true)
-            })
+            var items = [CustomizableActionSheetItem]()
+            if let previewView = Bundle.main.loadNibNamed("KrangWatchablePreviewView", owner: nil, options: nil)![0] as? KrangWatchablePreviewView {
+                previewView.setWatchable(watchable)
+                let sampleViewItem = CustomizableActionSheetItem()
+                sampleViewItem.type = .view
+                sampleViewItem.view = previewView
+                sampleViewItem.height = 160
+                items.append(sampleViewItem)
+            }
+            let closeItem = CustomizableActionSheetItem()
+            closeItem.type = .button
+            closeItem.label = "Close"
+            closeItem.selectAction = { (actionSheet: CustomizableActionSheet) -> Void in
+                actionSheet.dismiss()
+            }
+            items.append(closeItem)
+            let actionSheet = CustomizableActionSheet()
+            actionSheet.showInView(self.view, items: items)
+            
+//            //Check in.
+//            let _ = KrangActionableFullScreenAlertView.show(withTitle: "Checking in to \(watchable.title)", countdownDuration: 3.0, afterCountdownAction: { (alert) in
+//                alert.button.isHidden = true
+//                TraktHelper.shared.checkIn(to: watchable, completion: { (error, checkedInWatchable) in
+//                    alert.dismiss(true) {
+//                        if checkedInWatchable != nil {
+//                            if let drawer = self.pulleyViewController {
+//                                drawer.setDrawerPosition(position: .collapsed, animated: true)
+//                            }
+//                        }
+//                    }
+//                })
+//            }, buttonTitle: "Cancel Checkin", buttonAction: { (alert, _) in
+//                alert.dismiss(true)
+//            })
         } else if let show = selectedObject as? KrangShow {
             //Navigate to seasons VC.
             let seasonsVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "seasonList") as! SeasonListViewController

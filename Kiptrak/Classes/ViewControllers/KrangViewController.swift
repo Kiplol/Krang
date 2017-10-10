@@ -35,11 +35,11 @@ class KrangViewController: UIViewController {
     }
     
     //MARK:- App Licecyle
-    func willEnterForeground(_ notif:Notification) {
+    @objc func willEnterForeground(_ notif:Notification) {
         //Override
     }
     
-    func didEnterBackground(_ notif:Notification) {
+    @objc func didEnterBackground(_ notif:Notification) {
         //Override
     }
 

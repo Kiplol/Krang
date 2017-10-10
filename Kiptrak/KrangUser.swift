@@ -14,19 +14,19 @@ class KrangUser: Object {
     
     static let neverSyncedBeforeDate = Date(timeIntervalSince1970: 0.0)
     
-    dynamic var username:String = ""
-    dynamic var slug:String = ""
-    dynamic var name:String? = nil
-    dynamic var vip:Bool = false
-    dynamic var about:String? = nil
-    dynamic var location:String? = nil
-    dynamic var gender:String = "male"
-    dynamic var avatarImageURL:String? = nil
-    dynamic var coverImageURL:String? = nil
-    dynamic var sharingTextWatching:String = "I'm watching [item]"
-    dynamic var sharingTextWatched:String = "I just watched [item]"
-    dynamic var isCurrentKrangUser:Bool = false
-    dynamic var lastHistorySync: Date = KrangUser.neverSyncedBeforeDate
+    @objc dynamic var username:String = ""
+    @objc dynamic var slug:String = ""
+    @objc dynamic var name:String? = nil
+    @objc dynamic var vip:Bool = false
+    @objc dynamic var about:String? = nil
+    @objc dynamic var location:String? = nil
+    @objc dynamic var gender:String = "male"
+    @objc dynamic var avatarImageURL:String? = nil
+    @objc dynamic var coverImageURL:String? = nil
+    @objc dynamic var sharingTextWatching:String = "I'm watching [item]"
+    @objc dynamic var sharingTextWatched:String = "I just watched [item]"
+    @objc dynamic var isCurrentKrangUser:Bool = false
+    @objc dynamic var lastHistorySync: Date = KrangUser.neverSyncedBeforeDate
     
     override static func primaryKey() -> String? {
         return "username"

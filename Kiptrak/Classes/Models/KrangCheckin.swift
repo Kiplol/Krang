@@ -11,7 +11,7 @@ import RealmSwift
 
 class KrangCheckin: Object {
     
-    dynamic var dateStarted:Date? = nil
-    dynamic var dateExpires:Date? = nil
+    @objc dynamic var dateStarted:Date? = nil
+    @objc dynamic var dateExpires:Date? = nil
     
 }

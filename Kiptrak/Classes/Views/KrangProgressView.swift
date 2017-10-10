@@ -65,7 +65,7 @@ class KrangProgressView: UIView {
         self.progress = 0.0
     }
     
-    func update() {
+    @objc func update() {
         guard let startDate = self.startDate, let endDate = self.endDate else {
             self.stop()
             self.reset()

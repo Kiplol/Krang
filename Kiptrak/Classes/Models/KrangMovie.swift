@@ -14,19 +14,20 @@ class KrangMovie: Object {
     
     private static let placeholderUnknown = "Unknown"
     
-    dynamic var title: String = KrangMovie.placeholderUnknown
-    dynamic var year: Int = -1
-    dynamic var traktID: Int = -1
-    dynamic var slug: String = ""
-    dynamic var imdbID: String? = nil
-    dynamic var tmdbID: Int = -1
-    dynamic var posterImageURL: String? = nil
-    dynamic var posterThumbnailImageURL: String? = nil
-    dynamic var backdropImageURL:String? = nil
-    dynamic var backdropThumbnailImageURL: String? = nil
-    dynamic var checkin:KrangCheckin? = nil
-    dynamic var originalJSONString: String = ""
-    dynamic var watchDate: Date? = nil
+    @objc dynamic var title: String = KrangMovie.placeholderUnknown
+    @objc dynamic var year: Int = -1
+    @objc dynamic var traktID: Int = -1
+    @objc dynamic var slug: String = ""
+    @objc dynamic var imdbID: String? = nil
+    @objc dynamic var tmdbID: Int = -1
+    @objc dynamic var overview: String = ""
+    @objc dynamic var posterImageURL: String? = nil
+    @objc dynamic var posterThumbnailImageURL: String? = nil
+    @objc dynamic var backdropImageURL:String? = nil
+    @objc dynamic var backdropThumbnailImageURL: String? = nil
+    @objc dynamic var checkin:KrangCheckin? = nil
+    @objc dynamic var originalJSONString: String = ""
+    @objc dynamic var watchDate: Date? = nil
     
     func update(withJSON json:JSON) {
         guard let type = json["type"].string else {
@@ -45,6 +46,7 @@ class KrangMovie: Object {
         self.slug = json["movie"]["ids"]["slug"].string ?? ""
         self.imdbID = json["movie"]["ids"]["imdb"].string
         self.tmdbID = json["movie"]["ids"]["tmdb"].int ?? -1
+        self.overview = json["movie"]["overview"].string ?? self.overview
         
         if let szStartedAt = json["started_at"].string,
             let szExpiresAt = json["expires_at"].string,

@@ -97,7 +97,7 @@ extension UIView {
 
 extension UILabel {
     
-    dynamic var fontName:String? {
+    @objc dynamic var fontName:String? {
         set {
             if let name = newValue {
                 self.font = UIFont(name: name, size: self.font.pointSize)

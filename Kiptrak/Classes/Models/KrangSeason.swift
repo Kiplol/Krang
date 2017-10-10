@@ -14,15 +14,15 @@ class KrangSeason: Object {
     
     private static let placeholderTitle = "Season"
     
-    dynamic var numberOfAiredEpisodes:Int = 0
-    dynamic var seasonNumber:Int = -1
-    dynamic var title:String = KrangSeason.placeholderTitle
-    dynamic var traktID: Int = -1
-    dynamic var imdbID: String? = nil
-    dynamic var tmdbID: Int = -1
-    dynamic var tvRageID: Int = -1
-    dynamic var posterImageURL: String? = nil
-    dynamic var show: KrangShow? = nil
+    @objc dynamic var numberOfAiredEpisodes:Int = 0
+    @objc dynamic var seasonNumber:Int = -1
+    @objc dynamic var title:String = KrangSeason.placeholderTitle
+    @objc dynamic var traktID: Int = -1
+    @objc dynamic var imdbID: String? = nil
+    @objc dynamic var tmdbID: Int = -1
+    @objc dynamic var tvRageID: Int = -1
+    @objc dynamic var posterImageURL: String? = nil
+    @objc dynamic var show: KrangShow? = nil
     let episodes = LinkingObjects(fromType: KrangEpisode.self, property: "season")
     
     class func with(traktID: Int) -> KrangSeason? {

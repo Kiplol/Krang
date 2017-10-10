@@ -14,27 +14,27 @@ class KrangEpisode: Object {
     
     private static let placeholderUnknown = "Unknown"
     
-    dynamic var episode:Int = -1
-    dynamic var absoluteEpisodeNumber:Int = -1
-    dynamic var seasonNumber:Int = -1
-    dynamic var title:String = KrangEpisode.placeholderUnknown
-    dynamic var overview: String = KrangEpisode.placeholderUnknown
-    dynamic var traktID: Int = -1
-    dynamic var imdbID: String? = nil
-    dynamic var tmdbID: Int = -1
-    dynamic var tvRageID: Int = -1
-    dynamic var posterImageURL: String? = nil
-    dynamic var posterThumbnailImageURL: String? = nil
+    @objc dynamic var episode:Int = -1
+    @objc dynamic var absoluteEpisodeNumber:Int = -1
+    @objc dynamic var seasonNumber:Int = -1
+    @objc dynamic var title:String = KrangEpisode.placeholderUnknown
+    @objc dynamic var overview: String = KrangEpisode.placeholderUnknown
+    @objc dynamic var traktID: Int = -1
+    @objc dynamic var imdbID: String? = nil
+    @objc dynamic var tmdbID: Int = -1
+    @objc dynamic var tvRageID: Int = -1
+    @objc dynamic var posterImageURL: String? = nil
+    @objc dynamic var posterThumbnailImageURL: String? = nil
     var posterImageURLs: List<RealmString> = List<RealmString>()
-    dynamic var stillImageURL: String? = nil
+    @objc dynamic var stillImageURL: String? = nil
     var stillImageURLs: List<RealmString> = List<RealmString>()
-    dynamic var stillThumbnailImageURL: String? = nil
-    dynamic var checkin:KrangCheckin? = nil
-    dynamic var originalJSONString: String = ""
-    dynamic var watchDate: Date? = nil
-    dynamic var airDate: Date? = nil
-    dynamic var show: KrangShow? = nil
-    dynamic var season: KrangSeason? = nil
+    @objc dynamic var stillThumbnailImageURL: String? = nil
+    @objc dynamic var checkin:KrangCheckin? = nil
+    @objc dynamic var originalJSONString: String = ""
+    @objc dynamic var watchDate: Date? = nil
+    @objc dynamic var airDate: Date? = nil
+    @objc dynamic var show: KrangShow? = nil
+    @objc dynamic var season: KrangSeason? = nil
     
     func update(withJSON json:JSON) {
         guard let type = json["type"].string else {

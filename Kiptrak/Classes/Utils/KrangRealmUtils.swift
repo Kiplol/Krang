@@ -38,7 +38,7 @@ class KrangRealmUtils : NSObject {
 
 class RealmString : Object {
     
-    dynamic var value: String = ""
+    @objc dynamic var value: String = ""
     
     override static func primaryKey() -> String? {
         return "value"

@@ -82,19 +82,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        UIView.appearance().tintColor = UIColor.white
         
         //Navigation Bar
-        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         UINavigationBar.appearance().barTintColor = UIColor.darkBackground
         UINavigationBar.appearance().tintColor = UIColor.white
         UINavigationBar.appearance().isTranslucent = false
-        UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: UIFont(name: "Exo-Light-Italic", size: 16.0)!, NSForegroundColorAttributeName: UIColor.white]
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "Exo-Light-Italic", size: 16.0)!, NSAttributedStringKey.foregroundColor: UIColor.white]
         if #available(iOS 11.0, *) {
-            UINavigationBar.appearance().largeTitleTextAttributes = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "Exo-Black-Italic", size: 28.0)!]
+            UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: UIFont(name: "Exo-Black-Italic", size: 28.0)!]
         }
         
         //Buttons
         UIButton.appearance().tintColor = UIColor.white
         UIBarButtonItem.appearance().tintColor = UIColor.white
-        UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Exo-Light-Italic", size: 13.0)!, NSForegroundColorAttributeName: UIColor.white], for: .normal)
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedStringKey.font: UIFont(name: "Exo-Light-Italic", size: 13.0)!, NSAttributedStringKey.foregroundColor: UIColor.white], for: .normal)
         
         //Labels
         let labelAppearance = UILabel.appearance()
