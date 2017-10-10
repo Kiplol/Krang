@@ -83,7 +83,6 @@ class TraktHelper: NSObject {
         sharedDefaults.removeObject(forKey: "oathTokenExpiresAt")
         sharedDefaults.removeObject(forKey: "oauthRefreshToken")
         sharedDefaults.synchronize()
-        UserPrefs.traktSync = false
         KrangUser.getCurrentUser().makeChanges {
             KrangUser.getCurrentUser().lastHistorySync = Date.distantPast
             KrangRealmUtils.removeAllWatchDates()

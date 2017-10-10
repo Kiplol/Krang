@@ -132,6 +132,8 @@ class SplashViewController: KrangViewController {
     // MARK: - Navigation
     @IBAction func unwindToSplash(_ sender:UIStoryboardSegue) {
         //Logout
+        //@TODO: Move this UserPrefs stuff into TraktHelper
+        UserPrefs.traktSync = false
         TraktHelper.shared.logout()
         self.goToOnboarding()
     
