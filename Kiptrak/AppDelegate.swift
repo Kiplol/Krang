@@ -8,6 +8,7 @@
 
 import UIKit
 import OAuthSwift
+import LGAlertView
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -101,6 +102,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         labelAppearance.textColor = UIColor.white
         labelAppearance.fontName = "Exo-Light-Italic" //This seems to make it so that I can't ever set the font to something else...
         UILabel.appearance(whenContainedInInstancesOf: [UISearchBar.self]).textColor = UIColor(white: 1.0, alpha: 0.5)
+        UILabel.appearance(whenContainedInInstancesOf: [LGAlertViewButton.self]).textColor = UIColor.green
         
         //Search Bars
         let searchBarTextFieldAppearance = UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self])
