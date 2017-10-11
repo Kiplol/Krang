@@ -4,7 +4,7 @@
 def shared_pods
 	use_frameworks!
 	pod 'Hue'
-	pod 'Kingfisher', '~> 3.0'
+	pod 'Kingfisher'
 	pod 'OAuthSwift', '~> 1.2.0'
 	pod 'RealmSwift'
 	pod 'SwiftyBeaver'
@@ -14,9 +14,9 @@ end
 target 'Kiptrak' do
 	shared_pods
 	pod 'CustomizableActionSheet'
-	pod 'KDCircularProgress'
+	pod 'KDCircularProgress', :git => 'https://github.com/kaandedeoglu/KDCircularProgress.git', :branch => 'master'
 	pod 'LGAlertView'
-	pod 'Hero'
+	pod 'Hero', '~> 1.0.0-alpha.4'
 	pod 'Pulley'
 	pod 'RxKeyboard'
 	pod 'SwipeCellKit'
