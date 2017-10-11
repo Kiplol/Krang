@@ -133,30 +133,38 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
         if let watchable = selectedObject as? KrangWatchable {
             //Hide keyboard.
             self.searchController.searchBar.resignFirstResponder()
-            let alertView = LGAlertView(viewAndTitle: watchable.titleDisplayString, message: nil, style: .actionSheet, view: nil, buttonTitles: ["Checkin In", "Mark Watched"], cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, actionHandler: { (alertView, ineex, title) in
-                
+            
+            let previewView = Bundle.main.loadNibNamed("KrangWatchablePreviewView", owner: nil, options: nil)![0] as! KrangWatchablePreviewView
+            previewView.setWatchable(watchable)
+            let alertView = LGAlertView(viewAndTitle: watchable.titleDisplayString, message: watchable.subtitle, style: .actionSheet, view: previewView, buttonTitles: ["Check In", "Mark Watched"], cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, actionHandler: { [unowned self] (alertView, index, title) in
+                switch index {
+                case 0:
+                    //Check in.
+                    let _ = KrangActionableFullScreenAlertView.show(withTitle: "Checking in to \(watchable.title)", countdownDuration: 3.0, afterCountdownAction: { (alert) in
+                        alert.button.isHidden = true
+                        TraktHelper.shared.checkIn(to: watchable, completion: { (error, checkedInWatchable) in
+                            alert.dismiss(true) {
+                                if checkedInWatchable != nil {
+                                    if let drawer = self.pulleyViewController {
+                                        drawer.setDrawerPosition(position: .collapsed, animated: true)
+                                    }
+                                }
+                            }
+                        })
+                    }, buttonTitle: "Cancel Checkin", buttonAction: { (alert, _) in
+                        alert.dismiss(true)
+                    })
+                default:
+                    //@TODO
+                    break
+                }
             }, cancelHandler: { (alertView) in
                 
             }, destructiveHandler: { (alertView) in
                 
             })
-            alertView.show()
-            
-            //Check in.
-//            let _ = KrangActionableFullScreenAlertView.show(withTitle: "Checking in to \(watchable.title)", countdownDuration: 3.0, afterCountdownAction: { (alert) in
-//                alert.button.isHidden = true
-//                TraktHelper.shared.checkIn(to: watchable, completion: { (error, checkedInWatchable) in
-//                    alert.dismiss(true) {
-//                        if checkedInWatchable != nil {
-//                            if let drawer = self.pulleyViewController {
-//                                drawer.setDrawerPosition(position: .collapsed, animated: true)
-//                            }
-//                        }
-//                    }
-//                })
-//            }, buttonTitle: "Cancel Checkin", buttonAction: { (alert, _) in
-//                alert.dismiss(true)
-//            })
+            alertView.cancelButtonOffsetY = KrangUtils.Display.typeIsLike == .iphoneX ? 25.0 : 0.0
+            alertView.showAnimated()
         } else if let show = selectedObject as? KrangShow {
             //Navigate to seasons VC.
             let seasonsVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "seasonList") as! SeasonListViewController

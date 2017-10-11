@@ -24,7 +24,7 @@ class RealmManager: NSObject {
         config.fileURL = URL(string: realmPath)!
         
         //Migrate if needed
-        config.schemaVersion = 19
+        config.schemaVersion = 20
         config.migrationBlock = {migration, oldSchema in
             if oldSchema < 1 {
                 

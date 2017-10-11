@@ -27,6 +27,7 @@ class KrangMovie: Object {
     dynamic var checkin:KrangCheckin? = nil
     dynamic var originalJSONString: String = ""
     dynamic var watchDate: Date? = nil
+    dynamic var overview: String = ""
     
     func update(withJSON json:JSON) {
         guard let type = json["type"].string else {
@@ -45,6 +46,7 @@ class KrangMovie: Object {
         self.slug = json["movie"]["ids"]["slug"].string ?? ""
         self.imdbID = json["movie"]["ids"]["imdb"].string
         self.tmdbID = json["movie"]["ids"]["tmdb"].int ?? -1
+        self.overview = json["movie"]["overview"].string ?? self.overview
         
         if let szStartedAt = json["started_at"].string,
             let szExpiresAt = json["expires_at"].string,
@@ -189,6 +191,7 @@ extension KrangMovie: KrangSearchable {
     
     var urlForSearchResultThumbnailImage: URL? { return self.posterThumbnailURL }
     var titleForSearchResult: String? { return self.title }
+    var subtitle: String { return "\(self.year)" }
     var subtitleForSearchResult: String? {
         if self.year > -1 {
             return "\(self.year)"

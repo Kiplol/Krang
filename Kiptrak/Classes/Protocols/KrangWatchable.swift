@@ -14,9 +14,12 @@ protocol KrangWatchable: KrangLinkable {
     var imdbID: String? { get }
     var tmdbID: Int { get }
     var posterImageURL: String? { get }
+    var overview: String { get }
     
     var titleDisplayString: String { get }
     var posterThumbnailURL: URL? { get }
+    var subtitle: String { get }
+    
     var checkin:KrangCheckin? { get }
     
     var fanartImageURL: URL? { get }

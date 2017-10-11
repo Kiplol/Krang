@@ -146,6 +146,10 @@ extension KrangEpisode: KrangWatchable {
         }
     }
     
+    var subtitle: String {
+        return self.airDate != nil ? DateFormatter.localizedString(from: self.airDate!, dateStyle: .medium, timeStyle: .none) : "TBA"
+    }
+    
     var posterThumbnailURL: URL? {
         get {
             guard let posterThumbnailURL = self.posterThumbnailImageURL else {
