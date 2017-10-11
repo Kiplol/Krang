@@ -102,7 +102,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         labelAppearance.textColor = UIColor.white
         labelAppearance.fontName = "Exo-Light-Italic" //This seems to make it so that I can't ever set the font to something else...
         UILabel.appearance(whenContainedInInstancesOf: [UISearchBar.self]).textColor = UIColor(white: 1.0, alpha: 0.5)
-        UILabel.appearance(whenContainedInInstancesOf: [LGAlertViewButton.self]).textColor = UIColor.green
         
         //Search Bars
         let searchBarTextFieldAppearance = UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self])
@@ -110,6 +109,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         searchBarTextFieldAppearance.tintColor = UIColor.white
         searchBarTextFieldAppearance.backgroundColor = UIColor(white: 0.2, alpha: 1.0)
         searchBarTextFieldAppearance.font = UIFont(name: "Exo-Light-Italic", size: 16.0)
+        
+        //LGAlertView
+        LGAlertView.appearance().buttonsHeight = 44.0         //@TODO: This is just until that LGAlertView.m 2882 [self.tableView layoutIfNeeded] is released
+        LGAlertView.appearance().buttonsTitleColor = UIColor.darkBackground
+        LGAlertView.appearance().cancelButtonTitleColor = UIColor.gray
     }
     
     func topViewController() -> UIViewController {

@@ -163,6 +163,8 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
             }, destructiveHandler: { (alertView) in
                 
             })
+//            alertView.backgroundBlurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
+//            alertView.backgroundColor = UIColor.clear
             alertView.cancelButtonOffsetY = KrangUtils.Display.typeIsLike == .iphoneX ? 25.0 : 0.0
             alertView.showAnimated()
         } else if let show = selectedObject as? KrangShow {
