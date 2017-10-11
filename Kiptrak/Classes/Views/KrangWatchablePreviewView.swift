@@ -15,7 +15,12 @@ class KrangWatchablePreviewView: UIView {
     @IBOutlet weak var imageViewPoster: UIImageView!
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelDetail: UILabel!
-    @IBOutlet weak var labelOverview: UILabel!
+//    @IBOutlet weak var labelOverview: UILabel!
+    @IBOutlet weak var textViewOverview: UITextView! {
+        didSet {
+            self.textViewOverview.textContainerInset = .zero
+        }
+    }
     @IBOutlet weak var stackViewLabels: UIStackView!
     
     var notificationToken: NotificationToken? = nil
@@ -45,14 +50,14 @@ class KrangWatchablePreviewView: UIView {
         guard let watchable = watchable else {
             self.labelTitle.text = nil
             self.labelDetail.text = nil
-            self.labelOverview.text = nil
+            self.textViewOverview.text = nil
             self.imageViewPoster.image = #imageLiteral(resourceName: "poster_placeholder_dark")
             return
         }
         
         self.labelTitle.text = watchable.title
         self.labelDetail.text = watchable.title
-        self.labelOverview.text = watchable.overview
+        self.textViewOverview.text = watchable.overview
         if let szPosterURL = watchable.posterImageURL, let posterURL = URL(string: szPosterURL) {
             self.imageViewPoster.kf.setImage(with: posterURL, placeholder: #imageLiteral(resourceName: "poster_placeholder_dark"), options: nil, progressBlock: nil, completionHandler: nil)
         } else {
@@ -62,7 +67,8 @@ class KrangWatchablePreviewView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        [self.labelTitle, self.labelDetail, self.labelOverview].forEach{ $0.textColor = UIColor.darkBackground }
+        [self.labelTitle, self.labelDetail].forEach{ $0.textColor = UIColor.darkBackground }
+        self.textViewOverview.textColor = self.labelTitle.textColor
         self.stackViewLabels.removeArrangedSubview(self.labelTitle)
         self.stackViewLabels.removeArrangedSubview(self.labelDetail)
     }

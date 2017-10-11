@@ -114,6 +114,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         LGAlertView.appearance().buttonsHeight = 44.0         //@TODO: This is just until that LGAlertView.m 2882 [self.tableView layoutIfNeeded] is released
         LGAlertView.appearance().buttonsTitleColor = UIColor.darkBackground
         LGAlertView.appearance().cancelButtonTitleColor = UIColor.gray
+        LGAlertView.appearance().backgroundColor = UIColor.clear
+        LGAlertView.appearance().backgroundBlurEffect = UIBlurEffect(style: .extraLight)
+        LGAlertView.appearance().cancelButtonOffsetY = KrangUtils.Display.typeIsLike == .iphoneX ? 25.0 : 0.0
     }
     
     func topViewController() -> UIViewController {

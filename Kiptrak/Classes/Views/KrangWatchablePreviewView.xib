@@ -10,11 +10,16 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Exo-Light-Italic.otf">
+            <string>Exo-Light-Italic</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="Esy-bp-5dn" customClass="KrangWatchablePreviewView" customModule="Kiptrak" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="304" height="120"/>
+            <rect key="frame" x="0.0" y="0.0" width="304" height="116"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="o8l-HA-YIe">
@@ -57,7 +62,7 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="9IR-zX-Vip">
-                    <rect key="frame" x="78" y="8" width="304" height="50.5"/>
+                    <rect key="frame" x="78" y="8" width="304" height="100"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9w3-PP-dYM">
                             <rect key="frame" x="0.0" y="0.0" width="304" height="18"/>
@@ -73,13 +78,12 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cN7-OL-pR5">
-                            <rect key="frame" x="0.0" y="32.5" width="304" height="18"/>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bRJ-00-FZS">
+                            <rect key="frame" x="0.0" y="32.5" width="304" height="67.5"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
+                            <fontDescription key="fontDescription" name="Exo-Light-Italic" family="Exo" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        </textView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </stackView>
@@ -90,6 +94,7 @@
                 <constraint firstItem="o8l-HA-YIe" firstAttribute="leading" secondItem="JvK-CU-rez" secondAttribute="leading" id="BTF-BB-T9b"/>
                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="9IR-zX-Vip" secondAttribute="bottom" constant="8" id="CV4-rX-ceY"/>
                 <constraint firstItem="9IR-zX-Vip" firstAttribute="leading" secondItem="o8l-HA-YIe" secondAttribute="trailing" constant="8" id="WRz-F9-JkC"/>
+                <constraint firstItem="JvK-CU-rez" firstAttribute="bottom" secondItem="9IR-zX-Vip" secondAttribute="bottom" constant="8" id="YTk-iI-6SA"/>
                 <constraint firstItem="o8l-HA-YIe" firstAttribute="top" secondItem="JvK-CU-rez" secondAttribute="top" constant="8" id="exr-za-m6j"/>
                 <constraint firstAttribute="trailing" secondItem="9IR-zX-Vip" secondAttribute="trailing" id="i7d-4t-4gL"/>
             </constraints>
@@ -98,10 +103,10 @@
             <connections>
                 <outlet property="imageViewPoster" destination="eq1-qv-E1x" id="fW8-BC-47r"/>
                 <outlet property="labelDetail" destination="H55-ZX-be2" id="Yof-sZ-Rfl"/>
-                <outlet property="labelOverview" destination="cN7-OL-pR5" id="10H-DC-gDY"/>
                 <outlet property="labelTitle" destination="9w3-PP-dYM" id="fLT-fj-C6P"/>
                 <outlet property="posterClippingView" destination="o8l-HA-YIe" id="D4j-tg-gGw"/>
                 <outlet property="stackViewLabels" destination="9IR-zX-Vip" id="2Gl-DK-dOh"/>
+                <outlet property="textViewOverview" destination="bRJ-00-FZS" id="TlO-no-NCO"/>
             </connections>
             <point key="canvasLocation" x="22" y="-101"/>
         </view>
