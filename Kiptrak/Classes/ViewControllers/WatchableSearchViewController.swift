@@ -134,21 +134,19 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
             //Hide keyboard.
             self.searchController.searchBar.resignFirstResponder()
             
-            let alertView = LGAlertView(withWatchable: watchable, actionHandler: { [unowned self] (alertView, index, title) in
-                switch index {
-                case 0:
-                    //Check in.
-                    KrangWatchableUI.checkIn(toWatchable: watchable, completion: { (error, checkedInWatchable) in
-                        if checkedInWatchable != nil {
-                            if let drawer = self.pulleyViewController {
-                                drawer.setDrawerPosition(position: .collapsed, animated: true)
-                            }
+            let alertView = LGAlertView(withWatchable: watchable, checkInHandler: { (_, _, _) in
+                //Check in.
+                KrangWatchableUI.checkIn(toWatchable: watchable, completion: { (error, checkedInWatchable) in
+                    if checkedInWatchable != nil {
+                        if let drawer = self.pulleyViewController {
+                            drawer.setDrawerPosition(position: .collapsed, animated: true)
                         }
-                    })
-                default:
-                    //@TODO
-                    break
-                }
+                    }
+                })
+            }, markWatchedHandler: { (_, _, _) in
+                //@TODO
+            }, markUnwatchedHandler: { (_, _, _) in
+                //@TODO
             })
             alertView.showAnimated()
         } else if let show = selectedObject as? KrangShow {

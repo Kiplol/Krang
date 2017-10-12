@@ -27,9 +27,23 @@ class KrangWatchableUI: NSObject {
 
 extension LGAlertView {
     
-    convenience init(withWatchable watchable: KrangWatchable, actionHandler: LGAlertViewActionHandler? = nil, cancelHandler: LGAlertViewHandler? = nil) {
+    convenience init(withWatchable watchable: KrangWatchable, checkInHandler: LGAlertViewActionHandler? = nil, markWatchedHandler: LGAlertViewActionHandler? = nil, markUnwatchedHandler: LGAlertViewActionHandler? = nil) {
         let previewView = Bundle.main.loadNibNamed("KrangWatchablePreviewView", owner: nil, options: nil)![0] as! KrangWatchablePreviewView
         previewView.setWatchable(watchable)
-        self.init(viewAndTitle: watchable.title, message: watchable.subtitle, style: .actionSheet, view: previewView, buttonTitles: ["Check In", "Mark Watched"], cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, actionHandler: actionHandler, cancelHandler: cancelHandler, destructiveHandler: nil)
+        
+        self.init(viewAndTitle: watchable.title, message: watchable.subtitle, style: .actionSheet, view: previewView, buttonTitles: ["Check In", "Mark Watched"], cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, actionHandler: { (alertView, index, title) in
+            if let title = title {
+                switch title {
+                case "Check In":
+                    checkInHandler?(alertView, index, title)
+                case "Mark Watched":
+                    markWatchedHandler?(alertView, index, title)
+                case "Mark Unwatched":
+                    markUnwatchedHandler?(alertView, index, title)
+                default:
+                    break
+                }
+            }
+        }, cancelHandler: nil, destructiveHandler: nil)
     }
 }
