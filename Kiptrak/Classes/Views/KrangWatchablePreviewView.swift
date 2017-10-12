@@ -61,8 +61,8 @@ class KrangWatchablePreviewView: UIView {
         self.labelTitle.text = watchable.title
         self.labelDetail.text = watchable.title
         self.textViewOverview.text = watchable.overview
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(0.3 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
-            self.textViewOverview.setContentOffset(CGPoint.zero, animated: false)
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(0.15 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
+            self.textViewOverview.setContentOffset(CGPoint.zero, animated: true)
             if self.textViewOverview.contentSize.height > self.textViewOverview.bounds.size.height {
                 self.textViewOverview.flashScrollIndicators()
             }
