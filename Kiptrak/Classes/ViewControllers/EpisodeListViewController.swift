@@ -97,21 +97,13 @@ class EpisodeListViewController: KrangViewController, UITableViewDataSource, UIT
         tableView.deselectRow(at: indexPath, animated: true)
         
         let episode = self.episodes[indexPath.row]
-        let _ = KrangActionableFullScreenAlertView.show(withTitle: "Checking in to \(episode.title)", countdownDuration: 3.0, afterCountdownAction: { (alert) in
-            alert.button.isHidden = true
-            TraktHelper.shared.checkIn(to: episode, completion: { (error, checkedInWatchable) in
-                alert.dismiss(true) {
-                    if checkedInWatchable != nil {
-                        if let drawer = self.pulleyViewController {
-                            drawer.setDrawerPosition(position: .collapsed, animated: true)
-                        }
-                    }
+        KrangWatchableUI.offerActions(forWatchable: episode) { (error, action) in
+            if error == nil {
+                if let drawer = self.pulleyViewController {
+                    drawer.setDrawerPosition(position: .collapsed, animated: true)
                 }
-            })
-        }, buttonTitle: "Cancel Checkin", buttonAction: { (alert, _) in
-            alert.dismiss(true)
-        })
-
+            }
+        }
     }
     
     //MARK:- SwipeTableViewCellDelegate

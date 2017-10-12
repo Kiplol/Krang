@@ -9,10 +9,17 @@
 import UIKit
 import LGAlertView
 
+enum KrangWatchableAction {
+    case none
+    case checkIn
+    case markWatched
+    case markUnwatched
+}
+
 class KrangWatchableUI: NSObject {
     
-    class func checkIn(toWatchable watchable: KrangWatchable, completion:((Error?, KrangWatchable?) -> ())?) {
-        let _ = KrangActionableFullScreenAlertView.show(withTitle: "Checking in to \(watchable.title)", countdownDuration: 3.0, afterCountdownAction: { (alert) in
+    class func checkIn(toWatchable watchable: KrangWatchable, doCountdown: Bool, completion:((Error?, KrangWatchable?) -> ())?) {
+        let _ = KrangActionableFullScreenAlertView.show(withTitle: "Checking in to \(watchable.title)", countdownDuration: (doCountdown ? 3.0 : 0.0), afterCountdownAction: { (alert) in
             alert.button.isHidden = true
             TraktHelper.shared.checkIn(to: watchable, completion: { (error, checkedInWatchable) in
                 alert.dismiss(true) {
@@ -23,11 +30,33 @@ class KrangWatchableUI: NSObject {
             alert.dismiss(true)
         })
     }
+    
+    class func offerActions(forWatchable watchable: KrangWatchable, completion:((Error?, KrangWatchableAction) -> ())?) {
+        guard UserPrefs.traktSync else {
+            KrangWatchableUI.checkIn(toWatchable: watchable, doCountdown: true, completion: { (error, checkedInWatchable) in
+                completion?(error, .checkIn)
+            })
+            return
+        }
+        
+        let alertView = LGAlertView(withWatchable: watchable, checkInHandler: { (_, _, _) in
+            checkIn(toWatchable: watchable, doCountdown: false, completion: { (checkinError, checkedInWatchable) in
+                completion?(checkinError, .checkIn)
+            })
+        }, markWatchedHandler: { (_, _, _) in
+            //@TODO
+            completion?(nil, .markWatched)
+        }, markUnwatchedHandler: { (_, _, _) in
+            //@TODO
+            completion?(nil, .markUnwatched)
+        }, cancelHandler: nil)
+        alertView.showAnimated()
+    }
 }
 
 extension LGAlertView {
     
-    convenience init(withWatchable watchable: KrangWatchable, checkInHandler: LGAlertViewActionHandler? = nil, markWatchedHandler: LGAlertViewActionHandler? = nil, markUnwatchedHandler: LGAlertViewActionHandler? = nil) {
+    convenience init(withWatchable watchable: KrangWatchable, checkInHandler: LGAlertViewActionHandler? = nil, markWatchedHandler: LGAlertViewActionHandler? = nil, markUnwatchedHandler: LGAlertViewActionHandler? = nil, cancelHandler: LGAlertViewHandler? = nil) {
         let previewView = Bundle.main.loadNibNamed("KrangWatchablePreviewView", owner: nil, options: nil)![0] as! KrangWatchablePreviewView
         previewView.setWatchable(watchable)
         

@@ -134,21 +134,19 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
             //Hide keyboard.
             self.searchController.searchBar.resignFirstResponder()
             
-            let alertView = LGAlertView(withWatchable: watchable, checkInHandler: { (_, _, _) in
-                //Check in.
-                KrangWatchableUI.checkIn(toWatchable: watchable, completion: { (error, checkedInWatchable) in
-                    if checkedInWatchable != nil {
+            KrangWatchableUI.offerActions(forWatchable: watchable, completion: { (error, action) in
+                switch action {
+                case .checkIn:
+                    if error == nil {
                         if let drawer = self.pulleyViewController {
                             drawer.setDrawerPosition(position: .collapsed, animated: true)
                         }
                     }
-                })
-            }, markWatchedHandler: { (_, _, _) in
-                //@TODO
-            }, markUnwatchedHandler: { (_, _, _) in
-                //@TODO
+                    
+                default:
+                    break //@TODO: Other action
+                }
             })
-            alertView.showAnimated()
         } else if let show = selectedObject as? KrangShow {
             //Navigate to seasons VC.
             let seasonsVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "seasonList") as! SeasonListViewController
