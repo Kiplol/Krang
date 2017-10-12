@@ -374,6 +374,22 @@ class TraktHelper: NSObject {
         }
     }
     
+    func getExtendedInfo(forMovie movie: KrangMovie, completion:((Error?, KrangMovie) -> ())?) {
+        let url = String(format:Constants.traktGetMovieExtendedInfoFormat, movie.traktID)
+        let _ = self.oauth.client.get(url, parameters: [:], headers: TraktHelper.defaultHeaders(), success: { (response) in
+            let json = JSON(data: response.data)
+            var jsonForUpdating = JSON()
+            jsonForUpdating["type"] = "movie"
+            jsonForUpdating["movie"] = json
+            movie.makeChanges {
+                movie.update(withJSON: jsonForUpdating)
+            }
+            completion?(nil, movie)
+        }) { (error) in
+            completion?(error, movie)
+        }
+    }
+    
     //MARK:- History Sync
     func getFullHistory(since date: Date, page: Int = 1, progress: ((Int, Int) -> ())?, completion: ((Error?) -> ())?, showIDsSoFar: [Int] = []) {
         let url = Constants.traktGetHistory

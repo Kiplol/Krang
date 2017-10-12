@@ -44,6 +44,9 @@ class KrangWatchablePreviewView: UIView {
                 }
             })
         }
+        if let movie = watchable as? KrangMovie {
+            TraktHelper.shared.getExtendedInfo(forMovie: movie, completion: nil)
+        }
     }
     
     fileprivate func updateUI(withWatchable watchable: KrangWatchable?) {
@@ -58,6 +61,13 @@ class KrangWatchablePreviewView: UIView {
         self.labelTitle.text = watchable.title
         self.labelDetail.text = watchable.title
         self.textViewOverview.text = watchable.overview
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(0.3 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
+            self.textViewOverview.setContentOffset(CGPoint.zero, animated: false)
+            if self.textViewOverview.contentSize.height > self.textViewOverview.bounds.size.height {
+                self.textViewOverview.flashScrollIndicators()
+            }
+        })
+        
         if let szPosterURL = watchable.posterImageURL, let posterURL = URL(string: szPosterURL) {
             self.imageViewPoster.kf.setImage(with: posterURL, placeholder: #imageLiteral(resourceName: "poster_placeholder_dark"), options: nil, progressBlock: nil, completionHandler: nil)
         } else {
@@ -71,5 +81,6 @@ class KrangWatchablePreviewView: UIView {
         self.textViewOverview.textColor = self.labelTitle.textColor
         self.stackViewLabels.removeArrangedSubview(self.labelTitle)
         self.stackViewLabels.removeArrangedSubview(self.labelDetail)
+        self.textViewOverview.setContentOffset(CGPoint.zero, animated: true)
     }
 }
