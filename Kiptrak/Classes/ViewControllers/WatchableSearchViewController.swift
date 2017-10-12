@@ -134,34 +134,21 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
             //Hide keyboard.
             self.searchController.searchBar.resignFirstResponder()
             
-            let previewView = Bundle.main.loadNibNamed("KrangWatchablePreviewView", owner: nil, options: nil)![0] as! KrangWatchablePreviewView
-            previewView.setWatchable(watchable)
-            let alertView = LGAlertView(viewAndTitle: watchable.titleDisplayString, message: watchable.subtitle, style: .actionSheet, view: previewView, buttonTitles: ["Check In", "Mark Watched"], cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, actionHandler: { [unowned self] (alertView, index, title) in
+            let alertView = LGAlertView(withWatchable: watchable, actionHandler: { [unowned self] (alertView, index, title) in
                 switch index {
                 case 0:
                     //Check in.
-                    let _ = KrangActionableFullScreenAlertView.show(withTitle: "Checking in to \(watchable.title)", countdownDuration: 3.0, afterCountdownAction: { (alert) in
-                        alert.button.isHidden = true
-                        TraktHelper.shared.checkIn(to: watchable, completion: { (error, checkedInWatchable) in
-                            alert.dismiss(true) {
-                                if checkedInWatchable != nil {
-                                    if let drawer = self.pulleyViewController {
-                                        drawer.setDrawerPosition(position: .collapsed, animated: true)
-                                    }
-                                }
+                    KrangWatchableUI.checkIn(toWatchable: watchable, completion: { (error, checkedInWatchable) in
+                        if checkedInWatchable != nil {
+                            if let drawer = self.pulleyViewController {
+                                drawer.setDrawerPosition(position: .collapsed, animated: true)
                             }
-                        })
-                    }, buttonTitle: "Cancel Checkin", buttonAction: { (alert, _) in
-                        alert.dismiss(true)
+                        }
                     })
                 default:
                     //@TODO
                     break
                 }
-            }, cancelHandler: { (alertView) in
-                
-            }, destructiveHandler: { (alertView) in
-                
             })
             alertView.showAnimated()
         } else if let show = selectedObject as? KrangShow {
