@@ -44,13 +44,13 @@ class KrangWatchableUI: NSObject {
                 completion?(checkinError, .checkIn)
             })
         }, markWatchedHandler: { (_, _, _) in
-            //@TODO
-//            completion?(nil, .markWatched)
             TraktHelper.shared.markWatched(watchable, completion: { (markWatchedError) in
                 completion?(markWatchedError, .markWatched)
             })
         }, markUnwatchedHandler: { (_, _, _) in
-            //@TODO
+            TraktHelper.shared.markUnwatched(watchable, completion: { (markUnwatchedError) in
+                completion?(markUnwatchedError, .markUnwatched)
+            })
             completion?(nil, .markUnwatched)
         }, cancelHandler: nil)
         alertView.showAnimated()
