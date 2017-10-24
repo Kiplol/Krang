@@ -42,6 +42,14 @@ class KrangUtils: NSObject {
         return KrangUtils.versionNumberString == lastRunVersion
     }
     
+    class var safeAreaInsets: UIEdgeInsets {
+        if #available(iOS 11.0, *) {
+            return AppDelegate.instance.window!.safeAreaInsets
+        } else {
+            return .zero
+        }
+    }
+    
     public enum DisplayType {
         case unknown
         case iphone4
