@@ -10,7 +10,7 @@ import UIKit
 
 extension Date {
     
-    static let utcDateFormmater: DateFormatter = {
+    static let utcDateFormatter: DateFormatter = {
        let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
         formatter.timeZone = TimeZone(abbreviation: "UTC")
@@ -18,7 +18,11 @@ extension Date {
     }()
     
     static func from(utcTimestamp timestamp:String) -> Date? {
-        return Date.utcDateFormmater.date(from: timestamp)
+        return Date.utcDateFormatter.date(from: timestamp)
+    }
+    
+    func toUTCTimestamp() -> String {
+        return Date.utcDateFormatter.string(from: self)
     }
     
 }

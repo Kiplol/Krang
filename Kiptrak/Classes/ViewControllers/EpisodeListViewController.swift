@@ -99,8 +99,13 @@ class EpisodeListViewController: KrangViewController, UITableViewDataSource, UIT
         let episode = self.episodes[indexPath.row]
         KrangWatchableUI.offerActions(forWatchable: episode) { (error, action) in
             if error == nil {
-                if let drawer = self.pulleyViewController {
-                    drawer.setDrawerPosition(position: .collapsed, animated: true)
+                switch action {
+                case .checkIn:
+                    if let drawer = self.pulleyViewController {
+                        drawer.setDrawerPosition(position: .collapsed, animated: true)
+                    }
+                default:
+                    break
                 }
             }
         }

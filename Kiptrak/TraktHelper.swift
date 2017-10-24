@@ -390,6 +390,35 @@ class TraktHelper: NSObject {
         }
     }
     
+    //MARK:- Marking
+    func markWatched(_ watchable: KrangWatchable, completion: ((Error?) -> ())?) {
+        let url = Constants.traktMarkWatchedURL
+        guard let body = JSON(parseJSON: watchable.originalJSONString).dictionaryObject else {
+            //@TODO: Error
+            completion?(nil)
+            return
+        }
+        var params: [String: Any] = [:]
+        switch watchable {
+        case is KrangMovie:
+            params["movies"] = [["ids": ["trakt": watchable.traktID]]]
+        case is KrangEpisode:
+            params["episodes"] = [["ids": ["trakt": watchable.traktID]]]
+        default:
+            break
+        }
+        let watchedAt = Date()
+        params["watched_at"] = watchedAt.toUTCTimestamp()
+        let _ = self.oauth.client.post(url, parameters: params, headers: TraktHelper.defaultHeaders(), body: nil, success: { (response) in
+            KrangRealmUtils.makeChanges {
+                watchable.watchDate = watchedAt
+            }
+            completion?(nil)
+        }) { (error) in
+            completion?(error)
+        }
+    }
+    
     //MARK:- History Sync
     func getFullHistory(since date: Date, page: Int = 1, progress: ((Int, Int) -> ())?, completion: ((Error?) -> ())?, showIDsSoFar: [Int] = []) {
         let url = Constants.traktGetHistory

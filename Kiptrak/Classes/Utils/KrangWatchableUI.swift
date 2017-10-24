@@ -45,7 +45,10 @@ class KrangWatchableUI: NSObject {
             })
         }, markWatchedHandler: { (_, _, _) in
             //@TODO
-            completion?(nil, .markWatched)
+//            completion?(nil, .markWatched)
+            TraktHelper.shared.markWatched(watchable, completion: { (markWatchedError) in
+                completion?(markWatchedError, .markWatched)
+            })
         }, markUnwatchedHandler: { (_, _, _) in
             //@TODO
             completion?(nil, .markUnwatched)
@@ -60,14 +63,26 @@ extension LGAlertView {
         let previewView = Bundle.main.loadNibNamed("KrangWatchablePreviewView", owner: nil, options: nil)![0] as! KrangWatchablePreviewView
         previewView.setWatchable(watchable)
         
-        self.init(viewAndTitle: watchable.title, message: watchable.subtitle, style: .actionSheet, view: previewView, buttonTitles: ["Check In", "Mark Watched"], cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, actionHandler: { (alertView, index, title) in
+        let checkInTitle = "Check In"
+        let markWatchedTitle = "Mark Watched"
+        let markUnwatchedTitle = "Mark Unwatched"
+        var buttonsTitles: [String] = [checkInTitle]
+        if UserPrefs.traktSync {
+            if watchable.watchDate == nil {
+                buttonsTitles.append(markWatchedTitle)
+            } else {
+                buttonsTitles.append(markUnwatchedTitle)
+            }
+        }
+        
+        self.init(viewAndTitle: watchable.title, message: watchable.subtitle, style: .actionSheet, view: previewView, buttonTitles: buttonsTitles, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, actionHandler: { (alertView, index, title) in
             if let title = title {
                 switch title {
-                case "Check In":
+                case checkInTitle:
                     checkInHandler?(alertView, index, title)
-                case "Mark Watched":
+                case markWatchedTitle:
                     markWatchedHandler?(alertView, index, title)
-                case "Mark Unwatched":
+                case markUnwatchedTitle:
                     markUnwatchedHandler?(alertView, index, title)
                 default:
                     break
