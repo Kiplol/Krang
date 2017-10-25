@@ -69,7 +69,7 @@ class SettingsViewController: KrangViewController, UITableViewDataSource, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         self.populateViews()
-        self.constraintBelowStackView.constant = (16.0 + (KrangUtils.Display.typeIsLike == .iphoneX ? 25.0 : 0.0))
+        self.constraintBelowStackView.constant = (16.0 + KrangUtils.safeAreaInsets.bottom)
     }
     
     //MARK:-

@@ -15,7 +15,7 @@ target 'Kiptrak' do
 	shared_pods
 	pod 'KDCircularProgress'
 	pod 'LGAlertView'
-	pod 'Hero'
+	pod 'Hero', :git => 'https://github.com/lkzhao/Hero.git' #fix iOS 11 in UIView+Hero.swift
 	pod 'Pulley'
 	pod 'RxKeyboard'
 	pod 'SwipeCellKit'

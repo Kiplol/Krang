@@ -116,7 +116,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         LGAlertView.appearance().cancelButtonTitleColor = UIColor.gray
         LGAlertView.appearance().backgroundColor = UIColor.clear
         LGAlertView.appearance().backgroundBlurEffect = UIBlurEffect(style: .extraLight)
-        LGAlertView.appearance().cancelButtonOffsetY = KrangUtils.Display.typeIsLike == .iphoneX ? 25.0 : 0.0
+        LGAlertView.appearance().cancelButtonOffsetY = KrangUtils.safeAreaInsets.bottom
     }
     
     func topViewController() -> UIViewController {
