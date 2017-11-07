@@ -69,4 +69,10 @@ extension UINavigationController: PulleyDrawerViewControllerDelegate {
             drawerTopVC.drawerPositionDidChange?(drawer: drawer)
         }
     }
+    
+    public func drawerChangedDistanceFromBottom(drawer: PulleyViewController, distance: CGFloat) {
+        if let drawerTopVC = self.topViewController as? PulleyDelegate {
+            drawerTopVC.drawerChangedDistanceFromBottom?(drawer: drawer, distance: distance)
+        }
+    }
 }

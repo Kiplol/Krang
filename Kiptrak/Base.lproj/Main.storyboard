@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="id2-XQ-XDI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="id2-XQ-XDI">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -488,22 +488,35 @@
                                     <outlet property="delegate" destination="1k8-dh-FtJ" id="IA3-4g-9Ky"/>
                                 </connections>
                             </tableView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pNl-fK-ns3">
+                                <rect key="frame" x="0.0" y="70" width="375" height="253.5"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="M8W-wm-qwg">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="253.5"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <blurEffect style="regular"/>
+                            </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="NJG-If-Ilk" firstAttribute="leading" secondItem="9Vk-ZM-QaF" secondAttribute="leading" id="5Pr-01-DLl"/>
                             <constraint firstItem="Q9g-cZ-fCV" firstAttribute="top" secondItem="qDe-dT-kMI" secondAttribute="bottom" constant="8" id="6Qj-52-RU5"/>
+                            <constraint firstItem="pNl-fK-ns3" firstAttribute="top" secondItem="Q9g-cZ-fCV" secondAttribute="bottom" id="8mH-so-o4n"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="pNl-fK-ns3" secondAttribute="bottom" id="DZ1-YX-d7F"/>
                             <constraint firstItem="qDe-dT-kMI" firstAttribute="top" secondItem="9Vk-ZM-QaF" secondAttribute="topMargin" constant="12" id="Spc-8W-GID"/>
                             <constraint firstItem="w0H-uQ-9EG" firstAttribute="top" secondItem="NJG-If-Ilk" secondAttribute="bottom" constant="20" id="Z7j-J1-y7s"/>
                             <constraint firstItem="Q9g-cZ-fCV" firstAttribute="leading" secondItem="9Vk-ZM-QaF" secondAttribute="leading" id="aM3-QB-JE4"/>
                             <constraint firstItem="qDe-dT-kMI" firstAttribute="centerX" secondItem="9Vk-ZM-QaF" secondAttribute="centerX" id="dfp-7P-q8M"/>
+                            <constraint firstItem="pNl-fK-ns3" firstAttribute="leading" secondItem="9Vk-ZM-QaF" secondAttribute="leading" id="oEX-EE-LiK"/>
                             <constraint firstItem="NJG-If-Ilk" firstAttribute="top" secondItem="Q9g-cZ-fCV" secondAttribute="bottom" id="pcg-BT-Fbt"/>
                             <constraint firstAttribute="trailing" secondItem="Q9g-cZ-fCV" secondAttribute="trailing" id="pxu-IF-hJ7"/>
                             <constraint firstAttribute="trailing" secondItem="NJG-If-Ilk" secondAttribute="trailing" id="vdH-F0-Ece"/>
+                            <constraint firstAttribute="trailing" secondItem="pNl-fK-ns3" secondAttribute="trailing" id="wsc-sM-4e8"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="J7s-hh-tAn"/>
                     <connections>
+                        <outlet property="blurViewForTable" destination="pNl-fK-ns3" id="jBj-eE-tuI"/>
                         <outlet property="constraintSearchBarContainerHeight" destination="Aj8-NK-m7r" id="3KE-nA-kw4"/>
                         <outlet property="grabberView" destination="qDe-dT-kMI" id="FUp-05-jmJ"/>
                         <outlet property="searchBarContainerView" destination="Q9g-cZ-fCV" id="wGJ-nB-wwd"/>
@@ -512,7 +525,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i2i-4O-AeW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3054" y="412"/>
+            <point key="canvasLocation" x="3053.5999999999999" y="411.99400299850078"/>
         </scene>
         <!--Season List View Controller-->
         <scene sceneID="0i1-wL-0uw">

@@ -35,6 +35,7 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
             self.tableView.register(nib, forCellReuseIdentifier: WatchableSearchViewController.cellReuseIdentifier)
         }
     }
+    @IBOutlet weak var blurViewForTable: UIVisualEffectView!
     @IBOutlet weak var constraintSearchBarContainerHeight: NSLayoutConstraint!
     
     //MARK:- ivars
@@ -269,6 +270,14 @@ extension WatchableSearchViewController: PulleyDrawerViewControllerDelegate, UIS
                 self.searchController.searchBar.resignFirstResponder()
             }
         }
+    }
+    
+    func drawerChangedDistanceFromBottom(drawer: PulleyViewController, distance: CGFloat) {
+        let minDistance = self.collapsedDrawerHeight()
+        let range: CGFloat = 50.0
+        let maxDistance = minDistance + range
+        let t = (distance - minDistance) / range
+        self.blurViewForTable.alpha = 1.0 - t
     }
     
     //MARK:- UISearchBarDelegate
