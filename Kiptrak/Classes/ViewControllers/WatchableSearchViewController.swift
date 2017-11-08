@@ -35,7 +35,7 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
             self.tableView.register(nib, forCellReuseIdentifier: WatchableSearchViewController.cellReuseIdentifier)
         }
     }
-    @IBOutlet weak var blurViewForTable: UIVisualEffectView!
+    @IBOutlet weak var coverViewForTable: UIView!
     @IBOutlet weak var constraintSearchBarContainerHeight: NSLayoutConstraint!
     
     //MARK:- ivars
@@ -59,6 +59,7 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Search"
+        self.coverViewForTable.backgroundColor = self.view.backgroundColor
         self.searchController.searchResultsUpdater = self
         self.searchController.dimsBackgroundDuringPresentation = false
         self.searchController.searchBar.placeholder = "American Psycho, Law & Order, etc..."
@@ -274,10 +275,9 @@ extension WatchableSearchViewController: PulleyDrawerViewControllerDelegate, UIS
     
     func drawerChangedDistanceFromBottom(drawer: PulleyViewController, distance: CGFloat) {
         let minDistance = self.collapsedDrawerHeight()
-        let range: CGFloat = 50.0
-        let maxDistance = minDistance + range
+        let range: CGFloat = 160.0
         let t = (distance - minDistance) / range
-        self.blurViewForTable.alpha = 1.0 - t
+        self.coverViewForTable.alpha = 1.0 - t
     }
     
     //MARK:- UISearchBarDelegate
