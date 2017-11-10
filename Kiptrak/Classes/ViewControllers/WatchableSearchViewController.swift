@@ -78,8 +78,11 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if self.pulleyViewController != nil {
+        if let pulley = self.pulleyViewController {
             self.navigationController?.setNavigationBarHidden(true, animated: animated)
+            if pulley.drawerPosition == .collapsed {
+                self.coverViewForTable.alpha = 1.0
+            }
         }
         self.view.layoutIfNeeded()
         TraktHelper.shared.getRecentShowHistory { (error, shows) in
