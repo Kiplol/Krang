@@ -51,7 +51,7 @@ class SplashViewController: KrangViewController {
             if TraktHelper.shared.credentialsAreValid() {
                 TraktHelper.shared.getMyProfile(completion: { error, user in
                     //Peeee
-                    if user != nil && user!.username.characters.count > 0 {
+                    if user != nil && !user!.username.isEmpty {
                         KrangLogger.log.debug("User \(user!.username) is already logged in, so proceed to playback")
                         
                         //Trakt History Sync

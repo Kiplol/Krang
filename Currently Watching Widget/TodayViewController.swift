@@ -185,7 +185,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
         
         //First things first: make sure we're logged in to Trakt.
-        guard KrangUser.getCurrentUser().username.characters.count > 0,
+        guard !KrangUser.getCurrentUser().username.isEmpty,
             TraktHelper.shared.credentialsAreValid() else {
             //Not logged in.
             self.visibleContentView = self.contentViewLogin

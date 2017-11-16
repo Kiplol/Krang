@@ -31,7 +31,7 @@ class TraktHelper: NSObject {
             KrangLogger.log.error("Could not get UserDefaults for app group!  This is very bad!")
             return
         }
-        if let cachedCredentialData = sharedDefaults.object(forKey: "traktCredentials") as? Data, let cachedCredential = NSKeyedUnarchiver.unarchiveObject(with: cachedCredentialData) as? OAuthSwiftCredential, cachedCredential.oauthToken.characters.count > 0 {
+        if let cachedCredentialData = sharedDefaults.object(forKey: "traktCredentials") as? Data, let cachedCredential = NSKeyedUnarchiver.unarchiveObject(with: cachedCredentialData) as? OAuthSwiftCredential, !cachedCredential.oauthToken.isEmpty {
                 cachedCredential.version = .oauth2
                 self.oauth.client = OAuthSwiftClient(credential: cachedCredential)
                 self.cache(credentials: self.oauth.client.credential)
