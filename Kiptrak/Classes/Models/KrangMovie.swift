@@ -191,6 +191,7 @@ extension KrangMovie: KrangSearchable {
     
     var urlForSearchResultThumbnailImage: URL? { return self.posterThumbnailURL }
     var titleForSearchResult: String? { return self.title }
+    var subtitle: String { return "\(self.year)" }
     var subtitleForSearchResult: String? {
         if self.year > -1 {
             return "\(self.year)"

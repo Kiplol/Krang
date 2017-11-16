@@ -58,7 +58,6 @@ class PlaybackViewController: KrangViewController {
     var traktMovieID:Int? = nil
     var traktEpisodeID:Int? = nil
     var watchable: KrangWatchable? = nil
-    var correctionForDeviceType: CGFloat = 0.0
     
     fileprivate let defaultInfoContainerHeight: CGFloat = 120.0
 
@@ -76,12 +75,8 @@ class PlaybackViewController: KrangViewController {
         self.stackViewForButtons.removeArrangedSubview(self.buttonTrakt)
         NotificationCenter.default.addObserver(self, selector: #selector(PlaybackViewController.didCheckInToAWatchable(_:)), name: Notification.Name.didCheckInToWatchable, object: nil)
         
-//        let bottomPadding: CGFloat = KrangUtils.Display.typeIsLike == .iphoneX ? 25.0 : 0.0
-        if KrangUtils.Display.typeIsLike == .iphoneX {
-            correctionForDeviceType = 32.0
-            self.constraintInfoContainerHeight.constant += correctionForDeviceType
-            self.constraintAboveImagePosterBackground.constant -= (correctionForDeviceType + 12.0)
-        }
+        self.constraintInfoContainerHeight.constant += KrangUtils.safeAreaInsets.bottom
+        self.constraintAboveImagePosterBackground.constant -= KrangUtils.safeAreaInsets.top
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -162,6 +157,7 @@ class PlaybackViewController: KrangViewController {
     @IBAction func cancelTapped(_ sender: Any) {
         let _ = KrangActionableFullScreenAlertView.show(withTitle: "Cancelling checkin", countdownDuration: 3.0, afterCountdownAction: { (alert) in
             TraktHelper.shared.cancelAllCheckins { (error) in
+                KrangUtils.playFeedback(forResult: error)
                 alert.dismiss(true)
             }
         }, buttonTitle: "Stay Checked In") { (alert, button) in
@@ -288,14 +284,14 @@ extension PlaybackViewController: PulleyPrimaryContentControllerDelegate {
         default:
             self.constraintBelowStackViewForButtons.constant = 8.0 + drawer.drawerCornerRadius
         }
-        self.constraintBelowStackViewForButtons.constant += correctionForDeviceType
+        self.constraintBelowStackViewForButtons.constant += KrangUtils.safeAreaInsets.bottom
         self.view.layoutIfNeeded()
     }
     
     func drawerChangedDistanceFromBottom(drawer: PulleyViewController, distance: CGFloat) {
-        let overlap = drawer.drawerCornerRadius + self.correctionForDeviceType
-        let maxContentShrinkage: CGFloat = drawer.partialRevealDrawerHeight()
-        self.constraintBelowInfoContainer.constant = max(0.0, min(maxContentShrinkage, distance) - overlap) - correctionForDeviceType
+        let overlap = drawer.drawerCornerRadius + KrangUtils.safeAreaInsets.bottom
+        let maxContentShrinkage: CGFloat = drawer.partialRevealDrawerHeight(bottomSafeArea: KrangUtils.safeAreaInsets.bottom)
+        self.constraintBelowInfoContainer.constant = max(0.0, min(maxContentShrinkage, distance) - overlap) - KrangUtils.safeAreaInsets.bottom
         self.view.layoutIfNeeded()
     }
 }

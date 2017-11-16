@@ -10,6 +10,7 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+<<<<<<< .merge_file_KMIznV
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -21,6 +22,24 @@
                     <rect key="frame" x="0.0" y="8" width="70.5" height="100"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="poster_placeholder_dark" translatesAutoresizingMaskIntoConstraints="NO" id="EwL-8D-gGV">
+=======
+    <customFonts key="customFonts">
+        <array key="Exo-Light-Italic.otf">
+            <string>Exo-Light-Italic</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="Esy-bp-5dn" customClass="KrangWatchablePreviewView" customModule="Kiptrak" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="304" height="116"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="o8l-HA-YIe">
+                    <rect key="frame" x="0.0" y="8" width="70.5" height="100"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="poster_placeholder_dark" translatesAutoresizingMaskIntoConstraints="NO" id="eq1-qv-E1x">
+>>>>>>> .merge_file_APF8dH
                             <rect key="frame" x="0.0" y="0.0" width="70.5" height="100"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -31,12 +50,21 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+<<<<<<< .merge_file_KMIznV
                         <constraint firstAttribute="width" secondItem="lWr-K8-yaQ" secondAttribute="height" multiplier="19:27" id="COc-kv-MgZ"/>
                         <constraint firstAttribute="height" constant="100" id="EIW-OW-kDs"/>
                         <constraint firstItem="EwL-8D-gGV" firstAttribute="leading" secondItem="lWr-K8-yaQ" secondAttribute="leading" id="GLX-P1-iJp"/>
                         <constraint firstAttribute="trailing" secondItem="EwL-8D-gGV" secondAttribute="trailing" id="g8k-aD-RYc"/>
                         <constraint firstAttribute="bottom" secondItem="EwL-8D-gGV" secondAttribute="bottom" id="vkf-GF-hCR"/>
                         <constraint firstItem="EwL-8D-gGV" firstAttribute="top" secondItem="lWr-K8-yaQ" secondAttribute="top" id="xPf-Qo-ca4"/>
+=======
+                        <constraint firstAttribute="height" constant="100" id="7yL-Ia-bsJ"/>
+                        <constraint firstAttribute="trailing" secondItem="eq1-qv-E1x" secondAttribute="trailing" id="Bs8-kG-oEx"/>
+                        <constraint firstAttribute="width" secondItem="o8l-HA-YIe" secondAttribute="height" multiplier="19:27" id="LiU-2N-tIz"/>
+                        <constraint firstAttribute="bottom" secondItem="eq1-qv-E1x" secondAttribute="bottom" id="NcP-1B-Ds8"/>
+                        <constraint firstItem="eq1-qv-E1x" firstAttribute="top" secondItem="o8l-HA-YIe" secondAttribute="top" id="nKm-gF-l9m"/>
+                        <constraint firstItem="eq1-qv-E1x" firstAttribute="leading" secondItem="o8l-HA-YIe" secondAttribute="leading" id="npo-2a-Boh"/>
+>>>>>>> .merge_file_APF8dH
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -56,23 +84,35 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
+<<<<<<< .merge_file_KMIznV
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Y15-kH-279">
                     <rect key="frame" x="78" y="8" width="304" height="50.5"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m1G-3f-Bbi">
+=======
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="9IR-zX-Vip">
+                    <rect key="frame" x="78" y="8" width="304" height="100"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9w3-PP-dYM">
+>>>>>>> .merge_file_APF8dH
                             <rect key="frame" x="0.0" y="0.0" width="304" height="18"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
+<<<<<<< .merge_file_KMIznV
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w6J-Ev-N9Q">
+=======
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H55-ZX-be2">
+>>>>>>> .merge_file_APF8dH
                             <rect key="frame" x="0.0" y="18" width="304" height="14.5"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
+<<<<<<< .merge_file_KMIznV
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kyc-gr-VXg">
                             <rect key="frame" x="0.0" y="32.5" width="304" height="18"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -80,12 +120,21 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
+=======
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bRJ-00-FZS">
+                            <rect key="frame" x="0.0" y="32.5" width="304" height="67.5"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <fontDescription key="fontDescription" name="Exo-Light-Italic" family="Exo" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        </textView>
+>>>>>>> .merge_file_APF8dH
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </stackView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+<<<<<<< .merge_file_KMIznV
                 <constraint firstItem="Y15-kH-279" firstAttribute="top" secondItem="lWr-K8-yaQ" secondAttribute="top" id="0zY-tr-bLb"/>
                 <constraint firstItem="lWr-K8-yaQ" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="8" id="5UV-6f-tEc"/>
                 <constraint firstItem="Y15-kH-279" firstAttribute="leading" secondItem="lWr-K8-yaQ" secondAttribute="trailing" constant="8" id="J01-uJ-X8C"/>
@@ -103,6 +152,27 @@
                 <outlet property="posterClippingView" destination="lWr-K8-yaQ" id="VsX-CJ-9BA"/>
             </connections>
             <point key="canvasLocation" x="22" y="-61"/>
+=======
+                <constraint firstItem="9IR-zX-Vip" firstAttribute="top" secondItem="o8l-HA-YIe" secondAttribute="top" id="2h1-3V-3dl"/>
+                <constraint firstItem="o8l-HA-YIe" firstAttribute="leading" secondItem="JvK-CU-rez" secondAttribute="leading" id="BTF-BB-T9b"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="9IR-zX-Vip" secondAttribute="bottom" constant="8" id="CV4-rX-ceY"/>
+                <constraint firstItem="9IR-zX-Vip" firstAttribute="leading" secondItem="o8l-HA-YIe" secondAttribute="trailing" constant="8" id="WRz-F9-JkC"/>
+                <constraint firstItem="JvK-CU-rez" firstAttribute="bottom" secondItem="9IR-zX-Vip" secondAttribute="bottom" constant="8" id="YTk-iI-6SA"/>
+                <constraint firstItem="o8l-HA-YIe" firstAttribute="top" secondItem="JvK-CU-rez" secondAttribute="top" constant="8" id="exr-za-m6j"/>
+                <constraint firstAttribute="trailing" secondItem="9IR-zX-Vip" secondAttribute="trailing" id="i7d-4t-4gL"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="JvK-CU-rez"/>
+            <connections>
+                <outlet property="imageViewPoster" destination="eq1-qv-E1x" id="fW8-BC-47r"/>
+                <outlet property="labelDetail" destination="H55-ZX-be2" id="Yof-sZ-Rfl"/>
+                <outlet property="labelTitle" destination="9w3-PP-dYM" id="fLT-fj-C6P"/>
+                <outlet property="posterClippingView" destination="o8l-HA-YIe" id="D4j-tg-gGw"/>
+                <outlet property="stackViewLabels" destination="9IR-zX-Vip" id="2Gl-DK-dOh"/>
+                <outlet property="textViewOverview" destination="bRJ-00-FZS" id="TlO-no-NCO"/>
+            </connections>
+            <point key="canvasLocation" x="22" y="-101"/>
+>>>>>>> .merge_file_APF8dH
         </view>
     </objects>
     <resources>

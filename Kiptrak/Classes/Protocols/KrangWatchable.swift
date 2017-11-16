@@ -18,11 +18,13 @@ protocol KrangWatchable: KrangLinkable {
     
     var titleDisplayString: String { get }
     var posterThumbnailURL: URL? { get }
+    var subtitle: String { get }
+    
     var checkin:KrangCheckin? { get }
     
     var fanartImageURL: URL? { get }
     var fanartBlurrableImageURL : URL? { get }
     
     var originalJSONString: String { get }
-    var watchDate: Date? { get }
+    var watchDate: Date? { get set }
 }

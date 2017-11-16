@@ -30,14 +30,14 @@ class WatchableSearchResultTableViewCell: SwipeTableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.realmChangeToken?.stop()
+        self.realmChangeToken?.invalidate()
         self.imageViewThumbnail.image = #imageLiteral(resourceName: "poster_placeholder_dark")
         self.retrieveImageTask?.cancel()
         self.retrieveImageTask = nil
     }
     
     func update(withSearchable searchable: KrangSearchable) {
-        self.realmChangeToken?.stop()
+        self.realmChangeToken?.invalidate()
         self.imageViewThumbnail.image = #imageLiteral(resourceName: "poster_placeholder_dark")
         self.retrieveImageTask?.cancel()
         self.retrieveImageTask = nil
@@ -47,7 +47,7 @@ class WatchableSearchResultTableViewCell: SwipeTableViewCell {
             if let movie = searchable as? KrangMovie {
                 let movieID = movie.traktID
                 let query = try! Realm().objects(KrangMovie.self).filter("traktID == %d", movieID)
-                self.realmChangeToken = query.addNotificationBlock() { change in
+                self.realmChangeToken = query.observe() { change in
                     if query.count > 0 {
                         if let updatedThumbnailURL = query[0].urlForSearchResultThumbnailImage {
                             self.retrieveImageTask = self.imageViewThumbnail.kf.setImage(with: updatedThumbnailURL, placeholder: #imageLiteral(resourceName: "poster_placeholder_dark"), options: nil, progressBlock: nil, completionHandler: nil)
@@ -57,7 +57,7 @@ class WatchableSearchResultTableViewCell: SwipeTableViewCell {
             } else if let show = searchable as? KrangShow {
                 let showID = show.traktID
                 let query = try! Realm().objects(KrangShow.self).filter("traktID == %d", showID)
-                self.realmChangeToken = query.addNotificationBlock() { [unowned self] change in
+                self.realmChangeToken = query.observe() { [unowned self] change in
                     if query.count > 0 {
                         if let updatedThumnailURL = query[0].urlForSearchResultThumbnailImage {
                             self.retrieveImageTask = self.imageViewThumbnail.kf.setImage(with: updatedThumnailURL, placeholder: #imageLiteral(resourceName: "poster_placeholder_dark"), options: nil, progressBlock: nil, completionHandler: nil)

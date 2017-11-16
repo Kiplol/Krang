@@ -30,7 +30,7 @@ class SeasonCollectionViewCell: UICollectionViewCell, SelfSizingCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.realmChangeToken?.stop()
+        self.realmChangeToken?.invalidate()
         self.retrieveImageTask?.cancel()
         self.retrieveImageTask = nil
     }
@@ -38,7 +38,7 @@ class SeasonCollectionViewCell: UICollectionViewCell, SelfSizingCell {
     func update(withSeason season: KrangSeason) {
         self.labelTitle.text = season.title
         
-        self.realmChangeToken?.stop()
+        self.realmChangeToken?.invalidate()
         self.retrieveImageTask?.cancel()
         self.retrieveImageTask = nil
         self.imageSeen.isHidden = !(UserPrefs.traktSync && season.hasBeenWatched()) //Must work on getting the entire show/season/episode data from the get-go.
@@ -48,7 +48,7 @@ class SeasonCollectionViewCell: UICollectionViewCell, SelfSizingCell {
             self.imageView.kf.setImage(with: URL(string: posterImageURL), placeholder: self.imageView.image, options: [.transition(.fade(0.2))], progressBlock: nil, completionHandler: nil)
         } else if SeasonCollectionViewCell.listenForRealmChanges {
             let query = try! Realm().objects(KrangSeason.self).filter("traktID == %d", season.traktID)
-            self.realmChangeToken = query.addNotificationBlock({ change in
+            self.realmChangeToken = query.observe({ change in
                 if query.count > 0 {
                     if let updatedPosterImageURL = query[0].posterImageURL ?? query[0].show?.imagePosterURL {
                         self.imageView.kf.setImage(with: URL(string: updatedPosterImageURL), placeholder: self.imageView.image, options: [.transition(.fade(0.2))], progressBlock: nil, completionHandler: nil)

@@ -1,5 +1,4 @@
-# Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+platform :ios, '10.0'
 
 def shared_pods
 	use_frameworks!
@@ -14,9 +13,9 @@ end
 target 'Kiptrak' do
 	shared_pods
 	pod 'CustomizableActionSheet'
-	pod 'KDCircularProgress', :git => 'https://github.com/kaandedeoglu/KDCircularProgress.git', :branch => 'master'
+	pod 'KDCircularProgress'
 	pod 'LGAlertView'
-	pod 'Hero', '~> 1.0.0-alpha.4'
+	pod 'Hero'
 	pod 'Pulley'
 	pod 'RxKeyboard'
 	pod 'SwipeCellKit'

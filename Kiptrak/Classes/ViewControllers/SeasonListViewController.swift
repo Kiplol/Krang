@@ -24,12 +24,12 @@ class SeasonListViewController: KrangViewController, UICollectionViewDataSource,
     //MARK:- ivars
     var show: KrangShow! {
         willSet {
-            self.seasonsNotificationToken?.stop()
+            self.seasonsNotificationToken?.invalidate()
             self.seasonsNotificationToken = nil
         }
         didSet {
             self.title = show.title
-            self.seasonsNotificationToken = self.show.seasons.addNotificationBlock() {change in
+            self.seasonsNotificationToken = self.show.seasons.observe() {change in
                 if self.isViewLoaded {
                     switch change {
                     case .initial(_):
@@ -89,6 +89,7 @@ class SeasonListViewController: KrangViewController, UICollectionViewDataSource,
         let season = self.show.seasons[indexPath.row]
         let episodesVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "episodeList") as! EpisodeListViewController
         episodesVC.season = season
+//        self.feedbackGeneratorForSelection.selectionChanged()
         self.navigationController?.pushViewController(episodesVC, animated: true)
     }
     
@@ -113,13 +114,11 @@ class SeasonListViewController: KrangViewController, UICollectionViewDataSource,
 
 extension SeasonListViewController: PulleyDrawerViewControllerDelegate {
     //MARK:- PulleyDrawerViewControllerDelegate
-    func collapsedDrawerHeight() -> CGFloat
-    {
+    func collapsedDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
         return UIViewController.defaultCollapsedDrawerHeight
     }
     
-    func partialRevealDrawerHeight() -> CGFloat
-    {
+    func partialRevealDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
         return UIViewController.defaultPartialRevealDrawerHeight
     }
     

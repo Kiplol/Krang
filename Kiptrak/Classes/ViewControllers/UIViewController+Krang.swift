@@ -12,7 +12,7 @@ import Pulley
 extension UIViewController {
     
     class var defaultPartialRevealDrawerHeight: CGFloat { return 300.0 }
-    class var defaultCollapsedDrawerHeight: CGFloat { return (82.0 + (KrangUtils.Display.typeIsLike == .iphoneX ? 25.0 : 0.0)) }
+    class var defaultCollapsedDrawerHeight: CGFloat { return 82.0 }
     
     func topViewController() -> UIViewController {
         if let presentedViewController = self.presentedViewController {
@@ -39,19 +39,16 @@ extension UIViewController {
 }
 
 extension UINavigationController: PulleyDrawerViewControllerDelegate {
-    
-    public func collapsedDrawerHeight() -> CGFloat
-    {
+    public func collapsedDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
         if let drawer = self.topViewController as? PulleyDrawerViewControllerDelegate {
-            return drawer.collapsedDrawerHeight()
+            return drawer.collapsedDrawerHeight(bottomSafeArea: bottomSafeArea)
         }
         return UIViewController.defaultCollapsedDrawerHeight
     }
     
-    public func partialRevealDrawerHeight() -> CGFloat
-    {
+    public func partialRevealDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
         if let drawer = self.topViewController as? PulleyDrawerViewControllerDelegate {
-            return drawer.partialRevealDrawerHeight()
+            return drawer.partialRevealDrawerHeight(bottomSafeArea: bottomSafeArea)
         }
         return UIViewController.defaultPartialRevealDrawerHeight
     }
@@ -66,7 +63,13 @@ extension UINavigationController: PulleyDrawerViewControllerDelegate {
     public func drawerPositionDidChange(drawer: PulleyViewController)
     {
         if let drawerTopVC = self.topViewController as? PulleyDrawerViewControllerDelegate {
-            drawerTopVC.drawerPositionDidChange?(drawer: drawer)
+            drawerTopVC.drawerPositionDidChange?(drawer: drawer, bottomSafeArea: KrangUtils.safeAreaInsets.bottom)
+        }
+    }
+    
+    public func drawerChangedDistanceFromBottom(drawer: PulleyViewController, distance: CGFloat) {
+        if let drawerTopVC = self.topViewController as? PulleyDelegate {
+            drawerTopVC.drawerChangedDistanceFromBottom?(drawer: drawer, distance: distance, bottomSafeArea: KrangUtils.safeAreaInsets.bottom)
         }
     }
 }

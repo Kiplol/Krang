@@ -8,6 +8,7 @@
 
 import UIKit
 import OAuthSwift
+import LGAlertView
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -33,8 +34,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if KrangUtils.isFirstTimeRunningThisVersion && !UserPrefs.traktSync {
             //Delete all the movies, seasons, etc
-            KrangRealmUtils.makeChanges {
-                KrangRealmUtils.deleteAllMoviesShowsSeasonsEpisodes()
+            RealmManager.makeChanges {
+                RealmManager.deleteAllMoviesShowsSeasonsEpisodes()
             }
         }
         KrangUtils.setThisAsLastRunVersion()
@@ -108,6 +109,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         searchBarTextFieldAppearance.tintColor = UIColor.white
         searchBarTextFieldAppearance.backgroundColor = UIColor(white: 0.2, alpha: 1.0)
         searchBarTextFieldAppearance.font = UIFont(name: "Exo-Light-Italic", size: 16.0)
+        
+        //LGAlertView
+        LGAlertView.appearance().buttonsHeight = 44.0         //@TODO: This is just until that LGAlertView.m 2882 [self.tableView layoutIfNeeded] is released
+        LGAlertView.appearance().buttonsTitleColor = UIColor.darkBackground
+        LGAlertView.appearance().cancelButtonTitleColor = UIColor.gray
+        LGAlertView.appearance().backgroundColor = UIColor.clear
+        LGAlertView.appearance().backgroundBlurEffect = UIBlurEffect(style: .extraLight)
+        LGAlertView.appearance().cancelButtonOffsetY = KrangUtils.safeAreaInsets.bottom
     }
     
     func topViewController() -> UIViewController {

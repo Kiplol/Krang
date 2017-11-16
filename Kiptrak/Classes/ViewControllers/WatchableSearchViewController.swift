@@ -11,7 +11,7 @@ import Pulley
 import RealmSwift
 import OAuthSwift
 import SwipeCellKit
-import CustomizableActionSheet
+import LGAlertView
 
 class WatchableSearchViewController: KrangViewController, UISearchResultsUpdating, UITableViewDataSource, UITableViewDelegate, SwipeTableViewCellDelegate {
     
@@ -35,6 +35,7 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
             self.tableView.register(nib, forCellReuseIdentifier: WatchableSearchViewController.cellReuseIdentifier)
         }
     }
+    @IBOutlet weak var coverViewForTable: UIView!
     @IBOutlet weak var constraintSearchBarContainerHeight: NSLayoutConstraint!
     
     //MARK:- ivars
@@ -58,6 +59,7 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Search"
+        self.coverViewForTable.backgroundColor = self.view.backgroundColor
         self.searchController.searchResultsUpdater = self
         self.searchController.dimsBackgroundDuringPresentation = false
         self.searchController.searchBar.placeholder = "American Psycho, Law & Order, etc..."
@@ -76,8 +78,11 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if self.pulleyViewController != nil {
+        if let pulley = self.pulleyViewController {
             self.navigationController?.setNavigationBarHidden(true, animated: animated)
+            if pulley.drawerPosition == .collapsed {
+                self.coverViewForTable.alpha = 1.0
+            }
         }
         self.view.layoutIfNeeded()
         TraktHelper.shared.getRecentShowHistory { (error, shows) in
@@ -134,44 +139,24 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
             //Hide keyboard.
             self.searchController.searchBar.resignFirstResponder()
             
-            var items = [CustomizableActionSheetItem]()
-            if let previewView = Bundle.main.loadNibNamed("KrangWatchablePreviewView", owner: nil, options: nil)![0] as? KrangWatchablePreviewView {
-                previewView.setWatchable(watchable)
-                let sampleViewItem = CustomizableActionSheetItem()
-                sampleViewItem.type = .view
-                sampleViewItem.view = previewView
-                sampleViewItem.height = 160
-                items.append(sampleViewItem)
-            }
-            let closeItem = CustomizableActionSheetItem()
-            closeItem.type = .button
-            closeItem.label = "Close"
-            closeItem.selectAction = { (actionSheet: CustomizableActionSheet) -> Void in
-                actionSheet.dismiss()
-            }
-            items.append(closeItem)
-            let actionSheet = CustomizableActionSheet()
-            actionSheet.showInView(self.view, items: items)
-            
-//            //Check in.
-//            let _ = KrangActionableFullScreenAlertView.show(withTitle: "Checking in to \(watchable.title)", countdownDuration: 3.0, afterCountdownAction: { (alert) in
-//                alert.button.isHidden = true
-//                TraktHelper.shared.checkIn(to: watchable, completion: { (error, checkedInWatchable) in
-//                    alert.dismiss(true) {
-//                        if checkedInWatchable != nil {
-//                            if let drawer = self.pulleyViewController {
-//                                drawer.setDrawerPosition(position: .collapsed, animated: true)
-//                            }
-//                        }
-//                    }
-//                })
-//            }, buttonTitle: "Cancel Checkin", buttonAction: { (alert, _) in
-//                alert.dismiss(true)
-//            })
+            KrangWatchableUI.offerActions(forWatchable: watchable, completion: { (error, action) in
+                switch action {
+                case .checkIn:
+                    if error == nil {
+                        if let drawer = self.pulleyViewController {
+                            drawer.setDrawerPosition(position: .collapsed, animated: true)
+                        }
+                    }
+                    
+                default:
+                    break //@TODO: Other action
+                }
+            })
         } else if let show = selectedObject as? KrangShow {
             //Navigate to seasons VC.
             let seasonsVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "seasonList") as! SeasonListViewController
             seasonsVC.show = show
+//            self.feedbackGeneratorForSelection.selectionChanged()
             self.navigationController?.pushViewController(seasonsVC, animated: true)
         }
     }
@@ -239,6 +224,7 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
             }
         }
         
+        self.feedbackGeneratorForSelection.selectionChanged()
         return options.isEmpty ? nil : options
     }
     
@@ -251,30 +237,11 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
 
 extension WatchableSearchViewController: PulleyDrawerViewControllerDelegate, UISearchBarDelegate {
     //MARK:- PulleyDrawerViewControllerDelegate
-    func collapsedDrawerHeight() -> CGFloat
-    {
-//        if self.isViewLoaded {
-//            let bottomPadding: CGFloat = KrangUtils.Display.typeIsLike == .iphoneX ? 25.0 : 0.0
-//            return self.searchBarContainerView.frame.maxY + bottomPadding
-//        } else {
-//            return 68.0
-//        }
+    func collapsedDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
         return UIViewController.defaultCollapsedDrawerHeight
     }
     
-    func partialRevealDrawerHeight() -> CGFloat
-    {
-//        if self.isViewLoaded {
-//            let rowHeight = self.tableView.rowHeight
-//            let maxHeight = 4.5 * rowHeight
-//            let minHeight = rowHeight * 1.5
-//            let searchResultsHeight = (max(1.0, CGFloat(self.dataSet.count)) - 0.5) * rowHeight
-//            let tableViewHeight = max(minHeight, min(maxHeight, searchResultsHeight))
-//            let searchBarHeight = self.searchBarContainerView.frame.maxY
-//            return tableViewHeight + searchBarHeight
-//        } else {
-//            return UIViewController.defaultPartialRevealDrawerHeight
-//        }
+    func partialRevealDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
         return UIViewController.defaultPartialRevealDrawerHeight
     }
     
@@ -290,6 +257,13 @@ extension WatchableSearchViewController: PulleyDrawerViewControllerDelegate, UIS
                 self.searchController.searchBar.resignFirstResponder()
             }
         }
+    }
+    
+    func drawerChangedDistanceFromBottom(drawer: PulleyViewController, distance: CGFloat) {
+        let minDistance = self.collapsedDrawerHeight(bottomSafeArea: KrangUtils.safeAreaInsets.bottom)
+        let range: CGFloat = 160.0
+        let t = (distance - minDistance) / range
+        self.coverViewForTable.alpha = 1.0 - t
     }
     
     //MARK:- UISearchBarDelegate

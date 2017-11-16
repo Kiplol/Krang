@@ -33,11 +33,11 @@ class EpisodeListViewController: KrangViewController, UITableViewDataSource, UIT
     var episodesNotificationToken: NotificationToken? = nil
     fileprivate var episodes: Results<KrangEpisode>! {
         willSet {
-            self.episodesNotificationToken?.stop()
+            self.episodesNotificationToken?.invalidate()
             self.episodesNotificationToken = nil
         }
         didSet {
-            self.episodesNotificationToken = self.episodes.addNotificationBlock() { change in
+            self.episodesNotificationToken = self.episodes.observe() { change in
                 if self.isViewLoaded {
                     switch change {
                     case .initial(_):
@@ -97,21 +97,19 @@ class EpisodeListViewController: KrangViewController, UITableViewDataSource, UIT
         tableView.deselectRow(at: indexPath, animated: true)
         
         let episode = self.episodes[indexPath.row]
-        let _ = KrangActionableFullScreenAlertView.show(withTitle: "Checking in to \(episode.title)", countdownDuration: 3.0, afterCountdownAction: { (alert) in
-            alert.button.isHidden = true
-            TraktHelper.shared.checkIn(to: episode, completion: { (error, checkedInWatchable) in
-                alert.dismiss(true) {
-                    if checkedInWatchable != nil {
-                        if let drawer = self.pulleyViewController {
-                            drawer.setDrawerPosition(position: .collapsed, animated: true)
-                        }
+        KrangWatchableUI.offerActions(forWatchable: episode) { (error, action) in
+            if error == nil {
+                switch action {
+                case .checkIn:
+                    if let drawer = self.pulleyViewController {
+                        drawer.setDrawerPosition(position: .collapsed, animated: true)
                     }
+                default:
+                    break
                 }
-            })
-        }, buttonTitle: "Cancel Checkin", buttonAction: { (alert, _) in
-            alert.dismiss(true)
-        })
-
+            }
+        }
+//        self.feedbackGeneratorForSelection.selectionChanged()
     }
     
     //MARK:- SwipeTableViewCellDelegate
@@ -153,6 +151,7 @@ class EpisodeListViewController: KrangViewController, UITableViewDataSource, UIT
             }
         }
         
+        self.feedbackGeneratorForSelection.selectionChanged()
         return options.isEmpty ? nil : options
     }
 
@@ -165,15 +164,14 @@ class EpisodeListViewController: KrangViewController, UITableViewDataSource, UIT
 }
 
 extension EpisodeListViewController: PulleyDrawerViewControllerDelegate {
+    
     //MARK:- PulleyDrawerViewControllerDelegate
-    func collapsedDrawerHeight() -> CGFloat
-    {
-        return UIViewController.defaultCollapsedDrawerHeight
+    func collapsedDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
+        return UIViewController.defaultCollapsedDrawerHeight + bottomSafeArea
     }
     
-    func partialRevealDrawerHeight() -> CGFloat
-    {
-        return UIViewController.defaultPartialRevealDrawerHeight
+    func partialRevealDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
+        return UIViewController.defaultPartialRevealDrawerHeight + bottomSafeArea
     }
     
     func supportedDrawerPositions() -> [PulleyPosition] {

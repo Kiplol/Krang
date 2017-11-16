@@ -69,7 +69,7 @@ class SettingsViewController: KrangViewController, UITableViewDataSource, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         self.populateViews()
-        self.constraintBelowStackView.constant = (16.0 + (KrangUtils.Display.typeIsLike == .iphoneX ? 25.0 : 0.0))
+        self.constraintBelowStackView.constant = (16.0 + KrangUtils.safeAreaInsets.bottom)
     }
     
     //MARK:-
@@ -93,25 +93,27 @@ class SettingsViewController: KrangViewController, UITableViewDataSource, UITabl
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = self.rows[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: row.reuseID, for: indexPath)
-        switch row {
-        case is LogoutRow:
-            cell.textLabel?.text = "Logout"
-            cell.detailTextLabel?.text = nil
-            cell.accessoryType = .disclosureIndicator
-        case is VersionRow:
-            cell.textLabel?.text = "Krang Version"
-            cell.detailTextLabel?.text = (row as! VersionRow).versionString
-            cell.accessoryType = .none
-        case is TraktSyncRow:
-            cell.textLabel?.text = "Sync Trakt History"
-            cell.detailTextLabel?.text = nil
-            let switchView = (cell.accessoryView as? UISwitch ?? UISwitch())
-            switchView.isOn = UserPrefs.traktSync
-            switchView.tag = SettingsViewController.tagTraktSyncSwitch
-            switchView.addTarget(self, action: #selector(SettingsViewController.switchSwitched(switchView:)), for: .valueChanged)
-            cell.accessoryView = switchView
-        default:
-            break
+        if let settingsCell = cell as? SettingsTableViewCell {
+            switch row {
+            case is LogoutRow:
+                settingsCell.labelTitle?.text = "Logout"
+                settingsCell.labelDetail?.text = nil
+                settingsCell.accessoryType = .disclosureIndicator
+            case is VersionRow:
+                settingsCell.labelTitle?.text = "Krang Version"
+                settingsCell.labelDetail?.text = (row as! VersionRow).versionString
+                settingsCell.accessoryType = .none
+            case is TraktSyncRow:
+                settingsCell.labelTitle.text = "Sync Trakt History"
+                settingsCell.labelDetail.text = nil
+                let switchView = (cell.accessoryView as? UISwitch ?? UISwitch())
+                switchView.isOn = UserPrefs.traktSync
+                switchView.tag = SettingsViewController.tagTraktSyncSwitch
+                switchView.addTarget(self, action: #selector(SettingsViewController.switchSwitched(switchView:)), for: .valueChanged)
+                settingsCell.accessoryView = switchView
+            default:
+                break
+            }
         }
         return cell
     }
@@ -140,25 +142,43 @@ class SettingsViewController: KrangViewController, UITableViewDataSource, UITabl
                         //@TODO: Animate this
                         alert.progressView.progress = Double(currentPage) / Double(maxPage)
                     }, completion: { (error) in
-                        KrangRealmUtils.makeChanges {
-                            KrangUser.getCurrentUser().lastHistorySync = Date()
+                        if error == nil {
+                            RealmManager.makeChanges {
+                                KrangUser.getCurrentUser().lastHistorySync = Date()
+                            }
+                            UserPrefs.traktSync = switchView.isOn
+                        } else {
+                            switchView.isOn = false
+                            UserPrefs.traktSync = switchView.isOn
+                            RealmManager.makeChanges {
+                                KrangUser.getCurrentUser().lastHistorySync = Date.distantPast
+                                RealmManager.removeAllWatchDates()
+                            }
                         }
-                        UserPrefs.traktSync = switchView.isOn
                         alert.dismiss(true)
+                        KrangUtils.playFeedback(forResult: error)
                     })
                 }, buttonTitle: "Cancel Sync", buttonAction: { (alert, _) in
                     alert.dismiss(true)
+                    switchView.isOn = false
                 })
                 fullscreenAlertView?.indeterminate = false
             } else {
                 UserPrefs.traktSync = switchView.isOn
-                KrangRealmUtils.makeChanges {
+                RealmManager.makeChanges {
                     KrangUser.getCurrentUser().lastHistorySync = Date.distantPast
-                    KrangRealmUtils.removeAllWatchDates()
+                    RealmManager.removeAllWatchDates()
                 }
             }
         default:
             break
         }
     }
+}
+
+class SettingsTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var labelTitle: UILabel!
+    @IBOutlet weak var labelDetail: UILabel!
+    
 }

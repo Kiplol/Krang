@@ -27,7 +27,10 @@ class Constants: NSObject {
     class var traktGetShowHistory: String { return Constants.traktBaseURL + "/sync/history/shows" }
     class var traktGetHistory: String { return Constants.traktBaseURL + "/sync/history" }
     class var traktGetActivity: String { return Constants.traktBaseURL + "/sync/last_activities" }
-    class var traktGetShowHistoryFormat : String { return Constants.traktBaseURL + "/sync/history/shows/%d" }
+    class var traktGetShowHistoryFormat: String { return Constants.traktBaseURL + "/sync/history/shows/%d" }
+    class var traktGetMovieExtendedInfoFormat: String { return Constants.traktBaseURL + "/movies/%d?extended=full" }
+    class var traktMarkWatchedURL: String { return Constants.traktBaseURL + "/sync/history" }
+    class var traktMarkUnwatchedURL: String { return Constants.traktBaseURL + "/sync/history/remove" }
     
     //MARK:- TMDB
     class var tmdbAPIKey: String { get { return "42261ec0aa6d07687f189a56f7b2363d" } }
