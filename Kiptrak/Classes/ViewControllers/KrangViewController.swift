@@ -15,6 +15,8 @@ class KrangViewController: UIViewController {
 
     //MARK:- ivars
     fileprivate let disposeBag = DisposeBag()
+    let feedbackGeneratorForSelection = UISelectionFeedbackGenerator()
+    let feedbackGeneratorForNotifications = UINotificationFeedbackGenerator()
     
     //MARK:- View Lifecycle
     override func viewDidLoad() {

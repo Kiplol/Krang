@@ -10,6 +10,8 @@ import UIKit
 
 class KrangUtils: NSObject {
     
+    fileprivate static let feedbackGeneratorForNotifications = UINotificationFeedbackGenerator()
+    
     class var bundleInfo: [String: Any] {
         return Bundle.main.infoDictionary!
     }
@@ -89,6 +91,14 @@ class KrangUtils: NSObject {
                 return .iphoneX
             }
             return .unknown
+        }
+    }
+    
+    class func playFeedback(forResult error: Error?) {
+        if error != nil {
+            KrangUtils.feedbackGeneratorForNotifications.notificationOccurred(.error)
+        } else {
+            KrangUtils.feedbackGeneratorForNotifications.notificationOccurred(.success)
         }
     }
 }

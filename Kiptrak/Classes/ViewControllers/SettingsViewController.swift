@@ -140,7 +140,7 @@ class SettingsViewController: KrangViewController, UITableViewDataSource, UITabl
                         //@TODO: Animate this
                         alert.progressView.progress = Double(currentPage) / Double(maxPage)
                     }, completion: { (error) in
-                        KrangRealmUtils.makeChanges {
+                        RealmManager.makeChanges {
                             KrangUser.getCurrentUser().lastHistorySync = Date()
                         }
                         UserPrefs.traktSync = switchView.isOn
@@ -152,9 +152,9 @@ class SettingsViewController: KrangViewController, UITableViewDataSource, UITabl
                 fullscreenAlertView?.indeterminate = false
             } else {
                 UserPrefs.traktSync = switchView.isOn
-                KrangRealmUtils.makeChanges {
+                RealmManager.makeChanges {
                     KrangUser.getCurrentUser().lastHistorySync = Date.distantPast
-                    KrangRealmUtils.removeAllWatchDates()
+                    RealmManager.removeAllWatchDates()
                 }
             }
         default:

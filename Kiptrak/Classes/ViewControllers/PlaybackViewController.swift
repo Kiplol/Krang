@@ -157,6 +157,7 @@ class PlaybackViewController: KrangViewController {
     @IBAction func cancelTapped(_ sender: Any) {
         let _ = KrangActionableFullScreenAlertView.show(withTitle: "Cancelling checkin", countdownDuration: 3.0, afterCountdownAction: { (alert) in
             TraktHelper.shared.cancelAllCheckins { (error) in
+                KrangUtils.playFeedback(forResult: error)
                 alert.dismiss(true)
             }
         }, buttonTitle: "Stay Checked In") { (alert, button) in

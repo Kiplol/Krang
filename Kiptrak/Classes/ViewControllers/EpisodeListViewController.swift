@@ -109,6 +109,7 @@ class EpisodeListViewController: KrangViewController, UITableViewDataSource, UIT
                 }
             }
         }
+        self.feedbackGeneratorForSelection.selectionChanged()
     }
     
     //MARK:- SwipeTableViewCellDelegate
@@ -150,6 +151,7 @@ class EpisodeListViewController: KrangViewController, UITableViewDataSource, UIT
             }
         }
         
+        self.feedbackGeneratorForSelection.selectionChanged()
         return options.isEmpty ? nil : options
     }
 

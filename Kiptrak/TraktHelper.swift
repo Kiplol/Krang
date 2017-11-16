@@ -85,7 +85,7 @@ class TraktHelper: NSObject {
         sharedDefaults.synchronize()
         KrangUser.getCurrentUser().makeChanges {
             KrangUser.getCurrentUser().lastHistorySync = Date.distantPast
-            KrangRealmUtils.removeAllWatchDates()
+            RealmManager.removeAllWatchDates()
             KrangUser.setCurrentUser(nil)
         }
         self.didGetCredentials = false
@@ -129,7 +129,7 @@ class TraktHelper: NSObject {
             let json = JSON(data: response.data)
             var user:KrangUser? = nil
             
-            KrangRealmUtils.makeChanges {
+            RealmManager.makeChanges {
                 user = KrangUser.from(json: json)
                 KrangUser.setCurrentUser(user)
             }
@@ -210,7 +210,7 @@ class TraktHelper: NSObject {
             let json = JSON(data: response.data)
             
             if let seasonDics = json.array {
-                KrangRealmUtils.makeChanges {
+                RealmManager.makeChanges {
                     for seasonDic in seasonDics {
                         guard let traktID = seasonDic["ids"]["trakt"].int else {
                             continue
@@ -257,7 +257,7 @@ class TraktHelper: NSObject {
         let _ = self.oauth.client.get(url, parameters: [:], headers: TraktHelper.defaultHeaders(), success: { (response) in
             let json = JSON(data: response.data)
             if let showDics = json.array {
-                KrangRealmUtils.makeChanges {
+                RealmManager.makeChanges {
                     showDics.forEach {
                         let thisJSON  = $0
                         
@@ -327,7 +327,7 @@ class TraktHelper: NSObject {
             let json = JSON(data: response.data)
             var theseEpisodes = [KrangEpisode]()
             if let episodeDics = json.array {
-                KrangRealmUtils.makeChanges {
+                RealmManager.makeChanges {
                     for episodeDic in episodeDics {
                         guard let traktID = episodeDic["ids"]["trakt"].int else {
                             continue
@@ -405,7 +405,7 @@ class TraktHelper: NSObject {
         let watchedAt = Date()
         params["watched_at"] = watchedAt.toUTCTimestamp()
         let _ = self.oauth.client.post(url, parameters: params, headers: TraktHelper.defaultHeaders(), body: nil, success: { (response) in
-            KrangRealmUtils.makeChanges {
+            RealmManager.makeChanges {
                 watchable.watchDate = watchedAt
             }
             completion?(nil)
@@ -427,7 +427,7 @@ class TraktHelper: NSObject {
             break
         }
         let _ = self.oauth.client.post(url, parameters: params, headers: TraktHelper.defaultHeaders(), body: nil, success: { (response) in
-            KrangRealmUtils.makeChanges {
+            RealmManager.makeChanges {
                 watchable.watchDate = nil
             }
             completion?(nil)
@@ -461,7 +461,7 @@ class TraktHelper: NSObject {
                 
                 let showsGroup = DispatchGroup()
                 showsGroup.enter()
-                KrangRealmUtils.makeChanges {
+                RealmManager.makeChanges {
                     showDics.forEach {
                         guard let szWatchedAt = $0["watched_at"].string, let watchedAt = Date.from(utcTimestamp: szWatchedAt) else {
                             return
@@ -501,7 +501,7 @@ class TraktHelper: NSObject {
                 showsGroup.leave()
                 showsGroup.notify(queue: DispatchQueue.global(qos: DispatchQoS.background.qosClass), execute: {
                     KrangLogger.log.debug("Finished parsing shows for page \(currentPage) of \(pageCount).")
-                    KrangRealmUtils.makeChanges {
+                    RealmManager.makeChanges {
                         episodeDics.forEach {
                             guard let szWatchedAt = $0["watched_at"].string, let watchedAt = Date.from(utcTimestamp: szWatchedAt) else {
                                 return
@@ -535,7 +535,7 @@ class TraktHelper: NSObject {
                 
                 //Movies
                 parsingGroup.enter()
-                KrangRealmUtils.makeChanges {
+                RealmManager.makeChanges {
                     movieDics.forEach {
                         guard let szWatchedAt = $0["watched_at"].string, let watchedAt = Date.from(utcTimestamp: szWatchedAt) else {
                             return
@@ -584,7 +584,7 @@ class TraktHelper: NSObject {
             //Yay
             let json = JSON(data: response.data)
             if let episodeDics = json.array {
-                KrangRealmUtils.makeChanges {
+                RealmManager.makeChanges {
                     let watchedEpisodeIDs = episodeDics.filter { $0["episode"]["ids"]["trakt"].int != nil }.map { $0["episode"]["ids"]["trakt"].int! }
                     let unwatchedEpisodes = show.episodes.filter { watchedEpisodeIDs.contains($0.traktID) }
                     unwatchedEpisodes.forEach { $0.watchDate = nil }
@@ -634,7 +634,7 @@ class TraktHelper: NSObject {
             var showTraktIDs = [Int]()
             let json = JSON(data: response.data)
             if let dics = json.array {
-                KrangRealmUtils.makeChanges {
+                RealmManager.makeChanges {
                     dics.filter { $0["show"].exists() }.map { $0["show"] }.forEach {
                         guard let traktID = $0["ids"]["trakt"].int else {
                             return
@@ -695,7 +695,7 @@ class TraktHelper: NSObject {
             let json = JSON(data: response.data)
             var result: [KrangSearchable] = []
             if let matchDics = json.array {
-                KrangRealmUtils.makeChanges {
+                RealmManager.makeChanges {
                     matchDics.forEach {
                         guard let type = $0["type"].string else {
                             return
@@ -832,7 +832,7 @@ class TraktHelper: NSObject {
         
         var resultMovie:KrangMovie? = nil
         var resultEpisode:KrangEpisode? = nil
-        KrangRealmUtils.makeChanges {
+        RealmManager.makeChanges {
             if let movie = KrangMovie.from(json: json) {
                 //If it's new, save it to our database.
                 if KrangMovie.with(traktID: movie.traktID) == nil {

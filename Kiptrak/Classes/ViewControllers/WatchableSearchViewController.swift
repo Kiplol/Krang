@@ -156,6 +156,7 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
             //Navigate to seasons VC.
             let seasonsVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "seasonList") as! SeasonListViewController
             seasonsVC.show = show
+            self.feedbackGeneratorForSelection.selectionChanged()
             self.navigationController?.pushViewController(seasonsVC, animated: true)
         }
     }
@@ -223,6 +224,7 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
             }
         }
         
+        self.feedbackGeneratorForSelection.selectionChanged()
         return options.isEmpty ? nil : options
     }
     

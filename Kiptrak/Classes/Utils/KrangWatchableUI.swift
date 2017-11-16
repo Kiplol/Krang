@@ -41,17 +41,19 @@ class KrangWatchableUI: NSObject {
         
         let alertView = LGAlertView(withWatchable: watchable, checkInHandler: { (_, _, _) in
             checkIn(toWatchable: watchable, doCountdown: false, completion: { (checkinError, checkedInWatchable) in
+                KrangUtils.playFeedback(forResult: checkinError)
                 completion?(checkinError, .checkIn)
             })
         }, markWatchedHandler: { (_, _, _) in
             TraktHelper.shared.markWatched(watchable, completion: { (markWatchedError) in
+                KrangUtils.playFeedback(forResult: markWatchedError)
                 completion?(markWatchedError, .markWatched)
             })
         }, markUnwatchedHandler: { (_, _, _) in
             TraktHelper.shared.markUnwatched(watchable, completion: { (markUnwatchedError) in
+                KrangUtils.playFeedback(forResult: markUnwatchedError)
                 completion?(markUnwatchedError, .markUnwatched)
             })
-            completion?(nil, .markUnwatched)
         }, cancelHandler: nil)
         alertView.showAnimated()
     }

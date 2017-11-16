@@ -26,6 +26,8 @@ class KrangActionableFullScreenAlertView: UIView {
     var afterCountdownAction: ((KrangActionableFullScreenAlertView) -> ())? = nil
     var startTime: Date? = nil
     var displayLink: CADisplayLink? = nil
+    let feedbackGeneratorForNotifications = UINotificationFeedbackGenerator()
+    let feedbackGeneratorForSelection = UISelectionFeedbackGenerator()
     
     func dismiss(_ animated: Bool, completion: (() -> ())? = nil) {
         self.displayLink?.invalidate()
@@ -48,9 +50,11 @@ class KrangActionableFullScreenAlertView: UIView {
             oldDisplayLink.invalidate()
         }
         
+        
         self.startTime = Date()
         self.displayLink = CADisplayLink(target: self, selector: #selector(KrangActionableFullScreenAlertView.displayLinkTick))
         self.displayLink!.add(to: RunLoop.main, forMode: RunLoopMode.defaultRunLoopMode)
+        self.feedbackGeneratorForSelection.selectionChanged()
     }
     
     func displayLinkTick() {

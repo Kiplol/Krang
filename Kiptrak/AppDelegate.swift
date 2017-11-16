@@ -34,8 +34,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if KrangUtils.isFirstTimeRunningThisVersion && !UserPrefs.traktSync {
             //Delete all the movies, seasons, etc
-            KrangRealmUtils.makeChanges {
-                KrangRealmUtils.deleteAllMoviesShowsSeasonsEpisodes()
+            RealmManager.makeChanges {
+                RealmManager.deleteAllMoviesShowsSeasonsEpisodes()
             }
         }
         KrangUtils.setThisAsLastRunVersion()
