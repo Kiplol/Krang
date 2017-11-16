@@ -1,5 +1,4 @@
-# Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+platform :ios, '10.0'
 
 def shared_pods
 	use_frameworks!
@@ -15,7 +14,7 @@ target 'Kiptrak' do
 	shared_pods
 	pod 'KDCircularProgress'
 	pod 'LGAlertView'
-	pod 'Hero', :git => 'https://github.com/lkzhao/Hero.git' #fix iOS 11 in UIView+Hero.swift
+	pod 'Hero'
 	pod 'Pulley'
 	pod 'RxKeyboard'
 	pod 'SwipeCellKit'
@@ -29,7 +28,7 @@ end
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
-      config.build_settings['SWIFT_VERSION'] = '3.0'
+      config.build_settings['SWIFT_VERSION'] = '3.2'
     end
     if target.name == "OAuthSwift"
             puts "Updating #{target.name} OTHER_SWIFT_FLAGS"
