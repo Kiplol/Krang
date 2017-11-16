@@ -109,7 +109,7 @@ class EpisodeListViewController: KrangViewController, UITableViewDataSource, UIT
                 }
             }
         }
-        self.feedbackGeneratorForSelection.selectionChanged()
+//        self.feedbackGeneratorForSelection.selectionChanged()
     }
     
     //MARK:- SwipeTableViewCellDelegate

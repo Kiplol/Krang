@@ -18,11 +18,14 @@ enum KrangWatchableAction {
 
 class KrangWatchableUI: NSObject {
     
+    let feedbackGeneratorForSelection = UISelectionFeedbackGenerator()
+    
     class func checkIn(toWatchable watchable: KrangWatchable, doCountdown: Bool, completion:((Error?, KrangWatchable?) -> ())?) {
         let _ = KrangActionableFullScreenAlertView.show(withTitle: "Checking in to \(watchable.title)", countdownDuration: (doCountdown ? 3.0 : 0.0), afterCountdownAction: { (alert) in
             alert.button.isHidden = true
             TraktHelper.shared.checkIn(to: watchable, completion: { (error, checkedInWatchable) in
                 alert.dismiss(true) {
+                    KrangUtils.playFeedback(forResult: error)
                     completion?(error, checkedInWatchable)
                 }
             })
@@ -40,8 +43,7 @@ class KrangWatchableUI: NSObject {
         }
         
         let alertView = LGAlertView(withWatchable: watchable, checkInHandler: { (_, _, _) in
-            checkIn(toWatchable: watchable, doCountdown: false, completion: { (checkinError, checkedInWatchable) in
-                KrangUtils.playFeedback(forResult: checkinError)
+            KrangWatchableUI.checkIn(toWatchable: watchable, doCountdown: false, completion: { (checkinError, checkedInWatchable) in
                 completion?(checkinError, .checkIn)
             })
         }, markWatchedHandler: { (_, _, _) in
