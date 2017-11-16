@@ -238,19 +238,18 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
 extension WatchableSearchViewController: PulleyDrawerViewControllerDelegate, UISearchBarDelegate {
     //MARK:- PulleyDrawerViewControllerDelegate
     func collapsedDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
-        return UIViewController.defaultCollapsedDrawerHeight
+        return UIViewController.defaultCollapsedDrawerHeight + bottomSafeArea
     }
     
     func partialRevealDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
-        return UIViewController.defaultPartialRevealDrawerHeight
+        return UIViewController.defaultPartialRevealDrawerHeight + bottomSafeArea
     }
     
     func supportedDrawerPositions() -> [PulleyPosition] {
         return PulleyPosition.all // You can specify the drawer positions you support. This is the same as: [.open, .partiallyRevealed, .collapsed, .closed]
     }
     
-    func drawerPositionDidChange(drawer: PulleyViewController)
-    {
+    func drawerPositionDidChange(drawer: PulleyViewController, bottomSafeArea: CGFloat) {
         if self.isViewLoaded {
             self.tableView.isScrollEnabled = drawer.drawerPosition == .open
             if drawer.drawerPosition != .open {
@@ -259,8 +258,8 @@ extension WatchableSearchViewController: PulleyDrawerViewControllerDelegate, UIS
         }
     }
     
-    func drawerChangedDistanceFromBottom(drawer: PulleyViewController, distance: CGFloat) {
-        let minDistance = self.collapsedDrawerHeight(bottomSafeArea: KrangUtils.safeAreaInsets.bottom)
+    func drawerChangedDistanceFromBottom(drawer: PulleyViewController, distance: CGFloat, bottomSafeArea: CGFloat) {
+        let minDistance = self.collapsedDrawerHeight(bottomSafeArea: bottomSafeArea)
         let range: CGFloat = 160.0
         let t = (distance - minDistance) / range
         self.coverViewForTable.alpha = 1.0 - t

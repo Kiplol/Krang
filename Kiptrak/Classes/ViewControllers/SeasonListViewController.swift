@@ -115,19 +115,18 @@ class SeasonListViewController: KrangViewController, UICollectionViewDataSource,
 extension SeasonListViewController: PulleyDrawerViewControllerDelegate {
     //MARK:- PulleyDrawerViewControllerDelegate
     func collapsedDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
-        return UIViewController.defaultCollapsedDrawerHeight
+        return UIViewController.defaultCollapsedDrawerHeight + bottomSafeArea
     }
     
     func partialRevealDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
-        return UIViewController.defaultPartialRevealDrawerHeight
+        return UIViewController.defaultPartialRevealDrawerHeight + bottomSafeArea
     }
     
     func supportedDrawerPositions() -> [PulleyPosition] {
         return PulleyPosition.all
     }
     
-    func drawerPositionDidChange(drawer: PulleyViewController)
-    {
+    func drawerPositionDidChange(drawer: PulleyViewController, bottomSafeArea: CGFloat) {
         if self.isViewLoaded {
             self.collectionView.isScrollEnabled = drawer.drawerPosition == .open
         }

@@ -178,8 +178,7 @@ extension EpisodeListViewController: PulleyDrawerViewControllerDelegate {
         return PulleyPosition.all
     }
     
-    func drawerPositionDidChange(drawer: PulleyViewController)
-    {
+    func drawerPositionDidChange(drawer: PulleyViewController, bottomSafeArea: CGFloat) {
         if self.isViewLoaded {
             self.tableView.isScrollEnabled = drawer.drawerPosition == .open
         }

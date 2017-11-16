@@ -43,14 +43,14 @@ extension UINavigationController: PulleyDrawerViewControllerDelegate {
         if let drawer = self.topViewController as? PulleyDrawerViewControllerDelegate {
             return drawer.collapsedDrawerHeight(bottomSafeArea: bottomSafeArea)
         }
-        return UIViewController.defaultCollapsedDrawerHeight
+        return UIViewController.defaultCollapsedDrawerHeight + bottomSafeArea
     }
     
     public func partialRevealDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
         if let drawer = self.topViewController as? PulleyDrawerViewControllerDelegate {
             return drawer.partialRevealDrawerHeight(bottomSafeArea: bottomSafeArea)
         }
-        return UIViewController.defaultPartialRevealDrawerHeight
+        return UIViewController.defaultPartialRevealDrawerHeight + bottomSafeArea
     }
     
     public func supportedDrawerPositions() -> [PulleyPosition] {
@@ -60,16 +60,15 @@ extension UINavigationController: PulleyDrawerViewControllerDelegate {
         return PulleyPosition.all
     }
     
-    public func drawerPositionDidChange(drawer: PulleyViewController)
-    {
+    public func drawerPositionDidChange(drawer: PulleyViewController, bottomSafeArea: CGFloat) {
         if let drawerTopVC = self.topViewController as? PulleyDrawerViewControllerDelegate {
-            drawerTopVC.drawerPositionDidChange?(drawer: drawer, bottomSafeArea: KrangUtils.safeAreaInsets.bottom)
+            drawerTopVC.drawerPositionDidChange?(drawer: drawer, bottomSafeArea: bottomSafeArea)
         }
     }
     
-    public func drawerChangedDistanceFromBottom(drawer: PulleyViewController, distance: CGFloat) {
+    public func drawerChangedDistanceFromBottom(drawer: PulleyViewController, distance: CGFloat, bottomSafeArea: CGFloat) {
         if let drawerTopVC = self.topViewController as? PulleyDelegate {
-            drawerTopVC.drawerChangedDistanceFromBottom?(drawer: drawer, distance: distance, bottomSafeArea: KrangUtils.safeAreaInsets.bottom)
+            drawerTopVC.drawerChangedDistanceFromBottom?(drawer: drawer, distance: distance, bottomSafeArea: bottomSafeArea)
         }
     }
 }

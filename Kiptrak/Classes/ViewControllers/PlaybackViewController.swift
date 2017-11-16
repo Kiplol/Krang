@@ -277,21 +277,21 @@ extension PlaybackViewController: PulleyPrimaryContentControllerDelegate {
 //        controlsContainer.alpha = 1.0 - progress
     }
     
-    func drawerPositionDidChange(drawer: PulleyViewController) {
+    func drawerPositionDidChange(drawer: PulleyViewController, bottomSafeArea: CGFloat) {
         switch drawer.drawerPosition {
         case .closed:
             self.constraintBelowStackViewForButtons.constant = 8.0
         default:
             self.constraintBelowStackViewForButtons.constant = 8.0 + drawer.drawerCornerRadius
         }
-        self.constraintBelowStackViewForButtons.constant += KrangUtils.safeAreaInsets.bottom
+        self.constraintBelowStackViewForButtons.constant += bottomSafeArea
         self.view.layoutIfNeeded()
     }
     
-    func drawerChangedDistanceFromBottom(drawer: PulleyViewController, distance: CGFloat) {
-        let overlap = drawer.drawerCornerRadius + KrangUtils.safeAreaInsets.bottom
-        let maxContentShrinkage: CGFloat = drawer.partialRevealDrawerHeight(bottomSafeArea: KrangUtils.safeAreaInsets.bottom)
-        self.constraintBelowInfoContainer.constant = max(0.0, min(maxContentShrinkage, distance) - overlap) - KrangUtils.safeAreaInsets.bottom
+    func drawerChangedDistanceFromBottom(drawer: PulleyViewController, distance: CGFloat, bottomSafeArea: CGFloat) {
+        let overlap = drawer.drawerCornerRadius + bottomSafeArea
+        let maxContentShrinkage: CGFloat = drawer.partialRevealDrawerHeight(bottomSafeArea: bottomSafeArea)
+        self.constraintBelowInfoContainer.constant = max(0.0, min(maxContentShrinkage, distance) - overlap) - bottomSafeArea
         self.view.layoutIfNeeded()
     }
 }
