@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Pulley
 
 class PlaybackViewController: KrangViewController {
     
@@ -85,11 +84,6 @@ class PlaybackViewController: KrangViewController {
         self.refreshCheckin { 
             //Completion
         }
-        
-        if let drawerVC = self.pulleyViewController {
-            drawerVC.drawerBackgroundVisualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
-//            drawerVC.setDrawerPosition(position: .closed, animated: animated)
-        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -99,9 +93,6 @@ class PlaybackViewController: KrangViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.progressView.stop()
-        if let drawer = self.pulleyViewController {
-            drawer.setDrawerPosition(position: .collapsed, animated: animated)
-        }
     }
     
     //MARK:- App Lifecycle
@@ -268,30 +259,5 @@ class PlaybackViewController: KrangViewController {
     // MARK: - Navigation
     @IBAction func unwindToPlayback(_ sender:UIStoryboardSegue) {
         
-    }
-}
-
-extension PlaybackViewController: PulleyPrimaryContentControllerDelegate {
-    
-    func makeUIAdjustmentsForFullscreen(progress: CGFloat) {
-//        controlsContainer.alpha = 1.0 - progress
-    }
-    
-    func drawerPositionDidChange(drawer: PulleyViewController, bottomSafeArea: CGFloat) {
-        switch drawer.drawerPosition {
-        case .closed:
-            self.constraintBelowStackViewForButtons.constant = 8.0
-        default:
-            self.constraintBelowStackViewForButtons.constant = 8.0 + drawer.drawerCornerRadius
-        }
-        self.constraintBelowStackViewForButtons.constant += bottomSafeArea
-        self.view.layoutIfNeeded()
-    }
-    
-    func drawerChangedDistanceFromBottom(drawer: PulleyViewController, distance: CGFloat, bottomSafeArea: CGFloat) {
-        let overlap = drawer.drawerCornerRadius + bottomSafeArea
-        let maxContentShrinkage: CGFloat = drawer.partialRevealDrawerHeight(bottomSafeArea: bottomSafeArea)
-        self.constraintBelowInfoContainer.constant = max(0.0, min(maxContentShrinkage, distance) - overlap) - bottomSafeArea
-        self.view.layoutIfNeeded()
     }
 }

@@ -7,7 +7,6 @@ PODS:
   - LGAlertView (2.4.0)
   - MarqueeLabel/Swift (3.1.3)
   - OAuthSwift (1.2.0)
-  - Pulley (2.2.3)
   - Realm (3.0.2):
     - Realm/Headers (= 3.0.2)
   - Realm/Headers (3.0.2)
@@ -32,7 +31,6 @@ DEPENDENCIES:
   - LGAlertView
   - MarqueeLabel/Swift
   - OAuthSwift (~> 1.2.0)
-  - Pulley
   - RealmSwift
   - RxKeyboard
   - SwiftyBeaver
@@ -48,7 +46,6 @@ SPEC CHECKSUMS:
   LGAlertView: 2f5e83dd5cc2537de57d98727650609e86197d1a
   MarqueeLabel: baa5753dcbd36dca080e1f5c589a665aa5c906f1
   OAuthSwift: 7fd6855b8e4d58eb5a30d156ea9bed7a8aecd1ca
-  Pulley: 6574f1784f9d2ef75ae6b2a2f1304b7e2b4a8df1
   Realm: 6f23fd1f178a09342eac21bfa7c2bf4312a7a180
   RealmSwift: 695393add1b8f9d5fa75dd16e6355cf3935f71e2
   RxCocoa: d62846ca96495d862fa4c59ea7d87e5031d7340e
@@ -58,6 +55,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
   SwipeCellKit: 349c61ffde96ac3ae51c2691a03e421b5b29ee98
 
-PODFILE CHECKSUM: df5be6453ea306a7f363687da3e1bdaca414e6f8
+PODFILE CHECKSUM: 96c9cffab695791b1cf9ed85d9122ea415a57ab0
 
 COCOAPODS: 1.3.1

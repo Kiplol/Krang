@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Pulley
 import RealmSwift
 import OAuthSwift
 import SwipeCellKit
@@ -34,6 +33,7 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
         }
     }
     @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var imageLogo: UIImageView!
     
     // MARK :- ivars
     fileprivate let searchController = UISearchController(searchResultsController: nil)
@@ -41,7 +41,6 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
     fileprivate var historyResults = [KrangSearchable]()
     fileprivate var searchRequest: OAuthSwiftRequestHandle? = nil
     var isSearching: Bool {
-//        return self.searchController.isActive
         return !(self.searchController.searchBar.text ?? "").isEmpty
     }
     var dataSet: [KrangSearchable] {
@@ -64,15 +63,11 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
         self.definesPresentationContext = true
         self.headerView.addSubview(self.searchController.searchBar)
         self.headerView.frame.size.height = self.searchController.searchBar.bounds.size.height
-        
-//        self.searchController.searchBar.frame = self.searchController.searchBar.superview!.bounds
-        
     }
     
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-//        self.searchController.searchBar.frame = self.searchController.searchBar.superview!.bounds
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -83,6 +78,13 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
             if !self.isSearching {
                 self.tableView.reloadData()
             }
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        UIView.animate(withDuration: 0.5) {
+            self.imageLogo.alpha = 0.0
         }
     }
     
@@ -136,9 +138,7 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
                 switch action {
                 case .checkIn:
                     if error == nil {
-                        if let drawer = self.pulleyViewController {
-                            drawer.setDrawerPosition(position: .collapsed, animated: true)
-                        }
+
                     }
                     
                 default:
@@ -157,14 +157,6 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if let swipeCell = cell as? WatchableSearchResultTableViewCell, !WatchableSearchViewController.hasShownDemoSwipe, indexPath.row == 0 {
             var shouldShowDemoSwipeThisTime = true
-            if let drawer = self.pulleyViewController {
-                switch drawer.drawerPosition {
-                case .closed, .collapsed:
-                    shouldShowDemoSwipeThisTime = false
-                default:
-                    break
-                }
-            }
             if shouldShowDemoSwipeThisTime {
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(0.3 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
                 swipeCell.showSwipe(orientation: .right, animated: true, completion: { (idunno) in
@@ -228,34 +220,7 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
     }
 }
 
-extension WatchableSearchViewController: PulleyDrawerViewControllerDelegate, UISearchBarDelegate {
-    //MARK:- PulleyDrawerViewControllerDelegate
-    func collapsedDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
-        return UIViewController.defaultCollapsedDrawerHeight + bottomSafeArea
-    }
-    
-    func partialRevealDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
-        return UIViewController.defaultPartialRevealDrawerHeight + bottomSafeArea
-    }
-    
-    func supportedDrawerPositions() -> [PulleyPosition] {
-        return PulleyPosition.all // You can specify the drawer positions you support. This is the same as: [.open, .partiallyRevealed, .collapsed, .closed]
-    }
-    
-    func drawerPositionDidChange(drawer: PulleyViewController, bottomSafeArea: CGFloat) {
-        if self.isViewLoaded {
-            self.tableView.isScrollEnabled = drawer.drawerPosition == .open
-            if drawer.drawerPosition != .open {
-                self.searchController.searchBar.resignFirstResponder()
-            }
-        }
-    }
-    
-    func drawerChangedDistanceFromBottom(drawer: PulleyViewController, distance: CGFloat, bottomSafeArea: CGFloat) {
-        let minDistance = self.collapsedDrawerHeight(bottomSafeArea: bottomSafeArea)
-        let range: CGFloat = 160.0
-        let t = (distance - minDistance) / range
-    }
+extension WatchableSearchViewController: UISearchBarDelegate {
     
     //MARK:- UISearchBarDelegate
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {

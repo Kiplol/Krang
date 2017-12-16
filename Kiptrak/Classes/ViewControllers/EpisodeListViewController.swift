@@ -9,7 +9,6 @@
 import UIKit
 import RealmSwift
 import SwipeCellKit
-import Pulley
 
 class EpisodeListViewController: KrangViewController, UITableViewDataSource, UITableViewDelegate, SwipeTableViewCellDelegate {
 
@@ -101,9 +100,7 @@ class EpisodeListViewController: KrangViewController, UITableViewDataSource, UIT
             if error == nil {
                 switch action {
                 case .checkIn:
-                    if let drawer = self.pulleyViewController {
-                        drawer.setDrawerPosition(position: .collapsed, animated: true)
-                    }
+                    break
                 default:
                     break
                 }
@@ -161,26 +158,4 @@ class EpisodeListViewController: KrangViewController, UITableViewDataSource, UIT
         return options
     }
 
-}
-
-extension EpisodeListViewController: PulleyDrawerViewControllerDelegate {
-    
-    //MARK:- PulleyDrawerViewControllerDelegate
-    func collapsedDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
-        return UIViewController.defaultCollapsedDrawerHeight + bottomSafeArea
-    }
-    
-    func partialRevealDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
-        return UIViewController.defaultPartialRevealDrawerHeight + bottomSafeArea
-    }
-    
-    func supportedDrawerPositions() -> [PulleyPosition] {
-        return PulleyPosition.all
-    }
-    
-    func drawerPositionDidChange(drawer: PulleyViewController, bottomSafeArea: CGFloat) {
-        if self.isViewLoaded {
-            self.tableView.isScrollEnabled = drawer.drawerPosition == .open
-        }
-    }
 }

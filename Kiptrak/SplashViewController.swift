@@ -77,15 +77,15 @@ class SplashViewController: KrangViewController {
                                                     user?.lastHistorySync = Date()
                                                 }
                                             }
-                                            self.goToPlayback()
+                                            self.goToHome()
                                         })
                                     } else {
-                                        self.goToPlayback()
+                                        self.goToHome()
                                     }
                                 }
                             })
                         } else {
-                            self.goToPlayback()
+                            self.goToHome()
                         }
                     } else {
                         self.goToOnboarding()
@@ -98,9 +98,9 @@ class SplashViewController: KrangViewController {
     }
     
     //MARK:-
-    private func goToPlayback() {
+    private func goToHome() {
         self.labelMessage.text = nil
-        self.performSegue(withIdentifier: "toPlayback", sender: nil)
+        self.performSegue(withIdentifier: "toHome", sender: nil)
     }
     
     private func goToOnboarding() {
@@ -121,7 +121,7 @@ class SplashViewController: KrangViewController {
         TraktHelper.shared.login(from: self, success: { 
             TraktHelper.shared.getMyProfile(completion: { error, user in
                 //Yay
-                self.goToPlayback()
+                self.goToHome()
             })
             }) { (error) in
                 //Boo
