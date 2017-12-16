@@ -485,6 +485,11 @@
                                 <rect key="frame" x="0.0" y="116" width="375" height="484"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="3xd-Fs-9pm">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </view>
                                 <connections>
                                     <outlet property="dataSource" destination="1k8-dh-FtJ" id="kKr-w8-ox9"/>
                                     <outlet property="delegate" destination="1k8-dh-FtJ" id="IA3-4g-9Ky"/>
@@ -503,6 +508,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="J7s-hh-tAn"/>
                     <connections>
+                        <outlet property="headerView" destination="3xd-Fs-9pm" id="AB4-Rk-5Qq"/>
                         <outlet property="tableView" destination="NJG-If-Ilk" id="PcB-Bu-MXG"/>
                     </connections>
                 </viewController>

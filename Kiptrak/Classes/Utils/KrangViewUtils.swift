@@ -112,11 +112,11 @@ extension UILabel {
 extension UISearchBar {
     
     func applyKrangStyle() {
-//        self.searchBarStyle = .prominent
+        self.searchBarStyle = .default
         self.backgroundColor = UIColor.clear
         self.backgroundImage = UIImage()
         self.isTranslucent = true
-        self.barTintColor = UIColor.accent
+        self.barTintColor = UIColor.darkBackground
         self.tintColor = UIColor.white
     }
 }

@@ -33,6 +33,7 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
             self.tableView.register(nib, forCellReuseIdentifier: WatchableSearchViewController.cellReuseIdentifier)
         }
     }
+    @IBOutlet weak var headerView: UIView!
     
     // MARK :- ivars
     fileprivate let searchController = UISearchController(searchResultsController: nil)
@@ -60,10 +61,12 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
         self.searchController.searchBar.placeholder = "American Psycho, Law & Order, etc..."
         self.searchController.searchBar.delegate = self
         self.searchController.searchBar.applyKrangStyle()
-        self.searchController.hidesNavigationBarDuringPresentation = false
         self.definesPresentationContext = true
-        self.navigationItem.titleView = self.searchController.searchBar
+        self.headerView.addSubview(self.searchController.searchBar)
+        self.headerView.frame.size.height = self.searchController.searchBar.bounds.size.height
+        
 //        self.searchController.searchBar.frame = self.searchController.searchBar.superview!.bounds
+        
     }
     
     
