@@ -70,7 +70,6 @@ class SeasonListViewController: KrangViewController, UICollectionViewDataSource,
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 
     //MARK:- UICollectionViewDataSource

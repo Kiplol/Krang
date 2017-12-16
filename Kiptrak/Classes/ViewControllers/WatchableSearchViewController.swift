@@ -26,19 +26,15 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
         }
     }
 
-    //MARK:- IBOutlets
-    @IBOutlet weak var grabberView: UIView!
-    @IBOutlet weak var searchBarContainerView: UIView!
+    // MARK :- IBOutlets
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             let nib = UINib(nibName: "WatchableSearchResultTableViewCell", bundle: Bundle.main)
             self.tableView.register(nib, forCellReuseIdentifier: WatchableSearchViewController.cellReuseIdentifier)
         }
     }
-    @IBOutlet weak var coverViewForTable: UIView!
-    @IBOutlet weak var constraintSearchBarContainerHeight: NSLayoutConstraint!
     
-    //MARK:- ivars
+    // MARK :- ivars
     fileprivate let searchController = UISearchController(searchResultsController: nil)
     fileprivate var searchResults = [KrangSearchable]()
     fileprivate var historyResults = [KrangSearchable]()
@@ -55,35 +51,29 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
         }
     }
     
-    //MARK:- View Lifecycle
+    // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Search"
-        self.coverViewForTable.backgroundColor = self.view.backgroundColor
         self.searchController.searchResultsUpdater = self
         self.searchController.dimsBackgroundDuringPresentation = false
         self.searchController.searchBar.placeholder = "American Psycho, Law & Order, etc..."
         self.searchController.searchBar.delegate = self
         self.searchController.searchBar.applyKrangStyle()
+        self.searchController.hidesNavigationBarDuringPresentation = false
         self.definesPresentationContext = true
-        self.searchBarContainerView.addSubview(self.searchController.searchBar)
-        self.constraintSearchBarContainerHeight.constant = self.searchController.searchBar.bounds.size.height
-        self.searchController.searchBar.frame = self.searchController.searchBar.superview!.bounds
+        self.navigationItem.titleView = self.searchController.searchBar
+//        self.searchController.searchBar.frame = self.searchController.searchBar.superview!.bounds
     }
     
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.searchController.searchBar.frame = self.searchController.searchBar.superview!.bounds
+//        self.searchController.searchBar.frame = self.searchController.searchBar.superview!.bounds
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let pulley = self.pulleyViewController {
-            self.navigationController?.setNavigationBarHidden(true, animated: animated)
-            if pulley.drawerPosition == .collapsed {
-                self.coverViewForTable.alpha = 1.0
-            }
-        }
         self.view.layoutIfNeeded()
         TraktHelper.shared.getRecentShowHistory { (error, shows) in
             self.historyResults = shows
@@ -262,26 +252,14 @@ extension WatchableSearchViewController: PulleyDrawerViewControllerDelegate, UIS
         let minDistance = self.collapsedDrawerHeight(bottomSafeArea: bottomSafeArea)
         let range: CGFloat = 160.0
         let t = (distance - minDistance) / range
-        self.coverViewForTable.alpha = 1.0 - t
     }
     
     //MARK:- UISearchBarDelegate
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = true
-        if let drawerVC = self.pulleyViewController
-        {
-            drawerVC.setDrawerPosition(position: .open, animated: true)
-        }
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = false
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        if let drawerVC = self.pulleyViewController
-        {
-            drawerVC.setDrawerPosition(position: .collapsed, animated: true)
-        }
     }
 }
