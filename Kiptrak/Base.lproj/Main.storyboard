@@ -30,7 +30,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ggY-AT-mXr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1191" y="139"/>
+            <point key="canvasLocation" x="-2081" y="139"/>
         </scene>
         <!--Splash View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -90,12 +90,60 @@
                         <outlet property="buttonLoginTrakt" destination="TgE-em-xKW" id="OM9-mf-bDl"/>
                         <outlet property="imageBackground" destination="2Ua-9U-zz9" id="fcj-3D-o4N"/>
                         <outlet property="labelMessage" destination="3Rk-aJ-DIS" id="kUz-rO-qsN"/>
-                        <segue destination="EFV-ht-fKL" kind="showDetail" identifier="toHome" id="Ijx-sb-Y21"/>
+                        <segue destination="WxQ-Jn-lfp" kind="showDetail" identifier="toHome" id="b9q-S6-eVt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-433" y="139"/>
+            <point key="canvasLocation" x="-1350" y="139"/>
+        </scene>
+        <!--Krang Drawer View Controller-->
+        <scene sceneID="OHA-Za-mx6">
+            <objects>
+                <viewController id="WxQ-Jn-lfp" customClass="KrangDrawerViewController" customModule="Kiptrak" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hJs-aC-Ee5"/>
+                        <viewControllerLayoutGuide type="bottom" id="WnP-Zm-KFD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="PSv-Bv-gTI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="49e-Lp-1eZ">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="567"/>
+                                <connections>
+                                    <segue destination="EFV-ht-fKL" kind="embed" id="fTg-X9-Cv9"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KBF-h7-3aJ">
+                                <rect key="frame" x="0.0" y="567" width="375" height="667"/>
+                                <connections>
+                                    <segue destination="4EL-Ga-1bM" kind="embed" id="gsd-JB-OgG"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="KBF-h7-3aJ" firstAttribute="top" secondItem="49e-Lp-1eZ" secondAttribute="bottom" priority="999" id="7TV-A4-D6J"/>
+                            <constraint firstItem="49e-Lp-1eZ" firstAttribute="leading" secondItem="PSv-Bv-gTI" secondAttribute="leading" id="ADL-ab-uwH"/>
+                            <constraint firstAttribute="trailing" secondItem="49e-Lp-1eZ" secondAttribute="trailing" id="CoR-3E-5IL"/>
+                            <constraint firstItem="49e-Lp-1eZ" firstAttribute="top" secondItem="PSv-Bv-gTI" secondAttribute="top" id="GVP-Xu-daH"/>
+                            <constraint firstItem="KBF-h7-3aJ" firstAttribute="height" secondItem="PSv-Bv-gTI" secondAttribute="height" id="aEp-ct-rea"/>
+                            <constraint firstItem="KBF-h7-3aJ" firstAttribute="leading" secondItem="PSv-Bv-gTI" secondAttribute="leading" id="cPq-iL-c6f"/>
+                            <constraint firstAttribute="trailing" secondItem="KBF-h7-3aJ" secondAttribute="trailing" id="eHO-RU-ebm"/>
+                            <constraint firstItem="KBF-h7-3aJ" firstAttribute="top" secondItem="WnP-Zm-KFD" secondAttribute="top" constant="-100" id="t7c-pt-eYf"/>
+                            <constraint firstItem="49e-Lp-1eZ" firstAttribute="height" relation="greaterThanOrEqual" secondItem="PSv-Bv-gTI" secondAttribute="height" constant="-100" id="uIw-32-beo"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="constraintTopOfPlayback" destination="t7c-pt-eYf" id="Z7P-hB-2dL"/>
+                        <outlet property="mainContainer" destination="49e-Lp-1eZ" id="ZMp-1o-BpU"/>
+                        <outlet property="playbackContainer" destination="KBF-h7-3aJ" id="oj0-Jk-qII"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KCg-lA-BfM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-609" y="-158"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="VUm-dh-3Ha">
@@ -114,7 +162,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7FX-n8-OP4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="349" y="139"/>
+            <point key="canvasLocation" x="265" y="-420"/>
         </scene>
         <!--Playback View Controller-->
         <scene sceneID="Dg7-tf-ZyS">
@@ -394,7 +442,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="976" y="535"/>
+            <point key="canvasLocation" x="265" y="496"/>
         </scene>
         <!--Search-->
         <scene sceneID="hQm-hD-7Bd">
@@ -405,11 +453,11 @@
                         <viewControllerLayoutGuide type="bottom" id="w0H-uQ-9EG"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="9Vk-ZM-QaF">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="567"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="white" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NJG-If-Ilk">
-                                <rect key="frame" x="0.0" y="116" width="375" height="551"/>
+                                <rect key="frame" x="0.0" y="116" width="375" height="451"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="3xd-Fs-9pm">
@@ -423,7 +471,7 @@
                                 </connections>
                             </tableView>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" alpha="0.05000000074505806" contentMode="scaleAspectFit" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="q2v-xT-IGx">
-                                <rect key="frame" x="106" y="238" width="162" height="191.5"/>
+                                <rect key="frame" x="106" y="188" width="162" height="191.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="q2v-xT-IGx" secondAttribute="height" multiplier="162:191" id="upb-k4-hR9"/>
                                     <constraint firstAttribute="width" constant="162" id="urb-n5-La6"/>
@@ -456,6 +504,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="J7s-hh-tAn"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabled" value="YES"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="headerView" destination="3xd-Fs-9pm" id="AB4-Rk-5Qq"/>
                         <outlet property="imageLogo" destination="q2v-xT-IGx" id="LMi-2J-hvD"/>
@@ -565,7 +616,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fU0-K7-Rmj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1479" y="569"/>
+            <point key="canvasLocation" x="1087" y="298"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="HWQ-Z6-OYE">
@@ -773,7 +824,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U4F-zt-S7p" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="ACx-tu-NIY" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2040" y="535"/>
+            <point key="canvasLocation" x="1951" y="496"/>
         </scene>
     </scenes>
     <resources>

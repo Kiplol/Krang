@@ -147,7 +147,7 @@ class TMDBHelper: NSObject {
             return
         }
         
-        KrangLogger.log.debug("Updating season (\(show.title) \(season.title))")
+//        KrangLogger.log.debug("Updating season (\(show.title) \(season.title))")
         let url = String(format: Constants.tmdbSeasonGetURLFormat, show.tmdbID, show.slug, season.seasonNumber)
         let _ = self.oauth.client.get(url, success: { (response) in
             //Success
