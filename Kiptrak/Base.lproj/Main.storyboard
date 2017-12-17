@@ -115,35 +115,47 @@
                                     <segue destination="EFV-ht-fKL" kind="embed" id="fTg-X9-Cv9"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KBF-h7-3aJ">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y2x-Ji-4NS">
                                 <rect key="frame" x="0.0" y="567" width="375" height="667"/>
-                                <connections>
-                                    <segue destination="4EL-Ga-1bM" kind="embed" id="gsd-JB-OgG"/>
-                                </connections>
-                            </containerView>
+                                <subviews>
+                                    <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KBF-h7-3aJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                        <connections>
+                                            <segue destination="4EL-Ga-1bM" kind="embed" id="gsd-JB-OgG"/>
+                                        </connections>
+                                    </containerView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="KBF-h7-3aJ" firstAttribute="top" secondItem="Y2x-Ji-4NS" secondAttribute="top" id="3w9-ed-K0l"/>
+                                    <constraint firstItem="KBF-h7-3aJ" firstAttribute="leading" secondItem="Y2x-Ji-4NS" secondAttribute="leading" id="KLg-w7-Zf3"/>
+                                    <constraint firstAttribute="bottom" secondItem="KBF-h7-3aJ" secondAttribute="bottom" id="Ttl-tQ-ZSi"/>
+                                    <constraint firstAttribute="trailing" secondItem="KBF-h7-3aJ" secondAttribute="trailing" id="z8l-UE-Arj"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="KBF-h7-3aJ" firstAttribute="top" secondItem="49e-Lp-1eZ" secondAttribute="bottom" priority="999" id="7TV-A4-D6J"/>
                             <constraint firstItem="49e-Lp-1eZ" firstAttribute="leading" secondItem="PSv-Bv-gTI" secondAttribute="leading" id="ADL-ab-uwH"/>
                             <constraint firstAttribute="trailing" secondItem="49e-Lp-1eZ" secondAttribute="trailing" id="CoR-3E-5IL"/>
+                            <constraint firstAttribute="trailing" secondItem="Y2x-Ji-4NS" secondAttribute="trailing" id="F5Y-yB-LqX"/>
                             <constraint firstItem="49e-Lp-1eZ" firstAttribute="top" secondItem="PSv-Bv-gTI" secondAttribute="top" id="GVP-Xu-daH"/>
-                            <constraint firstItem="KBF-h7-3aJ" firstAttribute="height" secondItem="PSv-Bv-gTI" secondAttribute="height" id="aEp-ct-rea"/>
-                            <constraint firstItem="KBF-h7-3aJ" firstAttribute="leading" secondItem="PSv-Bv-gTI" secondAttribute="leading" id="cPq-iL-c6f"/>
-                            <constraint firstAttribute="trailing" secondItem="KBF-h7-3aJ" secondAttribute="trailing" id="eHO-RU-ebm"/>
-                            <constraint firstItem="KBF-h7-3aJ" firstAttribute="top" secondItem="WnP-Zm-KFD" secondAttribute="top" constant="-100" id="t7c-pt-eYf"/>
+                            <constraint firstItem="Y2x-Ji-4NS" firstAttribute="top" secondItem="49e-Lp-1eZ" secondAttribute="bottom" priority="999" id="IiZ-iE-BiG"/>
+                            <constraint firstItem="Y2x-Ji-4NS" firstAttribute="leading" secondItem="PSv-Bv-gTI" secondAttribute="leading" id="ItF-Ns-hUx"/>
+                            <constraint firstItem="WnP-Zm-KFD" firstAttribute="top" secondItem="Y2x-Ji-4NS" secondAttribute="top" constant="100" id="Yrc-2h-Okw"/>
+                            <constraint firstItem="Y2x-Ji-4NS" firstAttribute="height" secondItem="PSv-Bv-gTI" secondAttribute="height" id="f5N-ae-5yX"/>
                             <constraint firstItem="49e-Lp-1eZ" firstAttribute="height" relation="greaterThanOrEqual" secondItem="PSv-Bv-gTI" secondAttribute="height" constant="-100" id="uIw-32-beo"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="constraintTopOfPlayback" destination="t7c-pt-eYf" id="Z7P-hB-2dL"/>
+                        <outlet property="constraintTopOfPlayback" destination="Yrc-2h-Okw" id="BBf-WP-P9B"/>
                         <outlet property="mainContainer" destination="49e-Lp-1eZ" id="ZMp-1o-BpU"/>
                         <outlet property="playbackContainer" destination="KBF-h7-3aJ" id="oj0-Jk-qII"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KCg-lA-BfM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-609" y="-158"/>
+            <point key="canvasLocation" x="-610.39999999999998" y="-158.77061469265368"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="VUm-dh-3Ha">
