@@ -9,11 +9,17 @@
 import UIKit
 
 class KrangDrawerViewController: UIViewController {
+    
+    enum State {
+        case hidden
+        case collapsed
+        case open
+    }
 
     @IBOutlet weak var mainContainer: UIView!
     @IBOutlet weak var playbackContainer: UIView!
     @IBOutlet weak var constraintTopOfPlayback: NSLayoutConstraint!
-    var playbackIsShowing = false
+    var state = State.hidden
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,49 +34,39 @@ class KrangDrawerViewController: UIViewController {
 
     // MARK: - Drawer Opening / Closing
     @objc func playbackTapped(_ sender: UITapGestureRecognizer) {
-        self.showPlayback()
+        self.setDrawerState(.open)
     }
     
     @objc func playbackSwipedToHide(_ sender: UISwipeGestureRecognizer) {
-        self.hidePlayback()
+        self.setDrawerState(.collapsed)
     }
     
-    func showPlayback(_ animated: Bool = true) {
-        guard !self.playbackIsShowing else {
+    func setDrawerState(_ state: KrangDrawerViewController.State, animated: Bool = true) {
+        guard self.state != state else {
             return
         }
         
+        self.state = state
         let animation = {
-            self.constraintTopOfPlayback.constant = self.view.bounds.size.height - 30.0
+            switch state {
+            case .open:
+                self.constraintTopOfPlayback.constant = self.view.bounds.size.height - 30.0
+            case .collapsed:
+                self.constraintTopOfPlayback.constant = 100.0
+            case .hidden:
+                self.constraintTopOfPlayback.constant = 0.0
+            }
+            
             self.view.layoutIfNeeded()
             self.mainContainer.layoutIfNeeded()
             self.playbackContainer.layoutIfNeeded()
         }
         
         let completion = {
-            self.playbackIsShowing = true
+            
         }
         
-        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.4, options: [.beginFromCurrentState, .allowUserInteraction], animations: animation) { (finished) in
-            completion()
-        }
-    }
-    
-    func hidePlayback(_ animated: Bool = true) {
-        guard self.playbackIsShowing else {
-            return
-        }
-        
-        let animation = {
-            self.constraintTopOfPlayback.constant = 100.0
-            self.view.layoutIfNeeded()
-            self.mainContainer.layoutIfNeeded()
-            self.playbackContainer.layoutIfNeeded()
-        }
-        let completion = {
-            self.playbackIsShowing = false
-        }
-        UIView.animate(withDuration: 0.6, delay: 0.0, options: [.beginFromCurrentState, .allowUserInteraction, .curveEaseOut], animations: animation) { (finished) in
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.4, options: [.beginFromCurrentState, .allowUserInteraction], animations: animation) { (finished) in
             completion()
         }
     }
