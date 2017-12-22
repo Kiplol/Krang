@@ -22,4 +22,10 @@ extension UIViewController {
             return self
         }
     }
+    
+    var krangDrawerViewController: KrangDrawerViewController? {
+        get {
+            return self.parent as? KrangDrawerViewController
+        }
+    }
 }

@@ -178,6 +178,9 @@ class PlaybackViewController: KrangViewController {
         }
         //Still do this because we need the checkin.
         self.refreshCheckin(nil)
+        if let drawer = self.krangDrawerViewController {
+            drawer.setDrawerState(.collapsed)
+        }
     }
     //MARK:-
     func updateViews(withWatchable watchable:KrangWatchable?) {
