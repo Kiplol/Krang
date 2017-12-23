@@ -50,13 +50,17 @@ class KrangDrawerViewController: UIViewController {
         let animation = {
             switch state {
             case .open:
-                self.constraintTopOfPlayback.constant = self.view.bounds.size.height - 30.0
+                self.constraintTopOfPlayback.constant = self.view.bounds.size.height - 30.0 - KrangUtils.safeAreaInsets.top
+                self.playbackContainer.cornerRadius = 10.0
             case .collapsed:
                 self.constraintTopOfPlayback.constant = 100.0
+                self.playbackContainer.cornerRadius = 0.0
             case .hidden:
                 self.constraintTopOfPlayback.constant = 0.0
+                self.playbackContainer.cornerRadius = 0.0
             }
             
+            self.playbackContainer.superview?.cornerRadius = self.playbackContainer.cornerRadius
             self.view.layoutIfNeeded()
             self.mainContainer.layoutIfNeeded()
             self.playbackContainer.layoutIfNeeded()
@@ -66,7 +70,12 @@ class KrangDrawerViewController: UIViewController {
             
         }
         
+        if animated {
         UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.4, options: [.beginFromCurrentState, .allowUserInteraction], animations: animation) { (finished) in
+            completion()
+        }
+        } else {
+            animation()
             completion()
         }
     }

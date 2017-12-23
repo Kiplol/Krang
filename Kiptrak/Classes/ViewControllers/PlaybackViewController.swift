@@ -76,6 +76,7 @@ class PlaybackViewController: KrangViewController {
         
         self.constraintInfoContainerHeight.constant += KrangUtils.safeAreaInsets.bottom
         self.constraintAboveImagePosterBackground.constant -= KrangUtils.safeAreaInsets.top
+        self.constraintBelowStackViewForButtons.constant += KrangUtils.safeAreaInsets.bottom
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -178,9 +179,6 @@ class PlaybackViewController: KrangViewController {
         }
         //Still do this because we need the checkin.
         self.refreshCheckin(nil)
-        if let drawer = self.krangDrawerViewController {
-            drawer.setDrawerState(.collapsed)
-        }
     }
     //MARK:-
     func updateViews(withWatchable watchable:KrangWatchable?) {
@@ -255,6 +253,9 @@ class PlaybackViewController: KrangViewController {
             
             self.updateViews(withWatchable: watchable)
             self.updateProgressView(withCheckin: watchable?.checkin)
+            if let drawer = self.krangDrawerViewController, drawer.state == .hidden {
+                drawer.setDrawerState(.collapsed)
+            }
             completion?()
         }
     }

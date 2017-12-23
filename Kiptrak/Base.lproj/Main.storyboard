@@ -78,8 +78,8 @@
                             <constraint firstItem="TgE-em-xKW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Jfp-ox-vqp"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="TgE-em-xKW" secondAttribute="bottom" constant="20" id="PEa-PD-t4V"/>
                             <constraint firstItem="3Rk-aJ-DIS" firstAttribute="top" secondItem="Gpc-RB-YBd" secondAttribute="bottom" constant="63" id="T3n-14-LdJ"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="2Ua-9U-zz9" secondAttribute="bottom" id="TPJ-Nh-z3h"/>
                             <constraint firstItem="3Rk-aJ-DIS" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="XvQ-gx-fZ1"/>
+                            <constraint firstAttribute="bottom" secondItem="2Ua-9U-zz9" secondAttribute="bottom" id="fpp-LX-Xzd"/>
                             <constraint firstItem="Gpc-RB-YBd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="kv0-nr-8hg"/>
                             <constraint firstItem="2Ua-9U-zz9" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="qVL-0J-kxg"/>
                             <constraint firstItem="Gpc-RB-YBd" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="ukF-HU-Fxr"/>
@@ -116,13 +116,13 @@
                                 </connections>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y2x-Ji-4NS">
-                                <rect key="frame" x="0.0" y="667" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="667" width="375" height="637"/>
                                 <subviews>
                                     <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KBF-h7-3aJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="637"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="10"/>
+                                                <real key="value" value="0.0"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
@@ -165,10 +165,13 @@
                             <constraint firstItem="Y2x-Ji-4NS" firstAttribute="top" secondItem="49e-Lp-1eZ" secondAttribute="bottom" priority="999" id="IiZ-iE-BiG"/>
                             <constraint firstItem="Y2x-Ji-4NS" firstAttribute="leading" secondItem="PSv-Bv-gTI" secondAttribute="leading" id="ItF-Ns-hUx"/>
                             <constraint firstItem="WnP-Zm-KFD" firstAttribute="top" secondItem="Y2x-Ji-4NS" secondAttribute="top" id="Yrc-2h-Okw"/>
-                            <constraint firstItem="Y2x-Ji-4NS" firstAttribute="height" secondItem="PSv-Bv-gTI" secondAttribute="height" id="f5N-ae-5yX"/>
+                            <constraint firstItem="Y2x-Ji-4NS" firstAttribute="height" secondItem="PSv-Bv-gTI" secondAttribute="height" constant="-30" id="f5N-ae-5yX"/>
                             <constraint firstItem="49e-Lp-1eZ" firstAttribute="height" relation="greaterThanOrEqual" secondItem="PSv-Bv-gTI" secondAttribute="height" constant="-100" id="uIw-32-beo"/>
                         </constraints>
                     </view>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabled" value="YES"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="constraintTopOfPlayback" destination="Yrc-2h-Okw" id="BBf-WP-P9B"/>
                         <outlet property="mainContainer" destination="49e-Lp-1eZ" id="ZMp-1o-BpU"/>
@@ -177,7 +180,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KCg-lA-BfM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-610.39999999999998" y="-158.77061469265368"/>
+            <point key="canvasLocation" x="-598" y="139"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="VUm-dh-3Ha">
@@ -476,7 +479,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="265" y="496"/>
+            <point key="canvasLocation" x="348" y="267"/>
         </scene>
         <!--Search-->
         <scene sceneID="hQm-hD-7Bd">
@@ -608,7 +611,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sXT-Ek-gfQ">
-                                <rect key="frame" x="0.0" y="20" width="375" height="627"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
@@ -619,9 +622,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="sXT-Ek-gfQ" firstAttribute="top" secondItem="ASD-cX-aDL" secondAttribute="bottom" id="50o-y8-SA5"/>
                             <constraint firstAttribute="trailing" secondItem="sXT-Ek-gfQ" secondAttribute="trailing" id="5qT-nu-Eud"/>
-                            <constraint firstItem="cf1-QD-z5K" firstAttribute="top" secondItem="sXT-Ek-gfQ" secondAttribute="bottom" constant="20" id="VqE-U6-Kxs"/>
+                            <constraint firstItem="cf1-QD-z5K" firstAttribute="top" secondItem="sXT-Ek-gfQ" secondAttribute="bottom" id="VqE-U6-Kxs"/>
+                            <constraint firstItem="sXT-Ek-gfQ" firstAttribute="top" secondItem="xeb-Cu-lGf" secondAttribute="top" id="bNy-ke-O4f"/>
                             <constraint firstItem="sXT-Ek-gfQ" firstAttribute="leading" secondItem="xeb-Cu-lGf" secondAttribute="leading" id="y2E-lg-eSK"/>
                         </constraints>
                     </view>
