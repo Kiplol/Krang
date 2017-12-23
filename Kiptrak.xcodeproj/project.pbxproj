@@ -33,6 +33,8 @@
 		377463F51F6DD1FE00F08029 /* EpisodeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 377463F31F6DD1FE00F08029 /* EpisodeTableViewCell.xib */; };
 		377463F71F6E340E00F08029 /* KrangActionableFullScreenAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377463F61F6E340E00F08029 /* KrangActionableFullScreenAlertView.swift */; };
 		377463F91F6F190500F08029 /* KrangActionableFullScreenAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 377463F81F6F190500F08029 /* KrangActionableFullScreenAlertView.xib */; };
+		37806C361FEEE71A00284DD6 /* PlaybackProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37806C351FEEE71A00284DD6 /* PlaybackProgressView.swift */; };
+		37806C381FEEE7C600284DD6 /* PlaybackProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37806C371FEEE7C600284DD6 /* PlaybackProgressView.xib */; };
 		37870B201E22BA6A00A2EC00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37870B1F1E22BA6A00A2EC00 /* AppDelegate.swift */; };
 		37870B221E22BA6A00A2EC00 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37870B211E22BA6A00A2EC00 /* SplashViewController.swift */; };
 		37870B251E22BA6A00A2EC00 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37870B231E22BA6A00A2EC00 /* Main.storyboard */; };
@@ -180,6 +182,8 @@
 		377463F31F6DD1FE00F08029 /* EpisodeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EpisodeTableViewCell.xib; path = Kiptrak/Classes/Views/Cells/EpisodeTableViewCell.xib; sourceTree = "<group>"; };
 		377463F61F6E340E00F08029 /* KrangActionableFullScreenAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KrangActionableFullScreenAlertView.swift; path = Kiptrak/Classes/Views/KrangActionableFullScreenAlertView.swift; sourceTree = "<group>"; };
 		377463F81F6F190500F08029 /* KrangActionableFullScreenAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KrangActionableFullScreenAlertView.xib; path = Kiptrak/Classes/Views/KrangActionableFullScreenAlertView.xib; sourceTree = "<group>"; };
+		37806C351FEEE71A00284DD6 /* PlaybackProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlaybackProgressView.swift; path = Kiptrak/Classes/Views/PlaybackProgressView.swift; sourceTree = "<group>"; };
+		37806C371FEEE7C600284DD6 /* PlaybackProgressView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = PlaybackProgressView.xib; path = Kiptrak/Classes/Views/PlaybackProgressView.xib; sourceTree = "<group>"; };
 		37870B1C1E22BA6A00A2EC00 /* Kiptrak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kiptrak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37870B1F1E22BA6A00A2EC00 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37870B211E22BA6A00A2EC00 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
@@ -389,6 +393,8 @@
 		379C55531E259BAE00D51019 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				37806C371FEEE7C600284DD6 /* PlaybackProgressView.xib */,
+				37806C351FEEE71A00284DD6 /* PlaybackProgressView.swift */,
 				375E9BC71F8E74D600636E4C /* KrangWatchablePreviewView.swift */,
 				375E9BC51F8E74A600636E4C /* KrangWatchablePreviewView.xib */,
 				377463F61F6E340E00F08029 /* KrangActionableFullScreenAlertView.swift */,
@@ -618,6 +624,7 @@
 				377463F91F6F190500F08029 /* KrangActionableFullScreenAlertView.xib in Resources */,
 				37A19E551E288FFD007877B4 /* Exo-ExtraLight-Italic.otf in Resources */,
 				37A19E5E1E288FFD007877B4 /* Exo-Thin.otf in Resources */,
+				37806C381FEEE7C600284DD6 /* PlaybackProgressView.xib in Resources */,
 				37A19E4D1E288FFD007877B4 /* Exo-Black-Italic.otf in Resources */,
 				37A19E5A1E288FFD007877B4 /* Exo-Medium.otf in Resources */,
 				37A19E531E288FFD007877B4 /* Exo-ExtraBold-Italic.otf in Resources */,
@@ -807,6 +814,7 @@
 				37F0DB671E31705300FAC6DB /* KrangProgressView.swift in Sources */,
 				37E7B7591E2DA17B001D4799 /* KrangDateUtils.swift in Sources */,
 				376011691F6C524E004ED6EF /* KrangSeason.swift in Sources */,
+				37806C361FEEE71A00284DD6 /* PlaybackProgressView.swift in Sources */,
 				37870B201E22BA6A00A2EC00 /* AppDelegate.swift in Sources */,
 				375FD4E91EDB56710022C4C9 /* UIViewController+Krang.swift in Sources */,
 				376713821F61B98000024036 /* KrangUtils.swift in Sources */,

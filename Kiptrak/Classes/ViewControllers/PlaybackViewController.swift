@@ -253,8 +253,12 @@ class PlaybackViewController: KrangViewController {
             
             self.updateViews(withWatchable: watchable)
             self.updateProgressView(withCheckin: watchable?.checkin)
-            if let drawer = self.krangDrawerViewController, drawer.state == .hidden {
-                drawer.setDrawerState(.collapsed)
+            if let drawer = self.krangDrawerViewController {
+                if watchable != nil && drawer.state == .hidden {
+                    drawer.setDrawerState(.collapsed)
+                } else if watchable == nil && drawer.state != .hidden {
+                    drawer.setDrawerState(.hidden)
+                }
             }
             completion?()
         }
