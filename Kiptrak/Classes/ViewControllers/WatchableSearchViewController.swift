@@ -61,14 +61,15 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
         self.searchController.searchBar.delegate = self
         self.searchController.searchBar.applyKrangStyle()
         self.definesPresentationContext = true
-//        if #available(iOS 11.0, *) {
-//            self.headerView.frame.size.height = 0.0
-//            self.navigationItem.searchController = self.searchController
-//        } else {
+        if #available(iOS 11.0, *) {
+            self.headerView.frame.size.height = 0.0
+            self.navigationItem.searchController = self.searchController
+            self.navigationItem.hidesSearchBarWhenScrolling = false
+        } else {
             self.headerView.addSubview(self.searchController.searchBar)
             self.headerView.frame.size.height = self.searchController.searchBar.bounds.size.height
-//        }
-
+        }
+//        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
     }
     
     

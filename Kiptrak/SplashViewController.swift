@@ -101,6 +101,9 @@ class SplashViewController: KrangViewController {
     private func goToHome() {
         self.labelMessage.text = nil
         self.performSegue(withIdentifier: "toHome", sender: nil)
+        TraktHelper.shared.getCheckedInMovieOrEpisode { (error, movie, episode) in
+            NotificationCenter.default.post(name: Notification.Name.didCheckInToWatchable, object: (movie ?? episode), userInfo: nil)
+        }
     }
     
     private func goToOnboarding() {

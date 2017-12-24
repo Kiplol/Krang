@@ -25,7 +25,10 @@ extension UIViewController {
     
     var krangDrawerViewController: KrangDrawerViewController? {
         get {
-            return self.parent as? KrangDrawerViewController
+            if let drawer = self.parent as? KrangDrawerViewController {
+                return drawer
+            }
+            return self.parent?.krangDrawerViewController
         }
     }
 }

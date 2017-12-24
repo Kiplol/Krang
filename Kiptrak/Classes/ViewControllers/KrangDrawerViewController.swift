@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol KrangDrawerViewControllerDelegate: class {
+    func drawerViewController(_ drawerViewController: KrangDrawerViewController, willChangeStateTo state: KrangDrawerViewController.State)
+    func drawerViewController(_ drawerViewController: KrangDrawerViewController, didChangeStateTo state: KrangDrawerViewController.State)
+}
+
 class KrangDrawerViewController: UIViewController {
     
     enum State {
@@ -15,15 +20,23 @@ class KrangDrawerViewController: UIViewController {
         case collapsed
         case open
     }
-
+    
+    // MARK: - IBOutlets
     @IBOutlet weak var mainContainer: UIView!
     @IBOutlet weak var playbackContainer: UIView!
     @IBOutlet weak var constraintTopOfPlayback: NSLayoutConstraint!
+    
+    // MARK: - ivars
     var state = State.hidden
     
+    // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(KrangDrawerViewController.didCheckInToAWatchable(_:)), name: Notification.Name.didCheckInToWatchable, object: nil)
         self.setupGestureRecognizers()
+        for childVC in self.childViewControllers {
+            (childVC as? UINavigationController)?.interactivePopGestureRecognizer?.delegate = self
+        }
     }
     
     override func viewWillLayoutSubviews() {
@@ -31,7 +44,7 @@ class KrangDrawerViewController: UIViewController {
         self.mainContainer.layoutIfNeeded()
         self.playbackContainer.layoutIfNeeded()
     }
-
+    
     // MARK: - Drawer Opening / Closing
     @objc func playbackTapped(_ sender: UITapGestureRecognizer) {
         self.setDrawerState(.open)
@@ -46,6 +59,7 @@ class KrangDrawerViewController: UIViewController {
             return
         }
         
+        self.notifyChildrenStateWillChange(to: state)
         self.state = state
         let animation = {
             switch state {
@@ -67,20 +81,46 @@ class KrangDrawerViewController: UIViewController {
         }
         
         let completion = {
-            
+            self.notifyChildrenStateDidChange(to: state)
         }
         
         if animated {
-        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.4, options: [.beginFromCurrentState, .allowUserInteraction], animations: animation) { (finished) in
-            completion()
-        }
+            UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.4, options: [.beginFromCurrentState, .allowUserInteraction], animations: animation) { (finished) in
+                completion()
+            }
         } else {
             animation()
             completion()
         }
     }
     
-    //MARK: - Gesture Recognizers
+    // MARK: - Delegation
+    private func notifyChildrenStateWillChange(to state: KrangDrawerViewController.State) {
+        self.childViewControllers.forEach {
+            ($0 as? KrangDrawerViewControllerDelegate)?.drawerViewController(self, willChangeStateTo: state)
+        }
+    }
+    
+    private func notifyChildrenStateDidChange(to state: KrangDrawerViewController.State) {
+        self.childViewControllers.forEach {
+            ($0 as? KrangDrawerViewControllerDelegate)?.drawerViewController(self, didChangeStateTo: state)
+        }
+    }
+    
+    // MARK: - Notifications
+    @objc func didCheckInToAWatchable(_ notif: Notification) {
+        if (notif.object as? KrangWatchable) != nil {
+            if self.state == .hidden {
+                self.setDrawerState(.collapsed)
+            }
+        } else {
+            if self.state != .hidden {
+                self.setDrawerState(.hidden)
+            }
+        }
+    }
+    
+    // MARK: - Gesture Recognizers
     fileprivate func setupGestureRecognizers() {
         let playbackTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(KrangDrawerViewController.playbackTapped(_:)))
         self.playbackContainer.addGestureRecognizer(playbackTapGestureRecognizer)
@@ -93,4 +133,26 @@ class KrangDrawerViewController: UIViewController {
         swipeToHideGestureRecognizer.direction = .down
         self.playbackContainer.addGestureRecognizer(swipeToHideGestureRecognizer)
     }
+}
+
+extension KrangDrawerViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+}
+
+extension UINavigationController: KrangDrawerViewControllerDelegate {
+    func drawerViewController(_ drawerViewController: KrangDrawerViewController, willChangeStateTo state: KrangDrawerViewController.State) {
+        self.viewControllers.forEach {
+            ($0 as? KrangDrawerViewControllerDelegate)?.drawerViewController(drawerViewController, willChangeStateTo: state)
+        }
+    }
+    
+    func drawerViewController(_ drawerViewController: KrangDrawerViewController, didChangeStateTo state: KrangDrawerViewController.State) {
+        self.viewControllers.forEach {
+            ($0 as? KrangDrawerViewControllerDelegate)?.drawerViewController(drawerViewController, didChangeStateTo: state)
+        }
+    }
+    
+    
 }

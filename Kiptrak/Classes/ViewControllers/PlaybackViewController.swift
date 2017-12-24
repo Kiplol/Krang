@@ -85,6 +85,7 @@ class PlaybackViewController: KrangViewController {
         self.refreshCheckin { 
             //Completion
         }
+        self.updateViews(withWatchable: self.watchable)
     }
     
     override func viewDidLayoutSubviews() {
@@ -182,6 +183,9 @@ class PlaybackViewController: KrangViewController {
     }
     //MARK:-
     func updateViews(withWatchable watchable:KrangWatchable?) {
+        guard self.isViewLoaded else {
+            return
+        }
         self.stackViewForButtons.removeArrangedSubview(self.buttonIMDB)
         self.stackViewForButtons.removeArrangedSubview(self.buttonTMDB)
         self.stackViewForButtons.removeArrangedSubview(self.buttonTrakt)
@@ -253,13 +257,6 @@ class PlaybackViewController: KrangViewController {
             
             self.updateViews(withWatchable: watchable)
             self.updateProgressView(withCheckin: watchable?.checkin)
-            if let drawer = self.krangDrawerViewController {
-                if watchable != nil && drawer.state == .hidden {
-                    drawer.setDrawerState(.collapsed)
-                } else if watchable == nil && drawer.state != .hidden {
-                    drawer.setDrawerState(.hidden)
-                }
-            }
             completion?()
         }
     }
@@ -268,4 +265,21 @@ class PlaybackViewController: KrangViewController {
     @IBAction func unwindToPlayback(_ sender:UIStoryboardSegue) {
         
     }
+}
+
+extension PlaybackViewController: KrangDrawerViewControllerDelegate {
+    func drawerViewController(_ drawerViewController: KrangDrawerViewController, willChangeStateTo state: KrangDrawerViewController.State) {
+        switch state {
+        case .collapsed, .hidden:
+            self.performSegue(withIdentifier: "unwindSegueToPlaybackPreview", sender: self)
+        default:
+            break
+        }
+    }
+    
+    func drawerViewController(_ drawerViewController: KrangDrawerViewController, didChangeStateTo state: KrangDrawerViewController.State) {
+        
+    }
+    
+    
 }
