@@ -28,6 +28,8 @@
 		376011701F6C9E29004ED6EF /* SeasonCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3760116E1F6C9E29004ED6EF /* SeasonCollectionViewCell.xib */; };
 		376011721F6CA021004ED6EF /* SelfSizingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376011711F6CA021004ED6EF /* SelfSizingCell.swift */; };
 		3763546A1FF02C4C00AF01BF /* PlaybackPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376354691FF02C4C00AF01BF /* PlaybackPreviewViewController.swift */; };
+		3763546C1FF2DD8200AF01BF /* NibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3763546B1FF2DD8200AF01BF /* NibView.swift */; };
+		3763546D1FF2DD8200AF01BF /* NibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3763546B1FF2DD8200AF01BF /* NibView.swift */; };
 		376713821F61B98000024036 /* KrangUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376713811F61B98000024036 /* KrangUtils.swift */; };
 		377463F11F6DD16800F08029 /* EpisodeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377463F01F6DD16800F08029 /* EpisodeListViewController.swift */; };
 		377463F41F6DD1FE00F08029 /* EpisodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377463F21F6DD1FE00F08029 /* EpisodeTableViewCell.swift */; };
@@ -178,6 +180,7 @@
 		3760116E1F6C9E29004ED6EF /* SeasonCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SeasonCollectionViewCell.xib; path = Kiptrak/Classes/Views/Cells/SeasonCollectionViewCell.xib; sourceTree = "<group>"; };
 		376011711F6CA021004ED6EF /* SelfSizingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelfSizingCell.swift; path = Classes/Protocols/SelfSizingCell.swift; sourceTree = "<group>"; };
 		376354691FF02C4C00AF01BF /* PlaybackPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlaybackPreviewViewController.swift; path = Classes/ViewControllers/PlaybackPreviewViewController.swift; sourceTree = "<group>"; };
+		3763546B1FF2DD8200AF01BF /* NibView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NibView.swift; path = Kiptrak/Classes/Views/NibView.swift; sourceTree = "<group>"; };
 		376713811F61B98000024036 /* KrangUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KrangUtils.swift; path = Classes/Utils/KrangUtils.swift; sourceTree = "<group>"; };
 		377463F01F6DD16800F08029 /* EpisodeListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EpisodeListViewController.swift; path = Classes/ViewControllers/EpisodeListViewController.swift; sourceTree = "<group>"; };
 		377463F21F6DD1FE00F08029 /* EpisodeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EpisodeTableViewCell.swift; path = Kiptrak/Classes/Views/Cells/EpisodeTableViewCell.swift; sourceTree = "<group>"; };
@@ -396,6 +399,7 @@
 		379C55531E259BAE00D51019 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3763546B1FF2DD8200AF01BF /* NibView.swift */,
 				37806C371FEEE7C600284DD6 /* PlaybackProgressView.xib */,
 				37806C351FEEE71A00284DD6 /* PlaybackProgressView.swift */,
 				375E9BC71F8E74D600636E4C /* KrangWatchablePreviewView.swift */,
@@ -809,6 +813,7 @@
 				377463F11F6DD16800F08029 /* EpisodeListViewController.swift in Sources */,
 				37870B221E22BA6A00A2EC00 /* SplashViewController.swift in Sources */,
 				3724CBAC1E247557005387D1 /* PlaybackViewController.swift in Sources */,
+				3763546C1FF2DD8200AF01BF /* NibView.swift in Sources */,
 				37A19E9C1E2D512E007877B4 /* KrangViewUtils.swift in Sources */,
 				379D37471FE5EACD0055AF77 /* KrangDrawerViewController.swift in Sources */,
 				379C554A1E24992300D51019 /* KrangRealmUtils.swift in Sources */,
@@ -857,6 +862,7 @@
 				37A19E7E1E2BFF50007877B4 /* TraktHelper.swift in Sources */,
 				37A19E7D1E2BFF50007877B4 /* KrangLogger.swift in Sources */,
 				37F0DB681E31705300FAC6DB /* KrangProgressView.swift in Sources */,
+				3763546D1FF2DD8200AF01BF /* NibView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

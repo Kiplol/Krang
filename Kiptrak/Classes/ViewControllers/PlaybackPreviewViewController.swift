@@ -18,8 +18,7 @@ class PlaybackPreviewViewController: KrangViewController {
     }
     
     // MARK: - IBOutlets
-    @IBOutlet weak var labelWatchableDisplayName: UILabel!
-    @IBOutlet weak var imagePoster: UIImageView!
+    @IBOutlet weak var playbackProgressView: PlaybackProgressView!
     
     // MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -29,14 +28,7 @@ class PlaybackPreviewViewController: KrangViewController {
     
     // MARK: -
     func layout(withWatchable watchable: KrangWatchable?) {
-        guard let watchable = watchable else {
-            self.labelWatchableDisplayName.text = nil
-            self.imagePoster.image = nil
-            return
-        }
-        
-        self.labelWatchableDisplayName.text = watchable.titleDisplayString
-        self.imagePoster.setPoster(fromWatchable: self.watchable)
+        self.playbackProgressView.layout(withWatchable: watchable)
     }
 
     // MARK: - Notifications
@@ -61,7 +53,9 @@ extension PlaybackPreviewViewController: KrangDrawerViewControllerDelegate {
     func drawerViewController(_ drawerViewController: KrangDrawerViewController, willChangeStateTo state: KrangDrawerViewController.State) {
         switch state {
         case .open:
-            self.performSegue(withIdentifier: "showFullPlayback", sender: self)
+//            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(0.01 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
+                self.performSegue(withIdentifier: "showFullPlayback", sender: self)
+//            })
         default:
             break
         }

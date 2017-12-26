@@ -88,7 +88,8 @@ class SeasonListViewController: KrangViewController, UICollectionViewDataSource,
         let episodesVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "episodeList") as! EpisodeListViewController
         episodesVC.season = season
 //        self.feedbackGeneratorForSelection.selectionChanged()
-        self.navigationController?.pushViewController(episodesVC, animated: true)
+//        self.navigationController?.pushViewController(episodesVC, animated: true)
+        self.show(episodesVC, sender: self)
     }
     
     //MARK:- UICollectionViewDelegateFlowLayout

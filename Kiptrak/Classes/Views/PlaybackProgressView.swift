@@ -8,14 +8,28 @@
 
 import UIKit
 
-class PlaybackProgressView: UIView {
+class PlaybackProgressView: NibView {
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    @IBOutlet weak var progressFill: UIView!
+    @IBOutlet weak var labelDisplayName: UILabel!
+    @IBOutlet weak var buttonCancel: UIButton!
+    @IBOutlet weak var imagePoster: UIImageView!
+    
+//    required init?(coder aDecoder: NSCoder) {
+//        super.init(coder: aDecoder)
+//        if self.subviews.isEmpty {
+//            self.addSubview(Bundle.main.loadNibNamed("PlaybackProgressView", owner: self, options: nil)![0] as! UIView)
+//        }
+//    }
+    
+    func layout(withWatchable watchable: KrangWatchable?) {
+        guard let watchable = watchable else {
+            self.labelDisplayName.text = nil
+            self.imagePoster.image = nil
+            return
+        }
+        
+        self.labelDisplayName.text = watchable.titleDisplayString
+        self.imagePoster.setPoster(fromWatchable: watchable)
     }
-    */
-
 }

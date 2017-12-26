@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -7,10 +7,18 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PlaybackProgressView" customModule="Kiptrak" customModuleProvider="target">
+            <connections>
+                <outlet property="buttonCancel" destination="UMa-EC-38u" id="zcV-cY-ulP"/>
+                <outlet property="imagePoster" destination="fzb-K5-XOp" id="9A4-7r-DRh"/>
+                <outlet property="labelDisplayName" destination="Xtg-Oe-Y0V" id="J2I-8u-vLc"/>
+                <outlet property="progressFill" destination="din-KA-p5v" id="0Uz-Y9-KCk"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
@@ -22,34 +30,63 @@
                     <constraints>
                         <constraint firstAttribute="width" constant="10" id="7eI-1Q-H4Y"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="progressFill"/>
+                    </userDefinedRuntimeAttributes>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Currently Watching" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xtg-Oe-Y0V">
-                    <rect key="frame" x="10" y="10" width="279.5" height="41"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="34"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UMa-EC-38u">
-                    <rect key="frame" x="305" y="5.5" width="50" height="50"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="50" id="5Mh-Iv-ei3"/>
-                        <constraint firstAttribute="width" secondItem="UMa-EC-38u" secondAttribute="height" id="bhs-0S-KpH"/>
-                    </constraints>
-                    <state key="normal" image="circle_x_small"/>
-                </button>
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="zwM-ga-lKB">
+                    <rect key="frame" x="10" y="10" width="355" height="60"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fzb-K5-XOp">
+                            <rect key="frame" x="0.0" y="0.0" width="40" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="fzb-K5-XOp" secondAttribute="height" multiplier="2:3" id="O90-2V-UfF"/>
+                                <constraint firstAttribute="width" constant="40" id="WkL-HX-UPk"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="heroModifierString" value="imagePoster"/>
+                                <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="imagePoster"/>
+                            </userDefinedRuntimeAttributes>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Currently Watching" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xtg-Oe-Y0V">
+                            <rect key="frame" x="48" y="0.0" width="249" height="60"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="labelWatchableName"/>
+                            </userDefinedRuntimeAttributes>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UMa-EC-38u">
+                            <rect key="frame" x="305" y="0.0" width="50" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="50" id="5Mh-Iv-ei3"/>
+                            </constraints>
+                            <state key="normal" image="circle_x_small"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="heroModifierString" value="buttonCancel"/>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabledForSubviews" value="YES"/>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabled" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                        </button>
+                    </subviews>
+                </stackView>
             </subviews>
             <color key="backgroundColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="UMa-EC-38u" firstAttribute="leading" secondItem="Xtg-Oe-Y0V" secondAttribute="trailing" constant="15.5" id="3oa-cb-9nZ"/>
-                <constraint firstItem="Xtg-Oe-Y0V" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="Gzx-KB-vLq"/>
-                <constraint firstItem="Xtg-Oe-Y0V" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="UP3-Ku-dKX"/>
-                <constraint firstAttribute="trailing" secondItem="UMa-EC-38u" secondAttribute="trailing" constant="20" id="fOH-pT-rod"/>
-                <constraint firstItem="UMa-EC-38u" firstAttribute="centerY" secondItem="Xtg-Oe-Y0V" secondAttribute="centerY" id="mIe-GM-eK7"/>
+                <constraint firstItem="zwM-ga-lKB" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="QiU-Mb-7EI"/>
                 <constraint firstAttribute="bottom" secondItem="din-KA-p5v" secondAttribute="bottom" id="rQ6-km-I3m"/>
                 <constraint firstItem="din-KA-p5v" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="sXR-8G-Fqa"/>
+                <constraint firstAttribute="trailing" secondItem="zwM-ga-lKB" secondAttribute="trailing" constant="10" id="sgK-TY-Uae"/>
+                <constraint firstItem="zwM-ga-lKB" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="tOc-P2-HN8"/>
                 <constraint firstItem="din-KA-p5v" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="tzM-fA-beF"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="GhA-yF-1ZN"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabled" value="YES"/>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabledForSubviews" value="YES"/>
+            </userDefinedRuntimeAttributes>
         </view>
     </objects>
     <resources>

@@ -204,33 +204,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="637"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R2T-Ns-U9X">
-                                <rect key="frame" x="83.5" y="10" width="271.5" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="labelWatchableName"/>
-                                </userDefinedRuntimeAttributes>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FbO-Df-Jxa">
-                                <rect key="frame" x="20" y="10" width="53.5" height="80"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Thp-rQ-RyG" customClass="PlaybackProgressView" customModule="Kiptrak" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="FbO-Df-Jxa" secondAttribute="height" multiplier="2:3" id="SsY-9a-X7L"/>
-                                    <constraint firstAttribute="height" constant="80" id="jjy-ya-kE7"/>
+                                    <constraint firstAttribute="height" constant="120" id="MEs-QP-uZw"/>
                                 </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="imagePoster"/>
-                                </userDefinedRuntimeAttributes>
-                            </imageView>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="R2T-Ns-U9X" firstAttribute="top" secondItem="FbO-Df-Jxa" secondAttribute="top" id="2Ny-9e-n3D"/>
-                            <constraint firstItem="FbO-Df-Jxa" firstAttribute="leading" secondItem="9xk-yN-rXd" secondAttribute="leading" constant="20" id="GMG-iI-6c1"/>
-                            <constraint firstItem="9xk-yN-rXd" firstAttribute="trailing" secondItem="R2T-Ns-U9X" secondAttribute="trailing" constant="20" id="Sor-6u-rXP"/>
-                            <constraint firstItem="R2T-Ns-U9X" firstAttribute="leading" secondItem="FbO-Df-Jxa" secondAttribute="trailing" constant="10" id="X2W-rs-YVU"/>
-                            <constraint firstItem="FbO-Df-Jxa" firstAttribute="top" secondItem="588-24-S2P" secondAttribute="top" constant="10" id="aQM-UP-tS3"/>
+                            <constraint firstItem="Thp-rQ-RyG" firstAttribute="leading" secondItem="588-24-S2P" secondAttribute="leading" id="Fuq-ec-0G8"/>
+                            <constraint firstItem="Thp-rQ-RyG" firstAttribute="top" secondItem="588-24-S2P" secondAttribute="top" id="jvJ-jj-J68"/>
+                            <constraint firstAttribute="trailing" secondItem="Thp-rQ-RyG" secondAttribute="trailing" id="ndU-cn-T2i"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9xk-yN-rXd"/>
                     </view>
@@ -239,8 +225,7 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabled" value="YES"/>
                     </userDefinedRuntimeAttributes>
                     <connections>
-                        <outlet property="imagePoster" destination="FbO-Df-Jxa" id="MZc-On-Khe"/>
-                        <outlet property="labelWatchableDisplayName" destination="R2T-Ns-U9X" id="Avp-8t-SHZ"/>
+                        <outlet property="playbackProgressView" destination="Thp-rQ-RyG" id="IxC-cO-fvM"/>
                         <segue destination="4EL-Ga-1bM" kind="showDetail" identifier="showFullPlayback" action="showViewController:sender:" id="wIc-dD-QgF"/>
                     </connections>
                 </viewController>
@@ -293,6 +278,9 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="37d-7m-bWA" customClass="KrangProgressView" customModule="Kiptrak" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="progressFill"/>
+                                        </userDefinedRuntimeAttributes>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="WBv-kv-rbR">
                                         <rect key="frame" x="359" y="112" width="0.0" height="0.0"/>
@@ -441,6 +429,9 @@
                                 <state key="normal" image="circle_x_small">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="buttonCancel"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="cancelTapped:" destination="4EL-Ga-1bM" eventType="touchUpInside" id="mAv-T1-Qa0"/>
                                 </connections>

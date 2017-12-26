@@ -13,7 +13,7 @@ class PlaybackViewController: KrangViewController {
     //MARK:- ivars
     @IBOutlet weak var imagePosterBackground: UIImageView! {
         didSet {
-            self.imagePosterBackground.heroModifiers = [.zPosition(1.0), .translate(x: 0.0, y: 200.0, z: 0.0), .fade]
+//            self.imagePosterBackground.heroModifiers = [.zPosition(1.0), .translate(x: 0.0, y: 200.0, z: 0.0), .fade]
         }
     }
     @IBOutlet weak var imageInfoBackground: UIImageView!
@@ -24,17 +24,17 @@ class PlaybackViewController: KrangViewController {
     }
     @IBOutlet weak var labelNowWatching: UILabel! {
         didSet {
-            self.labelNowWatching.heroModifiers = [.zPosition(5.0), .fade]
+//            self.labelNowWatching.heroModifiers = [.zPosition(5.0), .fade]
         }
     }
     @IBOutlet weak var labelDisplayName: UILabel! {
         didSet {
-            self.labelDisplayName.heroModifiers = [.zPosition(6.0), .fade]
+//            self.labelDisplayName.heroModifiers = [.zPosition(6.0), .fade]
         }
     }
     @IBOutlet weak var infoContainer: UIView! {
         didSet {
-            self.infoContainer.heroModifiers = [.zPosition(4.0), .fade]
+//            self.infoContainer.heroModifiers = [.zPosition(4.0), .fade]
         }
     }
     @IBOutlet weak var buttonCancel: UIButton!
