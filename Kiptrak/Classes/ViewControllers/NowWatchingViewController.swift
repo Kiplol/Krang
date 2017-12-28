@@ -98,6 +98,17 @@ class NowWatchingViewController: KrangViewController {
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
+    @IBAction func cancelCheckInTapped(_ sender: Any) {
+        let _ = KrangActionableFullScreenAlertView.show(withTitle: "Cancelling checkin", countdownDuration: 3.0, afterCountdownAction: { (alert) in
+            TraktHelper.shared.cancelAllCheckins { (error) in
+                KrangUtils.playFeedback(forResult: error)
+                alert.dismiss(true)
+            }
+        }, buttonTitle: "Stay Checked In") { (alert, button) in
+            alert.dismiss(true)
+        }
+    }
+    
     // MARK: - Notifications
     @objc func didCheckInToAWatchable(_ notif: Notification) {
         self.watchable = (notif.object as? KrangWatchable)

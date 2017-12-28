@@ -27,7 +27,6 @@
 		3760116F1F6C9E29004ED6EF /* SeasonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3760116D1F6C9E29004ED6EF /* SeasonCollectionViewCell.swift */; };
 		376011701F6C9E29004ED6EF /* SeasonCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3760116E1F6C9E29004ED6EF /* SeasonCollectionViewCell.xib */; };
 		376011721F6CA021004ED6EF /* SelfSizingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376011711F6CA021004ED6EF /* SelfSizingCell.swift */; };
-		3763546A1FF02C4C00AF01BF /* PlaybackPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376354691FF02C4C00AF01BF /* PlaybackPreviewViewController.swift */; };
 		3763546C1FF2DD8200AF01BF /* NibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3763546B1FF2DD8200AF01BF /* NibView.swift */; };
 		3763546D1FF2DD8200AF01BF /* NibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3763546B1FF2DD8200AF01BF /* NibView.swift */; };
 		376713821F61B98000024036 /* KrangUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376713811F61B98000024036 /* KrangUtils.swift */; };
@@ -37,8 +36,6 @@
 		377463F51F6DD1FE00F08029 /* EpisodeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 377463F31F6DD1FE00F08029 /* EpisodeTableViewCell.xib */; };
 		377463F71F6E340E00F08029 /* KrangActionableFullScreenAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377463F61F6E340E00F08029 /* KrangActionableFullScreenAlertView.swift */; };
 		377463F91F6F190500F08029 /* KrangActionableFullScreenAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 377463F81F6F190500F08029 /* KrangActionableFullScreenAlertView.xib */; };
-		37806C361FEEE71A00284DD6 /* PlaybackProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37806C351FEEE71A00284DD6 /* PlaybackProgressView.swift */; };
-		37806C381FEEE7C600284DD6 /* PlaybackProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37806C371FEEE7C600284DD6 /* PlaybackProgressView.xib */; };
 		37870B201E22BA6A00A2EC00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37870B1F1E22BA6A00A2EC00 /* AppDelegate.swift */; };
 		37870B221E22BA6A00A2EC00 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37870B211E22BA6A00A2EC00 /* SplashViewController.swift */; };
 		37870B251E22BA6A00A2EC00 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37870B231E22BA6A00A2EC00 /* Main.storyboard */; };
@@ -180,7 +177,6 @@
 		3760116D1F6C9E29004ED6EF /* SeasonCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SeasonCollectionViewCell.swift; path = Kiptrak/Classes/Views/Cells/SeasonCollectionViewCell.swift; sourceTree = "<group>"; };
 		3760116E1F6C9E29004ED6EF /* SeasonCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SeasonCollectionViewCell.xib; path = Kiptrak/Classes/Views/Cells/SeasonCollectionViewCell.xib; sourceTree = "<group>"; };
 		376011711F6CA021004ED6EF /* SelfSizingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelfSizingCell.swift; path = Classes/Protocols/SelfSizingCell.swift; sourceTree = "<group>"; };
-		376354691FF02C4C00AF01BF /* PlaybackPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlaybackPreviewViewController.swift; path = Classes/ViewControllers/PlaybackPreviewViewController.swift; sourceTree = "<group>"; };
 		3763546B1FF2DD8200AF01BF /* NibView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NibView.swift; path = Kiptrak/Classes/Views/NibView.swift; sourceTree = "<group>"; };
 		376713811F61B98000024036 /* KrangUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KrangUtils.swift; path = Classes/Utils/KrangUtils.swift; sourceTree = "<group>"; };
 		37690A771FF5921B009A9028 /* NowWatchingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NowWatchingViewController.swift; path = Classes/ViewControllers/NowWatchingViewController.swift; sourceTree = "<group>"; };
@@ -189,8 +185,6 @@
 		377463F31F6DD1FE00F08029 /* EpisodeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EpisodeTableViewCell.xib; path = Kiptrak/Classes/Views/Cells/EpisodeTableViewCell.xib; sourceTree = "<group>"; };
 		377463F61F6E340E00F08029 /* KrangActionableFullScreenAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KrangActionableFullScreenAlertView.swift; path = Kiptrak/Classes/Views/KrangActionableFullScreenAlertView.swift; sourceTree = "<group>"; };
 		377463F81F6F190500F08029 /* KrangActionableFullScreenAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KrangActionableFullScreenAlertView.xib; path = Kiptrak/Classes/Views/KrangActionableFullScreenAlertView.xib; sourceTree = "<group>"; };
-		37806C351FEEE71A00284DD6 /* PlaybackProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlaybackProgressView.swift; path = Kiptrak/Classes/Views/PlaybackProgressView.swift; sourceTree = "<group>"; };
-		37806C371FEEE7C600284DD6 /* PlaybackProgressView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = PlaybackProgressView.xib; path = Kiptrak/Classes/Views/PlaybackProgressView.xib; sourceTree = "<group>"; };
 		37870B1C1E22BA6A00A2EC00 /* Kiptrak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kiptrak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37870B1F1E22BA6A00A2EC00 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37870B211E22BA6A00A2EC00 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
@@ -304,7 +298,6 @@
 			isa = PBXGroup;
 			children = (
 				37690A771FF5921B009A9028 /* NowWatchingViewController.swift */,
-				376354691FF02C4C00AF01BF /* PlaybackPreviewViewController.swift */,
 				379D37461FE5EACD0055AF77 /* KrangDrawerViewController.swift */,
 				3760116B1F6C9BC7004ED6EF /* SeasonListViewController.swift */,
 				377463F01F6DD16800F08029 /* EpisodeListViewController.swift */,
@@ -403,8 +396,6 @@
 			isa = PBXGroup;
 			children = (
 				3763546B1FF2DD8200AF01BF /* NibView.swift */,
-				37806C371FEEE7C600284DD6 /* PlaybackProgressView.xib */,
-				37806C351FEEE71A00284DD6 /* PlaybackProgressView.swift */,
 				375E9BC71F8E74D600636E4C /* KrangWatchablePreviewView.swift */,
 				375E9BC51F8E74A600636E4C /* KrangWatchablePreviewView.xib */,
 				377463F61F6E340E00F08029 /* KrangActionableFullScreenAlertView.swift */,
@@ -634,7 +625,6 @@
 				377463F91F6F190500F08029 /* KrangActionableFullScreenAlertView.xib in Resources */,
 				37A19E551E288FFD007877B4 /* Exo-ExtraLight-Italic.otf in Resources */,
 				37A19E5E1E288FFD007877B4 /* Exo-Thin.otf in Resources */,
-				37806C381FEEE7C600284DD6 /* PlaybackProgressView.xib in Resources */,
 				37A19E4D1E288FFD007877B4 /* Exo-Black-Italic.otf in Resources */,
 				37A19E5A1E288FFD007877B4 /* Exo-Medium.otf in Resources */,
 				37A19E531E288FFD007877B4 /* Exo-ExtraBold-Italic.otf in Resources */,
@@ -808,7 +798,6 @@
 				379C55471E248B4F00D51019 /* RealmManager.swift in Sources */,
 				377463F41F6DD1FE00F08029 /* EpisodeTableViewCell.swift in Sources */,
 				375E9BC81F8E74D600636E4C /* KrangWatchablePreviewView.swift in Sources */,
-				3763546A1FF02C4C00AF01BF /* PlaybackPreviewViewController.swift in Sources */,
 				379C554F1E25586900D51019 /* SettingsViewController.swift in Sources */,
 				3760116F1F6C9E29004ED6EF /* SeasonCollectionViewCell.swift in Sources */,
 				373D32961E22C05C00980925 /* Constants.swift in Sources */,
@@ -827,7 +816,6 @@
 				37F0DB671E31705300FAC6DB /* KrangProgressView.swift in Sources */,
 				37E7B7591E2DA17B001D4799 /* KrangDateUtils.swift in Sources */,
 				376011691F6C524E004ED6EF /* KrangSeason.swift in Sources */,
-				37806C361FEEE71A00284DD6 /* PlaybackProgressView.swift in Sources */,
 				37870B201E22BA6A00A2EC00 /* AppDelegate.swift in Sources */,
 				375FD4E91EDB56710022C4C9 /* UIViewController+Krang.swift in Sources */,
 				376713821F61B98000024036 /* KrangUtils.swift in Sources */,

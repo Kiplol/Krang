@@ -149,7 +149,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="KBF-h7-3aJ" firstAttribute="top" secondItem="Y2x-Ji-4NS" secondAttribute="top" id="3w9-ed-K0l"/>
                                     <constraint firstItem="cvV-bL-GTA" firstAttribute="centerX" secondItem="Y2x-Ji-4NS" secondAttribute="centerX" id="5HK-Vi-jve"/>
@@ -222,46 +222,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7FX-n8-OP4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="265" y="-420"/>
-        </scene>
-        <!--Playback Preview View Controller-->
-        <scene sceneID="zYn-FT-Jdg">
-            <objects>
-                <viewController id="Ens-3a-ac2" customClass="PlaybackPreviewViewController" customModule="Kiptrak" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="588-24-S2P">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Thp-rQ-RyG" customClass="PlaybackProgressView" customModule="Kiptrak" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="120" id="MEs-QP-uZw"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="progressView"/>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="Thp-rQ-RyG" firstAttribute="leading" secondItem="588-24-S2P" secondAttribute="leading" id="Fuq-ec-0G8"/>
-                            <constraint firstItem="Thp-rQ-RyG" firstAttribute="top" secondItem="588-24-S2P" secondAttribute="top" id="jvJ-jj-J68"/>
-                            <constraint firstAttribute="trailing" secondItem="Thp-rQ-RyG" secondAttribute="trailing" id="ndU-cn-T2i"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="9xk-yN-rXd"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="6th-HY-Fv8"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabled" value="YES"/>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <outlet property="playbackProgressView" destination="Thp-rQ-RyG" id="IxC-cO-fvM"/>
-                        <segue destination="4EL-Ga-1bM" kind="showDetail" identifier="showFullPlayback" action="showViewController:sender:" id="wIc-dD-QgF"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Z8J-rk-rWK" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="973.60000000000002" y="294.60269865067471"/>
         </scene>
         <!--Now Watching View Controller-->
         <scene sceneID="brw-PZ-Y9d">
@@ -390,12 +350,34 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="UM0-kp-nIw">
                                 <rect key="frame" x="86.5" y="10" width="272" height="100"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u7x-Ky-YBs" customClass="MarqueeLabel" customModule="MarqueeLabel">
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UTm-sH-Srg">
                                         <rect key="frame" x="0.0" y="0.0" width="272" height="31.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u7x-Ky-YBs" customClass="MarqueeLabel" customModule="MarqueeLabel">
+                                                <rect key="frame" x="0.0" y="0.0" width="228" height="31.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="holdScrolling" value="NO"/>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="tapToScroll" value="NO"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="trailingBuffer">
+                                                        <real key="value" value="44"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wR8-Tw-6dY">
+                                                <rect key="frame" x="228" y="0.0" width="44" height="31.5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="44" id="yh6-WM-PZT"/>
+                                                </constraints>
+                                                <state key="normal" image="circle_x_small"/>
+                                                <connections>
+                                                    <action selector="cancelCheckInTapped:" destination="MOm-jq-Kmx" eventType="touchUpInside" id="rTZ-zY-6X3"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="2R6-QD-BYI">
                                         <rect key="frame" x="0.0" y="31.5" width="272" height="68.5"/>
                                         <subviews>
@@ -424,8 +406,8 @@
                                     </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="u7x-Ky-YBs" secondAttribute="trailing" id="UvS-El-Vs9"/>
-                                    <constraint firstItem="u7x-Ky-YBs" firstAttribute="leading" secondItem="UM0-kp-nIw" secondAttribute="leading" id="Wnf-Kx-9wx"/>
+                                    <constraint firstAttribute="trailing" secondItem="UTm-sH-Srg" secondAttribute="trailing" id="jvO-x5-oDG"/>
+                                    <constraint firstItem="UTm-sH-Srg" firstAttribute="leading" secondItem="UM0-kp-nIw" secondAttribute="leading" id="t8E-vu-r38"/>
                                 </constraints>
                             </stackView>
                         </subviews>
