@@ -16,6 +16,7 @@ class PlaybackViewController: KrangViewController {
 //            self.imagePosterBackground.heroModifiers = [.zPosition(1.0), .translate(x: 0.0, y: 200.0, z: 0.0), .fade]
         }
     }
+    @IBOutlet weak var imageBackground: UIImageView!
     @IBOutlet weak var imageInfoBackground: UIImageView!
     @IBOutlet weak var avatar: KrangAvatarView! {
         didSet {
@@ -39,12 +40,6 @@ class PlaybackViewController: KrangViewController {
     }
     @IBOutlet weak var buttonCancel: UIButton!
     @IBOutlet weak var progressView: KrangProgressView!
-    @IBOutlet weak var shadowTop: UIImageView! {
-        didSet {
-            self.shadowTop.image = UIImage(gradientColors: [UIColor(white: 0.0, alpha: 0.7) , UIColor.clear])
-            self.shadowTop.heroModifiers = [.zPosition(19.0), .fade, .translate(x: 0.0, y: -80.0, z: 0.0)]
-        }
-    }
     @IBOutlet weak var stackViewForButtons: UIStackView!
     @IBOutlet weak var buttonIMDB: UIButton!
     @IBOutlet weak var buttonTMDB: UIButton!
@@ -52,7 +47,6 @@ class PlaybackViewController: KrangViewController {
     @IBOutlet weak var constraintBelowInfoContainer: NSLayoutConstraint!
     @IBOutlet weak var constraintBelowStackViewForButtons: NSLayoutConstraint!
     @IBOutlet weak var constraintInfoContainerHeight: NSLayoutConstraint!
-    @IBOutlet weak var constraintAboveImagePosterBackground: NSLayoutConstraint!
     
     var traktMovieID:Int? = nil
     var traktEpisodeID:Int? = nil
@@ -75,7 +69,6 @@ class PlaybackViewController: KrangViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(PlaybackViewController.didCheckInToAWatchable(_:)), name: Notification.Name.didCheckInToWatchable, object: nil)
         
         self.constraintInfoContainerHeight.constant += KrangUtils.safeAreaInsets.bottom
-        self.constraintAboveImagePosterBackground.constant -= KrangUtils.safeAreaInsets.top
         self.constraintBelowStackViewForButtons.constant += KrangUtils.safeAreaInsets.bottom
     }
     
@@ -210,11 +203,16 @@ class PlaybackViewController: KrangViewController {
                 self.stackViewForButtons.addArrangedSubview(self.buttonTMDB)
                 self.buttonTMDB.isHidden = false
             }
+            self.imageBackground.kf.setImage(with: watchable.fanartBlurrableImageURL, placeholder: nil, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, url) in
+                if let image = image {
+                    self.imageBackground.image = image.kf.blurred(withRadius: 15.0).kf.tinted(with: UIColor.darkBackground.alpha(0.8))
+                }
+            })
         } else {
             self.imagePosterBackground.setPoster(fromMovie: nil)
             self.labelDisplayName.text = nil
             self.labelNowWatching.isHidden = true
-            
+            self.imageBackground.image = nil
         }
     }
     

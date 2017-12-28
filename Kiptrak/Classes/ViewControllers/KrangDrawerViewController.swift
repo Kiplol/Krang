@@ -64,7 +64,7 @@ class KrangDrawerViewController: UIViewController {
         let animation = {
             switch state {
             case .open:
-                self.constraintTopOfPlayback.constant = self.view.bounds.size.height - 30.0
+                self.constraintTopOfPlayback.constant = self.view.bounds.size.height - 40.0
                 self.playbackContainer.cornerRadius = 10.0
             case .collapsed:
                 self.constraintTopOfPlayback.constant = 100.0

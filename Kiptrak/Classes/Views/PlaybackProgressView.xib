@@ -44,11 +44,10 @@
                                 <constraint firstAttribute="width" constant="40" id="WkL-HX-UPk"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="string" keyPath="heroModifierString" value="imagePoster"/>
                                 <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="imagePoster"/>
                             </userDefinedRuntimeAttributes>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Currently Watching" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xtg-Oe-Y0V">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Currently Watching" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xtg-Oe-Y0V">
                             <rect key="frame" x="48" y="0.0" width="249" height="60"/>
                             <fontDescription key="fontDescription" type="system" pointSize="34"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -64,9 +63,9 @@
                             </constraints>
                             <state key="normal" image="circle_x_small"/>
                             <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="string" keyPath="heroModifierString" value="buttonCancel"/>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabledForSubviews" value="YES"/>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabled" value="YES"/>
+                                <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="buttonCancel"/>
                             </userDefinedRuntimeAttributes>
                         </button>
                     </subviews>
