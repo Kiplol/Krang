@@ -67,7 +67,7 @@ class KrangDrawerViewController: UIViewController {
                 self.constraintTopOfPlayback.constant = self.view.bounds.size.height - 40.0
                 self.playbackContainer.cornerRadius = 10.0
             case .collapsed:
-                self.constraintTopOfPlayback.constant = 120.0
+                self.constraintTopOfPlayback.constant = 120.0 + KrangUtils.safeAreaInsets.bottom
                 self.playbackContainer.cornerRadius = 0.0
             case .hidden:
                 self.constraintTopOfPlayback.constant = 0.0

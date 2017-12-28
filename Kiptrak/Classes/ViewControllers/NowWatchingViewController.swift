@@ -6,6 +6,7 @@
 //  Copyright © 2017 Supernovacaine Inc. All rights reserved.
 //
 
+import MarqueeLabel
 import UIKit
 
 class NowWatchingViewController: KrangViewController {
@@ -15,7 +16,11 @@ class NowWatchingViewController: KrangViewController {
         case full
     }
     // MARK: - ivars
-    var watchable: KrangWatchable?
+    var watchable: KrangWatchable? {
+        didSet {
+            self.layout(withWatchable: self.watchable)
+        }
+    }
     fileprivate var mode: Mode = .collapsed {
         didSet {
             self.layout(forMode: self.mode)
@@ -23,6 +28,13 @@ class NowWatchingViewController: KrangViewController {
     }
 
     // MARK: IBOutlets
+    @IBOutlet weak var labelWatchableName: MarqueeLabel!
+    @IBOutlet weak var imagePoster: UIImageView!
+    @IBOutlet weak var imageBackground: UIImageView!
+    @IBOutlet weak var buttonIMDb: UIButton!
+    @IBOutlet weak var buttonTMDB: UIButton!
+    @IBOutlet weak var buttonTrakt: UIButton!
+    
     @IBOutlet weak var layoutFrameInfoTop: UIView!
     @IBOutlet weak var layoutFrameInfoBottom: UIView!
     @IBOutlet weak var layoutFramePosterLarge: UIView!
@@ -52,31 +64,44 @@ class NowWatchingViewController: KrangViewController {
     @IBOutlet weak var constraintImagePosterTopBottom: NSLayoutConstraint!
     @IBOutlet weak var constraintImagePosterTopTrailing: NSLayoutConstraint!
     
-    @IBOutlet weak var imagePosterContainer: UIView!
-    @IBOutlet weak var imagePoster: UIImageView!
-    
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(NowWatchingViewController.didCheckInToAWatchable(_:)), name: Notification.Name.didCheckInToWatchable, object: nil)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.layout(withWatchable: self.watchable)
+    }
+    
+    // MARK: - User Interaction
+    
+    @IBAction func imdbTapped(_ sender: Any) {
+        guard let url = self.watchable?.urlForIMDB else {
+            return
+        }
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
+    
+    @IBAction func tmdbTapped(_ sender: Any) {
+        guard let url = self.watchable?.urlForTMDB else {
+            return
+        }
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
+    
+    @IBAction func traktTapped(_ sender: Any) {
+        guard let url = self.watchable?.urlForTrakt else {
+            return
+        }
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
+    
     // MARK: - Notifications
     @objc func didCheckInToAWatchable(_ notif: Notification) {
         self.watchable = (notif.object as? KrangWatchable)
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 private extension NowWatchingViewController {
@@ -119,6 +144,38 @@ private extension NowWatchingViewController {
     func layout(forMode mode: Mode) {
         self.allModeConstraints.forEach { $0.isActive = false}
         self.constraints(forMode: mode).forEach { $0.isActive = true }
+        switch mode {
+        case .collapsed:
+            self.imageBackground.alpha = 0.0
+        default:
+            self.imageBackground.alpha = 0.5
+        }
+    }
+    
+    // MARK: -
+    func layout(withWatchable watchable: KrangWatchable?) {
+        self.imagePoster.setPoster(fromWatchable: watchable)
+        self.layoutLinkButons(forWatchable: watchable)
+        guard let watchable = watchable else {
+            self.labelWatchableName.text = nil
+            self.imageBackground.image = nil
+            return
+        }
+        
+        self.labelWatchableName.text = watchable.titleDisplayString
+        self.imageBackground.kf.setImage(with: watchable.posterThumbnailURL, placeholder: nil, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, url) in
+            if let image = image {
+                self.imageBackground.image = image.kf.blurred(withRadius: 4.0)
+            }
+        })
+    }
+    
+    func layoutLinkButons(forWatchable watchable: KrangWatchable?) {
+        let shouldHideIMDb = watchable?.urlForIMDB == nil
+        let shouldHideTMDB = watchable?.urlForTMDB == nil
+        let shouldHideTrakt = watchable?.urlForTrakt == nil
+        let hideMap: [UIButton: Bool] = [self.buttonIMDb: shouldHideIMDb, self.buttonTMDB: shouldHideTMDB, self.buttonTrakt: shouldHideTrakt]
+        hideMap.filter { $0.key.isHidden != $0.value }.forEach { $0.key.isHidden = $0.value }
     }
 }
 
