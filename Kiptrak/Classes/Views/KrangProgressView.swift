@@ -7,11 +7,20 @@
 //
 
 import UIKit
+#if MAIN_APP
+    import Hero
+#endif
 
 class KrangProgressView: UIView {
     
     //MARK:- ivars
-    private let fillView = UIView()
+    private let fillView: UIView = {
+        let fillView = UIView()
+        #if MAIN_APP
+            fillView.heroID = "KrangProgressView.fillView"
+        #endif
+        return fillView
+    }()
     private var displayLink: CADisplayLink? = nil
     var progress: Float = 0.0 {
         didSet {

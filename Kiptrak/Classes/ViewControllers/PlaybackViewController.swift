@@ -50,7 +50,14 @@ class PlaybackViewController: KrangViewController {
     
     var traktMovieID:Int? = nil
     var traktEpisodeID:Int? = nil
-    var watchable: KrangWatchable? = nil
+    var watchable: KrangWatchable? = nil {
+        didSet {
+            if self.isViewLoaded {
+                self.updateViews(withWatchable: self.watchable)
+                self.updateProgressView(withCheckin: self.watchable?.checkin)
+            }
+        }
+    }
     
     fileprivate let defaultInfoContainerHeight: CGFloat = 120.0
 
@@ -79,10 +86,12 @@ class PlaybackViewController: KrangViewController {
             //Completion
         }
         self.updateViews(withWatchable: self.watchable)
+        self.updateProgressView(withCheckin: self.watchable?.checkin)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        self.progressView.update()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -205,7 +214,7 @@ class PlaybackViewController: KrangViewController {
             }
             self.imageBackground.kf.setImage(with: watchable.fanartBlurrableImageURL, placeholder: nil, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, url) in
                 if let image = image {
-                    self.imageBackground.image = image.kf.blurred(withRadius: 15.0).kf.tinted(with: UIColor.darkBackground.alpha(0.8))
+                    self.imageBackground.image = image.kf.blurred(withRadius: 15.0)
                 }
             })
         } else {
@@ -217,6 +226,9 @@ class PlaybackViewController: KrangViewController {
     }
     
     func updateProgressView(withCheckin checkin: KrangCheckin?) {
+        guard self.isViewLoaded else {
+            return
+        }
         guard let checkin = checkin else {
             self.progressView.stop()
             self.progressView.reset()
@@ -252,9 +264,6 @@ class PlaybackViewController: KrangViewController {
                     KrangUser.getCurrentUser().coverImageURL = coverImageURL.absoluteString
                 }
             }
-            
-            self.updateViews(withWatchable: watchable)
-            self.updateProgressView(withCheckin: watchable?.checkin)
             completion?()
         }
     }

@@ -26,6 +26,16 @@ class PlaybackPreviewViewController: KrangViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(PlaybackPreviewViewController.didCheckInToAWatchable(_:)), name: Notification.Name.didCheckInToWatchable, object: nil)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.layout(withWatchable: self.watchable)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.playbackProgressView.stopUpdatingProgress()
+    }
+    
     // MARK: -
     func layout(withWatchable watchable: KrangWatchable?) {
         self.playbackProgressView.layout(withWatchable: watchable)
