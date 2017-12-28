@@ -85,7 +85,7 @@ class KrangDrawerViewController: UIViewController {
         }
         
         if animated {
-            UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.7, options: [.beginFromCurrentState, .allowUserInteraction], animations: animation) { (finished) in
+            UIView.animate(withDuration: 0.6, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.7, options: [.beginFromCurrentState, .allowUserInteraction], animations: animation) { (finished) in
                 completion()
             }
 //            UIView.animate(withDuration: 0.3, delay: 0.0, options: [.allowUserInteraction, .beginFromCurrentState, .curveEaseInOut], animations: animation, completion: { (_) in

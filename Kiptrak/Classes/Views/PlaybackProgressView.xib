@@ -14,7 +14,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PlaybackProgressView" customModule="Kiptrak" customModuleProvider="target">
             <connections>
                 <outlet property="buttonCancel" destination="UMa-EC-38u" id="zcV-cY-ulP"/>
-                <outlet property="imageBackground" destination="YRA-2Q-IkR" id="DW8-7e-wGv"/>
                 <outlet property="imagePoster" destination="fzb-K5-XOp" id="9A4-7r-DRh"/>
                 <outlet property="labelDisplayName" destination="Xtg-Oe-Y0V" id="J2I-8u-vLc"/>
                 <outlet property="progressFillView" destination="din-KA-p5v" id="YOu-Iv-sOJ"/>
@@ -25,13 +24,6 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" alpha="0.20000000000000001" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YRA-2Q-IkR">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="imageFanartBackground"/>
-                    </userDefinedRuntimeAttributes>
-                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="din-KA-p5v" customClass="KrangProgressView" customModule="Kiptrak" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -141,11 +133,7 @@
                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="6sc-sX-L8M" secondAttribute="bottom" constant="10" id="38a-8u-z7f"/>
                 <constraint firstAttribute="trailing" secondItem="6sc-sX-L8M" secondAttribute="trailing" constant="10" id="90X-Oa-AR3"/>
                 <constraint firstItem="6sc-sX-L8M" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="9bl-KH-YYg"/>
-                <constraint firstItem="YRA-2Q-IkR" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="L8K-cz-HRg"/>
                 <constraint firstAttribute="trailing" secondItem="din-KA-p5v" secondAttribute="trailing" id="TSq-wI-eQm"/>
-                <constraint firstItem="YRA-2Q-IkR" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="XPV-j9-Kgl"/>
-                <constraint firstAttribute="bottom" secondItem="YRA-2Q-IkR" secondAttribute="bottom" id="j3Q-8w-e3u"/>
-                <constraint firstAttribute="trailing" secondItem="YRA-2Q-IkR" secondAttribute="trailing" id="n6n-PH-5GF"/>
                 <constraint firstAttribute="bottom" secondItem="din-KA-p5v" secondAttribute="bottom" id="rQ6-km-I3m"/>
                 <constraint firstItem="din-KA-p5v" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="sXR-8G-Fqa"/>
                 <constraint firstItem="din-KA-p5v" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="tzM-fA-beF"/>

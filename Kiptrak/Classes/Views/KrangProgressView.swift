@@ -45,7 +45,7 @@ class KrangProgressView: UIView {
         self.backgroundColor = UIColor.clear
         self.fillView.frame = CGRect(x: 0, y: 0, width: 0, height: self.bounds.size.height)
         self.fillView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.fillView.backgroundColor = UIColor.accent.alpha(0.2)
+        self.fillView.backgroundColor = UIColor.progressFill
         self.addSubview(self.fillView)
         self.progress = 0.0
     }

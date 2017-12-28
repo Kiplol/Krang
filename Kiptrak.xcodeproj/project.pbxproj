@@ -31,6 +31,7 @@
 		3763546C1FF2DD8200AF01BF /* NibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3763546B1FF2DD8200AF01BF /* NibView.swift */; };
 		3763546D1FF2DD8200AF01BF /* NibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3763546B1FF2DD8200AF01BF /* NibView.swift */; };
 		376713821F61B98000024036 /* KrangUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376713811F61B98000024036 /* KrangUtils.swift */; };
+		37690A781FF5921B009A9028 /* NowWatchingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37690A771FF5921B009A9028 /* NowWatchingViewController.swift */; };
 		377463F11F6DD16800F08029 /* EpisodeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377463F01F6DD16800F08029 /* EpisodeListViewController.swift */; };
 		377463F41F6DD1FE00F08029 /* EpisodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377463F21F6DD1FE00F08029 /* EpisodeTableViewCell.swift */; };
 		377463F51F6DD1FE00F08029 /* EpisodeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 377463F31F6DD1FE00F08029 /* EpisodeTableViewCell.xib */; };
@@ -182,6 +183,7 @@
 		376354691FF02C4C00AF01BF /* PlaybackPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlaybackPreviewViewController.swift; path = Classes/ViewControllers/PlaybackPreviewViewController.swift; sourceTree = "<group>"; };
 		3763546B1FF2DD8200AF01BF /* NibView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NibView.swift; path = Kiptrak/Classes/Views/NibView.swift; sourceTree = "<group>"; };
 		376713811F61B98000024036 /* KrangUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KrangUtils.swift; path = Classes/Utils/KrangUtils.swift; sourceTree = "<group>"; };
+		37690A771FF5921B009A9028 /* NowWatchingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NowWatchingViewController.swift; path = Classes/ViewControllers/NowWatchingViewController.swift; sourceTree = "<group>"; };
 		377463F01F6DD16800F08029 /* EpisodeListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EpisodeListViewController.swift; path = Classes/ViewControllers/EpisodeListViewController.swift; sourceTree = "<group>"; };
 		377463F21F6DD1FE00F08029 /* EpisodeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EpisodeTableViewCell.swift; path = Kiptrak/Classes/Views/Cells/EpisodeTableViewCell.swift; sourceTree = "<group>"; };
 		377463F31F6DD1FE00F08029 /* EpisodeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EpisodeTableViewCell.xib; path = Kiptrak/Classes/Views/Cells/EpisodeTableViewCell.xib; sourceTree = "<group>"; };
@@ -301,6 +303,7 @@
 		373D32911E22BE9700980925 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				37690A771FF5921B009A9028 /* NowWatchingViewController.swift */,
 				376354691FF02C4C00AF01BF /* PlaybackPreviewViewController.swift */,
 				379D37461FE5EACD0055AF77 /* KrangDrawerViewController.swift */,
 				3760116B1F6C9BC7004ED6EF /* SeasonListViewController.swift */,
@@ -817,6 +820,7 @@
 				37A19E9C1E2D512E007877B4 /* KrangViewUtils.swift in Sources */,
 				379D37471FE5EACD0055AF77 /* KrangDrawerViewController.swift in Sources */,
 				379C554A1E24992300D51019 /* KrangRealmUtils.swift in Sources */,
+				37690A781FF5921B009A9028 /* NowWatchingViewController.swift in Sources */,
 				37A19E361E27F0B3007877B4 /* KrangEpisode.swift in Sources */,
 				379C55441E247F9C00D51019 /* KrangUser.swift in Sources */,
 				379C55561E259BD000D51019 /* KrangAvatarView.swift in Sources */,

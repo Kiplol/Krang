@@ -15,7 +15,6 @@ class PlaybackProgressView: NibView {
     @IBOutlet weak var labelDisplayName: MarqueeLabel!
     @IBOutlet weak var buttonCancel: UIButton!
     @IBOutlet weak var imagePoster: UIImageView!
-    @IBOutlet weak var imageBackground: UIImageView!
     
 //    required init?(coder aDecoder: NSCoder) {
 //        super.init(coder: aDecoder)
@@ -28,19 +27,12 @@ class PlaybackProgressView: NibView {
         guard let watchable = watchable else {
             self.labelDisplayName.text = nil
             self.imagePoster.image = nil
-            self.imageBackground.image = nil
             return
         }
         
         self.labelDisplayName.text = watchable.titleDisplayString
         self.imagePoster.setPoster(fromWatchable: watchable)
         self.updateProgressView(withCheckin: watchable.checkin)
-        
-        self.imageBackground.kf.setImage(with: watchable.fanartBlurrableImageURL, placeholder: nil, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, url) in
-            if let image = image {
-                self.imageBackground.image = image.kf.blurred(withRadius: 15.0)
-            }
-        })
     }
     
     private func updateProgressView(withCheckin checkin: KrangCheckin?) {
