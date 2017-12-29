@@ -34,6 +34,7 @@ class NowWatchingViewController: KrangViewController {
     @IBOutlet weak var buttonIMDb: UIButton!
     @IBOutlet weak var buttonTMDB: UIButton!
     @IBOutlet weak var buttonTrakt: UIButton!
+    @IBOutlet weak var progressView: KrangProgressView!
     
     @IBOutlet weak var layoutFrameInfoTop: UIView!
     @IBOutlet weak var layoutFrameInfoBottom: UIView!
@@ -64,6 +65,13 @@ class NowWatchingViewController: KrangViewController {
     @IBOutlet weak var constraintImagePosterTopBottom: NSLayoutConstraint!
     @IBOutlet weak var constraintImagePosterTopTrailing: NSLayoutConstraint!
     
+    // MARK: Progress View Constrains
+    @IBOutlet weak var constraintProgressViewBottomTop: NSLayoutConstraint!
+    @IBOutlet weak var constraintProgressViewBottomBottom: NSLayoutConstraint!
+    @IBOutlet weak var constraintProgressViewTopTop: NSLayoutConstraint!
+    @IBOutlet weak var constraintProgressViewTopHeight: NSLayoutConstraint!
+    
+    
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,8 +83,12 @@ class NowWatchingViewController: KrangViewController {
         self.layout(withWatchable: self.watchable)
     }
     
-    // MARK: - User Interaction
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.progressView.stop()
+    }
     
+    // MARK: - User Interaction
     @IBAction func imdbTapped(_ sender: Any) {
         guard let url = self.watchable?.urlForIMDB else {
             return
@@ -138,17 +150,27 @@ private extension NowWatchingViewController {
         return [self.imagePosterConstraintsForTop, self.imagePosterConstraintForCenter].flatMap { $0 }
     }
     
+    // MARK: - Progress View Constraints
+    private var progressViewConstraintsForTop: [NSLayoutConstraint] {
+        return [self.constraintProgressViewTopTop, self.constraintProgressViewTopHeight]
+    }
+    private var progressViewConstraintsForBottom: [NSLayoutConstraint] {
+        return [self.constraintProgressViewBottomTop, self.constraintProgressViewBottomBottom]
+    }
+    private var allProgressViewConstraints: [NSLayoutConstraint] {
+        return [self.progressViewConstraintsForTop, self.progressViewConstraintsForBottom].flatMap { $0 }
+    }
     // MARK: -
     private var allModeConstraints: [NSLayoutConstraint] {
-        return [self.allInfoStackViewConstraints, self.allImagePosterConstraints].flatMap { $0 }
+        return [self.allInfoStackViewConstraints, self.allImagePosterConstraints, self.allProgressViewConstraints].flatMap { $0 }
     }
     
     func constraints(forMode mode: Mode) -> [NSLayoutConstraint] {
         switch mode {
         case .collapsed:
-            return [self.infoStackViewConstraintsForTop, self.imagePosterConstraintsForTop].flatMap { $0 }
+            return [self.infoStackViewConstraintsForTop, self.imagePosterConstraintsForTop, self.progressViewConstraintsForTop].flatMap { $0 }
         case .full:
-            return [self.infoStackViewConstraintsForBottom, self.imagePosterConstraintForCenter].flatMap { $0 }
+            return [self.infoStackViewConstraintsForBottom, self.imagePosterConstraintForCenter, self.progressViewConstraintsForBottom].flatMap { $0 }
         }
     }
     
@@ -167,6 +189,7 @@ private extension NowWatchingViewController {
     func layout(withWatchable watchable: KrangWatchable?) {
         self.imagePoster.setPoster(fromWatchable: watchable)
         self.layoutLinkButons(forWatchable: watchable)
+        self.layoutProgressView(forWatchable: watchable)
         guard let watchable = watchable else {
             self.labelWatchableName.text = nil
             self.imageBackground.image = nil
@@ -187,6 +210,19 @@ private extension NowWatchingViewController {
         let shouldHideTrakt = watchable?.urlForTrakt == nil
         let hideMap: [UIButton: Bool] = [self.buttonIMDb: shouldHideIMDb, self.buttonTMDB: shouldHideTMDB, self.buttonTrakt: shouldHideTrakt]
         hideMap.filter { $0.key.isHidden != $0.value }.forEach { $0.key.isHidden = $0.value }
+    }
+    
+    func layoutProgressView(forWatchable watchable: KrangWatchable?) {
+        guard let startDate = watchable?.checkin?.dateStarted,
+            let endDate = watchable?.checkin?.dateExpires else {
+                self.progressView.stop()
+                self.progressView.reset()
+                return
+        }
+        
+        self.progressView.startDate = startDate
+        self.progressView.endDate = endDate
+        self.progressView.start()
     }
 }
 

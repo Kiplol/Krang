@@ -310,6 +310,10 @@
                                     <constraint firstAttribute="width" secondItem="0Q4-r9-LHb" secondAttribute="height" multiplier="2:3" id="ecg-Mt-T89"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IyI-kq-iBB" customClass="KrangProgressView" customModule="Kiptrak" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="800"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dHT-jR-8H0">
                                 <rect key="frame" x="10" y="10" width="66.5" height="100"/>
                                 <subviews>
@@ -415,6 +419,7 @@
                         <constraints>
                             <constraint firstItem="WHz-UF-kNQ" firstAttribute="top" secondItem="HpZ-oG-GRk" secondAttribute="top" id="2IN-s1-x8J"/>
                             <constraint firstItem="0Q4-r9-LHb" firstAttribute="centerY" secondItem="CXm-aG-Mrb" secondAttribute="centerY" id="39U-cd-Xpx"/>
+                            <constraint firstItem="IyI-kq-iBB" firstAttribute="leading" secondItem="Zsy-wP-y1d" secondAttribute="leading" id="7I3-bk-vbg"/>
                             <constraint firstItem="b1x-rc-Tah" firstAttribute="bottom" secondItem="WHz-UF-kNQ" secondAttribute="bottom" id="BFP-GH-zK4"/>
                             <constraint firstItem="dHT-jR-8H0" firstAttribute="bottom" secondItem="0Q4-r9-LHb" secondAttribute="bottom" id="Cff-eP-9e8"/>
                             <constraint firstItem="tpK-kd-wve" firstAttribute="trailing" secondItem="b1x-rc-Tah" secondAttribute="trailing" id="DOR-dX-C6F"/>
@@ -424,6 +429,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="WHz-UF-kNQ" secondAttribute="trailing" id="LSe-VC-Soz"/>
                             <constraint firstAttribute="trailing" secondItem="HpZ-oG-GRk" secondAttribute="trailing" id="NFz-nu-gUv"/>
                             <constraint firstItem="0Q4-r9-LHb" firstAttribute="height" secondItem="CXm-aG-Mrb" secondAttribute="height" priority="999" constant="-60" id="OL1-EM-ARr"/>
+                            <constraint firstItem="IyI-kq-iBB" firstAttribute="height" secondItem="Zsy-wP-y1d" secondAttribute="height" id="Ode-Yv-SaF"/>
                             <constraint firstItem="WHz-UF-kNQ" firstAttribute="leading" secondItem="Zsy-wP-y1d" secondAttribute="leadingMargin" id="PaE-wf-WTz"/>
                             <constraint firstItem="dHT-jR-8H0" firstAttribute="top" secondItem="707-UU-DO9" secondAttribute="top" id="Tka-mm-rWI"/>
                             <constraint firstItem="UM0-kp-nIw" firstAttribute="leading" secondItem="Q29-9k-bGw" secondAttribute="leading" id="UKu-86-0OF"/>
@@ -434,6 +440,7 @@
                             <constraint firstItem="0Q4-r9-LHb" firstAttribute="centerX" secondItem="CXm-aG-Mrb" secondAttribute="centerX" id="awF-QZ-ec1"/>
                             <constraint firstItem="0Q4-r9-LHb" firstAttribute="width" secondItem="CXm-aG-Mrb" secondAttribute="width" constant="-60" id="bDO-5l-59a"/>
                             <constraint firstItem="CXm-aG-Mrb" firstAttribute="trailing" secondItem="b1x-rc-Tah" secondAttribute="trailing" id="bGh-Pe-ww4"/>
+                            <constraint firstItem="IyI-kq-iBB" firstAttribute="top" secondItem="Zsy-wP-y1d" secondAttribute="top" id="btO-py-DOt"/>
                             <constraint firstItem="CXm-aG-Mrb" firstAttribute="leading" secondItem="b1x-rc-Tah" secondAttribute="leading" id="cYY-Ed-uPy"/>
                             <constraint firstItem="dHT-jR-8H0" firstAttribute="top" secondItem="0Q4-r9-LHb" secondAttribute="top" id="ecn-rF-ZYM"/>
                             <constraint firstItem="UM0-kp-nIw" firstAttribute="top" secondItem="P15-GB-eyn" secondAttribute="top" id="i9t-gU-ex2"/>
@@ -444,14 +451,19 @@
                             <constraint firstItem="UM0-kp-nIw" firstAttribute="leading" secondItem="P15-GB-eyn" secondAttribute="leading" id="ovi-lK-u4E"/>
                             <constraint firstItem="dHT-jR-8H0" firstAttribute="trailing" secondItem="707-UU-DO9" secondAttribute="trailing" id="qih-Mg-l17"/>
                             <constraint firstItem="HpZ-oG-GRk" firstAttribute="top" secondItem="CXm-aG-Mrb" secondAttribute="bottom" id="rGP-Nu-3VU"/>
+                            <constraint firstAttribute="bottom" secondItem="IyI-kq-iBB" secondAttribute="bottom" id="rRR-oc-AVu"/>
                             <constraint firstAttribute="bottom" secondItem="HpZ-oG-GRk" secondAttribute="bottom" id="tWO-iJ-A8O"/>
                             <constraint firstItem="UM0-kp-nIw" firstAttribute="bottom" secondItem="P15-GB-eyn" secondAttribute="bottom" id="wDY-JZ-chF"/>
                             <constraint firstItem="dHT-jR-8H0" firstAttribute="trailing" secondItem="0Q4-r9-LHb" secondAttribute="trailing" id="yQ4-Ww-Hfc"/>
                             <constraint firstItem="Q29-9k-bGw" firstAttribute="height" secondItem="WHz-UF-kNQ" secondAttribute="height" constant="-20" id="ylf-UR-3MK"/>
+                            <constraint firstAttribute="trailing" secondItem="IyI-kq-iBB" secondAttribute="trailing" id="yt1-o1-sr1"/>
+                            <constraint firstItem="IyI-kq-iBB" firstAttribute="top" secondItem="WHz-UF-kNQ" secondAttribute="top" id="zrn-GU-QMa"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="b1x-rc-Tah"/>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="rRR-oc-AVu"/>
+                                <exclude reference="zrn-GU-QMa"/>
                                 <exclude reference="Cff-eP-9e8"/>
                                 <exclude reference="ecn-rF-ZYM"/>
                                 <exclude reference="mOF-wF-fKX"/>
@@ -486,6 +498,10 @@
                         <outlet property="constraintInfoStackViewTopLeading" destination="ovi-lK-u4E" id="Rgf-ZB-mJT"/>
                         <outlet property="constraintInfoStackViewTopTop" destination="i9t-gU-ex2" id="zdt-nu-oPh"/>
                         <outlet property="constraintInfoStackViewTopTrailing" destination="Gyj-Yw-DIx" id="iX8-Mo-L6L"/>
+                        <outlet property="constraintProgressViewBottomBottom" destination="rRR-oc-AVu" id="IOh-qb-WBo"/>
+                        <outlet property="constraintProgressViewBottomTop" destination="zrn-GU-QMa" id="2gQ-wX-fHW"/>
+                        <outlet property="constraintProgressViewTopHeight" destination="Ode-Yv-SaF" id="60d-90-wck"/>
+                        <outlet property="constraintProgressViewTopTop" destination="btO-py-DOt" id="u3n-Sr-eRw"/>
                         <outlet property="imageBackground" destination="Q5u-Zf-KF9" id="5mv-86-qbS"/>
                         <outlet property="imagePoster" destination="hN0-Oi-IkO" id="eh6-0A-iRD"/>
                         <outlet property="labelWatchableName" destination="u7x-Ky-YBs" id="C2g-O5-Olt"/>
@@ -495,6 +511,7 @@
                         <outlet property="layoutFrameNameAndButtonsTop" destination="P15-GB-eyn" id="WEW-XJ-PZo"/>
                         <outlet property="layoutFramePosterLarge" destination="0Q4-r9-LHb" id="nrG-1F-3f3"/>
                         <outlet property="layoutFramePosterSmallTop" destination="707-UU-DO9" id="IIl-dq-uKB"/>
+                        <outlet property="progressView" destination="IyI-kq-iBB" id="jph-PW-JID"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CE0-zw-JhD" userLabel="First Responder" sceneMemberID="firstResponder"/>
