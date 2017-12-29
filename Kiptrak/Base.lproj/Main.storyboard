@@ -123,8 +123,8 @@
                                             <segue destination="c2K-NW-Bt5" kind="embed" id="gsd-JB-OgG"/>
                                         </connections>
                                     </containerView>
-                                    <view userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cvV-bL-GTA">
-                                        <rect key="frame" x="165" y="10" width="44" height="6"/>
+                                    <view userInteractionEnabled="NO" alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cvV-bL-GTA" userLabel="Grabber">
+                                        <rect key="frame" x="165" y="8" width="44" height="6"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="6" id="THn-Ta-Lm2"/>
@@ -153,7 +153,7 @@
                                 <constraints>
                                     <constraint firstItem="KBF-h7-3aJ" firstAttribute="top" secondItem="Y2x-Ji-4NS" secondAttribute="top" id="3w9-ed-K0l"/>
                                     <constraint firstItem="cvV-bL-GTA" firstAttribute="centerX" secondItem="Y2x-Ji-4NS" secondAttribute="centerX" id="5HK-Vi-jve"/>
-                                    <constraint firstItem="cvV-bL-GTA" firstAttribute="top" secondItem="Y2x-Ji-4NS" secondAttribute="top" constant="10" id="CbU-pp-1d1"/>
+                                    <constraint firstItem="cvV-bL-GTA" firstAttribute="top" secondItem="Y2x-Ji-4NS" secondAttribute="top" constant="8" id="CbU-pp-1d1"/>
                                     <constraint firstItem="KBF-h7-3aJ" firstAttribute="leading" secondItem="Y2x-Ji-4NS" secondAttribute="leading" id="KLg-w7-Zf3"/>
                                     <constraint firstAttribute="bottom" secondItem="KBF-h7-3aJ" secondAttribute="bottom" id="Ttl-tQ-ZSi"/>
                                     <constraint firstAttribute="trailing" secondItem="KBF-h7-3aJ" secondAttribute="trailing" id="z8l-UE-Arj"/>
@@ -187,7 +187,7 @@
                             <constraint firstItem="Y2x-Ji-4NS" firstAttribute="leading" secondItem="jAY-Sw-S38" secondAttribute="leading" id="ItF-Ns-hUx"/>
                             <constraint firstAttribute="bottom" secondItem="Y2x-Ji-4NS" secondAttribute="top" id="Yrc-2h-Okw"/>
                             <constraint firstItem="Y2x-Ji-4NS" firstAttribute="height" secondItem="PSv-Bv-gTI" secondAttribute="height" constant="-40" id="f5N-ae-5yX"/>
-                            <constraint firstItem="49e-Lp-1eZ" firstAttribute="height" relation="greaterThanOrEqual" secondItem="PSv-Bv-gTI" secondAttribute="height" constant="-100" id="uIw-32-beo"/>
+                            <constraint firstItem="49e-Lp-1eZ" firstAttribute="height" relation="greaterThanOrEqual" secondItem="PSv-Bv-gTI" secondAttribute="height" constant="-200" id="uIw-32-beo"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jAY-Sw-S38"/>
                     </view>
@@ -892,6 +892,7 @@
                         <outlet property="headerView" destination="3xd-Fs-9pm" id="AB4-Rk-5Qq"/>
                         <outlet property="imageLogo" destination="q2v-xT-IGx" id="LMi-2J-hvD"/>
                         <outlet property="tableView" destination="NJG-If-Ilk" id="PcB-Bu-MXG"/>
+                        <segue destination="heS-o5-q6v" kind="showDetail" identifier="toSettings" id="gtc-nH-eu7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i2i-4O-AeW" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1023,7 +1024,7 @@
                                 <rect key="frame" x="322" y="28" width="37" height="30"/>
                                 <state key="normal" title="Done"/>
                                 <connections>
-                                    <segue destination="ACx-tu-NIY" kind="unwind" unwindAction="unwindToPlayback:" id="LLf-Lx-kxf"/>
+                                    <segue destination="ACx-tu-NIY" kind="unwind" unwindAction="unwindToSearch:" id="xcb-8d-uBM"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" estimatedRowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3JD-3K-Aqu">
@@ -1191,6 +1192,7 @@
                         <outlet property="shadowTop" destination="8fW-hp-xAB" id="grc-DF-4g3"/>
                         <outlet property="tableView" destination="3JD-3K-Aqu" id="KTK-9C-PPp"/>
                         <segue destination="ACx-tu-NIY" kind="unwind" identifier="unwindToSplashSegueID" unwindAction="unwindToSplash:" id="PA7-Lb-yub"/>
+                        <segue destination="ACx-tu-NIY" kind="unwind" identifier="unwindSegueToSearch" unwindAction="unwindToSearch:" id="6o0-Q0-Qy7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U4F-zt-S7p" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1230,4 +1232,7 @@
         <image name="logo_trakt" width="100" height="99"/>
         <image name="posters_bg" width="360" height="640"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="gtc-nH-eu7"/>
+    </inferredMetricsTieBreakers>
 </document>

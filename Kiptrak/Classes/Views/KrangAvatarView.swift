@@ -14,6 +14,7 @@ class KrangAvatarView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.commonInit()
     }
     
     required init?(coder aDecoder: NSCoder) {

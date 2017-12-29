@@ -69,7 +69,12 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
             self.headerView.addSubview(self.searchController.searchBar)
             self.headerView.frame.size.height = self.searchController.searchBar.bounds.size.height
         }
-//        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
+        let avatarView = KrangAvatarView(frame: CGRect(x: 0.0, y: 0.0, width: 36.0, height: 36.0))
+        avatarView.heroID = "userAvatar"
+        let button = UIBarButtonItem.init(customView: avatarView)
+        let settingsTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(WatchableSearchViewController.settingsTapped(_:)))
+        avatarView.addGestureRecognizer(settingsTapGestureRecognizer)
+        self.navigationItem.rightBarButtonItem = button
     }
     
     
@@ -93,6 +98,16 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
         UIView.animate(withDuration: 0.5) {
             self.imageLogo.alpha = 0.0
         }
+    }
+    
+    // MARK: - User Interaction
+    @objc func settingsTapped(_ sender: AnyObject?) {
+        self.performSegue(withIdentifier: "toSettings", sender: self)
+    }
+    
+    // MARK: - Segues
+    @IBAction func unwindToSearch(_ sender: UIStoryboardSegue) {
+        
     }
     
     //MARK:- KrangViewController
