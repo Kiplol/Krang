@@ -71,6 +71,7 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
         }
         let avatarView = KrangAvatarView(frame: CGRect(x: 0.0, y: 0.0, width: 36.0, height: 36.0))
         avatarView.heroID = "userAvatar"
+        avatarView.backgroundColor = UIColor.white
         let button = UIBarButtonItem.init(customView: avatarView)
         let settingsTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(WatchableSearchViewController.settingsTapped(_:)))
         avatarView.addGestureRecognizer(settingsTapGestureRecognizer)
@@ -98,6 +99,12 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
         UIView.animate(withDuration: 0.5) {
             self.imageLogo.alpha = 0.0
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.searchController.searchBar.resignFirstResponder()
+        self.searchController.isActive = false
     }
     
     // MARK: - User Interaction
