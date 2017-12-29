@@ -222,6 +222,11 @@ private extension NowWatchingViewController {
         
         self.progressView.startDate = startDate
         self.progressView.endDate = endDate
+        self.progressView.didFinishClosure = { _ in
+            TraktHelper.shared.getCheckedInMovieOrEpisode { (error, movie, episode) in
+                NotificationCenter.default.post(name: Notification.Name.didCheckInToWatchable, object: (movie ?? episode), userInfo: nil)
+            }
+        }
         self.progressView.start()
     }
 }

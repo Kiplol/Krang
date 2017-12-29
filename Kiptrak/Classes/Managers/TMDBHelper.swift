@@ -78,14 +78,14 @@ class TMDBHelper: NSObject {
             return
         }
         
-        KrangLogger.log.debug("Updating episode")
+        KrangLogger.log.verbose("Updating episode")
         let url = String(format: Constants.tmdbEpisodeGetURLFormat, show.tmdbID, show.slug, episode.seasonNumber, episode.episode)
         let _ = self.oauth.client.get(url, success: { (response) in
             do {
                 let json = try JSON(data: response.data)
                 self.update(episode: episode, withJSON: json)
                 
-                KrangLogger.log.debug("Updated episode with episode details.  Now updating with season details.")
+                KrangLogger.log.verbose("Updated episode with episode details.  Now updating with season details.")
                 let seasonURL = String(format: Constants.tmdbSeasonGetURLFormat, show.tmdbID, show.slug, episode.seasonNumber)
                 let _ = self.oauth.client.get(seasonURL, success: { (seasonResponse) in
                     let seasonJSON = try! JSON(data: seasonResponse.data)
@@ -123,7 +123,7 @@ class TMDBHelper: NSObject {
             return
         }
         
-        KrangLogger.log.debug("Updating show (\(show.title))")
+        KrangLogger.log.verbose("Updating show (\(show.title))")
         let url = String(format: Constants.tmdbShowGetURLFormat, show.tmdbID, show.slug)
         let _ = self.oauth.client.get(url, success: { (response) in
             //Success
@@ -147,7 +147,7 @@ class TMDBHelper: NSObject {
             return
         }
         
-//        KrangLogger.log.debug("Updating season (\(show.title) \(season.title))")
+        KrangLogger.log.verbose("Updating season (\(show.title) \(season.title))")
         let url = String(format: Constants.tmdbSeasonGetURLFormat, show.tmdbID, show.slug, season.seasonNumber)
         let _ = self.oauth.client.get(url, success: { (response) in
             //Success

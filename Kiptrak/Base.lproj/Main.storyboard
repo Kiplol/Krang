@@ -314,7 +314,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="800"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dHT-jR-8H0">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dHT-jR-8H0" userLabel="Poster Container">
                                 <rect key="frame" x="10" y="10" width="66.5" height="100"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hN0-Oi-IkO">
@@ -326,7 +326,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="hN0-Oi-IkO" firstAttribute="leading" secondItem="dHT-jR-8H0" secondAttribute="leading" id="KtX-aX-Tfx"/>
                                     <constraint firstAttribute="bottom" secondItem="hN0-Oi-IkO" secondAttribute="bottom" id="cOd-YE-VjW"/>
