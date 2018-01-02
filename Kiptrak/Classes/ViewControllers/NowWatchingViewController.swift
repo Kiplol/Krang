@@ -123,6 +123,12 @@ class NowWatchingViewController: KrangViewController {
     
     // MARK: - Notifications
     @objc func didCheckInToAWatchable(_ notif: Notification) {
+        guard (notif.object as? KrangWatchable)?.checkin != nil else {
+            TraktHelper.shared.getCheckedInMovieOrEpisode { (error, movie, episode) in
+                self.watchable = movie ?? episode
+            }
+            return
+        }
         self.watchable = (notif.object as? KrangWatchable)
     }
 }
@@ -177,12 +183,16 @@ private extension NowWatchingViewController {
     func layout(forMode mode: Mode) {
         self.allModeConstraints.forEach { $0.isActive = false}
         self.constraints(forMode: mode).forEach { $0.isActive = true }
-        switch mode {
-        case .collapsed:
-            self.imageBackground.alpha = 0.0
-        default:
-            self.imageBackground.alpha = 0.5
-        }
+
+        UIView.animate(withDuration: 0.8, delay: 0.0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.5, options: [.beginFromCurrentState], animations: {
+            switch mode {
+            case .collapsed:
+                self.imageBackground.alpha = 0.0
+            default:
+                self.imageBackground.alpha = 0.5
+            }
+            self.view.layoutIfNeeded()
+        }, completion: nil)
     }
     
     // MARK: -

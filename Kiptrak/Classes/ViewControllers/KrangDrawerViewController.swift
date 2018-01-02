@@ -77,7 +77,7 @@ class KrangDrawerViewController: UIViewController {
             self.playbackContainer.superview?.cornerRadius = self.playbackContainer.cornerRadius
             self.view.layoutIfNeeded()
             self.mainContainer.layoutIfNeeded()
-            self.playbackContainer.layoutIfNeeded()
+//            self.playbackContainer.layoutIfNeeded()
         }
         
         let completion = {

@@ -123,37 +123,10 @@
                                             <segue destination="c2K-NW-Bt5" kind="embed" id="gsd-JB-OgG"/>
                                         </connections>
                                     </containerView>
-                                    <view userInteractionEnabled="NO" alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cvV-bL-GTA" userLabel="Grabber">
-                                        <rect key="frame" x="165" y="8" width="44" height="6"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="6" id="THn-Ta-Lm2"/>
-                                            <constraint firstAttribute="width" constant="44" id="aF9-UV-a3G"/>
-                                        </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="3"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                                <real key="value" value="0.20000000000000001"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                                <real key="value" value="3"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="size" keyPath="shadowOffser">
-                                                <size key="value" width="0.0" height="0.0"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="KBF-h7-3aJ" firstAttribute="top" secondItem="Y2x-Ji-4NS" secondAttribute="top" id="3w9-ed-K0l"/>
-                                    <constraint firstItem="cvV-bL-GTA" firstAttribute="centerX" secondItem="Y2x-Ji-4NS" secondAttribute="centerX" id="5HK-Vi-jve"/>
-                                    <constraint firstItem="cvV-bL-GTA" firstAttribute="top" secondItem="Y2x-Ji-4NS" secondAttribute="top" constant="8" id="CbU-pp-1d1"/>
                                     <constraint firstItem="KBF-h7-3aJ" firstAttribute="leading" secondItem="Y2x-Ji-4NS" secondAttribute="leading" id="KLg-w7-Zf3"/>
                                     <constraint firstAttribute="bottom" secondItem="KBF-h7-3aJ" secondAttribute="bottom" id="Ttl-tQ-ZSi"/>
                                     <constraint firstAttribute="trailing" secondItem="KBF-h7-3aJ" secondAttribute="trailing" id="z8l-UE-Arj"/>
@@ -176,9 +149,36 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <view userInteractionEnabled="NO" alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cvV-bL-GTA" userLabel="Grabber">
+                                <rect key="frame" x="172" y="673" width="30" height="4"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="4" id="THn-Ta-Lm2"/>
+                                    <constraint firstAttribute="width" constant="30" id="aF9-UV-a3G"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                        <real key="value" value="0.20000000000000001"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffser">
+                                        <size key="value" width="0.0" height="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="cvV-bL-GTA" firstAttribute="top" secondItem="Y2x-Ji-4NS" secondAttribute="top" priority="999" constant="6" id="0u6-yp-NW2"/>
+                            <constraint firstItem="cvV-bL-GTA" firstAttribute="top" relation="greaterThanOrEqual" secondItem="jAY-Sw-S38" secondAttribute="top" constant="6" id="8wS-PA-6YV"/>
                             <constraint firstItem="49e-Lp-1eZ" firstAttribute="leading" secondItem="jAY-Sw-S38" secondAttribute="leading" id="ADL-ab-uwH"/>
                             <constraint firstItem="jAY-Sw-S38" firstAttribute="trailing" secondItem="49e-Lp-1eZ" secondAttribute="trailing" id="CoR-3E-5IL"/>
                             <constraint firstItem="jAY-Sw-S38" firstAttribute="trailing" secondItem="Y2x-Ji-4NS" secondAttribute="trailing" id="F5Y-yB-LqX"/>
@@ -187,6 +187,7 @@
                             <constraint firstItem="Y2x-Ji-4NS" firstAttribute="leading" secondItem="jAY-Sw-S38" secondAttribute="leading" id="ItF-Ns-hUx"/>
                             <constraint firstAttribute="bottom" secondItem="Y2x-Ji-4NS" secondAttribute="top" id="Yrc-2h-Okw"/>
                             <constraint firstItem="Y2x-Ji-4NS" firstAttribute="height" secondItem="PSv-Bv-gTI" secondAttribute="height" constant="-40" id="f5N-ae-5yX"/>
+                            <constraint firstItem="cvV-bL-GTA" firstAttribute="centerX" secondItem="Y2x-Ji-4NS" secondAttribute="centerX" id="kh0-B2-9gy"/>
                             <constraint firstItem="49e-Lp-1eZ" firstAttribute="height" relation="greaterThanOrEqual" secondItem="PSv-Bv-gTI" secondAttribute="height" constant="-200" id="uIw-32-beo"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jAY-Sw-S38"/>
@@ -317,7 +318,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dHT-jR-8H0" userLabel="Poster Container">
                                 <rect key="frame" x="10" y="10" width="66.5" height="100"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hN0-Oi-IkO">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="poster_placeholder_dark" translatesAutoresizingMaskIntoConstraints="NO" id="hN0-Oi-IkO">
                                         <rect key="frame" x="0.0" y="0.0" width="67" height="100"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -1230,6 +1231,7 @@
         <image name="logo_imdb_100" width="123" height="50"/>
         <image name="logo_tmdb_100" width="46" height="50"/>
         <image name="logo_trakt" width="100" height="99"/>
+        <image name="poster_placeholder_dark" width="190" height="270"/>
         <image name="posters_bg" width="360" height="640"/>
     </resources>
     <inferredMetricsTieBreakers>
