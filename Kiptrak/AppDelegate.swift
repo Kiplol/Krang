@@ -113,7 +113,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         searchBarTextFieldAppearance.defaultTextAttributes = [NSAttributedStringKey.foregroundColor.rawValue: UIColor.white] // <- Text color when it's in iOS 11's navigationItem thingy.
         
         //LGAlertView
-        LGAlertView.appearance().buttonsHeight = 44.0         //@TODO: This is just until that LGAlertView.m 2882 [self.tableView layoutIfNeeded] is released
+//        LGAlertView.appearance().buttonsHeight = 44.0         //@TODO: This is just until that LGAlertView.m 2882 [self.tableView layoutIfNeeded] is released
         LGAlertView.appearance().buttonsTitleColor = UIColor.darkBackground
         LGAlertView.appearance().cancelButtonTitleColor = UIColor.gray
         LGAlertView.appearance().backgroundColor = UIColor.clear
