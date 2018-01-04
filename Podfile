@@ -14,7 +14,7 @@ end
 target 'Kiptrak' do
 	shared_pods
 	pod 'CustomizableActionSheet'
-	pod 'KDCircularProgress'
+	pod 'KDCircularProgress', '~> 1.5.2'
 	pod 'LGAlertView'
 	pod 'Hero'
 	pod 'RxKeyboard'

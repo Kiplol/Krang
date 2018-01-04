@@ -26,7 +26,7 @@ DEPENDENCIES:
   - CustomizableActionSheet
   - Hero
   - Hue
-  - KDCircularProgress
+  - KDCircularProgress (~> 1.5.2)
   - Kingfisher
   - LGAlertView
   - MarqueeLabel/Swift
@@ -55,6 +55,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
   SwipeCellKit: 76888d93d1843dc568fdf38fff21b15dbbcf6b28
 
-PODFILE CHECKSUM: 9b539d4771aa7ca2c0cfd9c4e444a95e2c6f0fb8
+PODFILE CHECKSUM: 37662b631a1c0ec044a7db9d7491dd25ea120fb9
 
 COCOAPODS: 1.3.1
