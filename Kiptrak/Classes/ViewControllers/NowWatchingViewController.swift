@@ -184,12 +184,12 @@ private extension NowWatchingViewController {
         self.allModeConstraints.forEach { $0.isActive = false}
         self.constraints(forMode: mode).forEach { $0.isActive = true }
 
-        UIView.animate(withDuration: 0.8, delay: 0.0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.5, options: [.beginFromCurrentState], animations: {
+        UIView.animate(withDuration: 0.60, delay: 0.0, usingSpringWithDamping: 0.95, initialSpringVelocity: 0.7, options: [.beginFromCurrentState], animations: {
             switch mode {
             case .collapsed:
                 self.imageBackground.alpha = 0.0
             default:
-                self.imageBackground.alpha = 0.5
+                self.imageBackground.alpha = 1.0
             }
             self.view.layoutIfNeeded()
         }, completion: nil)
@@ -207,11 +207,13 @@ private extension NowWatchingViewController {
         }
         
         self.labelWatchableName.text = watchable.titleDisplayString
-        self.imageBackground.kf.setImage(with: watchable.posterThumbnailURL, placeholder: nil, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, url) in
-            if let image = image {
-                self.imageBackground.image = image.kf.blurred(withRadius: 4.0)
-            }
-        })
+        let backgroundImageURL: String? = (watchable.fanartImageURL?.absoluteString ?? watchable.posterImageURL)
+        backgroundImageURL.flatMap { URL(string: $0) }.map {
+            self.imageBackground.kf.setImage(with: $0, placeholder: nil, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, url) in
+                if let image = image {
+                    self.imageBackground.image = image.kf.blurred(withRadius: 10.0)
+                }
+            }) } ?? { self.imageBackground.image = nil }()
     }
     
     func layoutLinkButons(forWatchable watchable: KrangWatchable?) {

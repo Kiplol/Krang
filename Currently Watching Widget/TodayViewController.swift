@@ -238,7 +238,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                     watchable = episode
                     self.labelTitle.text = episode.titleDisplayString
                     backgroundImageURL = watchable?.fanartBlurrableImageURL
-                    if let posterThumbnailURL = episode.posterThumbnailImageURL {
+                    if let posterThumbnailURL = episode.posterThumbnailImageURL ?? episode.season?.posterImageURL ?? episode.show?.imagePosterURL {
                         posterImageURL = URL(string: posterThumbnailURL)
                     }
                 } else {

@@ -223,9 +223,9 @@ class TMDBHelper: NSObject {
                 episode.stillImageURLs.removeAll()
                 episode.stillImageURLs.append(objectsIn: realmStringURLs)
             }
-            if let szAirDate = json["air_date"].string, let airDate = TMDBHelper.airDateFormatter.date(from: szAirDate) {
-                episode.airDate = airDate
-            }
+//            if let szAirDate = json["air_date"].string, let airDate = TMDBHelper.airDateFormatter.date(from: szAirDate) {
+//                episode.airDate = airDate
+//            }
         }
     }
     

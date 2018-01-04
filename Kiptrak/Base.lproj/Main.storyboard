@@ -236,7 +236,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="660"/>
                                 <color key="backgroundColor" red="0.27450980390000002" green="0.68235294120000001" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q5u-Zf-KF9">
+                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q5u-Zf-KF9">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="800"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -697,7 +697,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NOW WATCHING" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jvF-h6-fN5">
-                                <rect key="frame" x="8" y="455.5" width="359" height="22.5"/>
+                                <rect key="frame" x="8" y="458" width="359" height="20"/>
                                 <fontDescription key="fontDescription" name="Exo-Black" family="Exo" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>

@@ -25,9 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         BuddyBuildSDK.setup()
-        
         AppDelegate.instance = self;
         self.setupAppearance()
+        NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.didCheckInToAWatchable(_:)), name: Notification.Name.didCheckInToWatchable, object: nil)
         
         //Init the RealmManager
         let _ = RealmManager.shared
@@ -90,20 +90,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().barTintColor = UIColor.darkBackground
         UINavigationBar.appearance().tintColor = UIColor.white
         UINavigationBar.appearance().isTranslucent = false
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "Exo-Light-Italic", size: 16.0)!, NSAttributedStringKey.foregroundColor: UIColor.white]
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         if #available(iOS 11.0, *) {
-            UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: UIFont(name: "Exo-Black-Italic", size: 28.0)!]
+            UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         }
         
         //Buttons
         UIButton.appearance().tintColor = UIColor.white
         UIBarButtonItem.appearance().tintColor = UIColor.white
-        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedStringKey.font: UIFont(name: "Exo-Light-Italic", size: 13.0)!, NSAttributedStringKey.foregroundColor: UIColor.white], for: .normal)
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.white], for: .normal)
         
         //Labels
         let labelAppearance = UILabel.appearance()
         labelAppearance.textColor = UIColor.white
-        labelAppearance.fontName = "Exo-Light-Italic" //This seems to make it so that I can't ever set the font to something else...
         UILabel.appearance(whenContainedInInstancesOf: [UISearchBar.self]).textColor = UIColor(white: 1.0, alpha: 0.5)
         
         //Search Bars
@@ -111,7 +110,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         searchBarTextFieldAppearance.textColor = UILabel.appearance().textColor
         searchBarTextFieldAppearance.tintColor = UIColor.white
         searchBarTextFieldAppearance.backgroundColor = UIColor(white: 0.2, alpha: 1.0)
-        searchBarTextFieldAppearance.font = UIFont(name: "Exo-Light-Italic", size: 16.0)
         searchBarTextFieldAppearance.defaultTextAttributes = [NSAttributedStringKey.foregroundColor.rawValue: UIColor.white] // <- Text color when it's in iOS 11's navigationItem thingy.
         
         //LGAlertView
@@ -123,8 +121,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         LGAlertView.appearance().cancelButtonOffsetY = KrangUtils.safeAreaInsets.bottom
     }
     
+    // MARK: - View Controller Heirarchy
     func topViewController() -> UIViewController {
         return self.window!.rootViewController!.topViewController()
+    }
+    
+    // MARK: - Notifications
+    @objc func didCheckInToAWatchable(_ notif: Notification) {
+        if let watchable = notif.object as? KrangWatchable, let coverImageURL = watchable.fanartImageURL?.absoluteString {
+            RealmManager.makeChanges {
+                KrangUser.getCurrentUser().coverImageURL = coverImageURL
+            }
+        }
     }
     
 }

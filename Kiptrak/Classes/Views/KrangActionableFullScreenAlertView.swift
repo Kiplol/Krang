@@ -82,11 +82,11 @@ class KrangActionableFullScreenAlertView: UIView {
     //MARK:- UIView
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.labelTitle.font = UIFont(name: "Exo-Black", size: self.labelTitle.font.pointSize)
+//        self.labelTitle.font = UIFont(name: "Exo-Black", size: self.labelTitle.font.pointSize)
         self.centerContainerView.roundCorners()
         self.labelTitle.textColor = UIColor.black
         self.labelTitle.text = self.title
-        self.button.titleLabel?.font = UIFont(name: "Exo-Black", size: self.labelTitle.font.pointSize)
+//        self.button.titleLabel?.font = UIFont(name: "Exo-Black", size: self.labelTitle.font.pointSize)
     }
     
     //MARK:- User Interaction
