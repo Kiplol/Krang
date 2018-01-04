@@ -24,7 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        BuddyBuildSDK.setup()
         AppDelegate.instance = self;
         self.setupAppearance()
         NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.didCheckInToAWatchable(_:)), name: Notification.Name.didCheckInToWatchable, object: nil)

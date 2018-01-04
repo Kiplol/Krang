@@ -127,7 +127,6 @@
 		CCECAB0157942143A8E08CB2 /* Pods_Kiptrak.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37B22421F8414CC64C2C4B78 /* Pods_Kiptrak.framework */; };
 		E1820F6FBD891B52A6A6D1FF /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55EC0545D837BD5B8104ACC0 /* CoreTelephony.framework */; };
 		E4D2C1CD1B28EAF4E8E2A010 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBABE8C5F4AFA6AC90C42ADD /* CoreVideo.framework */; };
-		F03834CEB933E902BF4940E8 /* BuddyBuildSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF9B032F94E89D24645A3AB /* BuddyBuildSDK.framework */; };
 		FB3E162D1E45A3E736A6C43D /* Pods_Currently_Watching_Widget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98F45B548DC94C8289E45742 /* Pods_Currently_Watching_Widget.framework */; };
 /* End PBXBuildFile section */
 
@@ -156,7 +155,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0FF9B032F94E89D24645A3AB /* BuddyBuildSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BuddyBuildSDK.framework; sourceTree = "<group>"; };
 		15213CB89E0A6B9D090DF2E5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		1EBED3ECC65FC90281B1331E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		30BCC36AEA18296CBF311C9C /* Pods-Currently Watching Widget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Currently Watching Widget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Currently Watching Widget/Pods-Currently Watching Widget.debug.xcconfig"; sourceTree = "<group>"; };
@@ -259,7 +257,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCECAB0157942143A8E08CB2 /* Pods_Kiptrak.framework in Frameworks */,
-				F03834CEB933E902BF4940E8 /* BuddyBuildSDK.framework in Frameworks */,
 				A250AB0669B85C51937752EA /* AssetsLibrary.framework in Frameworks */,
 				68A85681C2C138574CF07450 /* CoreText.framework in Frameworks */,
 				E1820F6FBD891B52A6A6D1FF /* CoreTelephony.framework in Frameworks */,
@@ -484,7 +481,6 @@
 				37B22421F8414CC64C2C4B78 /* Pods_Kiptrak.framework */,
 				37A19E641E2BFDD9007877B4 /* NotificationCenter.framework */,
 				98F45B548DC94C8289E45742 /* Pods_Currently_Watching_Widget.framework */,
-				0FF9B032F94E89D24645A3AB /* BuddyBuildSDK.framework */,
 				6C5127FC6F5BCE0C9A2E5C5C /* AssetsLibrary.framework */,
 				4682B0B4C4E6D0EC612DC186 /* CoreText.framework */,
 				55EC0545D837BD5B8104ACC0 /* CoreTelephony.framework */,
