@@ -26,7 +26,7 @@ DEPENDENCIES:
   - CustomizableActionSheet
   - Hero
   - Hue
-  - KDCircularProgress (~> 1.5.2)
+  - KDCircularProgress (from `https://github.com/kaandedeoglu/KDCircularProgress`)
   - Kingfisher
   - LGAlertView
   - MarqueeLabel/Swift
@@ -36,6 +36,15 @@ DEPENDENCIES:
   - SwiftyBeaver
   - SwiftyJSON
   - SwipeCellKit
+
+EXTERNAL SOURCES:
+  KDCircularProgress:
+    :git: https://github.com/kaandedeoglu/KDCircularProgress
+
+CHECKOUT OPTIONS:
+  KDCircularProgress:
+    :commit: ba525189fb2dd2b3e0ebbd8ccac77bf2e5915739
+    :git: https://github.com/kaandedeoglu/KDCircularProgress
 
 SPEC CHECKSUMS:
   CustomizableActionSheet: c1db0f4c8b4b2be0d8762260c684b3c99896c320
@@ -55,6 +64,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
   SwipeCellKit: 76888d93d1843dc568fdf38fff21b15dbbcf6b28
 
-PODFILE CHECKSUM: 37662b631a1c0ec044a7db9d7491dd25ea120fb9
+PODFILE CHECKSUM: 8be700967ad2706e4d394e125f4f2d2dbc0d0c28
 
 COCOAPODS: 1.3.1
