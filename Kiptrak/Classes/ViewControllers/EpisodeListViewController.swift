@@ -157,5 +157,10 @@ class EpisodeListViewController: KrangViewController, UITableViewDataSource, UIT
         options.transitionStyle = .drag
         return options
     }
+}
 
+extension SwipeTableViewCell {
+    override open func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
 }
