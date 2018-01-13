@@ -35,7 +35,8 @@ class NowWatchingViewController: KrangViewController {
     @IBOutlet weak var buttonTMDB: UIButton!
     @IBOutlet weak var buttonTrakt: UIButton!
     @IBOutlet weak var progressView: KrangProgressView!
-
+    @IBOutlet weak var detailsView: UIView!
+    
     // MARK: Info Stack View Constraints
     @IBOutlet weak var constraintInfoStackViewBottomTop: NSLayoutConstraint!
     @IBOutlet weak var constraintInfoStackViewBottomTrailing: NSLayoutConstraint!
@@ -192,8 +193,10 @@ private extension NowWatchingViewController {
             switch mode {
             case .collapsed:
                 self.imageBackground.alpha = 0.0
+                self.detailsView.isHidden = true
             default:
                 self.imageBackground.alpha = 1.0
+                self.detailsView.isHidden = false
             }
             self.view.layoutIfNeeded()
         }, completion: nil)

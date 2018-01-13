@@ -333,6 +333,27 @@
                                             </button>
                                         </subviews>
                                     </stackView>
+                                    <view hidden="YES" contentMode="scaleToFill" horizontalHuggingPriority="1" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="ULi-Ej-ILv" userLabel="Details">
+                                        <rect key="frame" x="0.0" y="31.5" width="280.5" height="70"/>
+                                        <subviews>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="meG-Ed-yJi">
+                                                <rect key="frame" x="0.0" y="0.0" width="280.5" height="70"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="meG-Ed-yJi" firstAttribute="leading" secondItem="ULi-Ej-ILv" secondAttribute="leading" id="9s4-gB-m1X"/>
+                                            <constraint firstAttribute="trailing" secondItem="meG-Ed-yJi" secondAttribute="trailing" id="j2b-Hc-vO8"/>
+                                            <constraint firstItem="meG-Ed-yJi" firstAttribute="top" secondItem="ULi-Ej-ILv" secondAttribute="top" id="jwU-9Y-kDc"/>
+                                            <constraint firstAttribute="bottom" secondItem="meG-Ed-yJi" secondAttribute="bottom" id="ryq-ds-k5L"/>
+                                            <constraint firstAttribute="height" constant="70" id="wZw-7Z-cJi"/>
+                                        </constraints>
+                                    </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="2R6-QD-BYI">
                                         <rect key="frame" x="8.5" y="31.5" width="272" height="68.5"/>
                                         <subviews>
@@ -361,6 +382,8 @@
                                     </stackView>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="ULi-Ej-ILv" firstAttribute="leading" secondItem="UM0-kp-nIw" secondAttribute="leading" id="5Xo-qq-Aer"/>
+                                    <constraint firstAttribute="trailing" secondItem="ULi-Ej-ILv" secondAttribute="trailing" id="a0v-cM-9v8"/>
                                     <constraint firstAttribute="trailing" secondItem="UTm-sH-Srg" secondAttribute="trailing" id="jvO-x5-oDG"/>
                                     <constraint firstItem="UTm-sH-Srg" firstAttribute="leading" secondItem="UM0-kp-nIw" secondAttribute="leading" id="t8E-vu-r38"/>
                                 </constraints>
@@ -404,6 +427,7 @@
                         <outlet property="constraintInfoStackViewTopTop" destination="3Hi-MR-aJD" id="Wze-N0-2hk"/>
                         <outlet property="constraintInfoStackViewTopTrailing" destination="OdF-wC-Nsc" id="hUC-pr-pk5"/>
                         <outlet property="constraintProgressViewTopTop" destination="oKp-s5-HD2" id="uDv-uZ-DOK"/>
+                        <outlet property="detailsView" destination="ULi-Ej-ILv" id="WWb-cH-qiZ"/>
                         <outlet property="imageBackground" destination="Q5u-Zf-KF9" id="5mv-86-qbS"/>
                         <outlet property="imagePoster" destination="hN0-Oi-IkO" id="eh6-0A-iRD"/>
                         <outlet property="labelWatchableName" destination="u7x-Ky-YBs" id="C2g-O5-Olt"/>
