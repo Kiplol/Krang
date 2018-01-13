@@ -172,7 +172,7 @@ private extension NowWatchingViewController {
     }
     // MARK: -
     private var allModeConstraints: [NSLayoutConstraint] {
-        return [self.allInfoStackViewConstraints, self.allImagePosterConstraints, self.allProgressViewConstraints].flatMap { $0 }
+        return [self.allInfoStackViewConstraints, self.allImagePosterConstraints, self.allProgressViewConstraints, self.allImageBackgroundConstraints].flatMap { $0 }
     }
     
     func constraints(forMode mode: Mode) -> [NSLayoutConstraint] {
