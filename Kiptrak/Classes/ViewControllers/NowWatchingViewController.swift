@@ -57,6 +57,9 @@ class NowWatchingViewController: KrangViewController {
     @IBOutlet weak var constraintImagePosterTopWidth: NSLayoutConstraint!
     @IBOutlet weak var constraintImagePosterTopTrailing: NSLayoutConstraint!
     
+    // MARK: Image Background Constraints
+    @IBOutlet weak var constraintImageBackgroundTopBottom: NSLayoutConstraint!
+    
     // MARK: Progress View Constrains
     @IBOutlet weak var constraintProgressViewBottomTop: NSLayoutConstraint!
     @IBOutlet weak var constraintProgressViewTopTop: NSLayoutConstraint!
@@ -146,6 +149,17 @@ private extension NowWatchingViewController {
         return [self.imagePosterConstraintsForTop, self.imagePosterConstraintForCenter].flatMap { $0 }
     }
     
+    // MARK: - Image Background Constraints
+    private var imageBackgroundConstraintsForTop: [NSLayoutConstraint] {
+        return [self.constraintImageBackgroundTopBottom]
+    }
+    private var imageBackgroundConstraintsForBottom: [NSLayoutConstraint] {
+        return []
+    }
+    private var allImageBackgroundConstraints: [NSLayoutConstraint] {
+        return [self.imageBackgroundConstraintsForTop, self.imageBackgroundConstraintsForBottom].flatMap { $0 }
+    }
+    
     // MARK: - Progress View Constraints
     private var progressViewConstraintsForTop: [NSLayoutConstraint] {
         return [self.constraintProgressViewTopTop]
@@ -164,9 +178,9 @@ private extension NowWatchingViewController {
     func constraints(forMode mode: Mode) -> [NSLayoutConstraint] {
         switch mode {
         case .collapsed:
-            return [self.infoStackViewConstraintsForTop, self.imagePosterConstraintsForTop, self.progressViewConstraintsForTop].flatMap { $0 }
+            return [self.infoStackViewConstraintsForTop, self.imagePosterConstraintsForTop, self.progressViewConstraintsForTop, self.imageBackgroundConstraintsForTop].flatMap { $0 }
         case .full:
-            return [self.infoStackViewConstraintsForBottom, self.imagePosterConstraintForCenter, self.progressViewConstraintsForBottom].flatMap { $0 }
+            return [self.infoStackViewConstraintsForBottom, self.imagePosterConstraintForCenter, self.progressViewConstraintsForBottom, self.imageBackgroundConstraintsForBottom].flatMap { $0 }
         }
     }
     
