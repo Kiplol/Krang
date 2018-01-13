@@ -36,6 +36,8 @@ class NowWatchingViewController: KrangViewController {
     @IBOutlet weak var buttonTrakt: UIButton!
     @IBOutlet weak var progressView: KrangProgressView!
     @IBOutlet weak var detailsView: UIView!
+    @IBOutlet weak var constraintDetailsViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var detailsTextView: UITextView!
     
     // MARK: Info Stack View Constraints
     @IBOutlet weak var constraintInfoStackViewBottomBottom: NSLayoutConstraint!
@@ -63,7 +65,6 @@ class NowWatchingViewController: KrangViewController {
     // MARK: Progress View Constrains
     @IBOutlet weak var constraintProgressViewBottomTop: NSLayoutConstraint!
     @IBOutlet weak var constraintProgressViewTopTop: NSLayoutConstraint!
-    
     
     // MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -112,6 +113,13 @@ class NowWatchingViewController: KrangViewController {
         }, buttonTitle: "Stay Checked In") { (alert, button) in
             alert.dismiss(true)
         }
+    }
+    
+    @IBAction func previousTapped(_ sender: Any) {
+        KrangLogger.log.verbose("previousTapped", context: self)
+    }
+    
+    @IBAction func nextTapped(_ sender: Any) {
     }
     
     // MARK: - Notifications
@@ -188,7 +196,7 @@ private extension NowWatchingViewController {
         self.allModeConstraints.forEach { $0.isActive = false}
         self.constraints(forMode: mode).forEach { $0.isActive = true }
 
-        UIView.animate(withDuration: 0.60, delay: 0.0, usingSpringWithDamping: 0.95, initialSpringVelocity: 0.7, options: [.beginFromCurrentState], animations: {
+        UIView.animate(withDuration: 0.6, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.7, options: [.beginFromCurrentState], animations: {
             switch mode {
             case .collapsed:
                 self.imageBackground.alpha = 0.0
