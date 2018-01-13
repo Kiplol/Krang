@@ -35,13 +35,6 @@ class NowWatchingViewController: KrangViewController {
     @IBOutlet weak var buttonTMDB: UIButton!
     @IBOutlet weak var buttonTrakt: UIButton!
     @IBOutlet weak var progressView: KrangProgressView!
-    
-    @IBOutlet weak var layoutFrameInfoTop: UIView!
-    @IBOutlet weak var layoutFrameInfoBottom: UIView!
-    @IBOutlet weak var layoutFramePosterLarge: UIView!
-    @IBOutlet weak var layoutFramePosterSmallTop: UIView!
-    @IBOutlet weak var layoutFrameNameAndButtonsTop: UIView!
-    @IBOutlet weak var layoutFrameNameAndButtonsBottom: UIView!
 
     // MARK: Info Stack View Constraints
     @IBOutlet weak var constraintInfoStackViewBottomTop: NSLayoutConstraint!
@@ -50,7 +43,6 @@ class NowWatchingViewController: KrangViewController {
     @IBOutlet weak var constraintInfoStackViewBottomLeading: NSLayoutConstraint!
     
     @IBOutlet weak var constraintInfoStackViewTopTrailing: NSLayoutConstraint!
-    @IBOutlet weak var constraintInfoStackViewTopLeading: NSLayoutConstraint!
     @IBOutlet weak var constraintInfoStackViewTopBottom: NSLayoutConstraint!
     @IBOutlet weak var constraintInfoStackViewTopTop: NSLayoutConstraint!
     
@@ -62,14 +54,12 @@ class NowWatchingViewController: KrangViewController {
     
     @IBOutlet weak var constraintImagePosterTopLeading: NSLayoutConstraint!
     @IBOutlet weak var constraintImagePosterTopTop: NSLayoutConstraint!
-    @IBOutlet weak var constraintImagePosterTopBottom: NSLayoutConstraint!
+    @IBOutlet weak var constraintImagePosterTopWidth: NSLayoutConstraint!
     @IBOutlet weak var constraintImagePosterTopTrailing: NSLayoutConstraint!
     
     // MARK: Progress View Constrains
     @IBOutlet weak var constraintProgressViewBottomTop: NSLayoutConstraint!
-    @IBOutlet weak var constraintProgressViewBottomBottom: NSLayoutConstraint!
     @IBOutlet weak var constraintProgressViewTopTop: NSLayoutConstraint!
-    @IBOutlet weak var constraintProgressViewTopHeight: NSLayoutConstraint!
     
     
     // MARK: - View Lifecycle
@@ -136,7 +126,7 @@ class NowWatchingViewController: KrangViewController {
 private extension NowWatchingViewController {
     // MARK: - Info Stack View Constraints
     private var infoStackViewConstraintsForTop: [NSLayoutConstraint] {
-        return [self.constraintInfoStackViewTopTop, self.constraintInfoStackViewTopBottom, self.constraintInfoStackViewTopLeading, self.constraintInfoStackViewTopTrailing]
+        return [self.constraintInfoStackViewTopTop, self.constraintInfoStackViewTopBottom, self.constraintInfoStackViewTopTrailing]
     }
     private var infoStackViewConstraintsForBottom: [NSLayoutConstraint] {
         return [self.constraintInfoStackViewBottomTop, self.constraintInfoStackViewBottomBottom, self.constraintInfoStackViewBottomLeading, self.constraintInfoStackViewBottomTrailing]
@@ -147,7 +137,7 @@ private extension NowWatchingViewController {
     
     // MARK: - Image Poster Constraints
     private var imagePosterConstraintsForTop: [NSLayoutConstraint] {
-        return [self.constraintImagePosterTopTop, self.constraintImagePosterTopBottom, self.constraintImagePosterTopLeading, self.constraintImagePosterTopTrailing]
+        return [self.constraintImagePosterTopTop, self.constraintImagePosterTopWidth, self.constraintImagePosterTopLeading, self.constraintImagePosterTopTrailing]
     }
     private var imagePosterConstraintForCenter: [NSLayoutConstraint] {
         return [self.constraintImagePosterCenterTop, self.constraintImagePosterCenterBottom, self.constraintImagePosterCenterLeading, self.constraintImagePosterCenterTrailing]
@@ -158,10 +148,10 @@ private extension NowWatchingViewController {
     
     // MARK: - Progress View Constraints
     private var progressViewConstraintsForTop: [NSLayoutConstraint] {
-        return [self.constraintProgressViewTopTop, self.constraintProgressViewTopHeight]
+        return [self.constraintProgressViewTopTop]
     }
     private var progressViewConstraintsForBottom: [NSLayoutConstraint] {
-        return [self.constraintProgressViewBottomTop, self.constraintProgressViewBottomBottom]
+        return [self.constraintProgressViewBottomTop]
     }
     private var allProgressViewConstraints: [NSLayoutConstraint] {
         return [self.progressViewConstraintsForTop, self.progressViewConstraintsForBottom].flatMap { $0 }
@@ -181,8 +171,8 @@ private extension NowWatchingViewController {
     }
     
     func layout(forMode mode: Mode) {
-        self.allModeConstraints.forEach { $0.isActive = false}
-        self.constraints(forMode: mode).forEach { $0.isActive = true }
+//        self.allModeConstraints.forEach { $0.isActive = false}
+//        self.constraints(forMode: mode).forEach { $0.isActive = true }
 
         UIView.animate(withDuration: 0.60, delay: 0.0, usingSpringWithDamping: 0.95, initialSpringVelocity: 0.7, options: [.beginFromCurrentState], animations: {
             switch mode {
