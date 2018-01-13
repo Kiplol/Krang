@@ -38,12 +38,9 @@ class NowWatchingViewController: KrangViewController {
     @IBOutlet weak var detailsView: UIView!
     
     // MARK: Info Stack View Constraints
-    @IBOutlet weak var constraintInfoStackViewBottomTop: NSLayoutConstraint!
-    @IBOutlet weak var constraintInfoStackViewBottomTrailing: NSLayoutConstraint!
     @IBOutlet weak var constraintInfoStackViewBottomBottom: NSLayoutConstraint!
     @IBOutlet weak var constraintInfoStackViewBottomLeading: NSLayoutConstraint!
     
-    @IBOutlet weak var constraintInfoStackViewTopTrailing: NSLayoutConstraint!
     @IBOutlet weak var constraintInfoStackViewTopBottom: NSLayoutConstraint!
     @IBOutlet weak var constraintInfoStackViewTopTop: NSLayoutConstraint!
     
@@ -57,9 +54,11 @@ class NowWatchingViewController: KrangViewController {
     @IBOutlet weak var constraintImagePosterTopTop: NSLayoutConstraint!
     @IBOutlet weak var constraintImagePosterTopWidth: NSLayoutConstraint!
     @IBOutlet weak var constraintImagePosterTopTrailing: NSLayoutConstraint!
+    @IBOutlet weak var constraintImagePosterTopAspectRatio: NSLayoutConstraint!
     
     // MARK: Image Background Constraints
     @IBOutlet weak var constraintImageBackgroundTopBottom: NSLayoutConstraint!
+    @IBOutlet weak var constraintImageBackgroundBottomBottom: NSLayoutConstraint!
     
     // MARK: Progress View Constrains
     @IBOutlet weak var constraintProgressViewBottomTop: NSLayoutConstraint!
@@ -130,10 +129,10 @@ class NowWatchingViewController: KrangViewController {
 private extension NowWatchingViewController {
     // MARK: - Info Stack View Constraints
     private var infoStackViewConstraintsForTop: [NSLayoutConstraint] {
-        return [self.constraintInfoStackViewTopTop, self.constraintInfoStackViewTopBottom, self.constraintInfoStackViewTopTrailing]
+        return [self.constraintInfoStackViewTopTop, self.constraintInfoStackViewTopBottom]
     }
     private var infoStackViewConstraintsForBottom: [NSLayoutConstraint] {
-        return [self.constraintInfoStackViewBottomTop, self.constraintInfoStackViewBottomBottom, self.constraintInfoStackViewBottomLeading, self.constraintInfoStackViewBottomTrailing]
+        return [self.constraintInfoStackViewBottomBottom, self.constraintInfoStackViewBottomLeading]
     }
     private var allInfoStackViewConstraints: [NSLayoutConstraint] {
         return [self.infoStackViewConstraintsForTop, self.infoStackViewConstraintsForBottom].flatMap { $0 }
@@ -141,7 +140,7 @@ private extension NowWatchingViewController {
     
     // MARK: - Image Poster Constraints
     private var imagePosterConstraintsForTop: [NSLayoutConstraint] {
-        return [self.constraintImagePosterTopTop, self.constraintImagePosterTopWidth, self.constraintImagePosterTopLeading, self.constraintImagePosterTopTrailing]
+        return [self.constraintImagePosterTopTop, self.constraintImagePosterTopWidth, self.constraintImagePosterTopLeading, self.constraintImagePosterTopTrailing, constraintImagePosterTopAspectRatio]
     }
     private var imagePosterConstraintForCenter: [NSLayoutConstraint] {
         return [self.constraintImagePosterCenterTop, self.constraintImagePosterCenterBottom, self.constraintImagePosterCenterLeading, self.constraintImagePosterCenterTrailing]
@@ -155,7 +154,7 @@ private extension NowWatchingViewController {
         return [self.constraintImageBackgroundTopBottom]
     }
     private var imageBackgroundConstraintsForBottom: [NSLayoutConstraint] {
-        return []
+        return [self.constraintImageBackgroundBottomBottom]
     }
     private var allImageBackgroundConstraints: [NSLayoutConstraint] {
         return [self.imageBackgroundConstraintsForTop, self.imageBackgroundConstraintsForBottom].flatMap { $0 }
@@ -186,8 +185,8 @@ private extension NowWatchingViewController {
     }
     
     func layout(forMode mode: Mode) {
-//        self.allModeConstraints.forEach { $0.isActive = false}
-//        self.constraints(forMode: mode).forEach { $0.isActive = true }
+        self.allModeConstraints.forEach { $0.isActive = false}
+        self.constraints(forMode: mode).forEach { $0.isActive = true }
 
         UIView.animate(withDuration: 0.60, delay: 0.0, usingSpringWithDamping: 0.95, initialSpringVelocity: 0.7, options: [.beginFromCurrentState], animations: {
             switch mode {
