@@ -214,6 +214,7 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
                 tmdbAction.backgroundColor = UIColor.tmdbBrandPrimaryDark
                 tmdbAction.textColor = UIColor.tmdbBrandPrimaryLight
                 tmdbAction.title = nil
+                tmdbAction.accessibilityLabel = "TMDB"
                 options.append(tmdbAction)
             }
             if let traktURL = linkable.urlForTrakt {
@@ -224,6 +225,7 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
                 traktAction.backgroundColor = UIColor.black
                 traktAction.textColor = UIColor.traktBrandPrimary
                 traktAction.title = nil
+                traktAction.accessibilityLabel = "Trakt"
                 options.append(traktAction)
             }
             if let imdbURL = linkable.urlForIMDB {
@@ -234,6 +236,7 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
                 imdbAction.backgroundColor = UIColor.imdbBrandPrimary
                 imdbAction.textColor = UIColor.black
                 imdbAction.title = nil
+                imdbAction.accessibilityLabel = "IMDb"
                 options.append(imdbAction)
             }
         }
