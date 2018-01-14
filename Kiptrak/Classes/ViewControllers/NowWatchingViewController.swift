@@ -36,9 +36,10 @@ class NowWatchingViewController: KrangViewController {
     @IBOutlet weak var buttonTMDB: UIButton!
     @IBOutlet weak var buttonTrakt: UIButton!
     @IBOutlet weak var progressView: KrangProgressView!
-    @IBOutlet weak var detailsView: UIView!
-    @IBOutlet weak var constraintDetailsViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var detailsTextView: UITextView!
+    @IBOutlet weak var detailsBottomContainerView: UIView!
+    @IBOutlet weak var triviaContainerView: UIView!
+    @IBOutlet weak var textViewTrivia: UITextView!
+    @IBOutlet weak var constraintTextViewTriviaHeight: NSLayoutConstraint!
     
     // MARK: Info Stack View Constraints
     @IBOutlet weak var constraintInfoStackViewBottomBottom: NSLayoutConstraint!
@@ -116,20 +117,28 @@ class NowWatchingViewController: KrangViewController {
         }
     }
     
+    @IBAction func toggleTriviaTapped(_ sender: Any) {
+        self.triviaContainerView.isHidden = !self.triviaContainerView.isHidden
+    }
+    
     @IBAction func previousTapped(_ sender: Any) {
+        guard let piecesOfTrivia = self.piecesOfTrivia, let index = piecesOfTrivia.index(of: self.textViewTrivia.text)?.advanced(by: 0) else {
+            return
+        }
         
+        let previousPiece = index == 0 ? piecesOfTrivia[piecesOfTrivia.count - 1] : piecesOfTrivia[index - 1]
+        self.textViewTrivia.text = previousPiece
+        self.textViewTrivia.scrollRangeToVisible(NSRange(location:0, length:0))
     }
     
     @IBAction func nextTapped(_ sender: Any) {
-        guard let piecesOfTrivia = self.piecesOfTrivia, let index = piecesOfTrivia.index(of: self.detailsTextView.text) else {
+        guard let piecesOfTrivia = self.piecesOfTrivia, let index = piecesOfTrivia.index(of: self.textViewTrivia.text)?.advanced(by: 0) else {
             return
         }
-        let nextPiece = piecesOfTrivia[index.advanced(by: 1)]
-        self.detailsTextView.text = nextPiece
-        self.constraintDetailsViewHeight.constant = self.detailsTextView.contentSize.height
-        UIView.animate(withDuration: 0.2, delay: 0.0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.4, options: [], animations: {
-            self.view.layoutIfNeeded()
-        }, completion: nil)
+        
+        let nextPiece = index == (piecesOfTrivia.count - 1) ? piecesOfTrivia[0] : piecesOfTrivia[index + 1]
+        self.textViewTrivia.text = nextPiece
+        self.textViewTrivia.scrollRangeToVisible(NSRange(location:0, length:0))
     }
     
     // MARK: - Notifications
@@ -207,17 +216,15 @@ private extension NowWatchingViewController {
         self.constraints(forMode: mode).forEach { $0.isActive = true }
 
         UIView.animate(withDuration: 0.6, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.7, options: [.beginFromCurrentState], animations: {
-            self.view.layoutIfNeeded()
-            self.constraintDetailsViewHeight.constant = self.detailsTextView.contentSize.height
-            self.view.layoutIfNeeded()
             switch mode {
             case .collapsed:
                 self.imageBackground.alpha = 0.0
-                self.detailsView.isHidden = true
+                self.detailsBottomContainerView.isHidden = true
             default:
                 self.imageBackground.alpha = 1.0
-                self.detailsView.isHidden = false
+                self.detailsBottomContainerView.isHidden = false
             }
+            self.view.layoutIfNeeded()
         }, completion: nil)
     }
     
@@ -229,7 +236,7 @@ private extension NowWatchingViewController {
         guard let watchable = watchable else {
             self.labelWatchableName.text = nil
             self.imageBackground.image = nil
-            self.detailsTextView.text = nil
+            self.textViewTrivia.text = nil
             return
         }
         
@@ -244,9 +251,8 @@ private extension NowWatchingViewController {
         
         IMDBHelper.shared.getTrivia(forWatchable: watchable) { piecesOfTrivia in
             self.piecesOfTrivia = piecesOfTrivia
-            self.detailsTextView.text = piecesOfTrivia.first
+            self.textViewTrivia.text = piecesOfTrivia.first
             self.view.layoutIfNeeded()
-            self.constraintDetailsViewHeight.constant = self.detailsTextView.contentSize.height
         }
     }
     
