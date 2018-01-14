@@ -26,6 +26,7 @@ class NowWatchingViewController: KrangViewController {
             self.layout(forMode: self.mode)
         }
     }
+    private var piecesOfTrivia: [String]?
 
     // MARK: IBOutlets
     @IBOutlet weak var labelWatchableName: MarqueeLabel!
@@ -116,10 +117,19 @@ class NowWatchingViewController: KrangViewController {
     }
     
     @IBAction func previousTapped(_ sender: Any) {
-        KrangLogger.log.verbose("previousTapped", context: self)
+        
     }
     
     @IBAction func nextTapped(_ sender: Any) {
+        guard let piecesOfTrivia = self.piecesOfTrivia, let index = piecesOfTrivia.index(of: self.detailsTextView.text) else {
+            return
+        }
+        let nextPiece = piecesOfTrivia[index.advanced(by: 1)]
+        self.detailsTextView.text = nextPiece
+        self.constraintDetailsViewHeight.constant = self.detailsTextView.contentSize.height
+        UIView.animate(withDuration: 0.2, delay: 0.0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.4, options: [], animations: {
+            self.view.layoutIfNeeded()
+        }, completion: nil)
     }
     
     // MARK: - Notifications
@@ -197,6 +207,9 @@ private extension NowWatchingViewController {
         self.constraints(forMode: mode).forEach { $0.isActive = true }
 
         UIView.animate(withDuration: 0.6, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.7, options: [.beginFromCurrentState], animations: {
+            self.view.layoutIfNeeded()
+            self.constraintDetailsViewHeight.constant = self.detailsTextView.contentSize.height
+            self.view.layoutIfNeeded()
             switch mode {
             case .collapsed:
                 self.imageBackground.alpha = 0.0
@@ -205,7 +218,6 @@ private extension NowWatchingViewController {
                 self.imageBackground.alpha = 1.0
                 self.detailsView.isHidden = false
             }
-            self.view.layoutIfNeeded()
         }, completion: nil)
     }
     
@@ -217,6 +229,7 @@ private extension NowWatchingViewController {
         guard let watchable = watchable else {
             self.labelWatchableName.text = nil
             self.imageBackground.image = nil
+            self.detailsTextView.text = nil
             return
         }
         
@@ -228,6 +241,13 @@ private extension NowWatchingViewController {
                     self.imageBackground.image = image.kf.blurred(withRadius: 10.0)
                 }
             }) } ?? { self.imageBackground.image = nil }()
+        
+        IMDBHelper.shared.getTrivia(forWatchable: watchable) { piecesOfTrivia in
+            self.piecesOfTrivia = piecesOfTrivia
+            self.detailsTextView.text = piecesOfTrivia.first
+            self.view.layoutIfNeeded()
+            self.constraintDetailsViewHeight.constant = self.detailsTextView.contentSize.height
+        }
     }
     
     func layoutLinkButons(forWatchable watchable: KrangWatchable?) {

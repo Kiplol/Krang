@@ -31,6 +31,8 @@
 		3763546D1FF2DD8200AF01BF /* NibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3763546B1FF2DD8200AF01BF /* NibView.swift */; };
 		376713821F61B98000024036 /* KrangUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376713811F61B98000024036 /* KrangUtils.swift */; };
 		37690A781FF5921B009A9028 /* NowWatchingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37690A771FF5921B009A9028 /* NowWatchingViewController.swift */; };
+		376A448E200AB0CD00DB7E5D /* IMDBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376A448D200AB0CD00DB7E5D /* IMDBHelper.swift */; };
+		376A448F200AB0CD00DB7E5D /* IMDBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376A448D200AB0CD00DB7E5D /* IMDBHelper.swift */; };
 		377463F11F6DD16800F08029 /* EpisodeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377463F01F6DD16800F08029 /* EpisodeListViewController.swift */; };
 		377463F41F6DD1FE00F08029 /* EpisodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377463F21F6DD1FE00F08029 /* EpisodeTableViewCell.swift */; };
 		377463F51F6DD1FE00F08029 /* EpisodeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 377463F31F6DD1FE00F08029 /* EpisodeTableViewCell.xib */; };
@@ -178,6 +180,7 @@
 		3763546B1FF2DD8200AF01BF /* NibView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NibView.swift; path = Kiptrak/Classes/Views/NibView.swift; sourceTree = "<group>"; };
 		376713811F61B98000024036 /* KrangUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KrangUtils.swift; path = Classes/Utils/KrangUtils.swift; sourceTree = "<group>"; };
 		37690A771FF5921B009A9028 /* NowWatchingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NowWatchingViewController.swift; path = Classes/ViewControllers/NowWatchingViewController.swift; sourceTree = "<group>"; };
+		376A448D200AB0CD00DB7E5D /* IMDBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IMDBHelper.swift; path = Kiptrak/Classes/Managers/IMDBHelper.swift; sourceTree = "<group>"; };
 		377463F01F6DD16800F08029 /* EpisodeListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EpisodeListViewController.swift; path = Classes/ViewControllers/EpisodeListViewController.swift; sourceTree = "<group>"; };
 		377463F21F6DD1FE00F08029 /* EpisodeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EpisodeTableViewCell.swift; path = Kiptrak/Classes/Views/Cells/EpisodeTableViewCell.swift; sourceTree = "<group>"; };
 		377463F31F6DD1FE00F08029 /* EpisodeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EpisodeTableViewCell.xib; path = Kiptrak/Classes/Views/Cells/EpisodeTableViewCell.xib; sourceTree = "<group>"; };
@@ -323,6 +326,7 @@
 		37870B131E22BA6A00A2EC00 = {
 			isa = PBXGroup;
 			children = (
+				376A448D200AB0CD00DB7E5D /* IMDBHelper.swift */,
 				37870B1E1E22BA6A00A2EC00 /* Kiptrak */,
 				37A19E661E2BFDD9007877B4 /* Currently Watching Widget */,
 				37870B1D1E22BA6A00A2EC00 /* Products */,
@@ -823,6 +827,7 @@
 				379C55511E2564D100D51019 /* KrangLogger.swift in Sources */,
 				37A19E751E2BFE34007877B4 /* KrangWatchable.swift in Sources */,
 				376011721F6CA021004ED6EF /* SelfSizingCell.swift in Sources */,
+				376A448E200AB0CD00DB7E5D /* IMDBHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -849,6 +854,7 @@
 				37A19E7F1E2BFF50007877B4 /* RealmManager.swift in Sources */,
 				37A19E7E1E2BFF50007877B4 /* TraktHelper.swift in Sources */,
 				37A19E7D1E2BFF50007877B4 /* KrangLogger.swift in Sources */,
+				376A448F200AB0CD00DB7E5D /* IMDBHelper.swift in Sources */,
 				37F0DB681E31705300FAC6DB /* KrangProgressView.swift in Sources */,
 				3763546D1FF2DD8200AF01BF /* NibView.swift in Sources */,
 			);

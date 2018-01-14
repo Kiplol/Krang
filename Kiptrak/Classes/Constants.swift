@@ -42,7 +42,7 @@ class Constants: NSObject {
     class var tmdbShowGetURLFormat: String { return "https://api.themoviedb.org/3/tv/%d%@?api_key=\(Constants.tmdbAPIKey)&language=en-US" }
     
     //MARK: IMDB
-    open class var imdbURLFormat: String { get { return "http://www.imdb.com/title/%@/?ref_=Krang" } }
+    open class var imdbURLFormat: String { get { return "http://www.imdb.com/title/%@" } }
     
 }
 
