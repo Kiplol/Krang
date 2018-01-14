@@ -223,7 +223,7 @@ private extension NowWatchingViewController {
                 self.detailsBottomContainerView.alpha = 0.0
             default:
                 self.imageBackground.alpha = 1.0
-                self.detailsBottomContainerView.isHidden = false
+                self.detailsBottomContainerView.isHidden = self.piecesOfTrivia?.isEmpty ?? true
                 self.detailsBottomContainerView.alpha = 1.0
             }
             self.view.layoutIfNeeded()
@@ -242,6 +242,8 @@ private extension NowWatchingViewController {
             return
         }
         
+        self.detailsBottomContainerView.isHidden = true
+        
         self.labelWatchableName.text = watchable.titleDisplayString
         let backgroundImageURL: String? = (watchable.fanartImageURL?.absoluteString ?? watchable.posterImageURL)
         backgroundImageURL.flatMap { URL(string: $0) }.map {
@@ -252,6 +254,7 @@ private extension NowWatchingViewController {
             }) } ?? { self.imageBackground.image = nil }()
         
         IMDBHelper.shared.getTrivia(forWatchable: watchable) { piecesOfTrivia in
+            self.detailsBottomContainerView.isHidden = !piecesOfTrivia.isEmpty && self.mode != .full
             self.piecesOfTrivia = piecesOfTrivia
             self.textViewTrivia.text = piecesOfTrivia.first
             self.view.layoutIfNeeded()

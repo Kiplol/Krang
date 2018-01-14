@@ -16,6 +16,9 @@ class IMDBHelper: NSObject {
     func getTrivia(forWatchable watchable: KrangWatchable, completion:(([String]) -> ())?) {
         guard let urlForIMDB = watchable.urlForIMDB,
             let urlForTrivia = URL(string: "\(urlForIMDB.absoluteString)/trivia") else {
+                DispatchQueue.main.async {
+                    completion?([])
+                }
             return
         }
         
