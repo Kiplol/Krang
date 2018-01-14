@@ -322,6 +322,9 @@
                                                     <userDefinedRuntimeAttribute type="number" keyPath="trailingBuffer">
                                                         <real key="value" value="44"/>
                                                     </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="fadeLength">
+                                                        <real key="value" value="8"/>
+                                                    </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wR8-Tw-6dY">
@@ -346,7 +349,7 @@
                                                 <rect key="frame" x="8" y="4" width="339" height="0.0"/>
                                                 <color key="backgroundColor" white="1" alpha="0.19804152397260275" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" priority="999" constant="44" id="hoL-p7-6g5"/>
+                                                    <constraint firstAttribute="height" priority="999" constant="30" id="hoL-p7-6g5"/>
                                                 </constraints>
                                                 <state key="normal" title="Toggle Trivia"/>
                                                 <userDefinedRuntimeAttributes>
@@ -405,36 +408,36 @@
                                 </constraints>
                             </stackView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q4b-8F-Kim">
-                                <rect key="frame" x="0.0" y="609" width="375" height="86"/>
+                                <rect key="frame" x="0.0" y="579" width="375" height="116"/>
                                 <subviews>
                                     <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h6W-If-myD">
-                                        <rect key="frame" x="16" y="8" width="343" height="70"/>
+                                        <rect key="frame" x="16" y="8" width="343" height="100"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nbB-Ys-cQw">
-                                                <rect key="frame" x="0.0" y="0.0" width="50" height="70"/>
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nbB-Ys-cQw" userLabel="Previous">
+                                                <rect key="frame" x="0.0" y="0.0" width="50" height="100"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="50" id="hoK-KZ-abE"/>
                                                 </constraints>
-                                                <state key="normal" title="&lt;"/>
+                                                <state key="normal" image="direction-button-previous-30"/>
                                                 <connections>
                                                     <action selector="previousTapped:" destination="MOm-jq-Kmx" eventType="touchUpInside" id="2zg-gc-dB5"/>
                                                 </connections>
                                             </button>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="meG-Ed-yJi">
-                                                <rect key="frame" x="50" y="0.0" width="243" height="70"/>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" indicatorStyle="white" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="meG-Ed-yJi">
+                                                <rect key="frame" x="50" y="0.0" width="243" height="100"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="70" id="SJn-DC-plw"/>
+                                                    <constraint firstAttribute="height" constant="100" id="SJn-DC-plw"/>
                                                 </constraints>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FZq-4h-ezS">
-                                                <rect key="frame" x="293" y="0.0" width="50" height="70"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FZq-4h-ezS" userLabel="Next">
+                                                <rect key="frame" x="293" y="0.0" width="50" height="100"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <state key="normal" title="&gt;"/>
+                                                <state key="normal" image="direction-button-next-30"/>
                                                 <connections>
                                                     <action selector="nextTapped:" destination="MOm-jq-Kmx" eventType="touchUpInside" id="ah5-RY-cf2"/>
                                                 </connections>
@@ -1246,6 +1249,8 @@
         <image name="button_tmdb_ small" width="88" height="44"/>
         <image name="button_trakt_small" width="88" height="44"/>
         <image name="circle_x_small" width="15" height="15"/>
+        <image name="direction-button-next-30" width="15" height="15"/>
+        <image name="direction-button-previous-30" width="15" height="15"/>
         <image name="logo" width="162" height="191"/>
         <image name="logo_imdb_100" width="123" height="50"/>
         <image name="logo_tmdb_100" width="46" height="50"/>

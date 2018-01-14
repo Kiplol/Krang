@@ -220,9 +220,11 @@ private extension NowWatchingViewController {
             case .collapsed:
                 self.imageBackground.alpha = 0.0
                 self.detailsBottomContainerView.isHidden = true
+                self.detailsBottomContainerView.alpha = 0.0
             default:
                 self.imageBackground.alpha = 1.0
                 self.detailsBottomContainerView.isHidden = false
+                self.detailsBottomContainerView.alpha = 1.0
             }
             self.view.layoutIfNeeded()
         }, completion: nil)
