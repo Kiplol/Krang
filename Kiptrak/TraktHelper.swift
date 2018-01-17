@@ -422,6 +422,56 @@ class TraktHelper: NSObject {
         }
     }
     
+    // MARK: - Up Next
+    func getNextEpisode(forShow show: KrangShow, completion: ((Error?, KrangEpisode?) -> ())?) {
+        let url = String(format: Constants.traktGetNextEpisodeURLFormat, show.slug)
+        let _ = self.oauth.client.get(url, parameters: [:], headers: TraktHelper.defaultHeaders(), success: { [unowned self] (response) in
+            do {
+                let json = try JSON(data: response.data)
+                let nextEpisodeJSON = json["next_episode"]
+                guard let seasonNumber = nextEpisodeJSON["season"].int,
+                    let episodeNumber = nextEpisodeJSON["number"].int else {
+                        completion?(nil, nil)
+                        return
+                }
+                let episodeURL = String(format: Constants.traktGetEpisodeURLFormat, show.slug, seasonNumber, episodeNumber)
+                _ = self.oauth.client.get(episodeURL, parameters: [:], headers: TraktHelper.defaultHeaders(), success: { (episodeResponse) in
+                    do {
+                        let episodeJSON = try JSON(data: episodeResponse.data)
+                        guard let episodeTraktID = episodeJSON["ids"]["trakt"].int else {
+                            completion?(nil, nil)
+                            return
+                        }
+                        let jsonForUpdating = JSON(["episode": episodeJSON, "type": "episode"])
+                        if let existingEpisode = KrangEpisode.with(traktID: episodeTraktID) {
+                            RealmManager.makeChanges {
+                                show.nextEpisodeForWatchProgress = existingEpisode
+                                existingEpisode.update(withJSON: jsonForUpdating)
+                            }
+                            completion?(nil, existingEpisode)
+                        } else {
+                            let newEpisode = KrangEpisode()
+                            newEpisode.update(withJSON: jsonForUpdating)
+                            newEpisode.show = show
+                            newEpisode.season = show.getSeason(withSeasonNumber: seasonNumber)
+                            newEpisode.saveToDatbase()
+                            completion?(nil, newEpisode)
+                        }
+                    } catch let episodeJSONError {
+                        completion?(episodeJSONError, nil)
+                    }
+                }, failure: { (episodeError) in
+                    completion?(episodeError, nil)
+                })
+            } catch let jsonError {
+                KrangLogger.log.error("Error getting next episode for \(show.title)", context: jsonError)
+                completion?(jsonError, nil)
+            }
+        }) { (error) in
+            completion?(error, nil)
+        }
+    }
+    
     //MARK:- Marking
     func markWatched(_ watchable: KrangWatchable, completion: ((Error?) -> ())?) {
         let url = Constants.traktMarkWatchedURL

@@ -12,18 +12,19 @@ import Hue
 class Constants: NSObject {
     
     //MARK:- Trakt
-    open class var traktClientID: String { get { return "8fe969601ed2f6a00f34bf9c6691bb1edd35f52358a61373ba1fd74a6c4c5342" } }
-    open class var traktClientSecret: String { get { return "10005cf1cf0c7bfbd27d87c2bafeee75c4504786378d6925887fc7d450a90813" } }
-    open class var traktRedirectURL: String { get { return "http://elliottkipper.com/apps/kiptrak/auth.php" } }
-    open class var traktAuthorizeURL: String { get { return "https://api.trakt.tv/oauth/authorize" } }
-    open class var traktAccessTokenURL: String { get { return "https://api.trakt.tv/oauth/token" } }
-    open class var traktBaseURL: String { get { return "https://api.trakt.tv" } }
-    open class var traktWatchingURLFormat: String { get { return Constants.traktBaseURL + "/users/%@/watching?extended=full" } }
+    class var traktClientID: String { get { return "8fe969601ed2f6a00f34bf9c6691bb1edd35f52358a61373ba1fd74a6c4c5342" } }
+    class var traktClientSecret: String { get { return "10005cf1cf0c7bfbd27d87c2bafeee75c4504786378d6925887fc7d450a90813" } }
+    class var traktRedirectURL: String { get { return "http://elliottkipper.com/apps/kiptrak/auth.php" } }
+    class var traktAuthorizeURL: String { get { return "https://api.trakt.tv/oauth/authorize" } }
+    class var traktAccessTokenURL: String { get { return "https://api.trakt.tv/oauth/token" } }
+    class var traktBaseURL: String { get { return "https://api.trakt.tv" } }
+    class var traktWatchingURLFormat: String { get { return Constants.traktBaseURL + "/users/%@/watching?extended=full" } }
     class var traktSearchURLFormat: String { return Constants.traktBaseURL + "/search/movie,show?query=%@&extended=full" }
     class var traktCheckInURL: String { return Constants.traktBaseURL + "/checkin" }
     class var traktGetShowSeasonsURLFormat: String { return Constants.traktBaseURL + "/shows/%@/seasons?extended=full" }
     class var traktGetShowSeasonsAndEpisodesURLFormat: String { return Constants.traktBaseURL + "/shows/%@/seasons?extended=full,episodes" }
     class var traktGetEpisodesForSeasonURLFormat: String { return Constants.traktBaseURL + "/shows/%@/seasons/%d?extended=full" }
+    class var traktGetEpisodeURLFormat: String { return Constants.traktBaseURL + "/shows/%@/seasons/%d/episodes/%d?extended=full" }
     class var traktGetShowHistory: String { return Constants.traktBaseURL + "/sync/history/shows" }
     class var traktGetHistory: String { return Constants.traktBaseURL + "/sync/history" }
     class var traktGetActivity: String { return Constants.traktBaseURL + "/sync/last_activities" }
@@ -31,6 +32,7 @@ class Constants: NSObject {
     class var traktGetMovieExtendedInfoFormat: String { return Constants.traktBaseURL + "/movies/%d?extended=full" }
     class var traktMarkWatchedURL: String { return Constants.traktBaseURL + "/sync/history" }
     class var traktMarkUnwatchedURL: String { return Constants.traktBaseURL + "/sync/history/remove" }
+    class var traktGetNextEpisodeURLFormat: String { return Constants.traktBaseURL + "/shows/%@/progress/watched?hidden=false&specials=false&count_specials=true" }
     
     //MARK:- TMDB
     class var tmdbAPIKey: String { get { return "42261ec0aa6d07687f189a56f7b2363d" } }

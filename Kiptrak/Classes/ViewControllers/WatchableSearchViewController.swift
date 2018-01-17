@@ -95,6 +95,11 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
         self.view.layoutIfNeeded()
         TraktHelper.shared.getRecentShowHistory { (error, shows) in
             self.historySection.searchables = shows
+            if let show = shows.first {
+                TraktHelper.shared.getNextEpisode(forShow: show, completion: { (error, nextEpisode) in
+                    print(nextEpisode)
+                })
+            }
             if !self.isSearching {
                 self.tableView.reloadData()
             }

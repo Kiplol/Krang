@@ -23,6 +23,7 @@ class KrangShow: Object {
     @objc dynamic var imageBackdropURL: String? = nil
     @objc dynamic var imagePosterURL: String? = nil
     @objc dynamic var lastWatchDate: Date? = nil
+    @objc dynamic var nextEpisodeForWatchProgress: KrangEpisode? = nil
     var imagePosterURLs: List<RealmString> = List<RealmString>()
     let episodes = LinkingObjects(fromType: KrangEpisode.self, property: "show")
     let seasons = LinkingObjects(fromType: KrangSeason.self, property: "show")
