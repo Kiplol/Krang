@@ -14,6 +14,11 @@ import LGAlertView
 
 class WatchableSearchViewController: KrangViewController, UISearchResultsUpdating, UITableViewDataSource, UITableViewDelegate, SwipeTableViewCellDelegate {
     
+    struct Section {
+        let title: String?
+        var searchables: [KrangSearchable]
+    }
+    
     static let cellReuseIdentifier = "searchResultsCell"
     static var hasShownDemoSwipe: Bool {
         get {
@@ -37,17 +42,19 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
     
     // MARK :- ivars
     fileprivate let searchController = UISearchController(searchResultsController: nil)
-    fileprivate var searchResults = [KrangSearchable]()
-    fileprivate var historyResults = [KrangSearchable]()
+    fileprivate var upNextResults = List<KrangShow>()
+    fileprivate var searchResultsSection = Section(title: "Search Results", searchables: [])
+    fileprivate var historySection = Section(title: "History", searchables: [])
+    
     fileprivate var searchRequest: OAuthSwiftRequestHandle? = nil
     var isSearching: Bool {
         return !(self.searchController.searchBar.text ?? "").isEmpty
     }
     var dataSet: [KrangSearchable] {
         if self.isSearching {
-            return self.searchResults
+            return self.searchResultsSection.searchables
         } else {
-            return self.historyResults
+            return self.historySection.searchables
         }
     }
     
@@ -87,7 +94,7 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
         super.viewWillAppear(animated)
         self.view.layoutIfNeeded()
         TraktHelper.shared.getRecentShowHistory { (error, shows) in
-            self.historyResults = shows
+            self.historySection.searchables = shows
             if !self.isSearching {
                 self.tableView.reloadData()
             }
@@ -128,8 +135,7 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
     func updateSearchResults(for searchController: UISearchController) {
         self.searchRequest?.cancel()
         self.searchRequest = TraktHelper.shared.search(withQuery: searchController.searchBar.text ?? "") { (error, results) in
-            self.searchResults.removeAll()
-            self.searchResults.append(contentsOf: results)
+            self.searchResultsSection.searchables = results
             self.tableView.reloadData()
         }
     }

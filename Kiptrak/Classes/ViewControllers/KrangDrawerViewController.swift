@@ -32,6 +32,7 @@ class KrangDrawerViewController: UIViewController {
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor.darkBackground
         NotificationCenter.default.addObserver(self, selector: #selector(KrangDrawerViewController.didCheckInToAWatchable(_:)), name: Notification.Name.didCheckInToWatchable, object: nil)
         self.setupGestureRecognizers()
         for childVC in self.childViewControllers {
