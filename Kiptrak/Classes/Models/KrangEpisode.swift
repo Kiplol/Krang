@@ -223,7 +223,7 @@ extension KrangEpisode: KrangSearchable {
     }
     
     var titleForSearchResult: String? {
-        return "\(self.show?.title ?? "") s\(self.seasonNumber)e\(self.episode)"
+        return String(format: "%@ - s%02de%02d", self.show?.title ?? "", self.seasonNumber, self.episode)
     }
     
     var subtitleForSearchResult: String? {

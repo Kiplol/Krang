@@ -21,6 +21,7 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
     }
     
     static let cellReuseIdentifier = "searchResultsCell"
+    static let loadingCellReuseIdentifier = "loadingCell"
     static var hasShownDemoSwipe: Bool {
         get {
             return UserDefaults.standard.bool(forKey: "hasShownDemoSwipe")
@@ -36,6 +37,8 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
         didSet {
             let nib = UINib(nibName: "WatchableSearchResultTableViewCell", bundle: Bundle.main)
             self.tableView.register(nib, forCellReuseIdentifier: WatchableSearchViewController.cellReuseIdentifier)
+            let loadingNib = UINib(nibName: "LoadingTableViewCell", bundle: Bundle.main)
+            self.tableView.register(loadingNib, forCellReuseIdentifier: WatchableSearchViewController.loadingCellReuseIdentifier)
         }
     }
     @IBOutlet weak var headerView: UIView!
@@ -55,7 +58,11 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
         if self.isSearching {
             return [self.searchResultsSection]
         } else {
-            return [self.upNextSection, self.historySection]
+            if UserPrefs.traktSync {
+                return [self.upNextSection, self.historySection]
+            } else {
+                return [self.historySection]
+            }
         }
     }
     
@@ -100,11 +107,13 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
             if !self.isSearching {
                 self.tableView.reloadData()
             }
-            TraktHelper.shared.getNextEpisode(forShows: shows) { (nextEpisodeError, episodes) in
-                self.upNextSection.searchables = episodes
-                self.upNextSection.isLoading = false
-                if !self.isSearching {
-                    self.tableView.reloadData()
+            if UserPrefs.traktSync {
+                TraktHelper.shared.getNextEpisode(forShows: shows) { (nextEpisodeError, episodes) in
+                    self.upNextSection.searchables = episodes
+                    self.upNextSection.isLoading = false
+                    if !self.isSearching {
+                        self.tableView.reloadData()
+                    }
                 }
             }
         }
@@ -155,13 +164,20 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.dataSet[section].searchables.count
+        let sectionStruct = self.dataSet[section]
+        if sectionStruct.isLoading {
+            return 1
+        } else {
+            return sectionStruct.searchables.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: WatchableSearchViewController.cellReuseIdentifier)
-        let searchable = self.dataSet[indexPath.section].searchables[indexPath.row]
+        let section = self.dataSet[indexPath.section]
+        let reuseIdentifier = section.isLoading ? WatchableSearchViewController.loadingCellReuseIdentifier : WatchableSearchViewController.cellReuseIdentifier
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier)
         if let searchResultCell = cell as? WatchableSearchResultTableViewCell {
+            let searchable = self.dataSet[indexPath.section].searchables[indexPath.row]
             searchResultCell.update(withSearchable: searchable)
             searchResultCell.delegate = self
             switch searchable {
@@ -177,6 +193,11 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
     //MARK:- UITableViewDelegate
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return self.dataSet[section].title
+    }
+    
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        let section = self.dataSet[indexPath.section]
+        return !section.isLoading
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -218,6 +239,8 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
                 })
             })
             }
+        } else if let loadingCell = cell as? LoadingTableViewCell {
+            loadingCell.activityIndicator.startAnimating()
         }
     }
     
