@@ -153,6 +153,7 @@ class SettingsViewController: KrangViewController, UITableViewDataSource, UITabl
                             RealmManager.makeChanges {
                                 KrangUser.getCurrentUser().lastHistorySync = Date.distantPast
                                 RealmManager.removeAllWatchDates()
+                                RealmManager.removeAllNextEpisodes()
                             }
                         }
                         alert.dismiss(true)

@@ -17,6 +17,7 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
     struct Section {
         let title: String?
         var searchables: [KrangSearchable]
+        var isLoading = false
     }
     
     static let cellReuseIdentifier = "searchResultsCell"
@@ -42,19 +43,19 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
     
     // MARK :- ivars
     fileprivate let searchController = UISearchController(searchResultsController: nil)
-    fileprivate var upNextResults = List<KrangShow>()
-    fileprivate var searchResultsSection = Section(title: "Search Results", searchables: [])
-    fileprivate var historySection = Section(title: "History", searchables: [])
+    fileprivate var upNextSection = Section(title: "Up Next", searchables: [], isLoading: true)
+    fileprivate var searchResultsSection = Section(title: "Search Results", searchables: [], isLoading: false)
+    fileprivate var historySection = Section(title: "History", searchables: [], isLoading: true)
     
     fileprivate var searchRequest: OAuthSwiftRequestHandle? = nil
     var isSearching: Bool {
         return !(self.searchController.searchBar.text ?? "").isEmpty
     }
-    var dataSet: [KrangSearchable] {
+    var dataSet: [Section] {
         if self.isSearching {
-            return self.searchResultsSection.searchables
+            return [self.searchResultsSection]
         } else {
-            return self.historySection.searchables
+            return [self.upNextSection, self.historySection]
         }
     }
     
@@ -95,13 +96,16 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
         self.view.layoutIfNeeded()
         TraktHelper.shared.getRecentShowHistory { (error, shows) in
             self.historySection.searchables = shows
-            if let show = shows.first {
-                TraktHelper.shared.getNextEpisode(forShow: show, completion: { (error, nextEpisode) in
-                    print(nextEpisode)
-                })
-            }
+            self.historySection.isLoading = false
             if !self.isSearching {
                 self.tableView.reloadData()
+            }
+            TraktHelper.shared.getNextEpisode(forShows: shows) { (nextEpisodeError, episodes) in
+                self.upNextSection.searchables = episodes
+                self.upNextSection.isLoading = false
+                if !self.isSearching {
+                    self.tableView.reloadData()
+                }
             }
         }
     }
@@ -146,13 +150,17 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
     }
     
     //MARK:- UITableViewDataSource
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return self.dataSet.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.dataSet[section].searchables.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: WatchableSearchViewController.cellReuseIdentifier)
-        let searchable = self.dataSet[indexPath.row]
+        let searchable = self.dataSet[indexPath.section].searchables[indexPath.row]
         if let searchResultCell = cell as? WatchableSearchResultTableViewCell {
             searchResultCell.update(withSearchable: searchable)
             searchResultCell.delegate = self
@@ -167,9 +175,13 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
     }
     
     //MARK:- UITableViewDelegate
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return self.dataSet[section].title
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let selectedObject = self.dataSet[indexPath.row]
+        let selectedObject = self.dataSet[indexPath.section].searchables[indexPath.row]
         if let watchable = selectedObject as? KrangWatchable {
             //Hide keyboard.
             self.searchController.searchBar.resignFirstResponder()
@@ -214,7 +226,7 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
         guard orientation == .right else { return nil }
         
-        let selectedObject = self.dataSet[indexPath.row]
+        let selectedObject = self.dataSet[indexPath.section].searchables[indexPath.row]
         var options = [SwipeAction]()
         if let linkable = selectedObject as? KrangLinkable {
             if let tmbdURL = linkable.urlForTMDB {

@@ -483,6 +483,24 @@ class TraktHelper: NSObject {
         }
     }
     
+    func getNextEpisode(forShows shows: [KrangShow], completion: ((Error?, [KrangEpisode]) -> ())?) {
+        let showsGroup = DispatchGroup()
+        var nextEpisodes: [KrangEpisode] = []
+        shows.forEach {
+            showsGroup.enter()
+            self.getNextEpisode(forShow: $0, completion: { (_, episode) in
+                if let episode = episode {
+                    nextEpisodes.append(episode)
+                }
+                showsGroup.leave()
+            })
+        }
+        
+        showsGroup.notify(queue: DispatchQueue.main) {
+            completion?(nil, nextEpisodes)
+        }
+    }
+    
     //MARK:- Marking
     func markWatched(_ watchable: KrangWatchable, completion: ((Error?) -> ())?) {
         let url = Constants.traktMarkWatchedURL

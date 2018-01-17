@@ -72,4 +72,8 @@ class RealmManager: NSObject {
         KrangEpisode.removeAllWatchDates()
     }
     
+    class func removeAllNextEpisodes() {
+        KrangShow.removeAllNextEpisodes()
+    }
+    
 }

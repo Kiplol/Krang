@@ -216,3 +216,17 @@ extension KrangEpisode: KrangWatchable {
         }
     }
 }
+
+extension KrangEpisode: KrangSearchable {
+    var urlForSearchResultThumbnailImage: URL? {
+        return self.posterImageURL.flatMap { URL(string: $0) }
+    }
+    
+    var titleForSearchResult: String? {
+        return "\(self.show?.title ?? "") s\(self.seasonNumber)e\(self.episode)"
+    }
+    
+    var subtitleForSearchResult: String? {
+        return self.title
+    }
+}

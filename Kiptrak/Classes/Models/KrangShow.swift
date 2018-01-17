@@ -85,6 +85,11 @@ class KrangShow: Object {
     class func removeAllWatchDates() {
         KrangShow.allWatchedShows.forEach { $0.lastWatchDate = nil }
     }
+    
+    class func removeAllNextEpisodes() {
+        let realm = try! Realm()
+        realm.objects(self).filter("nextEpisodeForWatchProgress != nil").forEach { $0.nextEpisodeForWatchProgress = nil }
+    }
 }
 
 extension KrangShow: KrangLinkable {
