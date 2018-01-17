@@ -409,53 +409,69 @@
                                     <constraint firstItem="UTm-sH-Srg" firstAttribute="leading" secondItem="UM0-kp-nIw" secondAttribute="leading" id="t8E-vu-r38"/>
                                 </constraints>
                             </stackView>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q4b-8F-Kim">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q4b-8F-Kim">
                                 <rect key="frame" x="0.0" y="579" width="375" height="116"/>
                                 <subviews>
-                                    <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h6W-If-myD">
-                                        <rect key="frame" x="10" y="8" width="355" height="100"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nbB-Ys-cQw" userLabel="Previous">
-                                                <rect key="frame" x="0.0" y="0.0" width="44" height="100"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="44" id="hoK-KZ-abE"/>
-                                                </constraints>
-                                                <state key="normal" image="direction-button-previous-30"/>
-                                                <connections>
-                                                    <action selector="previousTapped:" destination="MOm-jq-Kmx" eventType="touchUpInside" id="2zg-gc-dB5"/>
-                                                </connections>
-                                            </button>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" indicatorStyle="white" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="meG-Ed-yJi">
-                                                <rect key="frame" x="44" y="0.0" width="267" height="100"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="100" id="SJn-DC-plw"/>
-                                                </constraints>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                            </textView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FZq-4h-ezS" userLabel="Next">
-                                                <rect key="frame" x="311" y="0.0" width="44" height="100"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <state key="normal" image="direction-button-next-30"/>
-                                                <connections>
-                                                    <action selector="nextTapped:" destination="MOm-jq-Kmx" eventType="touchUpInside" id="ah5-RY-cf2"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstItem="FZq-4h-ezS" firstAttribute="width" secondItem="nbB-Ys-cQw" secondAttribute="width" id="kz1-Fy-PNb"/>
-                                        </constraints>
-                                    </stackView>
+                                    <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pj0-fo-SLT">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="116"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="fhI-ds-3ie">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="116"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h6W-If-myD">
+                                                    <rect key="frame" x="10" y="8" width="355" height="100"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nbB-Ys-cQw" userLabel="Previous">
+                                                            <rect key="frame" x="0.0" y="0.0" width="44" height="100"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="44" id="hoK-KZ-abE"/>
+                                                            </constraints>
+                                                            <state key="normal" image="direction-button-previous-30"/>
+                                                            <connections>
+                                                                <action selector="previousTapped:" destination="MOm-jq-Kmx" eventType="touchUpInside" id="2zg-gc-dB5"/>
+                                                            </connections>
+                                                        </button>
+                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" indicatorStyle="white" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="meG-Ed-yJi">
+                                                            <rect key="frame" x="44" y="0.0" width="267" height="100"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="100" id="SJn-DC-plw"/>
+                                                            </constraints>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        </textView>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FZq-4h-ezS" userLabel="Next">
+                                                            <rect key="frame" x="311" y="0.0" width="44" height="100"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <state key="normal" image="direction-button-next-30"/>
+                                                            <connections>
+                                                                <action selector="nextTapped:" destination="MOm-jq-Kmx" eventType="touchUpInside" id="ah5-RY-cf2"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="FZq-4h-ezS" firstAttribute="width" secondItem="nbB-Ys-cQw" secondAttribute="width" id="kz1-Fy-PNb"/>
+                                                    </constraints>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="h6W-If-myD" firstAttribute="top" secondItem="fhI-ds-3ie" secondAttribute="top" constant="8" id="SLr-Kl-I3n"/>
+                                                <constraint firstItem="h6W-If-myD" firstAttribute="leading" secondItem="fhI-ds-3ie" secondAttribute="leading" constant="10" id="Xzf-0T-311"/>
+                                                <constraint firstAttribute="bottom" secondItem="h6W-If-myD" secondAttribute="bottom" constant="8" id="ghQ-RI-dEh"/>
+                                                <constraint firstAttribute="trailing" secondItem="h6W-If-myD" secondAttribute="trailing" constant="10" id="rMj-EF-ii9"/>
+                                            </constraints>
+                                        </view>
+                                        <blurEffect style="dark"/>
+                                    </visualEffectView>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="h6W-If-myD" secondAttribute="trailing" constant="10" id="4De-9l-cD5"/>
-                                    <constraint firstItem="h6W-If-myD" firstAttribute="leading" secondItem="q4b-8F-Kim" secondAttribute="leading" constant="10" id="MI2-BK-D5F"/>
-                                    <constraint firstItem="h6W-If-myD" firstAttribute="top" secondItem="q4b-8F-Kim" secondAttribute="top" constant="8" id="ei2-6Y-X9u"/>
-                                    <constraint firstAttribute="bottom" secondItem="h6W-If-myD" secondAttribute="bottom" constant="8" id="seF-nO-FAM"/>
+                                    <constraint firstItem="Pj0-fo-SLT" firstAttribute="top" secondItem="q4b-8F-Kim" secondAttribute="top" id="6d4-N1-5fV"/>
+                                    <constraint firstAttribute="bottom" secondItem="Pj0-fo-SLT" secondAttribute="bottom" id="Pul-EH-Jpx"/>
+                                    <constraint firstAttribute="trailing" secondItem="Pj0-fo-SLT" secondAttribute="trailing" id="gk7-0B-doB"/>
+                                    <constraint firstItem="Pj0-fo-SLT" firstAttribute="leading" secondItem="q4b-8F-Kim" secondAttribute="leading" id="z7q-qd-yfq"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -469,7 +485,7 @@
                             <constraint firstItem="dHT-jR-8H0" firstAttribute="leading" secondItem="b1x-rc-Tah" secondAttribute="leading" constant="10" id="B4f-Bf-gJL"/>
                             <constraint firstAttribute="bottom" secondItem="IyI-kq-iBB" secondAttribute="bottom" id="BsG-Fi-9SN"/>
                             <constraint firstItem="Q5u-Zf-KF9" firstAttribute="leading" secondItem="CXm-aG-Mrb" secondAttribute="leading" id="J93-bE-fh4"/>
-                            <constraint firstItem="UM0-kp-nIw" firstAttribute="top" secondItem="q4b-8F-Kim" secondAttribute="bottom" constant="5" id="LP5-qK-jQl"/>
+                            <constraint firstItem="IyI-kq-iBB" firstAttribute="top" secondItem="q4b-8F-Kim" secondAttribute="bottom" id="Ke7-75-CXK"/>
                             <constraint firstItem="Q5u-Zf-KF9" firstAttribute="top" secondItem="CXm-aG-Mrb" secondAttribute="top" id="MAH-4a-IFh"/>
                             <constraint firstItem="b1x-rc-Tah" firstAttribute="trailing" secondItem="UM0-kp-nIw" secondAttribute="trailing" constant="10" id="OdF-wC-Nsc"/>
                             <constraint firstItem="CXm-aG-Mrb" firstAttribute="top" secondItem="Zsy-wP-y1d" secondAttribute="top" id="Rsm-KV-wgZ"/>

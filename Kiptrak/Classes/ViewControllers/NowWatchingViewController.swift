@@ -275,6 +275,9 @@ private extension NowWatchingViewController {
             self.detailsBottomContainerView.isHidden = !piecesOfTrivia.isEmpty && self.mode != .full
             self.piecesOfTrivia = piecesOfTrivia
             self.setText(asTrivia: piecesOfTrivia.first)
+            if !piecesOfTrivia.isEmpty {
+                self.triviaContainerView.isHidden = false
+            }
             self.view.layoutIfNeeded()
         }
     }
