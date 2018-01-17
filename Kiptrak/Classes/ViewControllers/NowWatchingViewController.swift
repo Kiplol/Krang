@@ -127,8 +127,7 @@ class NowWatchingViewController: KrangViewController {
         }
         
         let previousPiece = index == 0 ? piecesOfTrivia[piecesOfTrivia.count - 1] : piecesOfTrivia[index - 1]
-        self.textViewTrivia.text = previousPiece
-        self.textViewTrivia.scrollRangeToVisible(NSRange(location:0, length:0))
+        self.setText(asTrivia: previousPiece)
     }
     
     @IBAction func nextTapped(_ sender: Any) {
@@ -137,8 +136,27 @@ class NowWatchingViewController: KrangViewController {
         }
         
         let nextPiece = index == (piecesOfTrivia.count - 1) ? piecesOfTrivia[0] : piecesOfTrivia[index + 1]
-        self.textViewTrivia.text = nextPiece
-        self.textViewTrivia.scrollRangeToVisible(NSRange(location:0, length:0))
+        self.setText(asTrivia: nextPiece)
+    }
+    
+    // MARK: - Trivia
+    private func setText(asTrivia text: String?) {
+        guard let text = text else {
+            self.triviaContainerView.isHidden = true
+            return
+        }
+        self.textViewTrivia.text = text
+        self.view.layoutIfNeeded()
+        
+        UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.4, options: [], animations: {
+            let maxHeight: CGFloat = 160.0
+            self.constraintTextViewTriviaHeight.constant = min(self.textViewTrivia.contentSize.height, maxHeight)
+            self.view.layoutIfNeeded()
+            self.textViewTrivia.scrollRangeToVisible(NSRange(location:0, length:0))
+            if self.constraintTextViewTriviaHeight.constant >= maxHeight {
+                self.textViewTrivia.flashScrollIndicators()
+            }
+        }, completion: nil)
     }
     
     // MARK: - Notifications
@@ -238,7 +256,7 @@ private extension NowWatchingViewController {
         guard let watchable = watchable else {
             self.labelWatchableName.text = nil
             self.imageBackground.image = nil
-            self.textViewTrivia.text = nil
+            self.setText(asTrivia: nil)
             return
         }
         
@@ -256,7 +274,7 @@ private extension NowWatchingViewController {
         IMDBHelper.shared.getTrivia(forWatchable: watchable) { piecesOfTrivia in
             self.detailsBottomContainerView.isHidden = !piecesOfTrivia.isEmpty && self.mode != .full
             self.piecesOfTrivia = piecesOfTrivia
-            self.textViewTrivia.text = piecesOfTrivia.first
+            self.setText(asTrivia: piecesOfTrivia.first)
             self.view.layoutIfNeeded()
         }
     }
