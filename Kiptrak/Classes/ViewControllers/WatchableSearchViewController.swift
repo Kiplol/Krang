@@ -195,6 +195,20 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
         return self.dataSet[section].title
     }
     
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let title = self.tableView(tableView, titleForHeaderInSection: section) else {
+            return nil
+        }
+        
+        let label = UILabel(frame: CGRect(x: 0.0, y: 0.0, width: tableView.bounds.size.width, height: 24.0))
+        label.font = UIFont.systemFont(ofSize: 12.0, weight: .bold)
+        label.backgroundColor = UIColor.black.alpha(0.6)
+        label.textColor = UIColor.white
+        label.text = " " + title
+        label.autoresizingMask = [.flexibleWidth]
+        return label
+    }
+    
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         let section = self.dataSet[indexPath.section]
         return !section.isLoading
