@@ -443,19 +443,30 @@ class TraktHelper: NSObject {
                             return
                         }
                         let jsonForUpdating = JSON(["episode": episodeJSON, "type": "episode"])
-                        if let existingEpisode = KrangEpisode.with(traktID: episodeTraktID) {
-                            RealmManager.makeChanges {
-                                show.nextEpisodeForWatchProgress = existingEpisode
-                                existingEpisode.update(withJSON: jsonForUpdating)
+                        let episode: KrangEpisode = {
+                            if let existingEpisode = KrangEpisode.with(traktID: episodeTraktID) {
+                                RealmManager.makeChanges {
+                                    show.nextEpisodeForWatchProgress = existingEpisode
+                                    existingEpisode.update(withJSON: jsonForUpdating)
+                                    existingEpisode.show = show
+                                    existingEpisode.season = show.getSeason(withSeasonNumber: seasonNumber)
+                                }
+                                return existingEpisode
+                            } else {
+                                let newEpisode = KrangEpisode()
+                                newEpisode.update(withJSON: jsonForUpdating)
+                                newEpisode.show = show
+                                newEpisode.season = show.getSeason(withSeasonNumber: seasonNumber)
+                                newEpisode.saveToDatbase()
+                                return newEpisode
                             }
-                            completion?(nil, existingEpisode)
+                        }()
+                        if episode.posterImageURL == nil {
+                            TMDBHelper.shared.update(episode: episode, completion: { (_, _) in
+                                completion?(nil, episode)
+                            })
                         } else {
-                            let newEpisode = KrangEpisode()
-                            newEpisode.update(withJSON: jsonForUpdating)
-                            newEpisode.show = show
-                            newEpisode.season = show.getSeason(withSeasonNumber: seasonNumber)
-                            newEpisode.saveToDatbase()
-                            completion?(nil, newEpisode)
+                            completion?(nil, episode)
                         }
                     } catch let episodeJSONError {
                         completion?(episodeJSONError, nil)
