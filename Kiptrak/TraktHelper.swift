@@ -173,6 +173,11 @@ class TraktHelper: NSObject {
         let _ = self.oauth.client.get(url, parameters: [:], headers: TraktHelper.defaultHeaders(), success: { (response) in
             //Yay
             do {
+                guard !response.data.isEmpty else {
+                    //They're just not watching anything.
+                    completion?(nil, nil, nil)
+                    return
+                }
                 let json = try JSON(data: response.data)
                 let maybeMovieOrEpisode = TraktHelper.movieOrEpisodeFrom(json: json)
                 if let actualMovie = maybeMovieOrEpisode as? KrangMovie {
