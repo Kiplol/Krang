@@ -267,11 +267,8 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
             
             KrangWatchableUI.offerActions(forWatchable: watchable, completion: { (error, action) in
                 switch action {
-                case .checkIn:
-                    if error == nil {
-
-                    }
-                    
+                case .markWatched:
+                    self.refreshData()
                 default:
                     break //@TODO: Other action
                 }
