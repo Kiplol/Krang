@@ -8,6 +8,7 @@ def shared_pods
 	pod 'OAuthSwift', '~> 1.2.0'
 	pod 'RealmSwift'
 	pod 'SwiftyBeaver'
+	pod 'SwiftLCS'
 	pod 'SwiftyJSON'
 end
 

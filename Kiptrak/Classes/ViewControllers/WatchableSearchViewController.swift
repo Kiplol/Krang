@@ -6,18 +6,25 @@
 //  Copyright © 2017 Supernovacaine Inc. All rights reserved.
 //
 
-import UIKit
-import RealmSwift
-import OAuthSwift
-import SwipeCellKit
 import LGAlertView
+import OAuthSwift
+import RealmSwift
+import SwiftLCS
+import SwipeCellKit
+import UIKit
 
 class WatchableSearchViewController: KrangViewController, UISearchResultsUpdating, UITableViewDataSource, UITableViewDelegate, SwipeTableViewCellDelegate {
     
-    struct Section {
+    class Section: NSObject {
         let title: String?
         var searchables: [KrangSearchable]
         var isLoading = false
+        
+        init(title: String?, searchables: [KrangSearchable], isLoading: Bool) {
+            self.title = title
+            self.searchables = searchables
+            self.isLoading = isLoading
+        }
     }
     
     static let cellReuseIdentifier = "searchResultsCell"
@@ -101,22 +108,7 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.view.layoutIfNeeded()
-        TraktHelper.shared.getRecentShowHistory { (error, shows) in
-            self.historySection.searchables = shows
-            self.historySection.isLoading = false
-            if !self.isSearching {
-                self.tableView.reloadData()
-            }
-            if UserPrefs.traktSync {
-                TraktHelper.shared.getNextEpisode(forShows: shows) { (nextEpisodeError, episodes) in
-                    self.upNextSection.searchables = episodes
-                    self.upNextSection.isLoading = false
-                    if !self.isSearching {
-                        self.tableView.reloadData()
-                    }
-                }
-            }
-        }
+        self.refreshData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -135,6 +127,11 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
     // MARK: - KrangViewController
     override func willEnterForeground(_ notif: Notification) {
         super.willEnterForeground(notif)
+        self.refreshData()
+    }
+    
+    // MARK: -
+    private func refreshData() {
         TraktHelper.shared.getRecentShowHistory { (error, shows) in
             self.historySection.searchables = shows
             self.historySection.isLoading = false
@@ -143,10 +140,25 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
             }
             if UserPrefs.traktSync {
                 TraktHelper.shared.getNextEpisode(forShows: shows) { (nextEpisodeError, episodes) in
-                    self.upNextSection.searchables = episodes
-                    self.upNextSection.isLoading = false
-                    if !self.isSearching {
-                        self.tableView.reloadData()
+                    if let previousEpisodes = self.upNextSection.searchables as? [KrangEpisode],
+                        let sectionIndex = self.dataSet.index(of: self.upNextSection),
+                    !self.isSearching {
+                        let diff = previousEpisodes.diff(episodes)
+                        self.tableView.beginUpdates()
+                        self.upNextSection.searchables = episodes
+                        if self.upNextSection.isLoading {
+                            self.tableView.deleteRows(at: [IndexPath(row: 0, section: sectionIndex)], with: .automatic)
+                        }
+                        self.upNextSection.isLoading = false
+                        self.tableView.deleteRows(at: diff.removedIndexSet.map { IndexPath(row: $0, section: sectionIndex) }, with: .automatic)
+                        self.tableView.insertRows(at: diff.addedIndexSet.map { IndexPath(row: $0, section: sectionIndex) }, with: .automatic)
+                        self.tableView.endUpdates()
+                    } else {
+                        self.upNextSection.searchables = episodes
+                        self.upNextSection.isLoading = false
+                        if !self.isSearching {
+                            self.tableView.reloadData()
+                        }
                     }
                 }
             }
@@ -221,13 +233,24 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
             return nil
         }
         
-        let label = UILabel(frame: CGRect(x: 0.0, y: 0.0, width: tableView.bounds.size.width, height: 24.0))
-        label.font = UIFont.systemFont(ofSize: 12.0, weight: .bold)
-        label.backgroundColor = UIColor.black.alpha(0.6)
+        let container = UIView(frame: CGRect(x: 0.0, y: 0.0, width: tableView.bounds.size.width, height: 24.0))
+        container.backgroundColor = UIColor.black.alpha(0.75)
+//        let container = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+//        container.frame = CGRect(x: 0.0, y: 0.0, width: tableView.bounds.size.width, height: 24.0)
+//        container.autoresizingMask = [.flexibleWidth]
+        
+        let label = UILabel(frame: CGRect(x: 10.0, y: 0.0, width: tableView.bounds.size.width - 20.0, height: 24.0))
+        label.font = UIFont.systemFont(ofSize: 13.0, weight: .bold)
+        label.backgroundColor = UIColor.clear
         label.textColor = UIColor.white
-        label.text = " " + title
+        label.text = title
         label.autoresizingMask = [.flexibleWidth]
-        return label
+        label.sizeToFit()
+        
+//        container.contentView.addSubview(label)
+        container.addSubview(label)
+        label.center.y = container.bounds.size.height * 0.5
+        return container
     }
     
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {

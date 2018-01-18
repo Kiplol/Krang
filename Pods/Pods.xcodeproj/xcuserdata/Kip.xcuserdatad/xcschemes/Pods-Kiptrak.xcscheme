@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CD3D99B511B38C56AE5896B2B71A0CF1"
+               BlueprintIdentifier = "B96B7965DA15910DD7086E45108350BB"
                BuildableName = "Pods_Kiptrak.framework"
                BlueprintName = "Pods-Kiptrak"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -47,7 +47,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CD3D99B511B38C56AE5896B2B71A0CF1"
+            BlueprintIdentifier = "B96B7965DA15910DD7086E45108350BB"
             BuildableName = "Pods_Kiptrak.framework"
             BlueprintName = "Pods-Kiptrak"
             ReferencedContainer = "container:Pods.xcodeproj">
