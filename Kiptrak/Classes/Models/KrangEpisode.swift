@@ -219,7 +219,15 @@ extension KrangEpisode: KrangWatchable {
 
 extension KrangEpisode: KrangSearchable {
     var urlForSearchResultThumbnailImage: URL? {
-        return self.posterImageURL.flatMap { URL(string: $0) }
+        if let posterImageURL = self.posterImageURL {
+            return URL(string: posterImageURL)
+        } else if let seasonPosterImageURL = self.season?.posterImageURL {
+            return URL(string: seasonPosterImageURL)
+        } else if let showPosterImageURL = self.show?.imagePosterURL {
+            return URL(string: showPosterImageURL)
+        } else {
+            return nil
+        }
     }
     
     var titleForSearchResult: String? {

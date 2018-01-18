@@ -136,27 +136,20 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
             self.historySection.searchables = shows
             self.historySection.isLoading = false
             if !self.isSearching {
-                self.tableView.reloadData()
+                if let historyIndex = self.dataSet.index(of: self.historySection) {
+                    self.tableView.reloadSections([historyIndex], with: .automatic)
+                } else {
+                    self.tableView.reloadData()
+                }
             }
             if UserPrefs.traktSync {
                 TraktHelper.shared.getNextEpisode(forShows: shows) { (nextEpisodeError, episodes) in
-                    if let previousEpisodes = self.upNextSection.searchables as? [KrangEpisode],
-                        let sectionIndex = self.dataSet.index(of: self.upNextSection),
-                    !self.isSearching {
-                        let diff = previousEpisodes.diff(episodes)
-                        self.tableView.beginUpdates()
-                        self.upNextSection.searchables = episodes
-                        if self.upNextSection.isLoading {
-                            self.tableView.deleteRows(at: [IndexPath(row: 0, section: sectionIndex)], with: .automatic)
-                        }
-                        self.upNextSection.isLoading = false
-                        self.tableView.deleteRows(at: diff.removedIndexSet.map { IndexPath(row: $0, section: sectionIndex) }, with: .automatic)
-                        self.tableView.insertRows(at: diff.addedIndexSet.map { IndexPath(row: $0, section: sectionIndex) }, with: .automatic)
-                        self.tableView.endUpdates()
-                    } else {
-                        self.upNextSection.searchables = episodes
-                        self.upNextSection.isLoading = false
-                        if !self.isSearching {
+                    self.upNextSection.searchables = episodes
+                    self.upNextSection.isLoading = false
+                    if !self.isSearching {
+                        if let upNextIndex = self.dataSet.index(of: self.upNextSection) {
+                            self.tableView.reloadSections([upNextIndex], with: .automatic)
+                        } else {
                             self.tableView.reloadData()
                         }
                     }
