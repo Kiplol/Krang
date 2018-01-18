@@ -86,7 +86,7 @@ class KrangUser: Object {
         self.location = json["user"]["location"].string
         self.gender = json["user"]["gender"].string ?? "male"
         self.avatarImageURL = json["user"]["images"]["avatar"]["full"].string
-        self.coverImageURL = json["account"]["cover_image"].string
+        self.coverImageURL = json["account"]["cover_image"].string ?? self.coverImageURL
         self.sharingTextWatching = json["sharing_text"]["watching"].string ?? "I'm watching [item]"
         self.sharingTextWatched = json["sharing_text"]["watching"].string ?? "I just watched [item]"        
     }
