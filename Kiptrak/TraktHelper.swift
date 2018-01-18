@@ -485,19 +485,19 @@ class TraktHelper: NSObject {
     
     func getNextEpisode(forShows shows: [KrangShow], completion: ((Error?, [KrangEpisode]) -> ())?) {
         let showsGroup = DispatchGroup()
-        var nextEpisodes: [KrangEpisode] = []
-        shows.forEach {
+        var showToEpisodeMap: [KrangShow: KrangEpisode] = [:]
+        shows.forEach { show in
             showsGroup.enter()
-            self.getNextEpisode(forShow: $0, completion: { (_, episode) in
+            self.getNextEpisode(forShow: show, completion: { (_, episode) in
                 if let episode = episode {
-                    nextEpisodes.append(episode)
+                    showToEpisodeMap[show] = episode
                 }
                 showsGroup.leave()
             })
         }
         
         showsGroup.notify(queue: DispatchQueue.main) {
-            completion?(nil, nextEpisodes)
+            completion?(nil, shows.flatMap { showToEpisodeMap[$0] })
         }
     }
     

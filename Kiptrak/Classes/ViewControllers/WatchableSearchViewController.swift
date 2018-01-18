@@ -132,6 +132,27 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
         self.searchController.isActive = false
     }
     
+    // MARK: - KrangViewController
+    override func willEnterForeground(_ notif: Notification) {
+        super.willEnterForeground(notif)
+        TraktHelper.shared.getRecentShowHistory { (error, shows) in
+            self.historySection.searchables = shows
+            self.historySection.isLoading = false
+            if !self.isSearching {
+                self.tableView.reloadData()
+            }
+            if UserPrefs.traktSync {
+                TraktHelper.shared.getNextEpisode(forShows: shows) { (nextEpisodeError, episodes) in
+                    self.upNextSection.searchables = episodes
+                    self.upNextSection.isLoading = false
+                    if !self.isSearching {
+                        self.tableView.reloadData()
+                    }
+                }
+            }
+        }
+    }
+    
     // MARK: - User Interaction
     @objc func settingsTapped(_ sender: AnyObject?) {
         self.performSegue(withIdentifier: "toSettings", sender: self)
