@@ -6,8 +6,9 @@
 //  Copyright © 2017 Supernovacaine Inc. All rights reserved.
 //
 
-import UIKit
+import FirebaseAnalytics
 import OAuthSwift
+import UIKit
 
 class SplashViewController: KrangViewController {
 
@@ -53,6 +54,8 @@ class SplashViewController: KrangViewController {
                     //Peeee
                     if user != nil && !user!.username.isEmpty {
                         KrangLogger.log.debug("User \(user!.username) is already logged in, so proceed to playback")
+                        Analytics.setUserID(user?.username)
+                        Analytics.setUserProperty(user?.name, forName: "name")
                         
                         //Trakt History Sync
                         if UserPrefs.traktSync {

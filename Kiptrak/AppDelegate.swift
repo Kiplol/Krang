@@ -6,9 +6,10 @@
 //  Copyright © 2017 Supernovacaine Inc. All rights reserved.
 //
 
-import UIKit
-import OAuthSwift
+import Firebase
 import LGAlertView
+import OAuthSwift
+import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -25,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         AppDelegate.instance = self;
+        FirebaseApp.configure()
         self.setupAppearance()
         NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.didCheckInToAWatchable(_:)), name: Notification.Name.didCheckInToWatchable, object: nil)
         

@@ -29,6 +29,8 @@
 		3760116F1F6C9E29004ED6EF /* SeasonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3760116D1F6C9E29004ED6EF /* SeasonCollectionViewCell.swift */; };
 		376011701F6C9E29004ED6EF /* SeasonCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3760116E1F6C9E29004ED6EF /* SeasonCollectionViewCell.xib */; };
 		376011721F6CA021004ED6EF /* SelfSizingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376011711F6CA021004ED6EF /* SelfSizingCell.swift */; };
+		3760A62020113E3600FB7CF2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3760A61F20113E3500FB7CF2 /* GoogleService-Info.plist */; };
+		3760A62120113E3600FB7CF2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3760A61F20113E3500FB7CF2 /* GoogleService-Info.plist */; };
 		3763546C1FF2DD8200AF01BF /* NibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3763546B1FF2DD8200AF01BF /* NibView.swift */; };
 		3763546D1FF2DD8200AF01BF /* NibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3763546B1FF2DD8200AF01BF /* NibView.swift */; };
 		376713821F61B98000024036 /* KrangUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376713811F61B98000024036 /* KrangUtils.swift */; };
@@ -181,6 +183,7 @@
 		3760116D1F6C9E29004ED6EF /* SeasonCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SeasonCollectionViewCell.swift; path = Kiptrak/Classes/Views/Cells/SeasonCollectionViewCell.swift; sourceTree = "<group>"; };
 		3760116E1F6C9E29004ED6EF /* SeasonCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SeasonCollectionViewCell.xib; path = Kiptrak/Classes/Views/Cells/SeasonCollectionViewCell.xib; sourceTree = "<group>"; };
 		376011711F6CA021004ED6EF /* SelfSizingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelfSizingCell.swift; path = Classes/Protocols/SelfSizingCell.swift; sourceTree = "<group>"; };
+		3760A61F20113E3500FB7CF2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3763546B1FF2DD8200AF01BF /* NibView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NibView.swift; path = Kiptrak/Classes/Views/NibView.swift; sourceTree = "<group>"; };
 		376713811F61B98000024036 /* KrangUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KrangUtils.swift; path = Classes/Utils/KrangUtils.swift; sourceTree = "<group>"; };
 		37690A771FF5921B009A9028 /* NowWatchingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NowWatchingViewController.swift; path = Classes/ViewControllers/NowWatchingViewController.swift; sourceTree = "<group>"; };
@@ -362,6 +365,7 @@
 				37870B261E22BA6A00A2EC00 /* Assets.xcassets */,
 				37870B281E22BA6A00A2EC00 /* LaunchScreen.storyboard */,
 				37870B2B1E22BA6A00A2EC00 /* Info.plist */,
+				3760A61F20113E3500FB7CF2 /* GoogleService-Info.plist */,
 				379C554B1E24992900D51019 /* Utils */,
 				373D32911E22BE9700980925 /* ViewControllers */,
 				379C55531E259BAE00D51019 /* Views */,
@@ -615,6 +619,7 @@
 				37870B2A1E22BA6A00A2EC00 /* LaunchScreen.storyboard in Resources */,
 				37A19E2F1E25BAEF007877B4 /* Images.xcassets in Resources */,
 				377463F51F6DD1FE00F08029 /* EpisodeTableViewCell.xib in Resources */,
+				3760A62020113E3600FB7CF2 /* GoogleService-Info.plist in Resources */,
 				37870B271E22BA6A00A2EC00 /* Assets.xcassets in Resources */,
 				37E957861F69CB03003D6D74 /* WatchableSearchResultTableViewCell.xib in Resources */,
 				372595B3201006C100C7C516 /* LoadingTableViewCell.xib in Resources */,
@@ -666,6 +671,7 @@
 				37A19E921E2C5B14007877B4 /* Exo-ExtraLight.otf in Resources */,
 				37A19E911E2C5B14007877B4 /* Exo-ExtraLight-Italic.otf in Resources */,
 				37A19E961E2C5B14007877B4 /* Exo-Medium.otf in Resources */,
+				3760A62120113E3600FB7CF2 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -746,6 +752,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Kiptrak/Pods-Kiptrak-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/CustomizableActionSheet/CustomizableActionSheet.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
 				"${BUILT_PRODUCTS_DIR}/Hue/Hue.framework",
 				"${BUILT_PRODUCTS_DIR}/KDCircularProgress/KDCircularProgress.framework",
@@ -762,10 +769,12 @@
 				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver/SwiftyBeaver.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/SwipeCellKit/SwipeCellKit.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CustomizableActionSheet.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hue.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KDCircularProgress.framework",
@@ -782,6 +791,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyBeaver.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwipeCellKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

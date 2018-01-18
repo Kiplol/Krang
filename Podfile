@@ -15,6 +15,7 @@ end
 target 'Kiptrak' do
 	shared_pods
 	pod 'CustomizableActionSheet'
+	pod 'Firebase/Core'
 	pod 'KDCircularProgress', :git => 'https://github.com/kaandedeoglu/KDCircularProgress'
 	pod 'LGAlertView'
 	pod 'Hero'
