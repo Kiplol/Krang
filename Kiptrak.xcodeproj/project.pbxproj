@@ -521,6 +521,7 @@
 				EA82FF84A79BA0B7A01D74D1 /* [CP] Embed Pods Frameworks */,
 				7C50886ACF88F300C3229EE4 /* [CP] Copy Pods Resources */,
 				37A19E731E2BFDD9007877B4 /* Embed App Extensions */,
+				3763B386201D2CF000E24FC1 /* Crashlytics */,
 			);
 			buildRules = (
 			);
@@ -678,6 +679,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3763B386201D2CF000E24FC1 /* Crashlytics */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Crashlytics;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/Fabric.framework/run\"";
+		};
 		607631F0D1C3329CEEED915C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

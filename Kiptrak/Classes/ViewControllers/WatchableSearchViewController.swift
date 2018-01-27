@@ -108,6 +108,7 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.view.layoutIfNeeded()
+        self.tableView.reloadData()
         self.refreshData()
     }
     

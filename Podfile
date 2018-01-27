@@ -14,7 +14,9 @@ end
 
 target 'Kiptrak' do
 	shared_pods
+	pod 'Crashlytics', '~> 3.9.3'
 	pod 'CustomizableActionSheet'
+	pod 'Fabric', '~> 1.7.2'
 	pod 'Firebase/Core'
 	pod 'KDCircularProgress', :git => 'https://github.com/kaandedeoglu/KDCircularProgress'
 	pod 'LGAlertView'
