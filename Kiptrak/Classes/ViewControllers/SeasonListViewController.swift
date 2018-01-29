@@ -6,8 +6,8 @@
 //  Copyright © 2017 Supernovacaine Inc. All rights reserved.
 //
 
-import UIKit
 import RealmSwift
+import UIKit
 
 class SeasonListViewController: KrangViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 

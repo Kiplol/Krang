@@ -6,11 +6,10 @@
 //  Copyright © 2017 Supernovacaine Inc. All rights reserved.
 //
 
-import UIKit
-
 import OAuthSwift
-import SwiftyJSON
 import RealmSwift
+import SwiftyJSON
+import UIKit
 
 class TraktHelper: NSObject {
     

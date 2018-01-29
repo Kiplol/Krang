@@ -6,9 +6,9 @@
 //  Copyright © 2017 Supernovacaine Inc. All rights reserved.
 //
 
-import UIKit
 import RealmSwift
 import SwipeCellKit
+import UIKit
 
 class EpisodeListViewController: KrangViewController, UITableViewDataSource, UITableViewDelegate, SwipeTableViewCellDelegate {
 

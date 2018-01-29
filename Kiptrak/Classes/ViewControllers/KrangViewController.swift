@@ -6,10 +6,10 @@
 //  Copyright © 2017 Supernovacaine Inc. All rights reserved.
 //
 
-import UIKit
 import Hero
-import RxSwift
 import RxKeyboard
+import RxSwift
+import UIKit
 
 class KrangViewController: UIViewController {
 
