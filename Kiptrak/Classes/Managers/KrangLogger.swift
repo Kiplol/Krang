@@ -14,8 +14,8 @@ class KrangLogger: NSObject {
     static let log = SwiftyBeaver.self
     
     class func setup() {
-        let consoleDestination = ConsoleDestination()
-        KrangLogger.log.addDestination(consoleDestination)
+//        let consoleDestination = ConsoleDestination()
+//        KrangLogger.log.addDestination(consoleDestination)
     }
 
 }

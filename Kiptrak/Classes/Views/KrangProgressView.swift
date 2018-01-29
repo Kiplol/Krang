@@ -24,7 +24,7 @@ class KrangProgressView: UIView {
     private var displayLink: CADisplayLink? = nil
     var progress: Float = 0.0 {
         didSet {
-            self.fillView.frame.size.width = self.bounds.size.width * CGFloat(self.progress)
+            self.fillView.frame = CGRect(x: 0.0, y: 0.0, width: self.bounds.size.width * CGFloat(self.progress), height: self.bounds.size.height)
         }
     }
     var startDate:Date? = nil
