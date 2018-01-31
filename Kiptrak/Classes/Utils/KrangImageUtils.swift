@@ -99,13 +99,13 @@ extension UIImageView {
     func setPoster(fromMovie movie:KrangMovie?) {
         guard let posterURL = movie?.posterImageURL else {
             //TODO
-            self.image = nil
+            self.image = #imageLiteral(resourceName: "poster_placeholder_dark")
             return
         }
         
         guard let url = URL(string: posterURL) else {
             //TODO
-            self.image = nil
+            self.image = #imageLiteral(resourceName: "poster_placeholder_dark")
             return
         }
         
@@ -115,13 +115,13 @@ extension UIImageView {
     func setPoster(fromEpisode episode:KrangEpisode?) {
         guard let szURL = episode?.posterImageURL else {
             //TODO
-            self.image = nil
+            self.image = #imageLiteral(resourceName: "poster_placeholder_dark")
             return
         }
         
         guard let url = URL(string: szURL) else {
             //TODO
-            self.image = nil
+            self.image = #imageLiteral(resourceName: "poster_placeholder_dark")
             return
         }
         
@@ -131,13 +131,13 @@ extension UIImageView {
     func setPoster(fromWatchable watchable:KrangWatchable?) {
         guard let szURL = watchable?.posterImageURL else {
             //TODO
-            self.image = nil
+            self.image = #imageLiteral(resourceName: "poster_placeholder_dark")
             return
         }
         
         guard let url = URL(string: szURL) else {
             //TODO
-            self.image = nil
+            self.image = #imageLiteral(resourceName: "poster_placeholder_dark")
             return
         }
         
