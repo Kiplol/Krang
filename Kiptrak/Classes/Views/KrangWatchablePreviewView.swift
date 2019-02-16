@@ -6,6 +6,7 @@
 //  Copyright © 2017 Supernovacaine Inc. All rights reserved.
 //
 
+import Kingfisher
 import UIKit
 import RealmSwift
 
@@ -69,7 +70,7 @@ class KrangWatchablePreviewView: UIView {
         })
         
         if let szPosterURL = watchable.posterImageURL, let posterURL = URL(string: szPosterURL) {
-            self.imageViewPoster.kf.setImage(with: posterURL, placeholder: #imageLiteral(resourceName: "poster_placeholder_dark"), options: nil, progressBlock: nil, completionHandler: nil)
+            self.imageViewPoster.kf.setImage(with: (posterURL as? ImageDataProvider), placeholder: #imageLiteral(resourceName: "poster_placeholder_dark"), options: nil, progressBlock: nil, completionHandler: nil)
         } else {
             self.imageViewPoster.image = #imageLiteral(resourceName: "poster_placeholder_dark")
         }

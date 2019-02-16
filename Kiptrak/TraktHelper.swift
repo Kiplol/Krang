@@ -496,7 +496,7 @@ class TraktHelper: NSObject {
         }
         
         showsGroup.notify(queue: DispatchQueue.main) {
-            completion?(nil, shows.flatMap { showToEpisodeMap[$0] })
+            completion?(nil, shows.compactMap { showToEpisodeMap[$0] })
         }
     }
     

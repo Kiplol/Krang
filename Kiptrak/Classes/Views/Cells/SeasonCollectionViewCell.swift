@@ -20,7 +20,7 @@ class SeasonCollectionViewCell: UICollectionViewCell, SelfSizingCell {
     @IBOutlet weak var imageSeen: UIImageView!
     @IBOutlet weak var labelTitle: UILabel!
     var realmChangeToken: NotificationToken? = nil
-    var retrieveImageTask: RetrieveImageTask? = nil
+    var retrieveImageTask: DownloadTask? = nil
     
     //MARK:-
     override func awakeFromNib() {
@@ -45,13 +45,13 @@ class SeasonCollectionViewCell: UICollectionViewCell, SelfSizingCell {
         
         //Use image that's already in there as a placeholder
         if let posterImageURL = season.posterImageURL {
-            self.imageView.kf.setImage(with: URL(string: posterImageURL), placeholder: self.imageView.image, options: [.transition(.fade(0.2))], progressBlock: nil, completionHandler: nil)
+            self.imageView.kf.setImage(with: (URL(string: posterImageURL) as? ImageDataProvider), placeholder: self.imageView.image, options: [.transition(.fade(0.2))], progressBlock: nil, completionHandler: nil)
         } else if SeasonCollectionViewCell.listenForRealmChanges {
             let query = try! Realm().objects(KrangSeason.self).filter("traktID == %d", season.traktID)
             self.realmChangeToken = query.observe({ change in
                 if query.count > 0 {
                     if let updatedPosterImageURL = query[0].posterImageURL ?? query[0].show?.imagePosterURL {
-                        self.imageView.kf.setImage(with: URL(string: updatedPosterImageURL), placeholder: self.imageView.image, options: [.transition(.fade(0.2))], progressBlock: nil, completionHandler: nil)
+                        self.imageView.kf.setImage(with: (URL(string: updatedPosterImageURL) as? ImageDataProvider), placeholder: self.imageView.image, options: [.transition(.fade(0.2))], progressBlock: nil, completionHandler: nil)
                     }
                 }
             })

@@ -19,7 +19,7 @@ class WatchableSearchResultTableViewCell: SwipeTableViewCell {
     
     //MARK:- ivars
     var realmChangeToken: NotificationToken? = nil
-    var retrieveImageTask: RetrieveImageTask? = nil
+    var retrieveImageTask: DownloadTask? = nil
     
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -42,7 +42,8 @@ class WatchableSearchResultTableViewCell: SwipeTableViewCell {
         self.retrieveImageTask?.cancel()
         self.retrieveImageTask = nil
         if let thumbnailURL = searchable.urlForSearchResultThumbnailImage {
-            self.retrieveImageTask = self.imageViewThumbnail.kf.setImage(with: thumbnailURL, placeholder: #imageLiteral(resourceName: "poster_placeholder_dark"), options: nil, progressBlock: nil, completionHandler: nil)
+            self.retrieveImageTask = self.imageViewThumbnail.kf.setImage(with: (thumbnailURL as? ImageDataProvider), placeholder: #imageLiteral(resourceName: "poster_placeholder_dark"), options: nil, progressBlock: nil, completionHandler: nil)
+            self.retrieveImageTask = self.imageViewThumbnail.kf.setImage(with: thumbnailURL)
         } else if TraktHelper.asyncImageLoadingOnSearch {
             if let movie = searchable as? KrangMovie {
                 let movieID = movie.traktID
@@ -50,7 +51,7 @@ class WatchableSearchResultTableViewCell: SwipeTableViewCell {
                 self.realmChangeToken = query.observe() { change in
                     if query.count > 0 {
                         if let updatedThumbnailURL = query[0].urlForSearchResultThumbnailImage {
-                            self.retrieveImageTask = self.imageViewThumbnail.kf.setImage(with: updatedThumbnailURL, placeholder: #imageLiteral(resourceName: "poster_placeholder_dark"), options: nil, progressBlock: nil, completionHandler: nil)
+                            self.retrieveImageTask = self.imageViewThumbnail.kf.setImage(with: (updatedThumbnailURL as? ImageDataProvider), placeholder: #imageLiteral(resourceName: "poster_placeholder_dark"), options: nil, progressBlock: nil, completionHandler: nil)
                         }
                     }
                 }
@@ -60,7 +61,8 @@ class WatchableSearchResultTableViewCell: SwipeTableViewCell {
                 self.realmChangeToken = query.observe() { [unowned self] change in
                     if query.count > 0 {
                         if let updatedThumnailURL = query[0].urlForSearchResultThumbnailImage {
-                            self.retrieveImageTask = self.imageViewThumbnail.kf.setImage(with: updatedThumnailURL, placeholder: #imageLiteral(resourceName: "poster_placeholder_dark"), options: nil, progressBlock: nil, completionHandler: nil)
+                            //@TODO: Image placeholder
+                            self.retrieveImageTask = self.imageViewThumbnail.kf.setImage(with: (updatedThumnailURL as? ImageDataProvider), placeholder: #imageLiteral(resourceName: "poster_placeholder_dark"), options: nil, progressBlock: nil, completionHandler: nil)
                         }
                     }
                 }

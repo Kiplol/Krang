@@ -6,6 +6,7 @@
 //  Copyright © 2017 Supernovacaine Inc. All rights reserved.
 //
 
+import Kingfisher
 import UIKit
 import SwipeCellKit
 
@@ -62,7 +63,8 @@ class EpisodeTableViewCell: SwipeTableViewCell {
             }
         }()
         if let szImageURL = szImageURL {
-            self.imageViewPreview.kf.setImage(with: URL(string: szImageURL), placeholder: self.imageViewPreview.image, options: [.transition(.fade(0.2))], progressBlock: nil, completionHandler: nil)
+//            self.imageViewPreview.kf.setImage(with: URL(string: szImageURL), placeholder: self.imageViewPreview.image, options: [.transition(.fade(0.2))], progressBlock: nil, completionHandler: nil)
+            self.imageViewPreview.kf.setImage(with: URL(string: szImageURL))
         } else {
             self.imageViewPreview.image = #imageLiteral(resourceName: "episode_still_placeholder")
         }

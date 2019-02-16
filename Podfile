@@ -5,7 +5,7 @@ def shared_pods
 	pod 'Hue'
 	pod 'Kingfisher'
 	pod 'MarqueeLabel/Swift'
-	pod 'OAuthSwift', '~> 1.2.0'
+	pod 'OAuthSwift', '1.2.0'
 	pod 'RealmSwift'
 	pod 'SwiftyBeaver'
 	pod 'SwiftLCS'
