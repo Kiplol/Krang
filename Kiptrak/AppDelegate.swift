@@ -83,17 +83,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func setupAppearance() {
         UIWindow.appearance().tintColor = UIColor.white
-//        UIView.appearance().tintColor = UIColor.white
         
         //Navigation Bar
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
-        UINavigationBar.appearance().barTintColor = UIColor.darkBackground
-        UINavigationBar.appearance().tintColor = UIColor.white
-        UINavigationBar.appearance().isTranslucent = false
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
-        if #available(iOS 11.0, *) {
-            UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
-        }
+        let navAppearance = UINavigationBar.appearance()
+        navAppearance.prefersLargeTitles = true
+        navAppearance.barTintColor = UIColor.darkBackground
+        navAppearance.tintColor = .white
+        navAppearance.isTranslucent = false
+
+        let navColorAppearance = UINavigationBarAppearance()
+        navColorAppearance.backgroundColor = navAppearance.barTintColor
+        navColorAppearance.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        navColorAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        UINavigationBar.appearance().compactAppearance = navColorAppearance
+        UINavigationBar.appearance().scrollEdgeAppearance = navColorAppearance
+        UINavigationBar.appearance().standardAppearance = navColorAppearance
         
         //Buttons
         UIButton.appearance().tintColor = UIColor.white

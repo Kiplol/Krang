@@ -265,9 +265,9 @@ private extension NowWatchingViewController {
         self.labelWatchableName.text = watchable.titleDisplayString
         let backgroundImageURL: String? = (watchable.fanartImageURL?.absoluteString ?? watchable.posterImageURL)
         backgroundImageURL.flatMap { URL(string: $0) }.map {
-            self.imageBackground.kf.setImage(with: $0, placeholder: nil, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, url) in
-                if let image = image {
-                    self.imageBackground.image = image.kf.blurred(withRadius: 10.0)
+            self.imageBackground.kf.setImage(with: $0, placeholder: nil, options: nil, progressBlock: nil, completionHandler: { result in
+                if case Result.success(let successResult) = result {
+                    self.imageBackground.image = successResult.image.kf.blurred(withRadius: 10.0)
                 }
             }) } ?? { self.imageBackground.image = nil }()
         

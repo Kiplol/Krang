@@ -83,14 +83,11 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
         self.searchController.searchBar.delegate = self
         self.searchController.searchBar.applyKrangStyle()
         self.definesPresentationContext = true
-        if #available(iOS 11.0, *) {
+
             self.headerView.frame.size.height = 0.0
             self.navigationItem.searchController = self.searchController
             self.navigationItem.hidesSearchBarWhenScrolling = false
-        } else {
-            self.headerView.addSubview(self.searchController.searchBar)
-            self.headerView.frame.size.height = self.searchController.searchBar.bounds.size.height
-        }
+
         let avatarView = KrangAvatarView(frame: CGRect(x: 0.0, y: 0.0, width: 36.0, height: 36.0))
         avatarView.heroID = "userAvatar"
         avatarView.backgroundColor = UIColor.white
@@ -253,6 +250,7 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         tableView.deselectRow(at: indexPath, animated: true)
         let selectedObject = self.dataSet[indexPath.section].searchables[indexPath.row]
         if let watchable = selectedObject as? KrangWatchable {

@@ -27,6 +27,10 @@ target 'Currently Watching Widget' do
 	shared_pods
 end
 
+#target 'Now WatchingExtension' do
+#  shared_pods
+#end
+
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     if target.name == "OAuthSwift"

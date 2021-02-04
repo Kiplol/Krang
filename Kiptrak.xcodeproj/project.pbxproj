@@ -14,6 +14,13 @@
 		372595B2201006C100C7C516 /* LoadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372595B0201006C100C7C516 /* LoadingTableViewCell.swift */; };
 		372595B3201006C100C7C516 /* LoadingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 372595B1201006C100C7C516 /* LoadingTableViewCell.xib */; };
 		373D32961E22C05C00980925 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373D32951E22C05C00980925 /* Constants.swift */; };
+		3740AB5425CC722B0013874C /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3740AB5325CC722B0013874C /* WidgetKit.framework */; };
+		3740AB5625CC722B0013874C /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3740AB5525CC722B0013874C /* SwiftUI.framework */; };
+		3740AB5925CC722B0013874C /* Now_Watching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3740AB5825CC722B0013874C /* Now_Watching.swift */; };
+		3740AB5C25CC722C0013874C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3740AB5B25CC722C0013874C /* Assets.xcassets */; };
+		3740AB5E25CC722C0013874C /* Now_Watching.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 3740AB5A25CC722B0013874C /* Now_Watching.intentdefinition */; };
+		3740AB5F25CC722C0013874C /* Now_Watching.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 3740AB5A25CC722B0013874C /* Now_Watching.intentdefinition */; };
+		3740AB6225CC722C0013874C /* Now WatchingExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3740AB5225CC722B0013874C /* Now WatchingExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		374C2AA01E242BCD0094D7A4 /* TraktHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374C2A9F1E242BCD0094D7A4 /* TraktHelper.swift */; };
 		375E9BC61F8E74A600636E4C /* KrangWatchablePreviewView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 375E9BC51F8E74A600636E4C /* KrangWatchablePreviewView.xib */; };
 		375E9BC81F8E74D600636E4C /* KrangWatchablePreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375E9BC71F8E74D600636E4C /* KrangWatchablePreviewView.swift */; };
@@ -137,6 +144,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		3740AB6025CC722C0013874C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 37870B141E22BA6A00A2EC00 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3740AB5125CC722B0013874C;
+			remoteInfo = "Now WatchingExtension";
+		};
 		37A19E6D1E2BFDD9007877B4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 37870B141E22BA6A00A2EC00 /* Project object */;
@@ -154,6 +168,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				37A19E6F1E2BFDD9007877B4 /* Currently Watching Widget.appex in Embed App Extensions */,
+				3740AB6225CC722C0013874C /* Now WatchingExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -170,6 +185,13 @@
 		372595B0201006C100C7C516 /* LoadingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoadingTableViewCell.swift; path = Kiptrak/Classes/Views/Cells/LoadingTableViewCell.swift; sourceTree = "<group>"; };
 		372595B1201006C100C7C516 /* LoadingTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = LoadingTableViewCell.xib; path = Kiptrak/Classes/Views/Cells/LoadingTableViewCell.xib; sourceTree = "<group>"; };
 		373D32951E22C05C00980925 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Classes/Constants.swift; sourceTree = "<group>"; };
+		3740AB5225CC722B0013874C /* Now WatchingExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Now WatchingExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3740AB5325CC722B0013874C /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		3740AB5525CC722B0013874C /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		3740AB5825CC722B0013874C /* Now_Watching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Now_Watching.swift; sourceTree = "<group>"; };
+		3740AB5A25CC722B0013874C /* Now_Watching.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Now_Watching.intentdefinition; sourceTree = "<group>"; };
+		3740AB5B25CC722C0013874C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3740AB5D25CC722C0013874C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		374C2A9F1E242BCD0094D7A4 /* TraktHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraktHelper.swift; sourceTree = "<group>"; };
 		374C2AA11E243C080094D7A4 /* Kiptrak.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Kiptrak.entitlements; sourceTree = "<group>"; };
 		375E9BC51F8E74A600636E4C /* KrangWatchablePreviewView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = KrangWatchablePreviewView.xib; path = Kiptrak/Classes/Views/KrangWatchablePreviewView.xib; sourceTree = "<group>"; };
@@ -262,6 +284,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		3740AB4F25CC722B0013874C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3740AB5625CC722B0013874C /* SwiftUI.framework in Frameworks */,
+				3740AB5425CC722B0013874C /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		37870B191E22BA6A00A2EC00 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -330,12 +361,24 @@
 			name = Managers;
 			sourceTree = "<group>";
 		};
+		3740AB5725CC722B0013874C /* Now Watching */ = {
+			isa = PBXGroup;
+			children = (
+				3740AB5825CC722B0013874C /* Now_Watching.swift */,
+				3740AB5A25CC722B0013874C /* Now_Watching.intentdefinition */,
+				3740AB5B25CC722C0013874C /* Assets.xcassets */,
+				3740AB5D25CC722C0013874C /* Info.plist */,
+			);
+			path = "Now Watching";
+			sourceTree = "<group>";
+		};
 		37870B131E22BA6A00A2EC00 = {
 			isa = PBXGroup;
 			children = (
 				376A448D200AB0CD00DB7E5D /* IMDBHelper.swift */,
 				37870B1E1E22BA6A00A2EC00 /* Kiptrak */,
 				37A19E661E2BFDD9007877B4 /* Currently Watching Widget */,
+				3740AB5725CC722B0013874C /* Now Watching */,
 				37870B1D1E22BA6A00A2EC00 /* Products */,
 				12EE2D71C67781060DB8F8AE /* Pods */,
 				4679527081A47D22E35BDC47 /* Frameworks */,
@@ -348,6 +391,7 @@
 			children = (
 				37870B1C1E22BA6A00A2EC00 /* Kiptrak.app */,
 				37A19E631E2BFDD9007877B4 /* Currently Watching Widget.appex */,
+				3740AB5225CC722B0013874C /* Now WatchingExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -503,6 +547,8 @@
 				1EBED3ECC65FC90281B1331E /* AVFoundation.framework */,
 				338B469DF7479164D6D797C8 /* CoreMedia.framework */,
 				DBABE8C5F4AFA6AC90C42ADD /* CoreVideo.framework */,
+				3740AB5325CC722B0013874C /* WidgetKit.framework */,
+				3740AB5525CC722B0013874C /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -510,6 +556,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		3740AB5125CC722B0013874C /* Now WatchingExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3740AB6325CC722C0013874C /* Build configuration list for PBXNativeTarget "Now WatchingExtension" */;
+			buildPhases = (
+				3740AB4E25CC722B0013874C /* Sources */,
+				3740AB4F25CC722B0013874C /* Frameworks */,
+				3740AB5025CC722B0013874C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Now WatchingExtension";
+			productName = "Now WatchingExtension";
+			productReference = 3740AB5225CC722B0013874C /* Now WatchingExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		37870B1B1E22BA6A00A2EC00 /* Kiptrak */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 37870B2E1E22BA6A00A2EC00 /* Build configuration list for PBXNativeTarget "Kiptrak" */;
@@ -525,6 +588,7 @@
 			);
 			dependencies = (
 				37A19E6E1E2BFDD9007877B4 /* PBXTargetDependency */,
+				3740AB6125CC722C0013874C /* PBXTargetDependency */,
 			);
 			name = Kiptrak;
 			productName = Kiptrak;
@@ -555,10 +619,15 @@
 		37870B141E22BA6A00A2EC00 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0820;
+				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 0910;
 				ORGANIZATIONNAME = "Supernovacaine Inc.";
 				TargetAttributes = {
+					3740AB5125CC722B0013874C = {
+						CreatedOnToolsVersion = 12.4;
+						DevelopmentTeam = LSB86U552U;
+						ProvisioningStyle = Automatic;
+					};
 					37870B1B1E22BA6A00A2EC00 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = LSB86U552U;
@@ -605,11 +674,20 @@
 			targets = (
 				37870B1B1E22BA6A00A2EC00 /* Kiptrak */,
 				37A19E621E2BFDD9007877B4 /* Currently Watching Widget */,
+				3740AB5125CC722B0013874C /* Now WatchingExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		3740AB5025CC722B0013874C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3740AB5C25CC722C0013874C /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		37870B1A1E22BA6A00A2EC00 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -782,6 +860,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		3740AB4E25CC722B0013874C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3740AB5E25CC722C0013874C /* Now_Watching.intentdefinition in Sources */,
+				3740AB5925CC722B0013874C /* Now_Watching.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		37870B181E22BA6A00A2EC00 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -820,6 +907,7 @@
 				37870B201E22BA6A00A2EC00 /* AppDelegate.swift in Sources */,
 				375FD4E91EDB56710022C4C9 /* UIViewController+Krang.swift in Sources */,
 				376713821F61B98000024036 /* KrangUtils.swift in Sources */,
+				3740AB5F25CC722C0013874C /* Now_Watching.intentdefinition in Sources */,
 				37E957811F6992B9003D6D74 /* WatchableSearchViewController.swift in Sources */,
 				374C2AA01E242BCD0094D7A4 /* TraktHelper.swift in Sources */,
 				3760116C1F6C9BC7004ED6EF /* SeasonListViewController.swift in Sources */,
@@ -864,6 +952,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		3740AB6125CC722C0013874C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3740AB5125CC722B0013874C /* Now WatchingExtension */;
+			targetProxy = 3740AB6025CC722C0013874C /* PBXContainerItemProxy */;
+		};
 		37A19E6E1E2BFDD9007877B4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 37A19E621E2BFDD9007877B4 /* Currently Watching Widget */;
@@ -899,6 +992,61 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		3740AB6425CC722C0013874C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LSB86U552U;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "Now Watching/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kip.krang.Now-Watching";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3740AB6525CC722C0013874C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LSB86U552U;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "Now Watching/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kip.krang.Now-Watching";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		37870B2C1E22BA6A00A2EC00 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1021,6 +1169,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Kiptrak/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.9;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D MAIN_APP";
@@ -1047,6 +1196,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Kiptrak/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.9;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D MAIN_APP";
@@ -1101,6 +1251,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		3740AB6325CC722C0013874C /* Build configuration list for PBXNativeTarget "Now WatchingExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3740AB6425CC722C0013874C /* Debug */,
+				3740AB6525CC722C0013874C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		37870B171E22BA6A00A2EC00 /* Build configuration list for PBXProject "Kiptrak" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

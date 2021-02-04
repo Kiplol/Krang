@@ -215,9 +215,9 @@ class PlaybackViewController: KrangViewController {
                 self.stackViewForButtons.addArrangedSubview(self.buttonTMDB)
                 self.buttonTMDB.isHidden = false
             }
-            self.imageBackground.kf.setImage(with: watchable.fanartBlurrableImageURL, placeholder: nil, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, url) in
-                if let image = image {
-                    self.imageBackground.image = image.kf.blurred(withRadius: 15.0)
+            self.imageBackground.kf.setImage(with: watchable.fanartBlurrableImageURL, placeholder: nil, options: nil, progressBlock: nil, completionHandler: { result in
+                if case Result.success(let successResult) = result {
+                    self.imageBackground.image = successResult.image.kf.blurred(withRadius: 15.0)
                 }
             })
         } else {
