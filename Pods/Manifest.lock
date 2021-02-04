@@ -1,8 +1,5 @@
 PODS:
-  - Crashlytics (3.9.3):
-    - Fabric (~> 1.7.2)
   - CustomizableActionSheet (1.2.3)
-  - Fabric (1.7.13)
   - Firebase/Core (7.1.0):
     - Firebase/CoreOnly
     - FirebaseAnalytics (= 7.1.0)
@@ -95,9 +92,7 @@ PODS:
   - SwipeCellKit (2.7.1)
 
 DEPENDENCIES:
-  - Crashlytics (~> 3.9.3)
   - CustomizableActionSheet
-  - Fabric (~> 1.7.2)
   - Firebase/Core
   - Hero
   - Hue
@@ -115,9 +110,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
-    - Crashlytics
     - CustomizableActionSheet
-    - Fabric
     - Firebase
     - FirebaseAnalytics
     - FirebaseCore
@@ -155,9 +148,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/kaandedeoglu/KDCircularProgress
 
 SPEC CHECKSUMS:
-  Crashlytics: 4689af8a6a5befe1e0d2c7e72681805cc43eb7e4
   CustomizableActionSheet: 2a855974bcdc347a4237b5ae94ac9b15fdbac17d
-  Fabric: e88a14d80173bcf3db4eac866c83619f2894183d
   Firebase: 78e8dd2e39d653de6270432ad84fe8b59f7bf4e8
   FirebaseAnalytics: 7f165a56dea86ddd5b8ce02af3bee982c683405c
   FirebaseCore: 20046127eef0fcb8fa25df7fc12f7b97d4e48611
@@ -186,6 +177,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   SwipeCellKit: 3972254a826da74609926daf59b08d6c72e619ea
 
-PODFILE CHECKSUM: cb0aa73a3fd0178fcc070c1f96044ced40a52e74
+PODFILE CHECKSUM: 541a0b9d94fbb121a8eab8a1d6cfdd706e47df7a
 
 COCOAPODS: 1.10.0
