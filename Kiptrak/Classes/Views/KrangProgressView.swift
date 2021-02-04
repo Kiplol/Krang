@@ -60,12 +60,12 @@ class KrangProgressView: UIView {
         
         if self.displayLink == nil {
             self.displayLink = CADisplayLink(target: self, selector: #selector(KrangProgressView.update))
-            self.displayLink?.add(to: RunLoop.main, forMode: .defaultRunLoopMode)
+            self.displayLink?.add(to: RunLoop.main, forMode: RunLoop.Mode.default)
         }
     }
     
     func stop() {
-        self.displayLink?.remove(from: RunLoop.main, forMode: .defaultRunLoopMode)
+        self.displayLink?.remove(from: RunLoop.main, forMode: RunLoop.Mode.default)
         self.displayLink?.invalidate()
         self.displayLink = nil
     }

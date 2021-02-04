@@ -35,7 +35,7 @@ class KrangDrawerViewController: UIViewController {
         self.view.backgroundColor = UIColor.darkBackground
         NotificationCenter.default.addObserver(self, selector: #selector(KrangDrawerViewController.didCheckInToAWatchable(_:)), name: Notification.Name.didCheckInToWatchable, object: nil)
         self.setupGestureRecognizers()
-        for childVC in self.childViewControllers {
+        for childVC in self.children {
             (childVC as? UINavigationController)?.interactivePopGestureRecognizer?.delegate = self
         }
     }
@@ -100,13 +100,13 @@ class KrangDrawerViewController: UIViewController {
     
     // MARK: - Delegation
     private func notifyChildrenStateWillChange(to state: KrangDrawerViewController.State) {
-        self.childViewControllers.forEach {
+        self.children.forEach {
             ($0 as? KrangDrawerViewControllerDelegate)?.drawerViewController(self, willChangeStateTo: state)
         }
     }
     
     private func notifyChildrenStateDidChange(to state: KrangDrawerViewController.State) {
-        self.childViewControllers.forEach {
+        self.children.forEach {
             ($0 as? KrangDrawerViewControllerDelegate)?.drawerViewController(self, didChangeStateTo: state)
         }
     }

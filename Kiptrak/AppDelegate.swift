@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         AppDelegate.instance = self;
         FirebaseApp.configure()
         self.setupAppearance()
@@ -72,7 +72,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     //MARK:- Deeplinks
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         if url.host == "oauth-callback" {
             KrangLogger.log.debug("Got OAuth callback from URL: \(url)")
             OAuthSwift.handle(url: url)
@@ -102,7 +102,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Buttons
         UIButton.appearance().tintColor = UIColor.white
         UIBarButtonItem.appearance().tintColor = UIColor.white
-        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.white], for: .normal)
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
         
         //Labels
         let labelAppearance = UILabel.appearance()
@@ -114,7 +114,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         searchBarTextFieldAppearance.textColor = UILabel.appearance().textColor
         searchBarTextFieldAppearance.tintColor = UIColor.white
         searchBarTextFieldAppearance.backgroundColor = UIColor(white: 0.2, alpha: 1.0)
-        searchBarTextFieldAppearance.defaultTextAttributes = [NSAttributedStringKey.foregroundColor.rawValue: UIColor.white] // <- Text color when it's in iOS 11's navigationItem thingy.
+        searchBarTextFieldAppearance.defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white] // <- Text color when it's in iOS 11's navigationItem thingy.
         
         //LGAlertView
 //        LGAlertView.appearance().buttonsHeight = 44.0         //@TODO: This is just until that LGAlertView.m 2882 [self.tableView layoutIfNeeded] is released

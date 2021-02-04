@@ -50,7 +50,7 @@ extension UIImage
         let context = UIGraphicsGetCurrentContext()
         
         let colorSpace = CGColorSpaceCreateDeviceRGB()
-        let colors = gradientColors.map {(color: UIColor) -> AnyObject! in return color.cgColor as AnyObject! } as NSArray
+        let colors = gradientColors.map {(color: UIColor) -> AnyObject? in return color.cgColor as AnyObject? } as NSArray
         let gradient: CGGradient
         if locations.count > 0 {
             let cgLocations = locations.map { CGFloat($0) }

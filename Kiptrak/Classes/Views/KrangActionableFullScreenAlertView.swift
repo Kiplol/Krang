@@ -53,7 +53,7 @@ class KrangActionableFullScreenAlertView: UIView {
         
         self.startTime = Date()
         self.displayLink = CADisplayLink(target: self, selector: #selector(KrangActionableFullScreenAlertView.displayLinkTick))
-        self.displayLink!.add(to: RunLoop.main, forMode: RunLoopMode.defaultRunLoopMode)
+        self.displayLink!.add(to: RunLoop.main, forMode: RunLoop.Mode.default)
     }
     
     @objc func displayLinkTick() {

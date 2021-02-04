@@ -23,8 +23,8 @@ class KrangViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.darkBackground
         
-        NotificationCenter.default.addObserver(self, selector: #selector(KrangViewController.willEnterForeground(_:)), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(KrangViewController.didEnterBackground(_:)), name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(KrangViewController.willEnterForeground(_:)), name: UIApplication.willEnterForegroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(KrangViewController.didEnterBackground(_:)), name: UIApplication.didEnterBackgroundNotification, object: nil)
         RxKeyboard.instance.visibleHeight
             .drive(onNext: { keyboardVisibleHeight in
                 self.keyboardVisibleHeightDidChange(keyboardVisibleHeight)
