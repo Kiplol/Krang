@@ -66,7 +66,7 @@ PODS:
     - nanopb/encode (= 2.30907.0)
   - nanopb/decode (2.30907.0)
   - nanopb/encode (2.30907.0)
-  - OAuthSwift (1.2.0)
+  - OAuthSwift (2.1.0)
   - PromisesObjC (1.2.12)
   - Realm (10.5.1):
     - Realm/Headers (= 10.5.1)
@@ -98,7 +98,7 @@ DEPENDENCIES:
   - Kingfisher
   - LGAlertView
   - MarqueeLabel/Swift
-  - OAuthSwift (= 1.2.0)
+  - OAuthSwift
   - RealmSwift
   - RxKeyboard
   - SwiftLCS
@@ -162,7 +162,7 @@ SPEC CHECKSUMS:
   LGAlertView: 2f5e83dd5cc2537de57d98727650609e86197d1a
   MarqueeLabel: 2daf039bf916937c8a4c9adfc13577cc5e51b4ce
   nanopb: 59221d7f958fb711001e6a449489542d92ae113e
-  OAuthSwift: 7fd6855b8e4d58eb5a30d156ea9bed7a8aecd1ca
+  OAuthSwift: ab1675598273e04355e0282459c328e65c9ddacd
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   Realm: 77fcb4e0b9f2963ea06f584749a0d7dc9cab95e1
   RealmSwift: 6abe6aa6cd8b70cc1a87afcb9232cabea74ff1ac
@@ -175,6 +175,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   SwipeCellKit: 3972254a826da74609926daf59b08d6c72e619ea
 
-PODFILE CHECKSUM: 805eed08b1509296c56ec25e49db5f9b3ac0f87a
+PODFILE CHECKSUM: c58f4e264aee704a7017b83ad2763edc08889bb1
 
 COCOAPODS: 1.10.0

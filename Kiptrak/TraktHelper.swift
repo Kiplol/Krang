@@ -109,232 +109,239 @@ class TraktHelper: NSObject {
     //MARK:- Real Shit
     func login(from presentingViewController: UIViewController, success: (() -> ())?, failure: ((_ error:Error?) -> ())?) {
         self.oauth.authorizeURLHandler = SafariURLHandler(viewController: presentingViewController, oauthSwift: oauth)
-        let _ = oauth.authorize(withCallbackURL: Constants.traktRedirectURL, scope: "public", state: "ABCDE12345ABCDE12345ABCDE12345", success: { (credential, response, parameters) in
-            //Yay
-            self.didGetCredentials = true
-            self.cache(credentials: credential)
-            KrangLogger.log.debug("Successfully logged in")
-            success?()
-        }) { (error) in
-            //Boo
-            KrangLogger.log.error("Error loggin in: \(error)")
-            failure?(error)
+        _ = oauth.authorize(withCallbackURL: Constants.traktRedirectURL, scope: "public", state: "ABCDE12345ABCDE12345ABCDE12345") { result in
+            switch result {
+            case .success(let token):
+                self.didGetCredentials = true
+                self.cache(credentials: token.credential)
+                KrangLogger.log.debug("Successfully logged in")
+                success?()
+            case .failure(let error):
+                KrangLogger.log.error("Error loggin in: \(error)")
+                failure?(error)
+            }
         }
     }
     
     func getMyProfile(completion: ((_:Error?,  _:KrangUser?) -> ())? ) {
-        let _ = self.oauth.client.get(Constants.traktBaseURL + "/users/settings", parameters: [:], headers: TraktHelper.defaultHeaders(), success: { (response) in
-            //Yay
-            do {
-                let json = try JSON(data: response.data)
-                var user:KrangUser? = nil
-                
-                RealmManager.makeChanges {
-                    user = KrangUser.from(json: json)
-                    KrangUser.setCurrentUser(user)
+        _ = self.oauth.client.get(Constants.traktBaseURL + "/user/settings") { result in
+            switch result {
+            case .success(let response):
+                do {
+                    let json = try JSON(data: response.data)
+                    var user:KrangUser? = nil
+                    
+                    RealmManager.makeChanges {
+                        user = KrangUser.from(json: json)
+                        KrangUser.setCurrentUser(user)
+                    }
+                    
+                    KrangLogger.log.debug("Got profile for user \(user!.username)")
+                    
+                    completion?(nil, user)
+                } catch let jsonError {
+                    completion?(jsonError, nil)
                 }
-                
-                KrangLogger.log.debug("Got profile for user \(user!.username)")
-                
-                completion?(nil, user)
-            } catch let jsonError {
-                completion?(jsonError, nil)
+            case .failure(let error):
+                KrangLogger.log.error("Error getting profile: \(error)")
+                completion?(error, nil)
             }
-        }) { (error) in
-            //Boo
-            KrangLogger.log.error("Error getting profile: \(error)")
-            completion?(error, nil)
         }
     }
     
     func getLastActivityTime(_ completion: ((Error?, Date?) -> ())?) {
         //@TODO
-        let _ = self.oauth.client.get(Constants.traktGetActivity, parameters: [:], headers: TraktHelper.defaultHeaders(), success: { (response) in
-            //Yay
-            do {
-            let json = try JSON(data: response.data)
-            if let szTime = json["all"].string, let time = Date.from(utcTimestamp: szTime) {
-                completion?(nil, time)
-            } else {
-                completion?(nil, nil)
+        _ = self.oauth.client.get(Constants.traktGetActivity, parameters: [:], headers: Self.defaultHeaders()) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    let json = try JSON(data: response.data)
+                    if let szTime = json["all"].string, let time = Date.from(utcTimestamp: szTime) {
+                        completion?(nil, time)
+                    } else {
+                        completion?(nil, nil)
+                    }
+                } catch let jsonError {
+                    completion?(jsonError, nil)
+                }
+            case .failure(let error):
+                completion?(error, nil)
             }
-            } catch let jsonError {
-                completion?(jsonError, nil)
-            }
-        }) { (error) in
-            //Boo
-            completion?(error, nil)
         }
     }
     
     func getCheckedInMovieOrEpisode(completion: ((_:Error?, _:KrangMovie?, _:KrangEpisode?) -> ())?) {
         let url = String.init(format: Constants.traktWatchingURLFormat, KrangUser.getCurrentUser().slug)
-        let _ = self.oauth.client.get(url, parameters: [:], headers: TraktHelper.defaultHeaders(), success: { (response) in
-            //Yay
-            do {
-                guard !response.data.isEmpty else {
-                    //They're just not watching anything.
-                    completion?(nil, nil, nil)
-                    return
-                }
-                let json = try JSON(data: response.data)
-                let maybeMovieOrEpisode = TraktHelper.movieOrEpisodeFrom(json: json)
-                if let actualMovie = maybeMovieOrEpisode as? KrangMovie {
-                    if let _ = actualMovie.posterImageURL {
-                        completion?(nil, actualMovie, nil)
-                    } else {
-                        TMDBHelper.shared.update(movie: actualMovie, completion: { (error, updatedMovie) in
-                            completion?(error, updatedMovie, nil)
-                        })
+        let _ = self.oauth.client.get(url, parameters: [:], headers: Self.defaultHeaders()) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    guard !response.data.isEmpty else {
+                        //They're just not watching anything.
+                        completion?(nil, nil, nil)
+                        return
                     }
-                } else if let actualEpisode = maybeMovieOrEpisode as? KrangEpisode {
-                    //                if let _ = actualEpisode.posterImageURL {
-                    //                    completion?(nil, nil, actualEpisode)
-                    //                } else {
-                    TMDBHelper.shared.update(episode: actualEpisode, completion: { (error, updatedEpisode) in
-                        if let show = updatedEpisode?.show {
-                            TMDBHelper.shared.update(show: show, completion: { (showError, updatedShow) in
-                                if updatedEpisode!.posterImageURL == nil {
-                                    updatedEpisode!.makeChanges {
-                                        updatedEpisode?.posterImageURL = updatedShow?.imagePosterURL
-                                    }
-                                }
-                                completion?(error, nil, updatedEpisode)
-                            })
+                    let json = try JSON(data: response.data)
+                    let maybeMovieOrEpisode = TraktHelper.movieOrEpisodeFrom(json: json)
+                    if let actualMovie = maybeMovieOrEpisode as? KrangMovie {
+                        if let _ = actualMovie.posterImageURL {
+                            completion?(nil, actualMovie, nil)
                         } else {
-                            completion?(error, nil, updatedEpisode)
+                            TMDBHelper.shared.update(movie: actualMovie, completion: { (error, updatedMovie) in
+                                completion?(error, updatedMovie, nil)
+                            })
                         }
-                    })
-                    //                }
-                } else {
-                    completion?(nil, nil, nil)
+                    } else if let actualEpisode = maybeMovieOrEpisode as? KrangEpisode {
+                        //                if let _ = actualEpisode.posterImageURL {
+                        //                    completion?(nil, nil, actualEpisode)
+                        //                } else {
+                        TMDBHelper.shared.update(episode: actualEpisode, completion: { (error, updatedEpisode) in
+                            if let show = updatedEpisode?.show {
+                                TMDBHelper.shared.update(show: show, completion: { (showError, updatedShow) in
+                                    if updatedEpisode!.posterImageURL == nil {
+                                        updatedEpisode!.makeChanges {
+                                            updatedEpisode?.posterImageURL = updatedShow?.imagePosterURL
+                                        }
+                                    }
+                                    completion?(error, nil, updatedEpisode)
+                                })
+                            } else {
+                                completion?(error, nil, updatedEpisode)
+                            }
+                        })
+                        //                }
+                    } else {
+                        completion?(nil, nil, nil)
+                    }
+                } catch let jsonError {
+                    completion?(jsonError, nil, nil)
                 }
-            } catch let jsonError {
-                completion?(jsonError, nil, nil)
+            case .failure(let error):
+                KrangLogger.log.error("Error getting currently watching movie or episode: \(error)")
+                completion?(error, nil, nil)
             }
-        }) { (error) in
-            //Boo
-            KrangLogger.log.error("Error getting currently watching movie or episode: \(error)")
-            completion?(error, nil, nil)
         }
     }
     
     func getAllSeasons(forShow show: KrangShow, completion: ((Error?, KrangShow?) -> ())?) {
         let url = String(format: Constants.traktGetShowSeasonsURLFormat, show.slug)
-        let _ = self.oauth.client.get(url, parameters: [:], headers: TraktHelper.defaultHeaders(), success: { (response) in
-            //Success
-            do {
-                let json = try JSON(data: response.data)
-                
-                if let seasonDics = json.array {
-                    RealmManager.makeChanges {
-                        for seasonDic in seasonDics {
-                            guard let traktID = seasonDic["ids"]["trakt"].int else {
-                                continue
-                            }
-                            
-                            let season: KrangSeason = {
-                                if let existingSeason = KrangSeason.with(traktID: traktID) {
-                                    existingSeason.update(withJSON: seasonDic)
-                                    return existingSeason
-                                } else {
-                                    let newSeason = KrangSeason()
-                                    newSeason.update(withJSON: seasonDic)
-                                    newSeason.saveToDatabaseOutsideWriteTransaction()
-                                    return newSeason
+        let _ = self.oauth.client.get(url, parameters: [:], headers: TraktHelper.defaultHeaders()) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    let json = try JSON(data: response.data)
+                    
+                    if let seasonDics = json.array {
+                        RealmManager.makeChanges {
+                            for seasonDic in seasonDics {
+                                guard let traktID = seasonDic["ids"]["trakt"].int else {
+                                    continue
                                 }
-                            }()
-                            season.show = show
+                                
+                                let season: KrangSeason = {
+                                    if let existingSeason = KrangSeason.with(traktID: traktID) {
+                                        existingSeason.update(withJSON: seasonDic)
+                                        return existingSeason
+                                    } else {
+                                        let newSeason = KrangSeason()
+                                        newSeason.update(withJSON: seasonDic)
+                                        newSeason.saveToDatabaseOutsideWriteTransaction()
+                                        return newSeason
+                                    }
+                                }()
+                                season.show = show
+                            }
                         }
                     }
-                }
-                
-                let imageUpdateGroup = DispatchGroup()
-                show.seasons.filter { $0.posterImageURL == nil }.forEach {
-                    if !TraktHelper.asyncImageLoadingOnSearch {
-                        imageUpdateGroup.enter()
-                    }
-                    TMDBHelper.shared.update(season: $0, completion: { (imageError, updatedSeason) in
+                    
+                    let imageUpdateGroup = DispatchGroup()
+                    show.seasons.filter { $0.posterImageURL == nil }.forEach {
                         if !TraktHelper.asyncImageLoadingOnSearch {
-                            imageUpdateGroup.leave()
+                            imageUpdateGroup.enter()
                         }
-                    })
+                        TMDBHelper.shared.update(season: $0, completion: { (imageError, updatedSeason) in
+                            if !TraktHelper.asyncImageLoadingOnSearch {
+                                imageUpdateGroup.leave()
+                            }
+                        })
+                    }
+                    imageUpdateGroup.notify(queue: DispatchQueue.main) {
+                        completion?(nil, show)
+                    }
+                } catch let jsonError {
+                    completion?(jsonError, show)
                 }
-                imageUpdateGroup.notify(queue: DispatchQueue.main) {
-                    completion?(nil, show)
-                }
-            } catch let jsonError {
-                completion?(jsonError, show)
+            case .failure(let error):
+                completion?(error, show)
             }
-        }) { (error) in
-            //Failure
-            completion?(error, show)
         }
     }
     
     func getAllSeasonsAndEpisodes(forShow show: KrangShow, completion: ((Error?, KrangShow?) -> ())?) {
         let url = String(format: Constants.traktGetShowSeasonsAndEpisodesURLFormat, show.slug)
-        let _ = self.oauth.client.get(url, parameters: [:], headers: TraktHelper.defaultHeaders(), success: { (response) in
-            do {
-                let json = try JSON(data: response.data)
-                if let showDics = json.array {
-                    RealmManager.makeChanges {
-                        showDics.forEach {
-                            let thisJSON  = $0
-                            
-                            guard let seasonNumber = thisJSON["number"].int else {
-                                return
-                            }
-                            
-                            let season: KrangSeason = {
-                                if let existingSeason = show.getSeason(withSeasonNumber: seasonNumber) {
-                                    existingSeason.update(withJSON: thisJSON)
-                                    return existingSeason
-                                } else {
-                                    let newSeason = KrangSeason()
-                                    newSeason.update(withJSON: thisJSON)
-                                    newSeason.saveToDatabaseOutsideWriteTransaction()
-                                    return newSeason
+        _ = self.oauth.client.get(url, parameters: [:], headers: TraktHelper.defaultHeaders()) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    let json = try JSON(data: response.data)
+                    if let showDics = json.array {
+                        RealmManager.makeChanges {
+                            showDics.forEach {
+                                let thisJSON  = $0
+                                
+                                guard let seasonNumber = thisJSON["number"].int else {
+                                    return
                                 }
-                            }()
-                            season.show = show
-                            
-                            if let episodeDics = thisJSON["episodes"].array {
-                                episodeDics.forEach {
-                                    let episodeJSON = $0
-                                    guard let episodeID = episodeJSON["ids"]["trakt"].int else {
-                                        return
+                                
+                                let season: KrangSeason = {
+                                    if let existingSeason = show.getSeason(withSeasonNumber: seasonNumber) {
+                                        existingSeason.update(withJSON: thisJSON)
+                                        return existingSeason
+                                    } else {
+                                        let newSeason = KrangSeason()
+                                        newSeason.update(withJSON: thisJSON)
+                                        newSeason.saveToDatabaseOutsideWriteTransaction()
+                                        return newSeason
                                     }
-                                    
-                                    var jsonForUpdating = JSON(["type": "episode"])
-                                    jsonForUpdating["episode"] = episodeJSON
-                                    
-                                    let episode: KrangEpisode = {
-                                        if let existingEpisode = KrangEpisode.with(traktID: episodeID) {
-                                            existingEpisode.update(withJSON: jsonForUpdating)
-                                            return existingEpisode
-                                        } else {
-                                            let newEpisode = KrangEpisode()
-                                            newEpisode.update(withJSON: jsonForUpdating)
-                                            newEpisode.saveToDatabaseOutsideWriteTransaction()
-                                            return newEpisode
+                                }()
+                                season.show = show
+                                
+                                if let episodeDics = thisJSON["episodes"].array {
+                                    episodeDics.forEach {
+                                        let episodeJSON = $0
+                                        guard let episodeID = episodeJSON["ids"]["trakt"].int else {
+                                            return
                                         }
-                                    }()
-                                    
-                                    episode.season = season
-                                    episode.show = show
+                                        
+                                        var jsonForUpdating = JSON(["type": "episode"])
+                                        jsonForUpdating["episode"] = episodeJSON
+                                        
+                                        let episode: KrangEpisode = {
+                                            if let existingEpisode = KrangEpisode.with(traktID: episodeID) {
+                                                existingEpisode.update(withJSON: jsonForUpdating)
+                                                return existingEpisode
+                                            } else {
+                                                let newEpisode = KrangEpisode()
+                                                newEpisode.update(withJSON: jsonForUpdating)
+                                                newEpisode.saveToDatabaseOutsideWriteTransaction()
+                                                return newEpisode
+                                            }
+                                        }()
+                                        
+                                        episode.season = season
+                                        episode.show = show
+                                    }
                                 }
                             }
                         }
                     }
+                    completion?(nil, show)
+                } catch let jsonError {
+                    completion?(jsonError, show)
                 }
-                completion?(nil, show)
-            } catch let jsonError {
-                completion?(jsonError, show)
+            case .failure(let error):
+                completion?(error, show)
             }
-        }) { (error) in
-            //Error
-            completion?(error, show)
         }
     }
     
@@ -346,139 +353,149 @@ class TraktHelper: NSObject {
         }
         
         let url = String(format: Constants.traktGetEpisodesForSeasonURLFormat, show.slug, season.seasonNumber)
-        let _ = self.oauth.client.get(url, parameters: [:], headers: TraktHelper.defaultHeaders(), success: { (response) in
-            //Success
-            do {
-                let json = try JSON(data: response.data)
-                var theseEpisodes = [KrangEpisode]()
-                if let episodeDics = json.array {
-                    RealmManager.makeChanges {
-                        for episodeDic in episodeDics {
-                            guard let traktID = episodeDic["ids"]["trakt"].int else {
-                                continue
-                            }
-                            var jsonForUpdating = JSON(["type": "episode"])
-                            jsonForUpdating["episode"] = episodeDic
-                            let episode: KrangEpisode = {
-                                if let existingEpisode = KrangEpisode.with(traktID: traktID) {
-                                    existingEpisode.update(withJSON: jsonForUpdating)
-                                    return existingEpisode
-                                } else {
-                                    let newEpisode = KrangEpisode()
-                                    newEpisode.update(withJSON: jsonForUpdating)
-                                    newEpisode.saveToDatabaseOutsideWriteTransaction()
-                                    return newEpisode
+        let _ = self.oauth.client.get(url, parameters: [:], headers: TraktHelper.defaultHeaders()) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    let json = try JSON(data: response.data)
+                    var theseEpisodes = [KrangEpisode]()
+                    if let episodeDics = json.array {
+                        RealmManager.makeChanges {
+                            for episodeDic in episodeDics {
+                                guard let traktID = episodeDic["ids"]["trakt"].int else {
+                                    continue
                                 }
-                            }()
-                            episode.season = season
-                            episode.show = show
-                            theseEpisodes.append(episode)
-                        }
-                    }
-                    
-                    //Update images
-                    let imageUpdateGroup = DispatchGroup()
-                    theseEpisodes.filter { $0.stillImageURL == nil || $0.stillImageURLs.isEmpty }.forEach {
-                        if !TraktHelper.asyncImageLoadingOnSearch {
-                            imageUpdateGroup.enter()
-                        }
-                        TMDBHelper.shared.update(episode: $0, completion: { (error, updatedEpisode) in
-                            if !TraktHelper.asyncImageLoadingOnSearch {
-                                imageUpdateGroup.leave()
+                                var jsonForUpdating = JSON(["type": "episode"])
+                                jsonForUpdating["episode"] = episodeDic
+                                let episode: KrangEpisode = {
+                                    if let existingEpisode = KrangEpisode.with(traktID: traktID) {
+                                        existingEpisode.update(withJSON: jsonForUpdating)
+                                        return existingEpisode
+                                    } else {
+                                        let newEpisode = KrangEpisode()
+                                        newEpisode.update(withJSON: jsonForUpdating)
+                                        newEpisode.saveToDatabaseOutsideWriteTransaction()
+                                        return newEpisode
+                                    }
+                                }()
+                                episode.season = season
+                                episode.show = show
+                                theseEpisodes.append(episode)
                             }
-                        })
+                        }
+                        
+                        //Update images
+                        let imageUpdateGroup = DispatchGroup()
+                        theseEpisodes.filter { $0.stillImageURL == nil || $0.stillImageURLs.isEmpty }.forEach {
+                            if !TraktHelper.asyncImageLoadingOnSearch {
+                                imageUpdateGroup.enter()
+                            }
+                            TMDBHelper.shared.update(episode: $0, completion: { (error, updatedEpisode) in
+                                if !TraktHelper.asyncImageLoadingOnSearch {
+                                    imageUpdateGroup.leave()
+                                }
+                            })
+                        }
+                        imageUpdateGroup.notify(queue: DispatchQueue.main) {
+                            completion?(nil, season)
+                        }
                     }
-                    imageUpdateGroup.notify(queue: DispatchQueue.main) {
-                        completion?(nil, season)
-                    }
+                } catch let jsonError {
+                    completion?(jsonError, season)
                 }
-            } catch let jsonError {
-                completion?(jsonError, season)
+            case .failure(let error):
+                completion?(error, season)
             }
-        }) { (error) in
-            //Failure
-            completion?(error, season)
         }
     }
     
     func getExtendedInfo(forMovie movie: KrangMovie, completion:((Error?, KrangMovie) -> ())?) {
         let url = String(format:Constants.traktGetMovieExtendedInfoFormat, movie.traktID)
-        let _ = self.oauth.client.get(url, parameters: [:], headers: TraktHelper.defaultHeaders(), success: { (response) in
-            do {
-                let json = try JSON(data: response.data)
-                var jsonForUpdating = JSON()
-                jsonForUpdating["type"] = "movie"
-                jsonForUpdating["movie"] = json
-                movie.makeChanges {
-                    movie.update(withJSON: jsonForUpdating)
+        let _ = self.oauth.client.get(url, parameters: [:], headers: TraktHelper.defaultHeaders()) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    let json = try JSON(data: response.data)
+                    var jsonForUpdating = JSON()
+                    jsonForUpdating["type"] = "movie"
+                    jsonForUpdating["movie"] = json
+                    movie.makeChanges {
+                        movie.update(withJSON: jsonForUpdating)
+                    }
+                    completion?(nil, movie)
+                } catch let jsonError {
+                    completion?(jsonError, movie)
                 }
-                completion?(nil, movie)
-            } catch let jsonError {
-                completion?(jsonError, movie)
+            case .failure(let error):
+                completion?(error, movie)
             }
-        }) { (error) in
-            completion?(error, movie)
         }
     }
     
     // MARK: - Up Next
     func getNextEpisode(forShow show: KrangShow, completion: ((Error?, KrangEpisode?) -> ())?) {
         let url = String(format: Constants.traktGetNextEpisodeURLFormat, show.slug)
-        let _ = self.oauth.client.get(url, parameters: [:], headers: TraktHelper.defaultHeaders(), success: { [unowned self] (response) in
-            do {
-                let json = try JSON(data: response.data)
-                let nextEpisodeJSON = json["next_episode"]
-                guard let seasonNumber = nextEpisodeJSON["season"].int,
-                    let episodeNumber = nextEpisodeJSON["number"].int else {
-                        completion?(nil, nil)
-                        return
-                }
-                let episodeURL = String(format: Constants.traktGetEpisodeURLFormat, show.slug, seasonNumber, episodeNumber)
-                _ = self.oauth.client.get(episodeURL, parameters: [:], headers: TraktHelper.defaultHeaders(), success: { (episodeResponse) in
-                    do {
-                        let episodeJSON = try JSON(data: episodeResponse.data)
-                        guard let episodeTraktID = episodeJSON["ids"]["trakt"].int else {
+        _ = self.oauth.client.get(url, parameters: [:], headers: TraktHelper.defaultHeaders()) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    let json = try JSON(data: response.data)
+                    let nextEpisodeJSON = json["next_episode"]
+                    guard let seasonNumber = nextEpisodeJSON["season"].int,
+                        let episodeNumber = nextEpisodeJSON["number"].int else {
                             completion?(nil, nil)
                             return
-                        }
-                        let jsonForUpdating = JSON(["episode": episodeJSON, "type": "episode"])
-                        let episode: KrangEpisode = {
-                            if let existingEpisode = KrangEpisode.with(traktID: episodeTraktID) {
-                                RealmManager.makeChanges {
-                                    show.nextEpisodeForWatchProgress = existingEpisode
-                                    existingEpisode.update(withJSON: jsonForUpdating)
-                                    existingEpisode.show = show
-                                    existingEpisode.season = show.getSeason(withSeasonNumber: seasonNumber)
-                                }
-                                return existingEpisode
-                            } else {
-                                let newEpisode = KrangEpisode()
-                                newEpisode.update(withJSON: jsonForUpdating)
-                                newEpisode.show = show
-                                newEpisode.season = show.getSeason(withSeasonNumber: seasonNumber)
-                                newEpisode.saveToDatbase()
-                                return newEpisode
-                            }
-                        }()
-                        if episode.posterImageURL == nil {
-                            TMDBHelper.shared.update(episode: episode, completion: { (_, _) in
-                                completion?(nil, episode)
-                            })
-                        } else {
-                            completion?(nil, episode)
-                        }
-                    } catch let episodeJSONError {
-                        completion?(episodeJSONError, nil)
                     }
-                }, failure: { (episodeError) in
-                    completion?(episodeError, nil)
-                })
-            } catch let jsonError {
-                KrangLogger.log.error("Error getting next episode for \(show.title)", context: jsonError)
-                completion?(jsonError, nil)
+                    let episodeURL = String(format: Constants.traktGetEpisodeURLFormat, show.slug, seasonNumber, episodeNumber)
+                    _ = self.oauth.client.get(episodeURL, parameters: [:], headers: TraktHelper.defaultHeaders()) { episodeResult in
+                        switch episodeResult {
+                        case .success(let episodeResponse):
+                            do {
+                                let episodeJSON = try JSON(data: episodeResponse.data)
+                                guard let episodeTraktID = episodeJSON["ids"]["trakt"].int else {
+                                    completion?(nil, nil)
+                                    return
+                                }
+                                let jsonForUpdating = JSON(["episode": episodeJSON, "type": "episode"])
+                                let episode: KrangEpisode = {
+                                    if let existingEpisode = KrangEpisode.with(traktID: episodeTraktID) {
+                                        RealmManager.makeChanges {
+                                            show.nextEpisodeForWatchProgress = existingEpisode
+                                            existingEpisode.update(withJSON: jsonForUpdating)
+                                            existingEpisode.show = show
+                                            existingEpisode.season = show.getSeason(withSeasonNumber: seasonNumber)
+                                        }
+                                        return existingEpisode
+                                    } else {
+                                        let newEpisode = KrangEpisode()
+                                        newEpisode.update(withJSON: jsonForUpdating)
+                                        newEpisode.show = show
+                                        newEpisode.season = show.getSeason(withSeasonNumber: seasonNumber)
+                                        newEpisode.saveToDatbase()
+                                        return newEpisode
+                                    }
+                                }()
+                                if episode.posterImageURL == nil {
+                                    TMDBHelper.shared.update(episode: episode, completion: { (_, _) in
+                                        completion?(nil, episode)
+                                    })
+                                } else {
+                                    completion?(nil, episode)
+                                }
+                            } catch let episodeJSONError {
+                                completion?(episodeJSONError, nil)
+                            }
+                        case .failure(let episodeError):
+                            completion?(episodeError, nil)
+                        }
+                    }
+                } catch let jsonError {
+                    KrangLogger.log.error("Error getting next episode for \(show.title)", context: jsonError)
+                    completion?(jsonError, nil)
+                }
+            case .failure(let error):
+                completion?(error, nil)
             }
-        }) { (error) in
-            completion?(error, nil)
         }
     }
     
@@ -514,13 +531,16 @@ class TraktHelper: NSObject {
         }
         let watchedAt = Date()
         params["watched_at"] = watchedAt.toUTCTimestamp()
-        let _ = self.oauth.client.post(url, parameters: params, headers: TraktHelper.defaultHeaders(), body: nil, success: { (response) in
-            RealmManager.makeChanges {
-                watchable.watchDate = watchedAt
+        _ = self.oauth.client.post(url, parameters: params, headers: TraktHelper.defaultHeaders(), body: nil) { result in
+            switch result {
+            case .success(_):
+                RealmManager.makeChanges {
+                    watchable.watchDate = watchedAt
+                }
+                completion?(nil)
+            case .failure(let error):
+                completion?(error)
             }
-            completion?(nil)
-        }) { (error) in
-            completion?(error)
         }
     }
     
@@ -536,13 +556,16 @@ class TraktHelper: NSObject {
         default:
             break
         }
-        let _ = self.oauth.client.post(url, parameters: params, headers: TraktHelper.defaultHeaders(), body: nil, success: { (response) in
-            RealmManager.makeChanges {
-                watchable.watchDate = nil
+        _ = self.oauth.client.post(url, parameters: params, headers: TraktHelper.defaultHeaders(), body: nil) { result in
+            switch result {
+            case .success(_):
+                RealmManager.makeChanges {
+                    watchable.watchDate = nil
+                }
+                completion?(nil)
+            case .failure(let error):
+                completion?(error)
             }
-            completion?(nil)
-        }) { (error) in
-            completion?(error)
         }
     }
     
@@ -551,194 +574,198 @@ class TraktHelper: NSObject {
         let url = Constants.traktGetHistory
         var showIDs = [Int]()
         showIDs.append(contentsOf: showIDsSoFar)
-        let _ = self.oauth.client.get(url, parameters: ["start_at": date, "limit": 500, "page": page], headers: TraktHelper.defaultHeaders(), success: { (response) in
-            //Success
-            guard let szPageCount = response.response.allHeaderFields["x-pagination-page-count"] as? String, let szCurrentPage = response.response.allHeaderFields["x-pagination-page"] as? String, let pageCount = Int(szPageCount), let currentPage = Int(szCurrentPage) else {
-                //@TODO: Error
-                completion?(nil)
-                return
-            }
-            do {
-                let json = try JSON(data: response.data)
-                var parsedShows = [Int: KrangShow]()
-                let parsingGroup = DispatchGroup()
-                parsingGroup.enter()
-                
-                if let dics = json.array {
-                    let showDics = dics.filter { $0["show"]["ids"]["trakt"].int != nil }
-                    let episodeDics = dics.filter { $0["episode"]["ids"]["trakt"].int != nil }
-                    let movieDics = dics.filter { $0["movie"]["ids"]["trakt"].int != nil }
-                    //First do the shows
+        _ = self.oauth.client.get(url, parameters: ["start_at": date, "limit": 500, "page": page], headers: TraktHelper.defaultHeaders()) { result in
+            switch result {
+            case .success(let response):
+                //Success
+                guard let szPageCount = response.response.allHeaderFields["x-pagination-page-count"] as? String, let szCurrentPage = response.response.allHeaderFields["x-pagination-page"] as? String, let pageCount = Int(szPageCount), let currentPage = Int(szCurrentPage) else {
+                    //@TODO: Error
+                    completion?(nil)
+                    return
+                }
+                do {
+                    let json = try JSON(data: response.data)
+                    var parsedShows = [Int: KrangShow]()
+                    let parsingGroup = DispatchGroup()
+                    parsingGroup.enter()
                     
-                    let showsGroup = DispatchGroup()
-                    showsGroup.enter()
-                    RealmManager.makeChanges {
-                        showDics.forEach {
-                            guard let szWatchedAt = $0["watched_at"].string, let watchedAt = Date.from(utcTimestamp: szWatchedAt) else {
-                                return
-                            }
-                            
-                            let thisJSON = $0["show"]
-                            guard let showID = thisJSON["ids"]["trakt"].int else {
-                                return
-                            }
-                            if showIDs.contains(showID) {
-                                return
-                            }
-                            
-                            let show: KrangShow = {
-                                if let existingShow = KrangShow.with(traktID: showID) {
-                                    existingShow.update(withJSON: thisJSON)
-                                    return existingShow
-                                } else {
-                                    let newShow = KrangShow()
-                                    newShow.update(withJSON: thisJSON)
-                                    newShow.saveToDatabaseOutsideWriteTransaction()
-                                    return newShow
-                                }
-                            }()
-                            show.setLastWatchDateIfNewer(watchedAt)
-                            parsedShows[showID] = show
-                            if !showIDs.contains(showID) {
-                                showIDs.append(showID)
-                            }
-                            
-                            showsGroup.enter()
-                            self.getAllSeasons(forShow: show, completion: { (_, _) in
-                                showsGroup.leave()
-                            })
-                        }
-                    }
-                    showsGroup.leave()
-                    showsGroup.notify(queue: DispatchQueue.global(qos: DispatchQoS.background.qosClass), execute: {
-                        KrangLogger.log.debug("Finished parsing shows for page \(currentPage) of \(pageCount).")
+                    if let dics = json.array {
+                        let showDics = dics.filter { $0["show"]["ids"]["trakt"].int != nil }
+                        let episodeDics = dics.filter { $0["episode"]["ids"]["trakt"].int != nil }
+                        let movieDics = dics.filter { $0["movie"]["ids"]["trakt"].int != nil }
+                        //First do the shows
+                        
+                        let showsGroup = DispatchGroup()
+                        showsGroup.enter()
                         RealmManager.makeChanges {
-                            episodeDics.forEach {
+                            showDics.forEach {
                                 guard let szWatchedAt = $0["watched_at"].string, let watchedAt = Date.from(utcTimestamp: szWatchedAt) else {
                                     return
                                 }
-                                let thisJSON = $0
-                                if let episodeID = $0["episode"]["ids"]["trakt"].int {
-                                    let episode: KrangEpisode = {
-                                        if let existingEpisode = KrangEpisode.with(traktID: episodeID) {
-                                            existingEpisode.update(withJSON: thisJSON)
-                                            return existingEpisode
-                                        } else {
-                                            let newEpisode = KrangEpisode()
-                                            newEpisode.update(withJSON: thisJSON)
-                                            newEpisode.saveToDatabaseOutsideWriteTransaction()
-                                            return newEpisode
+                                
+                                let thisJSON = $0["show"]
+                                guard let showID = thisJSON["ids"]["trakt"].int else {
+                                    return
+                                }
+                                if showIDs.contains(showID) {
+                                    return
+                                }
+                                
+                                let show: KrangShow = {
+                                    if let existingShow = KrangShow.with(traktID: showID) {
+                                        existingShow.update(withJSON: thisJSON)
+                                        return existingShow
+                                    } else {
+                                        let newShow = KrangShow()
+                                        newShow.update(withJSON: thisJSON)
+                                        newShow.saveToDatabaseOutsideWriteTransaction()
+                                        return newShow
+                                    }
+                                }()
+                                show.setLastWatchDateIfNewer(watchedAt)
+                                parsedShows[showID] = show
+                                if !showIDs.contains(showID) {
+                                    showIDs.append(showID)
+                                }
+                                
+                                showsGroup.enter()
+                                self.getAllSeasons(forShow: show, completion: { (_, _) in
+                                    showsGroup.leave()
+                                })
+                            }
+                        }
+                        showsGroup.leave()
+                        showsGroup.notify(queue: DispatchQueue.global(qos: DispatchQoS.background.qosClass), execute: {
+                            KrangLogger.log.debug("Finished parsing shows for page \(currentPage) of \(pageCount).")
+                            RealmManager.makeChanges {
+                                episodeDics.forEach {
+                                    guard let szWatchedAt = $0["watched_at"].string, let watchedAt = Date.from(utcTimestamp: szWatchedAt) else {
+                                        return
+                                    }
+                                    let thisJSON = $0
+                                    if let episodeID = $0["episode"]["ids"]["trakt"].int {
+                                        let episode: KrangEpisode = {
+                                            if let existingEpisode = KrangEpisode.with(traktID: episodeID) {
+                                                existingEpisode.update(withJSON: thisJSON)
+                                                return existingEpisode
+                                            } else {
+                                                let newEpisode = KrangEpisode()
+                                                newEpisode.update(withJSON: thisJSON)
+                                                newEpisode.saveToDatabaseOutsideWriteTransaction()
+                                                return newEpisode
+                                            }
+                                        }()
+                                        episode.watchDate = watchedAt
+                                        if let showID = $0["show"]["ids"]["trakt"].int, let show = (KrangShow.with(traktID: showID) ?? parsedShows[showID]){
+                                            episode.show = show
+                                            if let season = show.getSeason(withSeasonNumber: episode.seasonNumber), !season.episodes.contains(episode) {
+                                                episode.season = season
+                                            }
+                                            show.setLastWatchDateIfNewer(watchedAt)
                                         }
-                                    }()
-                                    episode.watchDate = watchedAt
-                                    if let showID = $0["show"]["ids"]["trakt"].int, let show = (KrangShow.with(traktID: showID) ?? parsedShows[showID]){
-                                        episode.show = show
-                                        if let season = show.getSeason(withSeasonNumber: episode.seasonNumber), !season.episodes.contains(episode) {
-                                            episode.season = season
-                                        }
-                                        show.setLastWatchDateIfNewer(watchedAt)
                                     }
                                 }
                             }
-                        }
-                        parsingGroup.leave()
-                    })
-                    
-                    //Movies
-                    parsingGroup.enter()
-                    RealmManager.makeChanges {
-                        movieDics.forEach {
-                            guard let szWatchedAt = $0["watched_at"].string, let watchedAt = Date.from(utcTimestamp: szWatchedAt) else {
-                                return
-                            }
-                            
-                            let thisJSON = $0
-                            guard let movieID = $0["movie"]["ids"]["trakt"].int else {
-                                return
-                            }
-                            let movie: KrangMovie = {
-                                if let existingMovie = KrangMovie.with(traktID: movieID) {
-                                    existingMovie.update(withJSON: thisJSON)
-                                    return existingMovie
-                                } else {
-                                    let newMovie = KrangMovie()
-                                    newMovie.update(withJSON: thisJSON)
-                                    newMovie.saveToDatabaseOutsideWriteTransaction()
-                                    return newMovie
+                            parsingGroup.leave()
+                        })
+                        
+                        //Movies
+                        parsingGroup.enter()
+                        RealmManager.makeChanges {
+                            movieDics.forEach {
+                                guard let szWatchedAt = $0["watched_at"].string, let watchedAt = Date.from(utcTimestamp: szWatchedAt) else {
+                                    return
                                 }
-                            }()
-                            movie.watchDate = watchedAt
+                                
+                                let thisJSON = $0
+                                guard let movieID = $0["movie"]["ids"]["trakt"].int else {
+                                    return
+                                }
+                                let movie: KrangMovie = {
+                                    if let existingMovie = KrangMovie.with(traktID: movieID) {
+                                        existingMovie.update(withJSON: thisJSON)
+                                        return existingMovie
+                                    } else {
+                                        let newMovie = KrangMovie()
+                                        newMovie.update(withJSON: thisJSON)
+                                        newMovie.saveToDatabaseOutsideWriteTransaction()
+                                        return newMovie
+                                    }
+                                }()
+                                movie.watchDate = watchedAt
+                            }
                         }
                     }
+                    
+                    parsingGroup.leave()
+                    if currentPage < pageCount {
+                        progress?(currentPage, pageCount)
+                        self.getFullHistory(since: date, page: (currentPage + 1), progress: progress, completion: completion, showIDsSoFar: showIDs)
+                    } else {
+                        parsingGroup.notify(queue: DispatchQueue.main, execute: {
+                            completion?(nil)
+                        })
+                    }
+                } catch let jsonError {
+                    completion?(jsonError)
                 }
-                
-                parsingGroup.leave()
-                if currentPage < pageCount {
-                    progress?(currentPage, pageCount)
-                    self.getFullHistory(since: date, page: (currentPage + 1), progress: progress, completion: completion, showIDsSoFar: showIDs)
-                } else {
-                    parsingGroup.notify(queue: DispatchQueue.main, execute: {
-                        completion?(nil)
-                    })
-                }
-            } catch let jsonError {
-                completion?(jsonError)
+            case .failure(let error):
+                completion?(error)
             }
-        }) { (error) in
-            //Failure
-            completion?(error)
+            
         }
     }
     
     func getHistory(forShow show: KrangShow, completion: ((Error?, KrangShow) -> ())?) {
         let url = String(format: Constants.traktGetShowHistoryFormat, show.traktID)
         //@TODO: Pagination?
-        let _ = self.oauth.client.get(url, parameters: ["limit":Int.max], headers: TraktHelper.defaultHeaders(), success: { (response) in
-            //Yay
-            do {
-                let json = try JSON(data: response.data)
-                if let episodeDics = json.array {
-                    RealmManager.makeChanges {
-                        let watchedEpisodeIDs = episodeDics.filter { $0["episode"]["ids"]["trakt"].int != nil }.map { $0["episode"]["ids"]["trakt"].int! }
-                        let unwatchedEpisodes = show.episodes.filter { watchedEpisodeIDs.contains($0.traktID) }
-                        unwatchedEpisodes.forEach { $0.watchDate = nil }
-                        episodeDics.forEach {
-                            guard let traktID = $0["episode"]["ids"]["trakt"].int,
-                                let szWatchedAt = $0["watched_at"].string,
-                                let watchedAt = Date.from(utcTimestamp: szWatchedAt) else {
-                                    return
-                            }
-                            
-                            let thisJSON = $0
-                            let episode: KrangEpisode = {
-                                if let existingEpisode = KrangEpisode.with(traktID: traktID)  {
-                                    return existingEpisode
-                                } else {
-                                    //                                KrangLogger.log.error("Couldn't find episode \(traktID)")
-                                    let newEpisode = KrangEpisode()
-                                    newEpisode.update(withJSON: thisJSON)
-                                    newEpisode.saveToDatabaseOutsideWriteTransaction()
-                                    return newEpisode
+        _ = self.oauth.client.get(url, parameters: ["limit":Int.max], headers: TraktHelper.defaultHeaders()) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    let json = try JSON(data: response.data)
+                    if let episodeDics = json.array {
+                        RealmManager.makeChanges {
+                            let watchedEpisodeIDs = episodeDics.filter { $0["episode"]["ids"]["trakt"].int != nil }.map { $0["episode"]["ids"]["trakt"].int! }
+                            let unwatchedEpisodes = show.episodes.filter { watchedEpisodeIDs.contains($0.traktID) }
+                            unwatchedEpisodes.forEach { $0.watchDate = nil }
+                            episodeDics.forEach {
+                                guard let traktID = $0["episode"]["ids"]["trakt"].int,
+                                    let szWatchedAt = $0["watched_at"].string,
+                                    let watchedAt = Date.from(utcTimestamp: szWatchedAt) else {
+                                        return
                                 }
-                            }()
-                            
-                            episode.show = show
-                            if let season = show.getSeason(withSeasonNumber: episode.seasonNumber) {
-                                episode.season = season
-                            } else {
-                                KrangLogger.log.error("Couldn't find a season for \(episode.titleDisplayString)")
+                                
+                                let thisJSON = $0
+                                let episode: KrangEpisode = {
+                                    if let existingEpisode = KrangEpisode.with(traktID: traktID)  {
+                                        return existingEpisode
+                                    } else {
+                                        //                                KrangLogger.log.error("Couldn't find episode \(traktID)")
+                                        let newEpisode = KrangEpisode()
+                                        newEpisode.update(withJSON: thisJSON)
+                                        newEpisode.saveToDatabaseOutsideWriteTransaction()
+                                        return newEpisode
+                                    }
+                                }()
+                                
+                                episode.show = show
+                                if let season = show.getSeason(withSeasonNumber: episode.seasonNumber) {
+                                    episode.season = season
+                                } else {
+                                    KrangLogger.log.error("Couldn't find a season for \(episode.titleDisplayString)")
+                                }
+                                episode.watchDate = watchedAt
                             }
-                            episode.watchDate = watchedAt
                         }
                     }
+                    completion?(nil, show)
+                } catch let jsonError {
+                    completion?(jsonError, show)
                 }
-                completion?(nil, show)
-            } catch let jsonError {
-                completion?(jsonError, show)
+            case .failure(let error):
+                completion?(error, show)
             }
-        }) { (error) in
-            //Boo
-            completion?(error, show)
         }
     }
     
@@ -746,57 +773,60 @@ class TraktHelper: NSObject {
         let url = Constants.traktGetShowHistory
         let now = Date()
         let fourWeeksAgo = Date(timeIntervalSince1970: now.timeIntervalSince1970 - (60.0 * 60.0 * 24.0 * 7.0 * 4.0))
-        let _ = self.oauth.client.get(url, parameters: ["start_at": fourWeeksAgo, "limit": 50], headers: TraktHelper.defaultHeaders(), success: { (response) in
-            var results = [KrangShow]()
-            var showTraktIDs = [Int]()
-            do {
-                let json = try JSON(data: response.data)
-                if let dics = json.array {
-                    RealmManager.makeChanges {
-                        dics.filter { $0["show"].exists() }.map { $0["show"] }.forEach {
-                            guard let traktID = $0["ids"]["trakt"].int else {
-                                return
-                            }
-                            guard !showTraktIDs.contains(traktID) else {
-                                return
-                            }
-                            showTraktIDs.append(traktID)
-                            let thisJSON = $0
-                            let show: KrangShow = {
-                                if let existingShow = KrangShow.with(traktID: traktID) {
-                                    existingShow.update(withJSON: thisJSON)
-                                    return existingShow
-                                } else {
-                                    let newShow = KrangShow()
-                                    newShow.update(withJSON: thisJSON)
-                                    newShow.saveToDatabaseOutsideWriteTransaction()
-                                    return newShow
+        _ = self.oauth.client.get(url, parameters: ["start_at": fourWeeksAgo, "limit": 50], headers: TraktHelper.defaultHeaders()) { result in
+            switch result {
+            case .success(let response):
+                var results = [KrangShow]()
+                var showTraktIDs = [Int]()
+                do {
+                    let json = try JSON(data: response.data)
+                    if let dics = json.array {
+                        RealmManager.makeChanges {
+                            dics.filter { $0["show"].exists() }.map { $0["show"] }.forEach {
+                                guard let traktID = $0["ids"]["trakt"].int else {
+                                    return
                                 }
-                            }()
-                            results.append(show)
+                                guard !showTraktIDs.contains(traktID) else {
+                                    return
+                                }
+                                showTraktIDs.append(traktID)
+                                let thisJSON = $0
+                                let show: KrangShow = {
+                                    if let existingShow = KrangShow.with(traktID: traktID) {
+                                        existingShow.update(withJSON: thisJSON)
+                                        return existingShow
+                                    } else {
+                                        let newShow = KrangShow()
+                                        newShow.update(withJSON: thisJSON)
+                                        newShow.saveToDatabaseOutsideWriteTransaction()
+                                        return newShow
+                                    }
+                                }()
+                                results.append(show)
+                            }
                         }
                     }
-                }
-                
-                let imageUpdateGroup = DispatchGroup()
-                results.filter { $0.imagePosterURL == nil }.forEach {
-                    if !TraktHelper.asyncImageLoadingOnSearch {
-                        imageUpdateGroup.enter()
-                    }
-                    TMDBHelper.shared.update(show: $0, completion: { (error, updatedShow) in
+                    
+                    let imageUpdateGroup = DispatchGroup()
+                    results.filter { $0.imagePosterURL == nil }.forEach {
                         if !TraktHelper.asyncImageLoadingOnSearch {
-                            imageUpdateGroup.leave()
+                            imageUpdateGroup.enter()
                         }
-                    })
+                        TMDBHelper.shared.update(show: $0, completion: { (error, updatedShow) in
+                            if !TraktHelper.asyncImageLoadingOnSearch {
+                                imageUpdateGroup.leave()
+                            }
+                        })
+                    }
+                    imageUpdateGroup.notify(queue: DispatchQueue.main) {
+                        completion?(nil, results)
+                    }
+                } catch let jsonError {
+                    completion?(jsonError, [KrangShow]())
                 }
-                imageUpdateGroup.notify(queue: DispatchQueue.main) {
-                    completion?(nil, results)
-                }
-            } catch let jsonError {
-                completion?(jsonError, [KrangShow]())
+            case .failure(let error):
+                completion?(error, [KrangShow]())
             }
-        }) { (error) in
-            completion?(error, [KrangShow]())
         }
     }
     
@@ -811,95 +841,95 @@ class TraktHelper: NSObject {
             return nil
         }
         let url = String(format: Constants.traktSearchURLFormat, escapedQuery)
-        let request = self.oauth.client.get(url, parameters: [:], headers: TraktHelper.defaultHeaders(), success: { (response) in
-            //Success
-            do {
-                let json = try JSON(data: response.data)
-                var result: [KrangSearchable] = []
-                if let matchDics = json.array {
-                    RealmManager.makeChanges {
-                        matchDics.forEach {
-                            guard let type = $0["type"].string else {
-                                return
-                            }
-                            
-                            switch type {
-                            case "movie":
-                                guard let traktID = $0["movie"]["ids"]["trakt"].int else {
+        let request = self.oauth.client.get(url, parameters: [:], headers: TraktHelper.defaultHeaders()) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    let json = try JSON(data: response.data)
+                    var result: [KrangSearchable] = []
+                    if let matchDics = json.array {
+                        RealmManager.makeChanges {
+                            matchDics.forEach {
+                                guard let type = $0["type"].string else {
                                     return
                                 }
                                 
-                                let thisJSON = $0
-                                let movie:KrangMovie = {
-                                    if let existingMovie = KrangMovie.with(traktID: traktID) {
-                                        existingMovie.update(withJSON: thisJSON)
-                                        return existingMovie
-                                    } else {
-                                        let newMovie = KrangMovie()
-                                        newMovie.update(withJSON: thisJSON)
-                                        newMovie.saveToDatabaseOutsideWriteTransaction()
-                                        return newMovie
+                                switch type {
+                                case "movie":
+                                    guard let traktID = $0["movie"]["ids"]["trakt"].int else {
+                                        return
                                     }
-                                }()
-                                result.append(movie)
-                            case "show":
-                                guard let traktID = $0["show"]["ids"]["trakt"].int else {
-                                    return
+                                    
+                                    let thisJSON = $0
+                                    let movie:KrangMovie = {
+                                        if let existingMovie = KrangMovie.with(traktID: traktID) {
+                                            existingMovie.update(withJSON: thisJSON)
+                                            return existingMovie
+                                        } else {
+                                            let newMovie = KrangMovie()
+                                            newMovie.update(withJSON: thisJSON)
+                                            newMovie.saveToDatabaseOutsideWriteTransaction()
+                                            return newMovie
+                                        }
+                                    }()
+                                    result.append(movie)
+                                case "show":
+                                    guard let traktID = $0["show"]["ids"]["trakt"].int else {
+                                        return
+                                    }
+                                    
+                                    let thisJSON = $0["show"]
+                                    let show:KrangShow = {
+                                        if let existingShow = KrangShow.with(traktID: traktID) {
+                                            existingShow.update(withJSON: thisJSON)
+                                            return existingShow
+                                        } else {
+                                            let newShow = KrangShow()
+                                            newShow.update(withJSON: thisJSON)
+                                            newShow.saveToDatabaseOutsideWriteTransaction()
+                                            return newShow
+                                        }
+                                    }()
+                                    result.append(show)
+                                default:
+                                    break
                                 }
-                                
-                                let thisJSON = $0["show"]
-                                let show:KrangShow = {
-                                    if let existingShow = KrangShow.with(traktID: traktID) {
-                                        existingShow.update(withJSON: thisJSON)
-                                        return existingShow
-                                    } else {
-                                        let newShow = KrangShow()
-                                        newShow.update(withJSON: thisJSON)
-                                        newShow.saveToDatabaseOutsideWriteTransaction()
-                                        return newShow
-                                    }
-                                }()
-                                result.append(show)
-                            default:
-                                break
                             }
                         }
                     }
-                }
-                
-                let imageUpdateGroup = DispatchGroup()
-                result.filter { $0.urlForSearchResultThumbnailImage == nil }.forEach {
-                    if let movie = $0 as? KrangMovie {
-                        if !TraktHelper.asyncImageLoadingOnSearch {
-                            imageUpdateGroup.enter()
-                        }
-                        TMDBHelper.shared.update(movie: movie, completion: { (_, updatedMovie) in
+                    
+                    let imageUpdateGroup = DispatchGroup()
+                    result.filter { $0.urlForSearchResultThumbnailImage == nil }.forEach {
+                        if let movie = $0 as? KrangMovie {
                             if !TraktHelper.asyncImageLoadingOnSearch {
-                                imageUpdateGroup.leave()
+                                imageUpdateGroup.enter()
                             }
-                        })
-                    } else if let show = $0 as? KrangShow {
-                        if !TraktHelper.asyncImageLoadingOnSearch {
-                            imageUpdateGroup.enter()
-                        }
-                        TMDBHelper.shared.update(show: show, completion: { (_, updatedShow) in
+                            TMDBHelper.shared.update(movie: movie, completion: { (_, updatedMovie) in
+                                if !TraktHelper.asyncImageLoadingOnSearch {
+                                    imageUpdateGroup.leave()
+                                }
+                            })
+                        } else if let show = $0 as? KrangShow {
                             if !TraktHelper.asyncImageLoadingOnSearch {
-                                imageUpdateGroup.leave()
+                                imageUpdateGroup.enter()
                             }
-                        })
+                            TMDBHelper.shared.update(show: show, completion: { (_, updatedShow) in
+                                if !TraktHelper.asyncImageLoadingOnSearch {
+                                    imageUpdateGroup.leave()
+                                }
+                            })
+                        }
                     }
+                    imageUpdateGroup.notify(queue: DispatchQueue.main) {
+                        completion?(nil, result)
+                    }
+                } catch let jsonError {
+                    completion?(jsonError, [])
                 }
-                imageUpdateGroup.notify(queue: DispatchQueue.main) {
-                    completion?(nil, result)
-                }
-            } catch let jsonError {
-                completion?(jsonError, [])
+            case .failure(let error):
+                completion?(error, [])
             }
-        }) { (error) in
-            //Failure
-            completion?(error, [])
         }
-        
         return request
     }
     
@@ -912,15 +942,16 @@ class TraktHelper: NSObject {
                 return
             }
             body["app_version"] = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
-            let _ = self.oauth.client.post(url, parameters: body, headers: TraktHelper.defaultHeaders(), body: nil, success: { (response) in
-                //Success
-                completion?(nil, watchable)
-                DispatchQueue.main.async {
-                    NotificationCenter.default.post(name: Notification.Name.didCheckInToWatchable, object: watchable, userInfo: nil)
+            let _ = self.oauth.client.post(url, parameters: body, headers: TraktHelper.defaultHeaders(), body: nil) { result in
+                switch result {
+                case .success(_):
+                    completion?(nil, watchable)
+                    DispatchQueue.main.async {
+                        NotificationCenter.default.post(name: Notification.Name.didCheckInToWatchable, object: watchable, userInfo: nil)
+                    }
+                case .failure(let error):
+                    completion?(error, nil)
                 }
-            }) { (error) in
-                //Failure
-                completion?(error, nil)
             }
         }
     }
@@ -938,10 +969,14 @@ class TraktHelper: NSObject {
     
     private func _cancelAllCheckins(_ completion: ((Error?) -> ())? ) {
         let url = Constants.traktCheckInURL
-        let _ = self.oauth.client.delete(url, parameters: [:], headers: TraktHelper.defaultHeaders(), success: { (_) in
+        let _ = self.oauth.client.delete(url, parameters: [:], headers: TraktHelper.defaultHeaders()) { result in
+            switch result {
+            case .success(_):
+                completion?(nil)
+            case .failure(let error):
+                completion?(error)
+            }
             completion?(nil)
-        }) { (error) in
-            completion?(error)
         }
     }
     

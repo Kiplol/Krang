@@ -5,7 +5,7 @@ def shared_pods
 	pod 'Hue'
 	pod 'Kingfisher'
 	pod 'MarqueeLabel/Swift'
-	pod 'OAuthSwift', '1.2.0'
+	pod 'OAuthSwift'
 	pod 'RealmSwift'
 	pod 'SwiftyBeaver'
 	pod 'SwiftLCS'
@@ -27,9 +27,9 @@ target 'Currently Watching Widget' do
 	shared_pods
 end
 
-#target 'Now WatchingExtension' do
-#  shared_pods
-#end
+target 'Now WatchingExtension' do
+  shared_pods
+end
 
 post_install do |installer|
   installer.pods_project.targets.each do |target|

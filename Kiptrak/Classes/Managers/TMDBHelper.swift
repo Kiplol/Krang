@@ -24,16 +24,19 @@ class TMDBHelper: NSObject {
     }()
     
     func getConfiguration(completion:((_:Error?) -> ())?) {
-        let _ = self.oauth.client.get(Constants.tmdbConfigurationURL, success: { (response) in
-            //Yay
-            let json = try! JSON(data: response.data)
-            self.configuration = Configuration()
-            self.configuration.update(with: json)
-            self.gotConfiguration = true
-            completion?(nil)
-        }) { (error) in
-            //Boo
-            completion?(error)
+        let _ = self.oauth.client.get(Constants.tmdbConfigurationURL) { result in
+            switch result {
+            case .success(let result):
+                //Yay
+                let json = try! JSON(data: result.data)
+                self.configuration = Configuration()
+                self.configuration.update(with: json)
+                self.gotConfiguration = true
+                completion?(nil)
+            case .failure(let error):
+                completion?(error)
+            }
+
         }
     }
     
@@ -43,22 +46,24 @@ class TMDBHelper: NSObject {
             return
         }
         let url = String(format: Constants.tmdbMovieGetURLFormat, movie.tmdbID)
-        let _ = self.oauth.client.get(url, success: { (response) in
-            //Yay
-            do {
-                let json = try JSON(data: response.data)
-                if outsideOfWriteTransaction {
-                    self.update(movie: movie, OutsideOfWriteTransactionWithJSON: json)
-                } else {
-                    self.update(movie: movie, withJSON: json)
+        _ = self.oauth.client.get(url) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    let json = try JSON(data: response.data)
+                    if outsideOfWriteTransaction {
+                        self.update(movie: movie, OutsideOfWriteTransactionWithJSON: json)
+                    } else {
+                        self.update(movie: movie, withJSON: json)
+                    }
+                    completion?(nil, movie)
+                } catch let jsonError {
+                    completion?(jsonError, movie)
                 }
-                completion?(nil, movie)
-            } catch let jsonError {
-                completion?(jsonError, movie)
+            case .failure(let error):
+                completion?(error, movie)
             }
-        }) { (error) in
-            //Boo
-            completion?(error, movie)
+            
         }
     }
     
@@ -80,40 +85,46 @@ class TMDBHelper: NSObject {
         
         KrangLogger.log.verbose("Updating episode")
         let url = String(format: Constants.tmdbEpisodeGetURLFormat, show.tmdbID, show.slug, episode.seasonNumber, episode.episode)
-        let _ = self.oauth.client.get(url, success: { (response) in
-            do {
-                let json = try JSON(data: response.data)
-                self.update(episode: episode, withJSON: json)
-                
-                KrangLogger.log.verbose("Updated episode with episode details.  Now updating with season details.")
-                let seasonURL = String(format: Constants.tmdbSeasonGetURLFormat, show.tmdbID, show.slug, episode.seasonNumber)
-                let _ = self.oauth.client.get(seasonURL, success: { (seasonResponse) in
-                    let seasonJSON = try! JSON(data: seasonResponse.data)
-                    self.update(episode: episode, withSeasonJSON: seasonJSON)
-                    completion?(nil, episode)
-                }, failure: { (seasonError) in
-                    KrangLogger.log.error("Error updating episode with season data.  Error: \(seasonError)\nEpisode: \(episode)")
-                    completion?(seasonError, episode)
-                })
-                if episode.posterImageURL == nil || episode.posterImageURLs.isEmpty {
-                    //
-                    //We already tried to set this from the season, so now we must try the show.
-                    episode.makeChanges() {
-                        if episode.posterImageURL == nil {
-                            episode.posterImageURL = show.imagePosterURL
-                        }
-                        if episode.posterImageURLs.isEmpty {
-                            episode.posterImageURLs.append(objectsIn: show.imagePosterURLs)
+        let _ = self.oauth.client.get(url) { result in
+            switch result {
+            case .failure(let error):
+                KrangLogger.log.error("Error updating episode.  Error: \(error)\nEpisode: \(episode)")
+                completion?(error, episode)
+            case .success(let response):
+                do {
+                    let json = try JSON(data: response.data)
+                    self.update(episode: episode, withJSON: json)
+                    
+                    KrangLogger.log.verbose("Updated episode with episode details.  Now updating with season details.")
+                    let seasonURL = String(format: Constants.tmdbSeasonGetURLFormat, show.tmdbID, show.slug, episode.seasonNumber)
+                    let _ = self.oauth.client.get(seasonURL) { seasonResult in
+                        switch seasonResult {
+                        case .failure(let seasonError):
+                            KrangLogger.log.error("Error updating episode with season data.  Error: \(seasonError)\nEpisode: \(episode)")
+                            completion?(seasonError, episode)
+                        case .success(let seasonResponse):
+                            let seasonJSON = try! JSON(data: seasonResponse.data)
+                            self.update(episode: episode, withSeasonJSON: seasonJSON)
+                            completion?(nil, episode)
                         }
                     }
+                    
+                    if episode.posterImageURL == nil || episode.posterImageURLs.isEmpty {
+                        //
+                        //We already tried to set this from the season, so now we must try the show.
+                        episode.makeChanges() {
+                            if episode.posterImageURL == nil {
+                                episode.posterImageURL = show.imagePosterURL
+                            }
+                            if episode.posterImageURLs.isEmpty {
+                                episode.posterImageURLs.append(objectsIn: show.imagePosterURLs)
+                            }
+                        }
+                    }
+                } catch let jsonError {
+                    completion?(jsonError, episode)
                 }
-            } catch let jsonError {
-                completion?(jsonError, episode)
             }
-            //
-        }) { (error) in
-            KrangLogger.log.error("Error updating episode.  Error: \(error)\nEpisode: \(episode)")
-            completion?(error, episode)
         }
     }
     
@@ -125,14 +136,15 @@ class TMDBHelper: NSObject {
         
         KrangLogger.log.verbose("Updating show (\(show.title))")
         let url = String(format: Constants.tmdbShowGetURLFormat, show.tmdbID, show.slug)
-        let _ = self.oauth.client.get(url, success: { (response) in
-            //Success
-            let showJSON = try! JSON(data: response.data)
-            self.update(show: show, withJSON: showJSON)
-            completion?(nil, show)
-        }) { (error) in
-            //Faliure
-            completion?(error, show)
+        let _ = self.oauth.client.get(url) { result in
+            switch result {
+            case .success(let response):
+                let showJSON = try! JSON(data: response.data)
+                self.update(show: show, withJSON: showJSON)
+                completion?(nil, show)
+            case .failure(let error):
+                completion?(error, show)
+            }
         }
     }
     
@@ -149,23 +161,24 @@ class TMDBHelper: NSObject {
         
         KrangLogger.log.verbose("Updating season (\(show.title) \(season.title))")
         let url = String(format: Constants.tmdbSeasonGetURLFormat, show.tmdbID, show.slug, season.seasonNumber)
-        let _ = self.oauth.client.get(url, success: { (response) in
-            //Success
-            do {
-                let json = try JSON(data: response.data)
-                self.update(season: season, withJSON: json)
-                if season.posterImageURL == nil && show.imagePosterURL != nil{
-                    season.makeChanges() {
-                        season.posterImageURL = show.imagePosterURL
+        let _ = self.oauth.client.get(url) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    let json = try JSON(data: response.data)
+                    self.update(season: season, withJSON: json)
+                    if season.posterImageURL == nil && show.imagePosterURL != nil{
+                        season.makeChanges() {
+                            season.posterImageURL = show.imagePosterURL
+                        }
                     }
+                    completion?(nil, season)
+                } catch let jsonError {
+                    completion?(jsonError, season)
                 }
-                completion?(nil, season)
-            } catch let jsonError {
-                completion?(jsonError, season)
+            case .failure(let error):
+                completion?(error, season)
             }
-        }) { (error) in
-            //Failure
-            completion?(error, season)
         }
     }
     

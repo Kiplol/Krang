@@ -21,6 +21,7 @@
 		3740AB5E25CC722C0013874C /* Now_Watching.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 3740AB5A25CC722B0013874C /* Now_Watching.intentdefinition */; };
 		3740AB5F25CC722C0013874C /* Now_Watching.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 3740AB5A25CC722B0013874C /* Now_Watching.intentdefinition */; };
 		3740AB6225CC722C0013874C /* Now WatchingExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3740AB5225CC722B0013874C /* Now WatchingExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		3740AC9825CCAD680013874C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373D32951E22C05C00980925 /* Constants.swift */; };
 		374C2AA01E242BCD0094D7A4 /* TraktHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374C2A9F1E242BCD0094D7A4 /* TraktHelper.swift */; };
 		375E9BC61F8E74A600636E4C /* KrangWatchablePreviewView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 375E9BC51F8E74A600636E4C /* KrangWatchablePreviewView.xib */; };
 		375E9BC81F8E74D600636E4C /* KrangWatchablePreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375E9BC71F8E74D600636E4C /* KrangWatchablePreviewView.swift */; };
@@ -137,6 +138,7 @@
 		771F5EE31D27AE8014250A86 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 338B469DF7479164D6D797C8 /* CoreMedia.framework */; };
 		A17C286F4A01541C882FCF85 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EBED3ECC65FC90281B1331E /* AVFoundation.framework */; };
 		A250AB0669B85C51937752EA /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C5127FC6F5BCE0C9A2E5C5C /* AssetsLibrary.framework */; };
+		BD5846AF63E3453D0045154C /* Pods_Now_WatchingExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79D11E9B5C6CB63EB30EE6E6 /* Pods_Now_WatchingExtension.framework */; };
 		CCECAB0157942143A8E08CB2 /* Pods_Kiptrak.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37B22421F8414CC64C2C4B78 /* Pods_Kiptrak.framework */; };
 		E1820F6FBD891B52A6A6D1FF /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55EC0545D837BD5B8104ACC0 /* CoreTelephony.framework */; };
 		E4D2C1CD1B28EAF4E8E2A010 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBABE8C5F4AFA6AC90C42ADD /* CoreVideo.framework */; };
@@ -275,8 +277,11 @@
 		55EC0545D837BD5B8104ACC0 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		57BCB84000D2751D40C37EC7 /* Pods-Kiptrak.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kiptrak.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kiptrak/Pods-Kiptrak.debug.xcconfig"; sourceTree = "<group>"; };
 		6C5127FC6F5BCE0C9A2E5C5C /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		776F68B6E65D427066FEA66A /* Pods-Now WatchingExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Now WatchingExtension.release.xcconfig"; path = "Pods/Target Support Files/Pods-Now WatchingExtension/Pods-Now WatchingExtension.release.xcconfig"; sourceTree = "<group>"; };
+		79D11E9B5C6CB63EB30EE6E6 /* Pods_Now_WatchingExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Now_WatchingExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		98F45B548DC94C8289E45742 /* Pods_Currently_Watching_Widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Currently_Watching_Widget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0DBC2C2D99275125265CBBB /* Pods-Currently Watching Widget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Currently Watching Widget.release.xcconfig"; path = "Pods/Target Support Files/Pods-Currently Watching Widget/Pods-Currently Watching Widget.release.xcconfig"; sourceTree = "<group>"; };
+		B3FE12C9AB8BBF77370FBF50 /* Pods-Now WatchingExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Now WatchingExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Now WatchingExtension/Pods-Now WatchingExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		B85F2574DB715286FF1AF483 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		DBABE8C5F4AFA6AC90C42ADD /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		F584FEFC695E49CA9E9F79BC /* Bridging-Header.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
@@ -290,6 +295,7 @@
 			files = (
 				3740AB5625CC722B0013874C /* SwiftUI.framework in Frameworks */,
 				3740AB5425CC722B0013874C /* WidgetKit.framework in Frameworks */,
+				BD5846AF63E3453D0045154C /* Pods_Now_WatchingExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,6 +334,8 @@
 				FC6C3DDC87919D26314AE58D /* Pods-Kiptrak.release.xcconfig */,
 				30BCC36AEA18296CBF311C9C /* Pods-Currently Watching Widget.debug.xcconfig */,
 				A0DBC2C2D99275125265CBBB /* Pods-Currently Watching Widget.release.xcconfig */,
+				B3FE12C9AB8BBF77370FBF50 /* Pods-Now WatchingExtension.debug.xcconfig */,
+				776F68B6E65D427066FEA66A /* Pods-Now WatchingExtension.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -549,6 +557,7 @@
 				DBABE8C5F4AFA6AC90C42ADD /* CoreVideo.framework */,
 				3740AB5325CC722B0013874C /* WidgetKit.framework */,
 				3740AB5525CC722B0013874C /* SwiftUI.framework */,
+				79D11E9B5C6CB63EB30EE6E6 /* Pods_Now_WatchingExtension.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -560,6 +569,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3740AB6325CC722C0013874C /* Build configuration list for PBXNativeTarget "Now WatchingExtension" */;
 			buildPhases = (
+				03940DD003EBB701A03CF9F5 /* [CP] Check Pods Manifest.lock */,
 				3740AB4E25CC722B0013874C /* Sources */,
 				3740AB4F25CC722B0013874C /* Frameworks */,
 				3740AB5025CC722B0013874C /* Resources */,
@@ -755,6 +765,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		03940DD003EBB701A03CF9F5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Now WatchingExtension-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		607631F0D1C3329CEEED915C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -866,6 +898,7 @@
 			files = (
 				3740AB5E25CC722C0013874C /* Now_Watching.intentdefinition in Sources */,
 				3740AB5925CC722B0013874C /* Now_Watching.swift in Sources */,
+				3740AC9825CCAD680013874C /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -994,6 +1027,7 @@
 /* Begin XCBuildConfiguration section */
 		3740AB6425CC722C0013874C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B3FE12C9AB8BBF77370FBF50 /* Pods-Now WatchingExtension.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
@@ -1022,6 +1056,7 @@
 		};
 		3740AB6525CC722C0013874C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 776F68B6E65D427066FEA66A /* Pods-Now WatchingExtension.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
