@@ -41,6 +41,8 @@ import Realm
  * `String`
  * `Data`
  * `Date`
+ * `Decimal128`
+ * `ObjectId`
 
  ### Relationships: Array (in Swift, `List`) and `Object` types
 
@@ -56,7 +58,5 @@ public typealias PropertyType = RLMPropertyType
  */
 public typealias NotificationToken = RLMNotificationToken
 
-extension NotificationToken {
-    @available(*, unavailable, renamed: "invalidate()")
-    @nonobjc public func stop() { fatalError() }
-}
+/// :nodoc:
+public typealias ObjectBase = RLMObjectBase

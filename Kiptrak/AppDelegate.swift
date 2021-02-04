@@ -40,6 +40,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         KrangUtils.setThisAsLastRunVersion()
         
+        RealmManager.makeChanges {
+            KrangMovie.deleteAllMovies()
+        }
+        
         //Init the logger
         KrangLogger.setup()
         
