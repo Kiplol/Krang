@@ -124,7 +124,7 @@ class TraktHelper: NSObject {
     }
     
     func getMyProfile(completion: ((_:Error?,  _:KrangUser?) -> ())? ) {
-        _ = self.oauth.client.get(Constants.traktBaseURL + "/user/settings") { result in
+        _ = self.oauth.client.get(Constants.traktBaseURL + "/users/settings", parameters: [:], headers: Self.defaultHeaders()) { result in
             switch result {
             case .success(let response):
                 do {
@@ -982,7 +982,9 @@ class TraktHelper: NSObject {
     
     //Helpers
     private static func defaultHeaders() -> [String: String] {
-        return ["Content-type": "application/json", "trakt-api-key": Constants.traktClientID, "trakt-api-version": "2"]
+        return ["Content-type": "application/json",
+                "trakt-api-key": Constants.traktClientID,
+                "trakt-api-version": "2"]
     }
     
     private static func movieOrEpisodeFrom(json:JSON) -> AnyObject? {
