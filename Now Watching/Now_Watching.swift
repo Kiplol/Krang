@@ -9,25 +9,30 @@
 import WidgetKit
 import SwiftUI
 import Intents
+import RealmSwift
 
 struct Provider: IntentTimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: ConfigurationIntent())
+        SimpleEntry(date: Date(), configuration: ConfigurationIntent(), watchable: nil, user: nil)
     }
 
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), configuration: configuration)
+        let entry = SimpleEntry(date: Date(), configuration: configuration, watchable: nil, user: nil)
         completion(entry)
     }
 
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         var entries: [SimpleEntry] = []
+        
+        _ = RealmManager.shared
+        let profile = KrangUser.getCurrentUser()
+        print(profile)
 
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
         let currentDate = Date()
         for hourOffset in 0 ..< 5 {
             let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, configuration: configuration)
+            let entry = SimpleEntry(date: entryDate, configuration: configuration, watchable: nil, user: profile)
             entries.append(entry)
         }
 
@@ -39,6 +44,8 @@ struct Provider: IntentTimelineProvider {
 struct SimpleEntry: TimelineEntry {
     let date: Date
     let configuration: ConfigurationIntent
+    let watchable: KrangWatchable?
+    let user: KrangUser?
 }
 
 struct Now_WatchingEntryView : View {
@@ -46,8 +53,9 @@ struct Now_WatchingEntryView : View {
 
     var body: some View {
         HStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: /*@START_MENU_TOKEN@*/nil/*@END_MENU_TOKEN@*/, content: {
-            /*@START_MENU_TOKEN@*/Text("Placeholder")/*@END_MENU_TOKEN@*/
+            Text("\(self.entry.user?.username ?? "Not Logged In")")
         })
+        
     }
 }
 
@@ -66,7 +74,7 @@ struct Now_Watching: Widget {
 
 struct Now_Watching_Previews: PreviewProvider {
     static var previews: some View {
-        Now_WatchingEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent()))
+        Now_WatchingEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent(), watchable: nil, user: nil))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
 }

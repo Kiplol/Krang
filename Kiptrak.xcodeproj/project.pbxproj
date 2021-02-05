@@ -134,6 +134,18 @@
 		37ED660A1E2D7E5400AEE3F4 /* DeeplinkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37ED66091E2D7E5400AEE3F4 /* DeeplinkHandler.swift */; };
 		37F0DB671E31705300FAC6DB /* KrangProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F0DB661E31705300FAC6DB /* KrangProgressView.swift */; };
 		37F0DB681E31705300FAC6DB /* KrangProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F0DB661E31705300FAC6DB /* KrangProgressView.swift */; };
+		37FF809525CCE0E40046B17A /* KrangSeason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376011681F6C524E004ED6EF /* KrangSeason.swift */; };
+		37FF809925CCE0E90046B17A /* KrangCheckin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E7B7551E2DA023001D4799 /* KrangCheckin.swift */; };
+		37FF809D25CCE0EC0046B17A /* KrangEpisode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A19E351E27F0B3007877B4 /* KrangEpisode.swift */; };
+		37FF80A125CCE0EF0046B17A /* KrangShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A19E371E27F290007877B4 /* KrangShow.swift */; };
+		37FF80A525CCE0F30046B17A /* KrangMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A19E311E269C96007877B4 /* KrangMovie.swift */; };
+		37FF80A925CCE0F70046B17A /* KrangUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C55431E247F9C00D51019 /* KrangUser.swift */; };
+		37FF80AD25CCE10E0046B17A /* KrangSearchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376011611F6ACDF0004ED6EF /* KrangSearchable.swift */; };
+		37FF80B125CCE1120046B17A /* KrangWatchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A19E741E2BFE34007877B4 /* KrangWatchable.swift */; };
+		37FF80B525CCE1170046B17A /* KrangLinkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376011651F6C382A004ED6EF /* KrangLinkable.swift */; };
+		37FF80B925CCE1870046B17A /* KrangRealmUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C55491E24992300D51019 /* KrangRealmUtils.swift */; };
+		37FF80BD25CCE1960046B17A /* KrangDateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E7B7581E2DA17B001D4799 /* KrangDateUtils.swift */; };
+		37FF80C125CCE1A00046B17A /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C55461E248B4F00D51019 /* RealmManager.swift */; };
 		68A85681C2C138574CF07450 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4682B0B4C4E6D0EC612DC186 /* CoreText.framework */; };
 		771F5EE31D27AE8014250A86 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 338B469DF7479164D6D797C8 /* CoreMedia.framework */; };
 		A17C286F4A01541C882FCF85 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EBED3ECC65FC90281B1331E /* AVFoundation.framework */; };
@@ -273,6 +285,7 @@
 		37E957841F69CB03003D6D74 /* WatchableSearchResultTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WatchableSearchResultTableViewCell.xib; path = Kiptrak/Classes/Views/Cells/WatchableSearchResultTableViewCell.xib; sourceTree = "<group>"; };
 		37ED66091E2D7E5400AEE3F4 /* DeeplinkHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeeplinkHandler.swift; path = Classes/Managers/DeeplinkHandler.swift; sourceTree = "<group>"; };
 		37F0DB661E31705300FAC6DB /* KrangProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KrangProgressView.swift; path = Kiptrak/Classes/Views/KrangProgressView.swift; sourceTree = "<group>"; };
+		37FF80C525CCE4760046B17A /* Now WatchingExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Now WatchingExtension.entitlements"; sourceTree = "<group>"; };
 		4682B0B4C4E6D0EC612DC186 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		55EC0545D837BD5B8104ACC0 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		57BCB84000D2751D40C37EC7 /* Pods-Kiptrak.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kiptrak.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kiptrak/Pods-Kiptrak.debug.xcconfig"; sourceTree = "<group>"; };
@@ -383,6 +396,7 @@
 		37870B131E22BA6A00A2EC00 = {
 			isa = PBXGroup;
 			children = (
+				37FF80C525CCE4760046B17A /* Now WatchingExtension.entitlements */,
 				376A448D200AB0CD00DB7E5D /* IMDBHelper.swift */,
 				37870B1E1E22BA6A00A2EC00 /* Kiptrak */,
 				37A19E661E2BFDD9007877B4 /* Currently Watching Widget */,
@@ -896,9 +910,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37FF80B925CCE1870046B17A /* KrangRealmUtils.swift in Sources */,
+				37FF809525CCE0E40046B17A /* KrangSeason.swift in Sources */,
+				37FF80C125CCE1A00046B17A /* RealmManager.swift in Sources */,
 				3740AB5E25CC722C0013874C /* Now_Watching.intentdefinition in Sources */,
+				37FF80BD25CCE1960046B17A /* KrangDateUtils.swift in Sources */,
 				3740AB5925CC722B0013874C /* Now_Watching.swift in Sources */,
+				37FF80AD25CCE10E0046B17A /* KrangSearchable.swift in Sources */,
+				37FF80B125CCE1120046B17A /* KrangWatchable.swift in Sources */,
+				37FF809D25CCE0EC0046B17A /* KrangEpisode.swift in Sources */,
 				3740AC9825CCAD680013874C /* Constants.swift in Sources */,
+				37FF80B525CCE1170046B17A /* KrangLinkable.swift in Sources */,
+				37FF809925CCE0E90046B17A /* KrangCheckin.swift in Sources */,
+				37FF80A925CCE0F70046B17A /* KrangUser.swift in Sources */,
+				37FF80A525CCE0F30046B17A /* KrangMovie.swift in Sources */,
+				37FF80A125CCE0EF0046B17A /* KrangShow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1038,6 +1064,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = "Now WatchingExtension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LSB86U552U;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1067,6 +1094,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = "Now WatchingExtension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LSB86U552U;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
