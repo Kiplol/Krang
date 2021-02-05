@@ -27,6 +27,12 @@ struct Provider: IntentTimelineProvider {
         _ = RealmManager.shared
         let profile = KrangUser.getCurrentUser()
         print(profile)
+        
+        TraktHelper.shared.getCheckedInMovieOrEpisode { _, movie, episode in
+            guard movie != nil || episode != nil else {
+                return 
+            }
+        }
 
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
         let currentDate = Date()

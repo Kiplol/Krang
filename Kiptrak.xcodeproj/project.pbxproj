@@ -13,6 +13,8 @@
 		3724CBAC1E247557005387D1 /* PlaybackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724CBAB1E247557005387D1 /* PlaybackViewController.swift */; };
 		372595B2201006C100C7C516 /* LoadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372595B0201006C100C7C516 /* LoadingTableViewCell.swift */; };
 		372595B3201006C100C7C516 /* LoadingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 372595B1201006C100C7C516 /* LoadingTableViewCell.xib */; };
+		3729284425CD981D006BFE97 /* KrangLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C55501E2564D100D51019 /* KrangLogger.swift */; };
+		3729284825CD982B006BFE97 /* TMDBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A19E331E26E914007877B4 /* TMDBHelper.swift */; };
 		373D32961E22C05C00980925 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373D32951E22C05C00980925 /* Constants.swift */; };
 		3740AB5425CC722B0013874C /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3740AB5325CC722B0013874C /* WidgetKit.framework */; };
 		3740AB5625CC722B0013874C /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3740AB5525CC722B0013874C /* SwiftUI.framework */; };
@@ -146,6 +148,7 @@
 		37FF80B925CCE1870046B17A /* KrangRealmUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C55491E24992300D51019 /* KrangRealmUtils.swift */; };
 		37FF80BD25CCE1960046B17A /* KrangDateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E7B7581E2DA17B001D4799 /* KrangDateUtils.swift */; };
 		37FF80C125CCE1A00046B17A /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C55461E248B4F00D51019 /* RealmManager.swift */; };
+		37FF80EB25CCEBE10046B17A /* TraktHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374C2A9F1E242BCD0094D7A4 /* TraktHelper.swift */; };
 		68A85681C2C138574CF07450 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4682B0B4C4E6D0EC612DC186 /* CoreText.framework */; };
 		771F5EE31D27AE8014250A86 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 338B469DF7479164D6D797C8 /* CoreMedia.framework */; };
 		A17C286F4A01541C882FCF85 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EBED3ECC65FC90281B1331E /* AVFoundation.framework */; };
@@ -912,6 +915,7 @@
 			files = (
 				37FF80B925CCE1870046B17A /* KrangRealmUtils.swift in Sources */,
 				37FF809525CCE0E40046B17A /* KrangSeason.swift in Sources */,
+				37FF80EB25CCEBE10046B17A /* TraktHelper.swift in Sources */,
 				37FF80C125CCE1A00046B17A /* RealmManager.swift in Sources */,
 				3740AB5E25CC722C0013874C /* Now_Watching.intentdefinition in Sources */,
 				37FF80BD25CCE1960046B17A /* KrangDateUtils.swift in Sources */,
@@ -919,11 +923,13 @@
 				37FF80AD25CCE10E0046B17A /* KrangSearchable.swift in Sources */,
 				37FF80B125CCE1120046B17A /* KrangWatchable.swift in Sources */,
 				37FF809D25CCE0EC0046B17A /* KrangEpisode.swift in Sources */,
+				3729284825CD982B006BFE97 /* TMDBHelper.swift in Sources */,
 				3740AC9825CCAD680013874C /* Constants.swift in Sources */,
 				37FF80B525CCE1170046B17A /* KrangLinkable.swift in Sources */,
 				37FF809925CCE0E90046B17A /* KrangCheckin.swift in Sources */,
 				37FF80A925CCE0F70046B17A /* KrangUser.swift in Sources */,
 				37FF80A525CCE0F30046B17A /* KrangMovie.swift in Sources */,
+				3729284425CD981D006BFE97 /* KrangLogger.swift in Sources */,
 				37FF80A125CCE0EF0046B17A /* KrangShow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1069,7 +1075,7 @@
 				DEVELOPMENT_TEAM = LSB86U552U;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "Now Watching/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -1099,7 +1105,7 @@
 				DEVELOPMENT_TEAM = LSB86U552U;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "Now Watching/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kip.krang.Now-Watching";
@@ -1280,7 +1286,7 @@
 				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = LSB86U552U;
 				INFOPLIST_FILE = "Currently Watching Widget/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MARKETING_VERSION = 1.0.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kip.krang.Currently-Watching-Widget";
@@ -1300,7 +1306,7 @@
 				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = LSB86U552U;
 				INFOPLIST_FILE = "Currently Watching Widget/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MARKETING_VERSION = 1.0.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kip.krang.Currently-Watching-Widget";
