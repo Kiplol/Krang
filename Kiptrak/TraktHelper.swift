@@ -16,7 +16,7 @@ class TraktHelper: NSObject {
     static let shared = TraktHelper()
     static let asyncImageLoadingOnSearch = true
     
-    let oauth = OAuth2Swift(consumerKey: Constants.traktClientID, consumerSecret: Constants.traktClientSecret, authorizeUrl: Constants.traktAuthorizeURL, accessTokenUrl: Constants.traktAccessTokenURL, responseType: "code")
+    let oauth = OAuth2Swift(consumerKey: Constants.traktClientID, consumerSecret: Constants.traktClientSecret, authorizeUrl: Constants.traktAuthorizeURL, accessTokenUrl: Constants.traktAccessTokenURL, responseType: "token")
     private var didGetCredentials = false
     
     override init () {

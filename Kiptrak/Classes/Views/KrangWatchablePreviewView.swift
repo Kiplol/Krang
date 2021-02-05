@@ -36,7 +36,7 @@ class KrangWatchablePreviewView: UIView {
         if let realmObject = watchable as? Object {
             self.notificationToken = realmObject.observe({ [unowned self] (change) in
                 switch change {
-                case .change(_):
+                case .change(_, _):
                     self.updateUI(withWatchable: watchable)
                 default:
                     break

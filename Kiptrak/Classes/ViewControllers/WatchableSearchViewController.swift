@@ -134,7 +134,7 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
             self.historySection.searchables = shows
             self.historySection.isLoading = false
             if !self.isSearching {
-                if let historyIndex = self.dataSet.index(of: self.historySection) {
+                if let historyIndex = self.dataSet.firstIndex(of: self.historySection) {
                     self.tableView.reloadSections([historyIndex], with: .automatic)
                 } else {
                     self.tableView.reloadData()
@@ -145,7 +145,7 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
                     self.upNextSection.searchables = episodes
                     self.upNextSection.isLoading = false
                     if !self.isSearching {
-                        if let upNextIndex = self.dataSet.index(of: self.upNextSection) {
+                        if let upNextIndex = self.dataSet.firstIndex(of: self.upNextSection) {
                             self.tableView.reloadSections([upNextIndex], with: .automatic)
                         } else {
                             self.tableView.reloadData()

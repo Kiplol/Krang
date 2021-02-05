@@ -122,7 +122,7 @@ class NowWatchingViewController: KrangViewController {
     }
     
     @IBAction func previousTapped(_ sender: Any) {
-        guard let piecesOfTrivia = self.piecesOfTrivia, let index = piecesOfTrivia.index(of: self.textViewTrivia.text)?.advanced(by: 0) else {
+        guard let piecesOfTrivia = self.piecesOfTrivia, let index = piecesOfTrivia.firstIndex(of: self.textViewTrivia.text)?.advanced(by: 0) else {
             return
         }
         
@@ -131,7 +131,7 @@ class NowWatchingViewController: KrangViewController {
     }
     
     @IBAction func nextTapped(_ sender: Any) {
-        guard let piecesOfTrivia = self.piecesOfTrivia, let index = piecesOfTrivia.index(of: self.textViewTrivia.text)?.advanced(by: 0) else {
+        guard let piecesOfTrivia = self.piecesOfTrivia, let index = piecesOfTrivia.firstIndex(of: self.textViewTrivia.text)?.advanced(by: 0) else {
             return
         }
         
