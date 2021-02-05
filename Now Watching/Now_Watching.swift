@@ -71,7 +71,7 @@ struct Now_WatchingEntryView : View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
             } else {
                 HStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: /*@START_MENU_TOKEN@*/nil/*@END_MENU_TOKEN@*/, content: {
-                    Text("\(self.entry.user?.username ?? "Not Logged In")")
+                    Text("\(self.entry.user != nil ? "Not Watching Anything" : "Not Logged In")")
                         .foregroundColor(Color("widgetTextPrimary"))
                 })
             }
@@ -86,27 +86,29 @@ struct WatchableView: View {
     var watchable: KrangWatchable
     
     var body: some View {
-        ZStack {
-    
-            //Info at bottom
-            VStack {
-                Spacer()
+        GeometryReader { geometry in
+            ZStack(alignment: Alignment(horizontal: .leading, vertical: .bottom), content: {
+                
+                //Info at bottom
                 VStack {
-                    Text(self.watchable.title).font(.headline).foregroundColor(Color("widgetTextPrimary"))
-                }.frame(maxWidth: .infinity)
-                .padding(8)
-                .background(Color("widgetBackground").opacity(0.6))
-            }.zIndex(/*@START_MENU_TOKEN@*/1.0/*@END_MENU_TOKEN@*/)
-            
-//            if let url = self.watchable.posterThumbnailURL,
-//               let imageData = try? Data(contentsOf: url),
-//               let uiImage = UIImage(data: imageData) {
-//                Image(uiImage: uiImage)
-//                    .resizable()
-//                    .aspectRatio(contentMode: .fill)
-//            }
+                    //                Spacer()
+                    VStack {
+                        Text(self.watchable.title).font(.headline).foregroundColor(Color("widgetTextPrimary"))
+                    }.frame(maxWidth: .infinity)
+                    .padding(8)
+                    .background(Color("widgetBackground").opacity(0.6))
+                }.zIndex(1.0)
+                
+                if let url = self.watchable.posterThumbnailURL,
+                   let imageData = try? Data(contentsOf: url),
+                   let uiImage = UIImage(data: imageData) {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill).zIndex(0.8)
+                        .frame(width: geometry.size.width, height: geometry.size.height)
+                }
+            }).frame(width: geometry.size.width, height: geometry.size.height, alignment: .bottomLeading)
         }
-//        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.clear)
     }
 }
