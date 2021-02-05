@@ -13,6 +13,10 @@
 		3724CBAC1E247557005387D1 /* PlaybackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724CBAB1E247557005387D1 /* PlaybackViewController.swift */; };
 		372595B2201006C100C7C516 /* LoadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372595B0201006C100C7C516 /* LoadingTableViewCell.swift */; };
 		372595B3201006C100C7C516 /* LoadingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 372595B1201006C100C7C516 /* LoadingTableViewCell.xib */; };
+		3728858025CDBBED00AAD3A3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37A19E2E1E25BAEF007877B4 /* Images.xcassets */; };
+		3728858525CDBC5100AAD3A3 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3728858425CDBC5100AAD3A3 /* Colors.xcassets */; };
+		3728858625CDBC5100AAD3A3 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3728858425CDBC5100AAD3A3 /* Colors.xcassets */; };
+		3728858A25CDBD0500AAD3A3 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3728858425CDBC5100AAD3A3 /* Colors.xcassets */; };
 		3729284425CD981D006BFE97 /* KrangLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C55501E2564D100D51019 /* KrangLogger.swift */; };
 		3729284825CD982B006BFE97 /* TMDBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A19E331E26E914007877B4 /* TMDBHelper.swift */; };
 		373D32961E22C05C00980925 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373D32951E22C05C00980925 /* Constants.swift */; };
@@ -201,6 +205,7 @@
 		3724CBAB1E247557005387D1 /* PlaybackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlaybackViewController.swift; path = Classes/ViewControllers/PlaybackViewController.swift; sourceTree = "<group>"; };
 		372595B0201006C100C7C516 /* LoadingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoadingTableViewCell.swift; path = Kiptrak/Classes/Views/Cells/LoadingTableViewCell.swift; sourceTree = "<group>"; };
 		372595B1201006C100C7C516 /* LoadingTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = LoadingTableViewCell.xib; path = Kiptrak/Classes/Views/Cells/LoadingTableViewCell.xib; sourceTree = "<group>"; };
+		3728858425CDBC5100AAD3A3 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		373D32951E22C05C00980925 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Classes/Constants.swift; sourceTree = "<group>"; };
 		3740AB5225CC722B0013874C /* Now WatchingExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Now WatchingExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3740AB5325CC722B0013874C /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -426,6 +431,7 @@
 			children = (
 				37A19E771E2BFE39007877B4 /* Protocols */,
 				37A19E2E1E25BAEF007877B4 /* Images.xcassets */,
+				3728858425CDBC5100AAD3A3 /* Colors.xcassets */,
 				373D32951E22C05C00980925 /* Constants.swift */,
 				374C2AA11E243C080094D7A4 /* Kiptrak.entitlements */,
 				37A19E391E288FD2007877B4 /* Resources */,
@@ -711,7 +717,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3728858A25CDBD0500AAD3A3 /* Colors.xcassets in Resources */,
 				3740AB5C25CC722C0013874C /* Assets.xcassets in Resources */,
+				3728858025CDBBED00AAD3A3 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -734,6 +742,7 @@
 				37A19E5D1E288FFD007877B4 /* Exo-Thin-Italic.otf in Resources */,
 				37A19E5B1E288FFD007877B4 /* Exo-Regular-Italic.otf in Resources */,
 				37A19E591E288FFD007877B4 /* Exo-Medium-Italic.otf in Resources */,
+				3728858525CDBC5100AAD3A3 /* Colors.xcassets in Resources */,
 				37A19E521E288FFD007877B4 /* Exo-DemiBold.otf in Resources */,
 				37A19E4E1E288FFD007877B4 /* Exo-Black.otf in Resources */,
 				37A19E541E288FFD007877B4 /* Exo-ExtraBold.otf in Resources */,
@@ -768,6 +777,7 @@
 				37A19E8F1E2C5B14007877B4 /* Exo-ExtraBold-Italic.otf in Resources */,
 				37A19E8B1E2C5B14007877B4 /* Exo-Bold-Italic.otf in Resources */,
 				37A19E891E2C5B14007877B4 /* Exo-Black-Italic.otf in Resources */,
+				3728858625CDBC5100AAD3A3 /* Colors.xcassets in Resources */,
 				37A19E8C1E2C5B14007877B4 /* Exo-Bold.otf in Resources */,
 				37A19E941E2C5B14007877B4 /* Exo-Light.otf in Resources */,
 				37A19E931E2C5B14007877B4 /* Exo-Light-Italic.otf in Resources */,
