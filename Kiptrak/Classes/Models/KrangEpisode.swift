@@ -152,7 +152,7 @@ extension KrangEpisode: KrangWatchable {
     
     var posterThumbnailURL: URL? {
         get {
-            guard let posterThumbnailURL = self.posterThumbnailImageURL else {
+            guard let posterThumbnailURL = self.posterThumbnailImageURL ?? self.show?.imagePosterURL else {
                 return nil
             }
             return URL(string: posterThumbnailURL)

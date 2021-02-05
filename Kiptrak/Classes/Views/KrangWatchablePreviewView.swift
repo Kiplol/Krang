@@ -69,8 +69,8 @@ class KrangWatchablePreviewView: UIView {
             }
         })
         
-        if let szPosterURL = watchable.posterImageURL, let posterURL = URL(string: szPosterURL) {
-            self.imageViewPoster.kf.setImage(with: (posterURL as? ImageDataProvider), placeholder: #imageLiteral(resourceName: "poster_placeholder_dark"), options: nil, progressBlock: nil, completionHandler: nil)
+        if let szPosterURL = watchable.posterImageURL ?? watchable.posterThumbnailURL?.string, let posterURL = URL(string: szPosterURL) {
+            self.imageViewPoster.kf.setImage(with: posterURL, placeholder: #imageLiteral(resourceName: "poster_placeholder_dark"), options: nil, progressBlock: nil, completionHandler: nil)
         } else {
             self.imageViewPoster.image = #imageLiteral(resourceName: "poster_placeholder_dark")
         }
