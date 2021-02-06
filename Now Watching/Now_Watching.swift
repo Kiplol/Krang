@@ -13,11 +13,11 @@ import RealmSwift
 
 struct Provider: IntentTimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: ConfigurationIntent(), watchable: nil, user: nil)
+        SimpleEntry(date: Date(), configuration: ConfigurationIntent(), watchable: KrangMovie.endOfEva, user: nil)
     }
 
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), configuration: configuration, watchable: nil, user: nil)
+        let entry = SimpleEntry(date: Date(), configuration: configuration, watchable: KrangMovie.endOfEva, user: nil)
         completion(entry)
     }
 
@@ -33,7 +33,7 @@ struct Provider: IntentTimelineProvider {
             completion(timeline)
             return
         }
-        print(profile)
+//        print(profile)
         
         TraktHelper.shared.getCheckedInMovieOrEpisode { _, movie, episode in
             guard movie != nil || episode != nil else {
@@ -90,16 +90,23 @@ struct WatchableView: View {
             ZStack(alignment: Alignment(horizontal: .leading, vertical: .bottom), content: {
                 
                 //Info at bottom
-                VStack {
-                    //                Spacer()
-                    VStack {
-                        Text(self.watchable.title).font(.headline).foregroundColor(Color("widgetTextPrimary"))
+                VStack(alignment: .leading) {
+                    VStack(alignment: .leading, spacing: 8) {
+                        HStack {
+                            WatchableTitleView(watchable: self.watchable)
+                            .foregroundColor(Color("widgetTextPrimary"))
+                            Spacer()
+                        }
+                        // Dots
+                        LinkableIndicatorsView(linkable: self.watchable).padding(.leading, 3.0)
                     }.frame(maxWidth: .infinity)
                     .padding(8)
-                    .background(Color("widgetBackground").opacity(0.6))
+                    .background(Color("widgetBackground").opacity(0.7))
                 }.zIndex(1.0)
                 
-                if let url = self.watchable.posterThumbnailURL,
+                
+                if let szurl = self.imageURLForBackground(),
+                   let url = URL(string: szurl),
                    let imageData = try? Data(contentsOf: url),
                    let uiImage = UIImage(data: imageData) {
                     Image(uiImage: uiImage)
@@ -111,11 +118,75 @@ struct WatchableView: View {
         }
         .background(Color.clear)
     }
+    
+    func imageURLForBackground() -> String? {
+        if let episode = self.watchable as? KrangEpisode {
+            return episode.posterImageURL ?? episode.season?.posterImageURL ?? episode.show?.imagePosterURL
+        }
+        return self.watchable.posterImageURL
+    }
+}
+
+struct LinkableIndicatorsView: View {
+    @State var linkable: KrangLinkable
+    
+    var body: some View {
+        HStack {
+            if linkable.urlForTrakt != nil {
+                IndicatorView(color: Color("TraktPrimary"))
+            }
+            if linkable.urlForIMDB != nil {
+                IndicatorView(color: Color("IMDbPrimary"))
+            }
+            if linkable.urlForTMDB != nil {
+                IndicatorView(color: Color("TMDBPrimary"))
+            }
+        }
+    }
+    
+    struct IndicatorView: View {
+        @State var color: Color
+        var body: some View {
+            Circle().strokeBorder(Color("widgetTextPrimary").opacity(0.5)).frame(width: 6, height: 6, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                .background(
+                    Circle().fill(self.color)
+                )
+        }
+    }
+}
+
+//struct LinkableIndicatorView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        LinkableIndicatorView(linkable: Now_Watching_Previews.endOfEva)
+//    }
+//}
+
+struct WatchableTitleView: View {
+    @State var watchable: KrangWatchable
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 5, content: {
+            if let episode = self.watchable as? KrangEpisode,
+               let show = episode.show {
+                
+                Text(show.title).foregroundColor(.white).font(.headline)
+                Text(episode.title).foregroundColor(Color.white.opacity(0.8)).font(.footnote)
+            } else {
+                Text(self.watchable.titleDisplayString).foregroundColor(.white).font(.headline)
+            }
+        })
+    }
+}
+
+struct WatchableTitleView_Previews: PreviewProvider {
+    static var previews: some View {
+        WatchableTitleView(watchable: KrangMovie.endOfEva).previewContext(WidgetPreviewContext(family: .systemSmall)).background(Color.black)
+    }
 }
 
 struct WatchableView_Previews: PreviewProvider {
     static var previews: some View {
-        WatchableView(watchable: Now_Watching_Previews.endOfEva)
+        WatchableView(watchable: KrangMovie.endOfEva)
             .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
 }
@@ -128,31 +199,22 @@ struct Now_Watching: Widget {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
             Now_WatchingEntryView(entry: entry)
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName("Now Watching")
+        .description("Get info and shortcuts for what you're currently checked into on Trakt.")
     }
 }
 
 struct Now_Watching_Previews: PreviewProvider {
-    
-    static var endOfEva: KrangWatchable {
-        let movie = KrangMovie()
-        movie.title = "Neon Genesis Evangelion: The End of Evangelion"
-        movie.posterThumbnailImageURL = "https://i.ebayimg.com/images/g/zkgAAOSwYIxX~Zju/s-l500.jpg"
-        movie.posterImageURL = "https://i.ebayimg.com/images/g/zkgAAOSwYIxX~Zju/s-l500.jpg"
-        movie.traktID = 11325
-        movie.imdbID = "tt0169858"
-        movie.tmdbID = 18491
-        return movie
-    }
     
     static var previews: some View {
         Now_WatchingEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent(), watchable: nil, user: nil))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
         
         
-        Now_WatchingEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent(), watchable: Self.endOfEva, user: nil))
+        Now_WatchingEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent(), watchable: KrangMovie.endOfEva, user: nil))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
+        Now_WatchingEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent(), watchable: KrangMovie.endOfEva, user: nil))
+            .previewContext(WidgetPreviewContext(family: .systemMedium))
         
     }
 }

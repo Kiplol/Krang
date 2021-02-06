@@ -117,6 +117,18 @@ class KrangMovie: Object {
     class func removeAllWatchDates() {
         KrangMovie.allWatchedMovies.forEach { $0.watchDate = nil}
     }
+    
+    static var endOfEva: KrangWatchable {
+        let movie = KrangMovie()
+        movie.title = "Neon Genesis Evangelion: The End of Evangelion"
+        movie.posterThumbnailImageURL = "https://i.ebayimg.com/images/g/zkgAAOSwYIxX~Zju/s-l500.jpg"
+        movie.posterImageURL = "https://i.ebayimg.com/images/g/zkgAAOSwYIxX~Zju/s-l500.jpg"
+        movie.traktID = 11325
+        movie.imdbID = "tt0169858"
+        movie.tmdbID = 18491
+        return movie
+    }
+    
 }
 
 extension KrangMovie: KrangWatchable {
