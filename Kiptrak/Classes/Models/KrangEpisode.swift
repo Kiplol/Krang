@@ -132,6 +132,20 @@ class KrangEpisode: Object {
     class func removeAllWatchDates() {
         KrangEpisode.allWatchedEpisodes.forEach { $0.watchDate = nil }
     }
+    
+    static var chunibyo: KrangEpisode {
+        let episode = KrangEpisode()
+        episode.episode = 5
+        episode.seasonNumber = 1
+        episode.title = "The Shackles of... Hard Study"
+        episode.overview = "After scoring a dreadfully low score on her maths test, Rikka is faced with her circle being disbanded if she fails her next one. Rikka tries to improve the circle's status by volunteering to clean the pool but, due to playing around, it backfires, with the maths teacher deciding Rikka will need to match the class average to keep her circle. Yūta attempts to help Rikka study, but she keeps getting distracted. After learning a bit about how lonely Rikka gets sometimes, Yūta offers to come up with an e-mail address for Rikka should she pass her test, using various bribes to get her to study hard. After the maths exam, Rikka ends up scoring relatively poorly, but manages to land just above the class average, so Yūta awards her with a new e-mail address."
+        episode.traktID = 910413
+        episode.tmdbID = 976715
+        episode.posterImageURL = "https://image.tmdb.org/t/p/w780/2eKpiIE7Qxc3nnCECIQ0eOk7gxe.jpg"
+        episode.posterThumbnailImageURL = "https://image.tmdb.org/t/p/w92/2eKpiIE7Qxc3nnCECIQ0eOk7gxe.jpg"
+        episode.stillImageURL = "https://image.tmdb.org/t/p/original/mn9pJcZgaIp1ijueAzc30Rdxghk.jpg"
+        return episode
+    }
 }
 
 extension KrangEpisode: KrangWatchable {

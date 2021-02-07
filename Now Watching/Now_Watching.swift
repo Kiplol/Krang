@@ -35,21 +35,24 @@ struct Provider: IntentTimelineProvider {
         }
 //        print(profile)
         
-        TraktHelper.shared.getCheckedInMovieOrEpisode { _, movie, episode in
-            guard movie != nil || episode != nil else {
-                let notWatchignAnythingEntry = SimpleEntry(date: Date(), configuration: configuration, watchable: nil, user: profile)
-                entries.append(notWatchignAnythingEntry)
+        TMDBHelper.shared.getConfiguration { _ in
+            TraktHelper.shared.getCheckedInMovieOrEpisode { _, movie, episode in
+                guard movie != nil || episode != nil else {
+                    let notWatchignAnythingEntry = SimpleEntry(date: Date(), configuration: configuration, watchable: nil, user: profile)
+                    entries.append(notWatchignAnythingEntry)
+                    let timeline = Timeline(entries: entries, policy: .atEnd)
+                    completion(timeline)
+                    return 
+                }
+                
+                
+                let watchable = (movie ?? episode)! as KrangWatchable
+                let endDate = watchable.checkin?.dateExpires ?? Date().addingTimeInterval(60 * 60)
+                let watchingEntry = SimpleEntry(date: endDate, configuration: configuration, watchable: watchable, user: profile)
+                entries.append(watchingEntry)
                 let timeline = Timeline(entries: entries, policy: .atEnd)
                 completion(timeline)
-                return 
             }
-            
-            let watchable = (movie ?? episode)! as KrangWatchable
-            let endDate = watchable.checkin?.dateExpires ?? Date().addingTimeInterval(60 * 60)
-            let watchingEntry = SimpleEntry(date: endDate, configuration: configuration, watchable: watchable, user: profile)
-            entries.append(watchingEntry)
-            let timeline = Timeline(entries: entries, policy: .atEnd)
-            completion(timeline)
         }
     }
 }
@@ -59,6 +62,17 @@ struct SimpleEntry: TimelineEntry {
     let configuration: ConfigurationIntent
     let watchable: KrangWatchable?
     let user: KrangUser?
+    
+    var relevance: TimelineEntryRelevance? {
+        if let watchable = self.watchable {
+            var remainingTime: TimeInterval = 0
+            if let checkInEnd = watchable.checkin?.dateExpires {
+                remainingTime = checkInEnd.timeIntervalSince(Date())
+            }
+            return TimelineEntryRelevance(score: 100, duration: remainingTime)
+        }
+        return TimelineEntryRelevance(score: 0)
+    }
 }
 
 struct Now_WatchingEntryView : View {
@@ -72,7 +86,9 @@ struct Now_WatchingEntryView : View {
             } else {
                 HStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: /*@START_MENU_TOKEN@*/nil/*@END_MENU_TOKEN@*/, content: {
                     Text("\(self.entry.user != nil ? "Not Watching Anything" : "Not Logged In")")
+                        .multilineTextAlignment(.center)
                         .foregroundColor(Color("widgetTextPrimary"))
+                        
                 })
             }
         }
@@ -121,7 +137,19 @@ struct WatchableView: View {
     
     func imageURLForBackground() -> String? {
         if let episode = self.watchable as? KrangEpisode {
-            return episode.posterImageURL ?? episode.season?.posterImageURL ?? episode.show?.imagePosterURL
+            
+            let possibilities = [episode.stillImageURL?.string, episode.posterImageURL, episode.season?.posterImageURL, episode.show?.imagePosterURL].filter {
+                if let string = $0 {
+                    return URL(string: string) != nil
+                } else {
+                    return false
+                }
+            }
+            
+            if let first = (possibilities as! [String]).first {
+                return first
+            }
+
         }
         return self.watchable.posterImageURL
     }
@@ -214,6 +242,11 @@ struct Now_Watching_Previews: PreviewProvider {
         Now_WatchingEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent(), watchable: KrangMovie.endOfEva, user: nil))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
         Now_WatchingEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent(), watchable: KrangMovie.endOfEva, user: nil))
+            .previewContext(WidgetPreviewContext(family: .systemMedium))
+        
+        Now_WatchingEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent(), watchable: KrangEpisode.chunibyo, user: nil))
+            .previewContext(WidgetPreviewContext(family: .systemSmall))
+        Now_WatchingEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent(), watchable: KrangEpisode.chunibyo, user: nil))
             .previewContext(WidgetPreviewContext(family: .systemMedium))
         
     }
