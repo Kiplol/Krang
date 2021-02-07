@@ -198,7 +198,8 @@ struct WatchableTitleView: View {
                let show = episode.show {
                 
                 Text(show.title).foregroundColor(.white).font(.headline)
-                Text(episode.title).foregroundColor(Color.white.opacity(0.8)).font(.footnote)
+                
+                Text("s\(episode.seasonNumber) e\(episode.episode) - \(episode.title)").foregroundColor(Color.white.opacity(0.8)).font(.footnote)
             } else {
                 Text(self.watchable.titleDisplayString).foregroundColor(.white).font(.headline)
             }
