@@ -46,6 +46,7 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
             self.tableView.register(nib, forCellReuseIdentifier: WatchableSearchViewController.cellReuseIdentifier)
             let loadingNib = UINib(nibName: "LoadingTableViewCell", bundle: Bundle.main)
             self.tableView.register(loadingNib, forCellReuseIdentifier: WatchableSearchViewController.loadingCellReuseIdentifier)
+            self.tableView.sectionHeaderTopPadding = 0.0 // iOS 15+
         }
     }
     @IBOutlet weak var headerView: UIView!
@@ -225,10 +226,8 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
         }
         
         let container = UIView(frame: CGRect(x: 0.0, y: 0.0, width: tableView.bounds.size.width, height: 24.0))
+        container.autoresizingMask = [.flexibleWidth]
         container.backgroundColor = UIColor.black.alpha(0.75)
-//        let container = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
-//        container.frame = CGRect(x: 0.0, y: 0.0, width: tableView.bounds.size.width, height: 24.0)
-//        container.autoresizingMask = [.flexibleWidth]
         
         let label = UILabel(frame: CGRect(x: 10.0, y: 0.0, width: tableView.bounds.size.width - 20.0, height: 24.0))
         label.font = UIFont.systemFont(ofSize: 13.0, weight: .bold)
@@ -242,6 +241,10 @@ class WatchableSearchViewController: KrangViewController, UISearchResultsUpdatin
         container.addSubview(label)
         label.center.y = container.bounds.size.height * 0.5
         return container
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 28.0
     }
     
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
